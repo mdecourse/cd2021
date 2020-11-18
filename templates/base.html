@@ -1,0 +1,16 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - CMSiMDE user app</title>
+    {% else %}
+    <title>CMSiMDE user app</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>CMSiMDE: <a href="/user/">Home</a>
+    |<a href="/user/threegear">threegear</a>
+    </div>
+    <hr>
+    {% block body %}{% endblock %}
+  </body>
+</html>
