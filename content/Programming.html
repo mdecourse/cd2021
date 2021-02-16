@@ -133,8 +133,98 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Solvespace << <a href='Solvespace.html'>Previous</a> <a href='CoppeliaSim.html'>Next</a> >> CoppeliaSim<br /><h1>Simulation</h1>
-<br />Solvespace << <a href='Solvespace.html'>Previous</a> <a href='CoppeliaSim.html'>Next</a> >> CoppeliaSim</div>
+    <div id="tipue_search_content">Topics << <a href='Topics.html'>Previous</a> <a href='git config.html'>Next</a> >> git config<br /><h1>Programming</h1>
+<p>四設一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True</a></p>
+<p>五精一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=2384&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=2384&amp;column=True</a></p>
+<p>四設二甲協同產品設計實習: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True</a></p>
+<p>四設二乙協同產品設計實習: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0776&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0776&amp;column=True</a></p>
+<p>原始碼: <a href="https://github.com/mdecourse/nfulist">https://github.com/mdecourse/nfulist</a></p>
+<h4>上述程式的</h4>
+<h4>服務對象: 希望透過網際模式取得特定課程修課人員名單的用戶.</h4>
+<h4>價值: 可以在教務修課資料持續維護的任何時段, 即時取得當時的最新資料.</h4>
+<h4>可重用時機: 透過相同模式讓機械設計工程師在任何設計階段, 即時取得當時與設計流程有關的最新資料.</h4>
+<h4>討論:</h4>
+<p style="padding-left: 30px;">在多人整合模式下的產品設計流程中, 採網際程式流程進行設計時, 若能以動態協同互動的機制整合, 將可有效透過網路, 電腦程式與即時資料進行設計最佳化.</p>
+<p style="padding-left: 30px;"></p>
+<h4>實習:</h4>
+<p style="padding-left: 30px;"><a href="https://ethercalc.net/">https://ethercalc.net</a> 或自行利用 Ubuntu 20.04 及 <a href="https://github.com/audreyt/ethercalc">https://github.com/audreyt/ethercalc</a></p>
+<p style="padding-left: 30px;"> 建立 ethercalc 伺服主機 (請參考: <a href="http://mde.tw/cad2020/content/Ethercalc.html">http://mde.tw/cad2020/content/Ethercalc.html</a> )</p>
+<p style="padding-left: 30px;"><a href="https://github.com/audreyt/ethercalc/blob/master/API.md">https://github.com/audreyt/ethercalc/blob/master/API.md</a></p>
+<p style="padding-left: 30px;"><a href="https://ethercalc.docs.apiary.io/">https://ethercalc.docs.apiary.io/</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ethercalc-python">https://github.com/mdecourse/ethercalc-python</a></p>
+<p style="padding-left: 30px;"><a href="https://www.aosabook.org/en/posa/from-socialcalc-to-ethercalc.html">https://www.aosabook.org/en/posa/from-socialcalc-to-ethercalc.html</a> </p>
+<p style="padding-left: 30px;">hello_ethercalc.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python3
+import ethercalc
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
+e = ethercalc.EtherCalc("http://140.130.17.17:8000")
+# http://140.130.17.17:8000/kkcao0lc2ew7
+print(e)
+# 設定 id 為 kkcao0lc2ew7 的 sheet C1 值為 number 2
+e.command("kkcao0lc2ew7", ["set C1 value n 2"])
+# C2 設為字串 "電腦輔助設計", 但是字串前面必須加一個單引號
+e.command("kkcao0lc2ew7", [ethercalc.set("C2", "'電腦輔助設計")])
+e.command("kkcao0lc2ew7", [ethercalc.set("C3", 3),
+                                           ethercalc.set("C4", 4),
+                                           # C5 為 C3+C4
+                                           ethercalc.set("C5", "=C3+C4"),
+                                          ])
+pp.pprint(e.cells("kkcao0lc2ew7"))
+pp.pprint(e.cells("kkcao0lc2ew7", "C5"))
+pp.pprint(e.export("kkcao0lc2ew7"))
+</pre>
+<p>上述程式執行結果:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">&lt;ethercalc.EtherCalc object at 0x000001DD9D7195E0&gt;
+{   'C1': {   'coord': 'C1',
+              'datatype': 'v',
+              'datavalue': 2,
+              'formula': '',
+              'readonly': False,
+              'valuetype': 'n'},
+    'C2': {   'coord': 'C2',
+              'datatype': 't',
+              'datavalue': '電腦輔助設計',
+              'formula': '',
+              'readonly': False,
+              'valuetype': 't'},
+    'C3': {   'coord': 'C3',
+              'datatype': 'v',
+              'datavalue': 3,
+              'formula': '',
+              'readonly': False,
+              'valuetype': 'n'},
+    'C4': {   'coord': 'C4',
+              'datatype': 'v',
+              'datavalue': 4,
+              'formula': '',
+              'readonly': False,
+              'valuetype': 'n'},
+    'C5': {   'coord': 'C5',
+              'datatype': 'f',
+              'datavalue': 7,
+              'formula': 'C3+C4',
+              'parseinfo': [   {'opcode': 0, 'text': 'C3', 'type': 2},
+                               {'opcode': '+', 'text': '+', 'type': 3},
+                               {'opcode': 0, 'text': 'C4', 'type': 2}],
+              'readonly': False,
+              'valuetype': 'n'}}
+{   'coord': 'C5',
+    'datatype': 'f',
+    'datavalue': 7,
+    'formula': 'C3+C4',
+    'parseinfo': [   {'opcode': 0, 'text': 'C3', 'type': 2},
+                     {'opcode': '+', 'text': '+', 'type': 3},
+                     {'opcode': 0, 'text': 'C4', 'type': 2}],
+    'readonly': False,
+    'valuetype': 'n'}
+[   [None, None, 2.0],
+    [None, None, '電腦輔助設計'],
+    [None, None, 3.0],
+    [None, None, 4.0],
+    [None, None, 7.0]]</pre>
+<p></p><br />Topics << <a href='Topics.html'>Previous</a> <a href='git config.html'>Next</a> >> git config</div>
         
     <!-- footer -->
       <div class="container">
