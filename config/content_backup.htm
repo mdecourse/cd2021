@@ -64,6 +64,8 @@
 <p style="padding-left: 60px;">八人共同快速 (八週) 開發一組產品設計與實作模擬 (分組自評與互評, 說明遭遇問題與解決方法)</p>
 <p style="padding-left: 30px;">W18 上課之前必須將各組報告 html, pdf 與 Youtube 影片連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/14">2021 協同產品設計實習 期末 (W18) 分組專題報告與影片繳交處 </a></p>
 <h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4><h2>Programming</h2>
+<p><a href="https://www.gnu.org/education/edu-schools.zh-tw.html">https://www.gnu.org/education/edu-schools.zh-tw.html</a> (為什麼學校只應採用自由軟體)</p>
+<p style="padding-left: 30px;">相同概念: Why Engineers Should Exclusively Use English</p>
 <p>四設一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True</a></p>
 <p>五精一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=2384&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=2384&amp;column=True</a></p>
 <p>四設二甲協同產品設計實習: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True</a></p>
@@ -83,6 +85,7 @@
 <p style="padding-left: 30px;"><a href="https://ethercalc.docs.apiary.io/">https://ethercalc.docs.apiary.io/</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ethercalc-python">https://github.com/mdecourse/ethercalc-python</a></p>
 <p style="padding-left: 30px;"><a href="https://www.aosabook.org/en/posa/from-socialcalc-to-ethercalc.html">https://www.aosabook.org/en/posa/from-socialcalc-to-ethercalc.html</a></p>
+<p style="padding-left: 30px;"><a href="https://www.mdeditor.tw/pl/2XA2/zh-tw">https://www.mdeditor.tw/pl/2XA2/zh-tw</a></p>
 <p style="padding-left: 30px;">hello_ethercalc.py</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python3
 import ethercalc
@@ -155,9 +158,16 @@ pp.pprint(e.export("kkcao0lc2ew7"))
     [None, None, 4.0],
     [None, None, 7.0]]</pre>
 <h4>有關 ethercalc:</h4>
-<p style="padding-left: 30px;">若 ethercalc 與 redis 合用, sheet 資料存入 /var/lib/redis/dump.rdb, 此一檔案儲存設定位於 /etc/redis/redis.conf 中的 dbfilename dump.rdb</p>
+<p style="padding-left: 30px;">若 ethercalc 與 redis 合用, sheet 資料將會存入 /var/lib/redis/dump.rdb, 此一檔案儲存設定位於 /etc/redis/redis.conf 中的 dbfilename dump.rdb</p>
 <p style="padding-left: 30px;">使用者若要以 root 身分檢視 /var/lib/redis/dump.rdb 可以透過 sudo -s 以 root 身分執行命令.</p>
-<p style="padding-left: 30px;">若以 /etc/init.d/redis-server stop 關閉 redis, 則執行 ethercalc, sheet 資料將會存在執行命令目錄下的 dump 目錄中.</p>
+<p style="padding-left: 30px;">若以 /etc/init.d/redis-server stop 關閉 redis, 然後執行 ethercalc, sheet 資料將會存在執行命令目錄下的 dump 目錄中.</p>
+<p style="padding-left: 30px;">在結合 redis 使用下的 ethercalc, 若希望 reset /var/lib/redis/dump.rdb 中的資料:</p>
+<p style="padding-left: 60px;">sudo -s</p>
+<p style="padding-left: 60px;">/etc/init.d/redis-server stop</p>
+<p style="padding-left: 60px;">rm /var/lib/redis/dump.rdb</p>
+<p style="padding-left: 60px;">/etc/init.d/redis-server start</p>
+<p style="padding-left: 60px;">ethercalc</p>
+<p style="padding-left: 60px;">則 /var/lib/redis/dump.rdb 中為空資料.</p>
 <p></p><h2>git config</h2>
 <p>y:\home\.gitconfig settings:</p>
 <p style="padding-left: 30px;">git config --global user.email "your github account associated email address"</p>
