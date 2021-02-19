@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Fossil SCM on Ubuntu</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://mdecourse.github.io/cd2021/blog/" rel="canonical" />
+
+  <!-- Feed -->
+        <link href="https://mdecourse.github.io/cd2021/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="cd2021 Full Atom Feed" />
+          <link href="https://mdecourse.github.io/cd2021/blog/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="cd2021 Categories Atom Feed" />
+
+  <link href="https://mdecourse.github.io/cd2021/blog/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://mdecourse.github.io/cd2021/blog/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
+
+  
+    <link href="https://mdecourse.github.io/cd2021/blog/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html" rel="canonical" />
+
+        <meta name="description" content="Fossil SCM 是一套完整的軟體組態管理系統 (Software Configuration Management), 以 ANSI C 編寫, 其中利用 TCL 作為 Scripting 語言. 接下來將要說明如何在 Ubuntu 20.04 中安裝與配置 Fossil SCM.">
+
+        <meta name="author" content="yen">
+
+        <meta name="tags" content="202102">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="cd2021"/>
+<meta property="og:title" content="Fossil SCM on Ubuntu"/>
+<meta property="og:description" content="Fossil SCM 是一套完整的軟體組態管理系統 (Software Configuration Management), 以 ANSI C 編寫, 其中利用 TCL 作為 Scripting 語言. 接下來將要說明如何在 Ubuntu 20.04 中安裝與配置 Fossil SCM."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-02-11 11:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://mdecourse.github.io/cd2021/blog/author/yen.html">
+<meta property="article:section" content="Weblog"/>
+<meta property="article:tag" content="202102"/>
+<meta property="og:image" content="https://mdecourse.github.io/cd2021/blog/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Fossil SCM on Ubuntu",
+  "headline": "Fossil SCM on Ubuntu",
+  "datePublished": "2021-02-11 11:00:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "yen",
+    "url": "https://mdecourse.github.io/cd2021/blog/author/yen.html"
+  },
+  "image": "https://mdecourse.github.io/cd2021/blog/theme/images/post-bg.jpg",
+  "url": "https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html",
+  "description": "Fossil SCM 是一套完整的軟體組態管理系統 (Software Configuration Management), 以 ANSI C 編寫, 其中利用 TCL 作為 Scripting 語言. 接下來將要說明如何在 Ubuntu 20.04 中安裝與配置 Fossil SCM."
+}
+</script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCSharp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushBash.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushLua.js"></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "./../cmsimde/static/syntaxhighlighter/css/shCore.css";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "./../cmsimde/static/syntaxhighlighter/css/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+
+<!-- for LaTeX equations -->
+<script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+    <!--
+
+              <li role="presentation"><a href="https://mdecourse.github.io/cd2021/blog/pages/about/">About</a></li>
+      -->
+
+            <li><a href="https://mdecourse.github.io/cd2021/blog/pages/about/index.html">About</span></a></li>
+            
+            <li><a href="https://mdecourse.github.io/cd2021/blog/archives.html">Archives</span></a></li>
+            
+            <li><a href="https://mdecourse.github.io/cd2021/blog/categories.html">Categories</span></a></li>
+            
+            <li><a href="https://mdecourse.github.io/cd2021/blog/tags.html">Tags</span></a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://mdecourse.github.io/cd2021/blog/index.html" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Fossil SCM on Ubuntu</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://mdecourse.github.io/cd2021/blog/author/yen.html">Yen</a>
+            | <time datetime="週四 11 二月 2021">週四 11 二月 2021</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-image: url('https://mdecourse.github.io/cd2021/blog/theme/images/post-bg.jpg')">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+<section class="search">
+      <form class="navbar-search" action="https://mdecourse.github.io/cd2021/blog/search.html">
+      <input type="text"  placeholder="Search" name="q" id="tipue_search_input" required>
+    </form>
+</section>
+
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p><a href="https://www.fossil-scm.org">Fossil SCM</a> 是一套完整的<a href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86">軟體組態管理系統</a> (<a href="https://en.wikipedia.org/wiki/Software_configuration_management">Software Configuration Management</a>), 以 ANSI C 編寫, 其中利用 <a href="https://en.wikipedia.org/wiki/Tcl">TCL</a> 作為 Scripting 語言. 接下來將要說明如何在 Ubuntu 20.04 中安裝與配置 <a href="https://www.fossil-scm.org">Fossil SCM</a>.</p>
+
+
+<p>這裡所要介紹的 <a href="https://www.fossil-scm.org">Fossil SCM</a> 為 <a href="http://fossil.kmol.info">http://fossil.kmol.info</a> (只配置 IPv6 網路協定), http 網際伺服器前端採用 <a href="https://nginx.org/">nginx</a>, https 代理伺服器採用 <a href="https://www.stunnel.org/">stunnel</a>, 主要伺服的 <a href="https://en.wikipedia.org/wiki/Software_configuration_management">Software Configuration Management</a> 套件則為 <a href="https://www.fossil-scm.org">Fossil SCM</a>.</p>
+<h2>安裝 <a href="https://nginx.org/">nginx</a></h2>
+<p>在 Ubuntu 20.04 中安裝 <a href="https://nginx.org/">nginx</a> 非常簡單, 只要執行 sudo apt install nginx 即可.</p>
+<p><a href="https://nginx.org/">nginx</a> 的基本設定檔案位於 /etc/nginx/sites-available/default</p>
+<p>安裝 <a href="https://nginx.org/">nginx</a> 有兩個目的, 一方面回應 <a href="http://fossil.kmol.info">http://fossil.kmol.info</a>, 也就是 port 80 的 WWW 伺服器. 而另外一方面則是配合 <a href="https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx">https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx</a> 以手動模式取得 <a href="https://www.stunnel.org/">stunnel</a> https 伺服所需要的 fullchain.pem 與 privkey.prm 等兩個檔案.</p>
+<h2>安裝 <a href="https://www.fossil-scm.org">Fossil SCM</a></h2>
+<p>在 Ubuntu 20.04 安裝 <a href="https://www.fossil-scm.org">Fossil SCM</a> 也非常簡單, 只要執行 sudo apt install fossil 即可. 但是所安裝的版本可能不是最新版, 由於安裝的 fossil 執行檔案位於 /usr/bin/fossil, 假如希望與 Windows 10 64 位元操作系統中的 <a href="https://www.fossil-scm.org">Fossil SCM</a> 對應, 可以至 <a href="https://fossil-scm.org/home/uv/download.html">https://fossil-scm.org/home/uv/download.html</a> 下載 Linux 最新版本的 fossil, 然後以 sudo cp fossil /urs/bin/ 即可. 若要查驗 <a href="https://www.fossil-scm.org">Fossil SCM</a> 的版本, 可以使用 fossil version 指令.</p>
+<p><a href="https://www.fossil-scm.org">Fossil SCM</a> 整個系統就只有一個 fossil 執行檔案, 而倉儲檔案則只全部壓縮在一個 <a href="https://www.sqlite.org">SQLite</a> 資料庫檔案中.</p>
+<p>接下來為了配置一套可以伺服多個 <a href="https://www.fossil-scm.org">Fossil SCM</a> 倉儲的 Ubuntu 20.04 系統, 在 /home/user/ 目錄下建立 repository 目錄, 之後的所有要從遠端擷取的 <a href="https://www.fossil-scm.org">Fossil SCM</a> 倉儲都可以放在此一用戶目錄下. 至於要在此目錄下建立一個內定的 <a href="https://www.fossil-scm.org">Fossil SCM</a> 倉儲, 可以進入 /home/user/repository 目錄後 (這裡的 user 為 Ubuntu 20.04 下的用戶帳號名稱), 以 fossil init cd2021.fossil 建立一個 <a href="https://www.fossil-scm.org">Fossil SCM</a> 倉儲, 執行完後系統就會直接在命令列中顯示用來管理此一倉儲的用戶 (會使用建立倉儲的帳號, 也就是 user) 登入管理的密碼.</p>
+<p>使用者可以選擇將此一與 user 對應的管理密碼記起來, 或者之後再使用 sqlite3 指令進入 cd2021.fossil 查詢.</p>
+<p>假如使用者需要在 Ubuntu 環境中直接對 <a href="https://www.fossil-scm.org">Fossil SCM</a> 倉儲改版, 則建議在 /home/user/repository 目錄中再建立一個 wd 目錄 (為 working directory 的縮寫), 之後可以將位於 /home/user/repository 目錄中的各個 .fossil 內容, 在 /home/user/repository/wd 目錄中展開, 若以 /home/user/repository/cd2021.fossil 為例, 展開後將位於 /home/user/repository/wd/cd2021.</p>
+<h2>安裝 <a href="https://www.stunnel.org/">stunnel</a></h2>
+<p>安裝 <a href="https://www.stunnel.org/">stunnel</a> 也很簡單, 只要執行 sudo apt install stunnel4 即可, 安裝後若要隨系統開機啟動, 則需要 sudo vi /etc/default/stunnel4, 並在檔案中加入 ENABLED=1 後存檔.</p>
+<p>另外, 還需要 sudo vi /etc/environment, 並在檔案中加入 HTTPS=on 後存檔.</p>
+<p>接下來為了由 <a href="https://www.stunnel.org/">stunnel</a> 代理 <a href="https://www.fossil-scm.org">Fossil SCM</a> 的 https 伺服, 必須加入 /etc/stunnel/stunnel.conf</p>
+<pre class="brush: jscript">
+[https]
+accept = 140.130.your_ipv4.ip:443
+accept = 2001:288:6004:your:ipv6::ip:443
+cert = /etc/stunnel/fullchain.pem
+key = /etc/stunnel/privkey.pem
+exec = /usr/bin/fossil
+execargs = /usr/bin/fossil http /home/user/repository/ --https --nojail --notfound cd2021
+</pre>
+
+<p>上述的 fullchain.pem 與 privkey.pem 由於尚未配置 <a href="https://certbot.eff.org/">certbot</a>, 必須要取得合法的數位簽章檔案後, 再利用:</p>
+<p>sudo systemctl start stunnel4.service </p>
+<p>啟動 <a href="https://www.stunnel.org/">stunnel</a>.</p>
+<p>sudo systemctl stop stunnel4.service</p>
+<p>關閉 <a href="https://www.stunnel.org/">stunnel</a>, 或利用:</p>
+<p>sudo systemctl restart stunnel4.service</p>
+<p>重新啟動 <a href="https://www.stunnel.org/">stunnel</a>.</p>
+<h2>擷取 fullchain.pem 與 privkey.pem</h2>
+<p>這個步驟主要按照 <a href="https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx">https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx</a> 中的指令操作, 由於 Ubuntu 20.04 已經內建 snap, 因此只要執行:</p>
+<p>sudo snap install core; sudo snap refresh core</p>
+<p>sudo snap install --classic certbot</p>
+<p>sudo ln -s /snap/bin/certbot /usr/bin/certbot</p>
+<p>sudo certbot certonly --nginx</p>
+<p>就可以在 /etc/letsencrypt/live/fossil.kmol.info/ 目錄中找到 fullchain.pem 與 privkey.pem 等兩個數位簽章檔案, 接著將此兩個檔案複製至 /etc/stunnel/ 目錄, 以便配合 /etc/stunnel/stunnel.conf 隨電腦開機啟動.</p>
+<p>因為 <a href="https://certbot.eff.org/">certbot</a> 的數位簽章每 90 天都要更新一次, 屆時若要手動更新可以先模擬執行:</p>
+<p>sudo certbot renew --dry-run</p>
+<h2>nginx http 跳轉 https</h2>
+<p>最後一個步驟是讓 <a href="https://nginx.org/">nginx</a> 所伺服的 <a href="http://fossil.kmol.info">http://fossil.kmol.info</a> 能夠自動跳轉到 <a href="https://www.fossil-scm.org">Fossil SCM</a> 與 <a href="https://www.stunnel.org/">stunnel</a> 結合的 <a href="https://fossil.kmol.info">https://fossil.kmol.info</a></p>
+<p>修改 /etc/nginx/sites-available/default 中的設定如下:</p>
+<pre class="brush: jscript">
+server {
+listen 80;
+server_name fossil.kmol.info;
+rewrite ^/(.*)$ https://fossil.kmol.info/$1 permanent;
+}
+</pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Fossil SCM on Ubuntu&amp;url=https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://mdecourse.github.io/cd2021/blog/tag/202102.html">202102</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'kmolab-github';
+                    var disqus_shortname = 'kmolab-github';
+                    var disqus_identifier = '/fossil-scm-on-ubuntu.html';
+                    var disqus_url = 'https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/fossil-scm-on-ubuntu.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>
+                </section>
+
+                <aside class="post-nav">
+                    <a class="post-nav-next" href="https://mdecourse.github.io/cd2021/blog/fossil-scm-use-case.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-left"></i>
+                                <h2 class="post-nav-title">Fossil SCM 使用案例</h2>
+                            <p class="post-nav-excerpt">請注意: http://fossil.kmol.info 僅支援 IPv6 網路協定. Fossil SCM 的...</p>
+                        </section>
+                    </a>
+                    <a class="post-nav-prev" href="https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">Pelican 與 Blogger 內容同步2</h2>
+                            <p class="post-nav-excerpt">cmsimde 中的 Pelican blog 內容建議採用 config 目錄中的 pelican.leo 進行管理, 主要的資料管理架構採用 Leo Editor 中的...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+  
+  <script type="text/javascript" src="https://mdecourse.github.io/cd2021/blog/theme/js/script.js"></script>
+
+<script type="text/javascript">
+    var disqus_shortname = 'kmolab-github';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+ 
+
+
+</body>
+</html>
