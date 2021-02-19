@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+
+  <title>Pelican 與 Blogger 內容同步2</title>
+
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="origin" />
+  <meta name="generator" content="Pelican" />
+  <link href="https://mdecourse.github.io/cd2021/blog/" rel="canonical" />
+
+  <!-- Feed -->
+        <link href="https://mdecourse.github.io/cd2021/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="cd2021 Full Atom Feed" />
+          <link href="https://mdecourse.github.io/cd2021/blog/feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="cd2021 Categories Atom Feed" />
+
+  <link href="https://mdecourse.github.io/cd2021/blog/theme/css/style.css" type="text/css" rel="stylesheet" />
+
+  <!-- Code highlight color scheme -->
+      <link href="https://mdecourse.github.io/cd2021/blog/theme/css/code_blocks/tomorrow_night.css" rel="stylesheet">
+
+  
+    <link href="https://mdecourse.github.io/cd2021/blog/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+
+  <!-- Custom fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300' rel='stylesheet' type='text/css' />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+    <link href="https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html" rel="canonical" />
+
+        <meta name="description" content="cmsimde 中的 Pelican blog 內容建議採用 config 目錄中的 pelican.leo 進行管理, 主要的資料管理架構採用 Leo Editor 中的 @clean 標題指令, 能夠與內文指令 @others 配合, 利用階層式的文章管理, 區隔網誌摘要與各段內容.">
+
+        <meta name="author" content="yen">
+
+        <meta name="tags" content="202102">
+
+
+
+
+<!-- Open Graph -->
+<meta property="og:site_name" content="cd2021"/>
+<meta property="og:title" content="Pelican 與 Blogger 內容同步2"/>
+<meta property="og:description" content="cmsimde 中的 Pelican blog 內容建議採用 config 目錄中的 pelican.leo 進行管理, 主要的資料管理架構採用 Leo Editor 中的 @clean 標題指令, 能夠與內文指令 @others 配合, 利用階層式的文章管理, 區隔網誌摘要與各段內容."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-02-10 11:20:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://mdecourse.github.io/cd2021/blog/author/yen.html">
+<meta property="article:section" content="Weblog"/>
+<meta property="article:tag" content="202102"/>
+<meta property="og:image" content="https://mdecourse.github.io/cd2021/blog/theme/images/post-bg.jpg">
+
+<!-- Twitter Card -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "name": "Pelican 與 Blogger 內容同步2",
+  "headline": "Pelican 與 Blogger 內容同步2",
+  "datePublished": "2021-02-10 11:20:00+08:00",
+  "dateModified": "",
+  "author": {
+    "@type": "Person",
+    "name": "yen",
+    "url": "https://mdecourse.github.io/cd2021/blog/author/yen.html"
+  },
+  "image": "https://mdecourse.github.io/cd2021/blog/theme/images/post-bg.jpg",
+  "url": "https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html",
+  "description": "cmsimde 中的 Pelican blog 內容建議採用 config 目錄中的 pelican.leo 進行管理, 主要的資料管理架構採用 Leo Editor 中的 @clean 標題指令, 能夠與內文指令 @others 配合, 利用階層式的文章管理, 區隔網誌摘要與各段內容."
+}
+</script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shCore.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushJava.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushPython.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushSql.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushPhp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCpp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushCSharp.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushBash.js"></script>
+<script type="text/javascript" src="./../cmsimde/static/syntaxhighlighter/shBrushLua.js"></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "./../cmsimde/static/syntaxhighlighter/css/shCore.css";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "./../cmsimde/static/syntaxhighlighter/css/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+
+<!-- for LaTeX equations -->
+<script src="https://scrum-3.github.io/web/math/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+
+</head>
+<!-- TODO : Body class -->
+<body class="home-template">
+
+<nav id="menu">
+  <a class="close-button">Close</a>
+  <div class="nav-wrapper">
+    <p class="nav-label">Menu</p>
+    <ul>
+    <!--
+
+              <li role="presentation"><a href="https://mdecourse.github.io/cd2021/blog/pages/about/">About</a></li>
+      -->
+
+            <li><a href="https://mdecourse.github.io/cd2021/blog/pages/about/index.html">About</span></a></li>
+            
+            <li><a href="https://mdecourse.github.io/cd2021/blog/archives.html">Archives</span></a></li>
+            
+            <li><a href="https://mdecourse.github.io/cd2021/blog/categories.html">Categories</span></a></li>
+            
+            <li><a href="https://mdecourse.github.io/cd2021/blog/tags.html">Tags</span></a></li>
+
+    </ul>
+  </div>
+</nav>
+    <!-- Progressbar -->
+    <div class="progress-container">
+        <span class="progress-bar"></span>
+    </div>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header id="post-header" class="has-cover">
+      <div class="inner">
+        <nav id="navigation">
+            <span id="home-button" class="nav-button">
+                <a class="home-button" href="https://mdecourse.github.io/cd2021/blog/index.html" title="Home"><i class="ic ic-arrow-left"></i> Home</a>
+            </span>
+          <span id="menu-button" class="nav-button">
+            <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
+          </span>
+        </nav>
+        <h1 class="post-title">Pelican 與 Blogger 內容同步2</h1>
+        <!-- TODO : Proper class for headline -->
+        <span class="post-meta">
+                <a href="https://mdecourse.github.io/cd2021/blog/author/yen.html">Yen</a>
+            | <time datetime="週三 10 二月 2021">週三 10 二月 2021</time>
+        </span>
+        <!-- TODO : Modified check -->
+            <div class="post-cover cover" style="background-image: url('https://mdecourse.github.io/cd2021/blog/theme/images/post-bg.jpg')">
+      </div>
+    </header>
+
+  <section id="wrapper">
+    <a class="hidden-close"></a>
+
+<section class="search">
+      <form class="navbar-search" action="https://mdecourse.github.io/cd2021/blog/search.html">
+      <input type="text"  placeholder="Search" name="q" id="tipue_search_input" required>
+    </form>
+</section>
+
+
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                <p><a href="https://github.com/mdecourse/cmsimde">cmsimde</a> 中的 Pelican blog 內容建議採用 config 目錄中的 pelican.leo 進行管理, 主要的資料管理架構採用 <a href="https://leoeditor.com/">Leo Editor</a> 中的 <a href="https://leoeditor.com/directives.html#clean-path">@clean</a> 標題指令, 能夠與內文指令 <a href="https://leoeditor.com/directives.html#part-2-all-and-others">@others</a> 配合, 利用階層式的文章管理, 區隔網誌摘要與各段內容.</p>
+
+
+<h2>Google Developer Console</h2>
+<p>為了能夠將 <a href="https://blog.getpelican.com/">Pelican blog</a> 在 <a href="https://leoeditor.com/">Leo Editor</a> 中的網誌文章推向 <a href="https://www.blogger.com">Blogger</a>, 必須要從 <a href="https://console.developers.google.com">Google developer console</a> 取得
+與 <a href="https://www.blogger.com">Blogger</a> 擷取權限對應的 secret json 檔案. 實際操作流程如下:</p>
+<p>進入 Library - &gt; ENABLE APIS AND SERVICES -&gt; 啟用 Blogger API v3</p>
+<p>設定 OAuth consent screen </p>
+<p>新增 Credentials -&gt; Desktop-type Oauth 2.0 client -&gt; Download JSON 即可取得 secret.json 檔案.</p>
+<h2>將 secrets.json 轉為 token.dat</h2>
+<p>轉換前必須確定系統已經安裝 google_auth_oauthlib</p>
+<p>pip install google_auth_oauthlib</p>
+<p>接著利用下列程式將 secrets.json 轉為 token.dat, 隨後使用者就可利用此一  token.dat 將 <a href="https://leoeditor.com/">Leo Editor</a> 中的網誌文章內容傳送到對應的 <a href="https://www.blogger.com">Blogger</a>.</p>
+<p>下列程式在轉換過程會透過操作系統的內定瀏覽器讓使用者登入與 secrets.json 對應的帳號, 一旦通過認證就可以完成 secrets.json 轉為 token.dat 的流程.</p>
+<pre class="brush: python">
+# get secrets: https://console.developers.google.com
+# https://developers.google.com/blogger/docs/3.0/using
+# pip install google_auth_oauthlib
+# under Mac command + b to execute
+import pickle
+import os
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+
+SCOPES = ['https://www.googleapis.com/auth/blogger', ]
+
+# we check if the file tBo store the credentials exists
+if not os.path.exists('./../../yen_gm_blogger_token.dat'):
+
+    flow = InstalledAppFlow.from_client_secrets_file('./../../yen_gm_blogger_secrets.json', SCOPES)
+    credentials = flow.run_local_server()
+
+    with open('yen_gm_blogger_token.dat', 'wb') as credentials_dat:
+        pickle.dump(credentials, credentials_dat)
+else:
+    with open('yen_gm_blogger_token.dat', 'rb') as credentials_dat:
+        credentials = pickle.load(credentials_dat)
+service = build('blogger', 'v3', credentials=credentials)
+g.es(service)
+</pre>
+
+<h2>將 Pelican 文章轉往 Blogger</h2>
+<p>將 Pelican 文章轉投 Blogger 的過程包含新增與編輯, 新增的程式碼如下:</p>
+<pre class="brush: python">
+from markdown import markdown
+from oauth2client import client
+#from googleapiclient import sample_tools
+import os
+# 配合使用 credential token
+import pickle
+from googleapiclient.discovery import build
+#from google_auth_oauthlib.flow import InstalledAppFlow
+#from google.auth.transport.requests import Request
+
+os.environ['TZ'] = 'Asia/Taipei'
+with open('./../../yen_gm_blogger_token.dat', 'rb') as credentials_dat:
+    credentials = pickle.load(credentials_dat)
+service = build('blogger', 'v3', credentials=credentials)
+
+def get_cat_tag_content(data):
+    # 請注意, 因為 data 來自 .md 的檔案 內容, 第1行為 ---
+    # 用跳行符號分割
+    data_list = data.split("\n")
+    #第 2 行為 title
+    title= data_list[1]
+    #第 4 行為 category
+    category = data_list[3]
+    #第 5 行為 tags
+    tags = data_list[4]
+    # 有多項資料的 content 型別為數列
+    # 再將第 9 行之後的資料數列串回成以跳行隔開的資料
+    content = "\n".join(data_list[8:])
+    # 先將截斷摘要與內文的 pelican md 檔按符號, 換成 Blogger 的 <!--more-->
+    content = content.replace('<!-- PELICAN_END_SUMMARY -->', '<!--more-->')
+    # 接著若內容有 ~~~python 與 ~~~ 則換成 Wordpress 格式
+    #content = content.replace('~~~python', '[code lang="python"]')
+    #content = content.replace('~~~', '[/code]')
+    return title, category, tags, content
+
+# 從目前所在節點的 body pan 中取出類別, tags 以及文章內容
+# p.h 為 @clean filename.md
+# 因為要使用 @clean 節點掛上為後的 blogger post_id, 因此改為讀 .md 檔案
+md_filename = p.h.split(" ")[1]
+with open(md_filename, 'r', encoding="utf-8") as content_file:
+    md_content = content_file.read()
+# title_str, category_str, tags_str, content = get_cat_tag_content(p.b)
+title_str, category_str, tags_str, content = get_cat_tag_content(md_content)
+category = category_str.split(":")[1]
+tags = tags_str.split(":")[1].split(",")
+tags.append(category)
+# title 是一個單獨的字串
+title = title_str.split(":")[1]
+# 將 markdown 格式 content 轉為 html
+content = markdown(content)
+# 以下處理 content 的 <h2> 標題
+content = content.replace("<h2>", "<h2><font size='4'>")
+content = content.replace("</h2>", "</font></h2>")
+# g.es(content)
+
+try:
+    '''
+    users = service.users()
+    # 取得使用者 profile 資料
+    user = users.get(userId='self').execute()
+    print('網誌名稱: %s' % user['displayName'])
+    '''
+    blogs = service.blogs()
+    # 取得使用者所建立網誌名稱
+    blogs = blogs.listByUser(userId='self').execute()
+    # post_id is now blogs["items"][0]["id"]
+    #blog_id = blogs["items"][0]["id"]
+    blog_id = "2403495118140401474"
+    #for blog in blogs['items']:
+        #print(blog['name'], blog['url'])
+    posts = service.posts()
+    # 新增網誌 post 時, 需要 post_id
+    body = {
+    "kind": "blogger#post",
+    "id": blog_id,
+    "title": title,
+    # 利用 markdown 函式, 將 .md 的內文轉為 html, 作為 Blogger 的文章內容
+    "content": content,
+    "labels": tags
+    }
+    insert = posts.insert(blogId=blog_id, body=body)
+    posts_doc = insert.execute()
+    post_id = posts_doc["id"]
+    #print(posts_doc)
+    # 改用 credential token 後不會產生 blogger.dat
+    #os.remove("blogger.dat")
+    # 利用最後的 child 節點來儲存 post_id
+    to_save_post_id = p.insertAsLastChild()   
+    # 改為內文為空的節點, id 直接標在 head 標題 
+    to_save_post_id.b = ""
+    to_save_post_id.h = post_id
+    # 因為新增節點, commander 必須 redraw
+    c.redraw()
+    g.es("post_id 為", post_id)
+    g.es("已經將資料送往 KBlogger!")
+except(client.AccessTokenRefreshError):
+    g.es("error")
+</pre>
+
+<p>完成上述文章轉投至 Blogger 之後, <a href="https://www.blogger.com">Blogger</a> 會傳回該文章的 post id, 而新增程式會將此 id 放在該筆 @clean 文章節點的最末端, 由於該  post id 節點只有標題而無內文, 因此即便內縮成為 @clean 的子節點, 也不會在文章中增加任何資料, 但若該網誌內容同步推向一個以上的 <a href="https://www.blogger.com">Blogger</a>, 則使用者需要將該 post if 內縮外, 還需要在此 post id 節點的上屬節點增加標註, 說明該 post id 所屬的網誌標題或代號.</p>
+<p>至於當該文章內容經過編修後, 使用者若希望將新內容推向遠端同步 <a href="https://www.blogger.com">Blogger</a>, 則必須將原先新增的 <a href="https://www.blogger.com">Blogger</a> post id 移至該 @clean 文章的最末端, 以便讓程式可以更新與此 post id 對應的 <a href="https://www.blogger.com">Blogger</a> 文章內容.</p>
+<p>可用於編輯 <a href="https://www.blogger.com">Blogger</a> 文章的程式碼如下:</p>
+<pre class="brush: python">
+from markdown import markdown
+from oauth2client import client
+#from googleapiclient import sample_tools
+import os
+# 配合使用 credential token
+import pickle
+from googleapiclient.discovery import build
+#from google_auth_oauthlib.flow import InstalledAppFlow
+#from google.auth.transport.requests import Request
+
+os.environ['TZ'] = 'Asia/Taipei'
+with open('./../../yen_gm_blogger_token.dat', 'rb') as credentials_dat:
+    credentials = pickle.load(credentials_dat)
+service = build('blogger', 'v3', credentials=credentials)
+
+def get_cat_tag_content(data):
+    # 請注意, 因為 data 來自 .md 的檔案 內容, 第1行為 ---
+    # 用跳行符號分割
+    data_list = data.split("\n")
+    #第 2 行為 title
+    title= data_list[1]
+    #第 4 行為 category
+    category = data_list[3]
+    #第 5 行為 tags
+    tags = data_list[4]
+    # 有多項資料的 content 型別為數列
+    # 再將第 9 行之後的資料數列串回成以跳行隔開的資料
+    content = "\n".join(data_list[8:])
+    # 先將截斷摘要與內文的 pelican md 檔按符號, 換成 Blogger 的 <!--more-->
+    content = content.replace('<!-- PELICAN_END_SUMMARY -->', '<!--more-->')
+    # 接著若內容有 ~~~python 與 ~~~ 則換成 Wordpress 格式
+    #content = content.replace('~~~python', '[code lang="python"]')
+    #content = content.replace('~~~', '[/code]')
+    return title, category, tags, content
+
+# 從目前所在節點的 body pan 中取出類別, tags 以及文章內容
+# p.h 為 @clean filename.md
+# 因為要使用 @clean 節點掛上為後的 blogger post_id, 因此改為讀 .md 檔案
+md_filename = p.h.split(" ")[1]
+with open(md_filename, 'r', encoding="utf-8") as content_file:
+    md_content = content_file.read()
+# title_str, category_str, tags_str, content = get_cat_tag_content(p.b)
+title_str, category_str, tags_str, content = get_cat_tag_content(md_content)
+category = category_str.split(":")[1]
+tags = tags_str.split(":")[1].split(",")
+tags.append(category)
+# title 是一個單獨的字串
+title = title_str.split(":")[1]
+# 將 markdown 格式 content 轉為 html
+content = markdown(content)
+# 以下處理 content 的 <h2> 標題
+content = content.replace("<h2>", "<h2><font size='4'>")
+content = content.replace("</h2>", "</font></h2>")
+# g.es(content)
+
+try:
+    blogs = service.blogs()
+    # 取得使用者所建立網誌名稱
+    blogs = blogs.listByUser(userId='self').execute()
+    #blog_id = blogs["items"][0]["id"]
+    blog_id = "2403495118140401474"
+    # 設法取得原 post 的 id
+    postid_outline = p.getLastChild()
+    # 直接從標題取得 post 的 id 號碼
+    post_id = postid_outline.h
+    posts = service.posts()
+    # 更新網誌文章時的 body
+    body = {
+    "kind": "blogger#post",
+    "title": title,
+    "content": content
+    }
+    # need to save postId to outline head
+    update = posts.update(blogId=blog_id, postId=post_id, body=body, publish=True)
+    update_doc = update.execute()
+    # 使用 credential token 後, 無需刪除 blogger.dat
+    #os.remove("blogger.dat")
+    g.es("post_id 為", post_id)
+    g.es("已經將更新資料送往 K Blogger!")
+except(client.AccessTokenRefreshError):
+    g.es("error")
+</pre>
+            </section>
+
+            <section class="post-info">
+                <div class="post-share">
+                    <a class="twitter" href="https://twitter.com/share?text=Pelican 與 Blogger 內容同步2&amp;url=https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="ic ic-twitter"></i><span class="hidden">Twitter</span>
+                    </a>
+                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="ic ic-facebook"></i><span class="hidden">Facebook</span>
+                    </a>
+                    <a class="googleplus" href="https://plus.google.com/share?url=https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="ic ic-googleplus"></i><span class="hidden">Google+</span>
+                    </a>
+                    <div class="clear"></div>
+                </div>
+
+                <aside class="post-tags">
+<a href="https://mdecourse.github.io/cd2021/blog/tag/202102.html">202102</a>                </aside>
+
+                <div class="clear"></div>
+
+
+                </section>
+
+                <script type="text/javascript">
+                    var disqus = 'kmolab-github';
+                    var disqus_shortname = 'kmolab-github';
+                    var disqus_identifier = '/sync-pelican-and-blogger-content2.html';
+                    var disqus_url = 'https://mdecourse.github.io/cd2021/blog/sync-pelican-and-blogger-content2.html';
+                </script>
+                <noscript>Please enable JavaScript to view the comments.</noscript>
+                <section class="post-comments">
+                        <a id="show-disqus" class="post-comments-activate" data-disqus-identifier="/sync-pelican-and-blogger-content2.html" >Show Comments</a>
+                    <div id="disqus_thread"></div>
+                </section>
+
+                <aside class="post-nav">
+                    <a class="post-nav-next" href="https://mdecourse.github.io/cd2021/blog/fossil-scm-on-ubuntu.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-left"></i>
+                                <h2 class="post-nav-title">Fossil SCM on Ubuntu</h2>
+                            <p class="post-nav-excerpt">Fossil SCM 是一套完整的軟體組態管理系統 (Software Configuration Management), 以 ANSI C 編寫, 其中利用 TCL...</p>
+                        </section>
+                    </a>
+                    <a class="post-nav-prev" href="https://mdecourse.github.io/cd2021/blog/data-sustainablity.html">
+                        <section class="post-nav-teaser">
+                            <i class="ic ic-arrow-right"></i>
+                                <h2 class="post-nav-title">資料儲存的永續性</h2>
+                            <p class="post-nav-excerpt">假如將時間倒轉 20 年, 看看當時的電腦程式課程在教些什麼? 大家是如何上課, 結果應該會讓現在這些初出茅廬, 剛剛成年的大一生非常驚訝. 是的, 當年並沒有人手一機,...</p>
+                        </section>
+                    </a>
+                    <div class="clear"></div>
+                </aside>
+
+            </div>
+        </article>
+    </main>
+      <!-- TODO : Body class -->
+    <div id="body-class" style="display: none;" class=""></div>
+
+    <footer id="footer">
+      <div class="inner">
+        <section class="credits">
+
+
+          <span class="credits-theme">Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow">Attila</a></span>
+          <span class="credits-software">Published with <a href="https://github.com/getpelican/pelican" rel="nofollow">Pelican</a></span>
+        </section>
+      </div>
+    </footer>
+  </section>
+  
+  <script type="text/javascript" src="https://mdecourse.github.io/cd2021/blog/theme/js/script.js"></script>
+
+<script type="text/javascript">
+    var disqus_shortname = 'kmolab-github';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+ 
+
+
+</body>
+</html>
