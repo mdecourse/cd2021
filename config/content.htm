@@ -16,9 +16,122 @@
 <p></p>
 <h4>電腦輔助設計室與協同設計室行事曆</h4>
 <p><a href="https://calendar.google.com/calendar/embed?src=mde.nfu.edu.tw_3439313938333136353439%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;mode=week&amp;src=mde.nfu.edu.tw_35303530373431313438%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;src=yen%40gm.nfu.edu.tw&amp;ctz=Asia%2FTaipei">全頁檢視</a></p>
-<p><iframe height="600" src="https://calendar.google.com/calendar/embed?src=mde.nfu.edu.tw_3439313938333136353439%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;mode=week&amp;src=mde.nfu.edu.tw_35303530373431313438%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;src=yen%40gm.nfu.edu.tw&amp;ctz=Asia%2FTaipei" width="800"></iframe></p><h1>Topics</h1>
+<p><iframe height="600" src="https://calendar.google.com/calendar/embed?src=mde.nfu.edu.tw_3439313938333136353439%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;mode=week&amp;src=mde.nfu.edu.tw_35303530373431313438%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;src=yen%40gm.nfu.edu.tw&amp;ctz=Asia%2FTaipei" width="800"></iframe></p>
+<h1>Topics</h1>
 <h4>課程簡介</h4>
 <p>從英文單字解釋了解何謂協同? 產品? 設計? 以及實習?</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/ljJRENnHr68" width="560"></iframe></p>
+<p>針對 Leo Editor 6.3 在 Windows 10 無法正確建立 home/.leo/.leoID.txt, 因此必須手動建立:</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/z03rrIteigQ" width="560"></iframe></p>
+<p>為了讓各階段分組協同產品設計實習過程, 可以利用網誌建立特定時間點的設計報告資料, 特別利用 Leo Editor 設定 CMSiMDE 中的 Pelican 網誌, 並以 button 指令對 Pelican Markdown 檔案轉檔, 並將網誌超文件存入 blog 目錄:</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/6zoQW2SSan0" width="560"></iframe></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/uaUBWPzHVZ4" width="560"></iframe></p>
+<p> 為了因應協同設計過程, 特定檔案可能在 Leo Editor 以外的編輯流程中改版, 且該檔案並未導入 Leo Editor 中進行編輯, 則使用者可以透過 refresh from disk 的功能將外部檔案的內容導入:</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/kTfsaeqelG4" width="560"></iframe></p>
+<p>為了順利完成 W2-W4 以自選組員方式進行分組協同產品開發實習, 必須在各班取得分組名單 (以學號為依據) 以及各班組序, 若採用 Ethercalc 網際共用表單, 讓各班以線上同步分式輸入各組名單並設法訂定組序, 則可以採用全人工輸入與排序方式或人工輸入且程式自動排序方式進行, 以下嘗試透過 <a href="https://pypi.org/project/ethercalc-python/">https://pypi.org/project/ethercalc-python/</a> 讀取 Ethercalc 表單中的資料, 並設法進行排序, 且期望能自動產生可直接輸入 CMSiMDE 網頁的方式進行:</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/6VAhJ44qzbk" width="560"></iframe></p>
+<p>根據第一階段的分組要求, 嘗試採電腦程式執行的方式完成分組與排序, 目前結果如下:</p>
+<p>討論:</p>
+<p style="padding-left: 30px;">在無其他同步或非同步網際程式工具輔助下, 若採用 Ethercalc 以網際同步方式可取得各分組的學員學號, 但因無自動定組序的方法 (可類比至後續若要設法導入自動化流程讀取各組的分組網站, 則必須設法讓電腦程式可以讀取各分組的分組網站內容), 因此需要人工介入訂定組序並收集各組分組網站的連結並發布在網際環境中, 目前所面臨的問題是, 除了各組兩名組員可自選外, 其他流程 (定各班組序, 取得各班分組網站連結並自動嵌入預定地 content.htm 檔案中) 都希望以自動化方式完成.</p>
+<p style="padding-left: 30px;">目前已知 ethercalc-python 可協助讀取特地的 Ethercalc 表單, 以下列程式為例, 因為利用 Python 的 set 去除各列中重複的 None 值, 但因 set 資料的特性是 unordered, 因此雖達成去除重複資料的目的, 但卻弄亂原先的資料順序, 因此或可採直接讀取 Ethercalc 表單資料後, 依照各行固定的學員學號, 並設法忽略中間的空白列 (row) 內容後, 在與最終的各班選課名單進行比對後 (因其中可能包含未自選組員的情況, 則必須由電腦進行自動配對), 再進行各班組序的訂定, 並依各組組序與組長 Github 帳號, 自動產生各組的分組倉儲連結與分組網站連結後, 設法產生對應的 html 資料後, 再設法嵌入指定的 content.htm 中.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python3
+import ethercalc
+import pprint
+ 
+pp = pprint.PrettyPrinter(indent=4)
+e = ethercalc.EtherCalc("http://140.130.17.17:8000")
+output = e.export("h9qd54jy0kfp")
+for i in range(len(output)):
+    #print(output[i])
+    # 設法除掉 None element
+    soutput = set(output[i])
+    print(soutput)</pre>
+<p>且從甲班表單取回的資料如下:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">{'member 2', 'member 1', 'member 3', '2a cad2021'}
+{None, 40823145.0, 'stage1-ag1', 40823108.0}
+{None, 40623121.0, 'stage1-ag2', 40523252.0}
+{None, 40623234.0}
+{None, 40423113.0}
+{'stage1-ag5', 40823106.0, None, 40823102.0}
+{None}
+{None}
+{'stage1-ag9', 40823112.0, 40823109.0, None}
+{None, 40823139.0, 'stage1-ag10', 40823111.0}
+{None, 40823129.0, 'stage1-ag11', 40823149.0}
+{'stage1-ag12', 40823107.0, None, 40823103.0}
+{None, 40823115.0, 40823140.0, 'stage1-ag13'}
+{40823104.0, 'stage1-ag14', 40823101.0, None}
+{None, 'stage1-ag15', 40823150.0, 40823119.0}
+{40823120.0, 40823124.0, None, 'stage1-ag16'}
+{None, 'stage1-ag18', 40823122.0, 40823117.0}
+{40823132.0, 40823125.0, 40823110.0, 'stage1-ag19'}
+{40823128.0, 'stage1-ag20', 40823126.0, None}
+{None, 40823146.0, 40823114.0, 'stage1-ag19'}
+{40823144.0, 'stage1-ag20', 40823142.0, None}
+{None, 40823121.0, 'stage1-ag21', 40823135.0}
+{40823136.0, 'stage1-ag22', 40823123.0, None}
+{None, 40823148.0, 'stage1-ag23', 40823127.0}
+{40823152.0, 40823153.0, 'stage1-ag24', None}
+{None, 40871106.0, 'stage1-ag25', 40823151.0}
+{None, 40823131.0, 'stage1-ag26', 40823116.0}</pre>
+<p>而從乙班表單取回的資料如下:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">{'member 3', None, 'member 1', 'cd2021 2b', 'member 2'}
+{None, 'stage1-bg1', 40823251.0, 40823245.0}
+{None, 40823234.0, 40823235.0, 'stage1-bg2'}
+{None, 40823207.0, 40823206.0, 'stage1-bg3'}
+{40723128.0, 40723215.0, None, 'stage1-bg4'}
+{None, 'stage1-bg5', 40823218.0, 40823238.0}
+{None, 'stage1-bg6', 40823225.0, 40823214.0}
+{None, 40823236.0, 40823212.0, 'stage1-bg7'}
+{40823208.0, 'stage1-bg8', None, 40823246.0}
+{None, 40823201.0, 40823217.0, 'stage1-bg9'}
+{40723106.0, 40723139.0, 40723143.0, None, 'stage1-bg10'}
+{None, 40823239.0, 'stage1-bg11', 40823205.0}
+{'stage1-bg12', 40823202.0, 40823203.0, None}
+{'stage1-bg13', None, 40823223.0, 40823224.0, '^'}
+{None, 'stage1-bg14', 40823242.0, 40823228.0}
+{40823216.0, 40823211.0, 'stage1-bg15', None}
+{40823237.0, 'stage1-bg16', 40823221.0, None}
+{None, 'stage1-bg17', 40823250.0, 40832244.0}
+{None, 40823209.0, 40823210.0, 'stage1-bg18'}
+{None, 'stage1-bg19', 40823219.0, 40823231.0}
+{40823232.0, None, 'stage1-bg20', 40823213.0}
+{40823248.0, 'stage1-bg21', None, 40823247.0}
+{None, 40823244.0, 40823222.0, 'stage1-bg22'}
+{40723224.0, 40623144.0, 'stage1-bg23', None}
+{None, 'stage1-bg24', 40823220.0, 40823204.0}
+{None, 40823241.0, 40823227.0, 'stage1-bg25'}
+{'stage1-bg26', 40823204.0, None}
+{None, 'stage1-bg27', 40723141.0}
+{None, 40723233.0, 'stage1-bg28'}
+{None, 40823233.0, 'stage1-bg29'}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None}
+{None, 'WWW'}</pre>
 <p>創建實體元件是產品設計, 創建數位工具也是產品設計, 不斷提升各種服務品質也是產品設計, 解決設計流程中的重點議題也是產品設計, 產品不分大小與虛實, 只看有沒有價值, 而且該價值能否持續被重用延伸.</p>
 <p>對了, 設法激發學生潛力, 令其可以日日進步, 每天生活都陽光普照, 也應該算產品設計, 成敗端看這個產品能否及時養成良好的生活習慣, 吸飽各種有價值的元素, 貼上貨真價實的標籤......</p>
 <p>Collaborative</p>
@@ -51,7 +164,27 @@
 <p><a href="https://constructive.co/insight/collaborative-design-process-best-practices/">How Collaboration Makes us Better Designers?</a></p>
 <p><a href="https://99u.adobe.com/articles/51643/the-right-way-to-do-collaborative-design-how-to-avoid-designing-by-committee">The Right Way to Do Collaborative Design</a></p>
 <p><a href="https://link.springer.com/book/10.1007/978-3-030-14899-7">Product Development</a></p>
-<p><a href="https://link.springer.com/book/10.1007/978-1-4842-3985-8">Hacking Product Design</a></p><h2>Group Project</h2>
+<p><a href="https://link.springer.com/book/10.1007/978-1-4842-3985-8">Hacking Product Design</a></p><h1>Stage1</h1>
+<p>第一階段分組協同實習:</p>
+<p style="padding-left: 30px;">每週分組報告必須包含 html, pdf 與 Youtube 影片:</p>
+<p style="padding-left: 60px;">標題: 2021-協同產品設計實習-stage1-ag1</p>
+<p style="padding-left: 90px;">專題題目:</p>
+<p style="padding-left: 90px;">第一位組員學號:(<a href="http://www.iesensor.com/HTML5pptCV/#/">Curriculum Vitae 範例</a>)</p>
+<p style="padding-left: 90px;">第二位組員學號:(<a href="https://mde.tw/cd2021/downloads/cv_example/cv_example.html">CV 範例</a>)</p>
+<p style="padding-left: 90px;">其他組員學號:</p>
+<p>交付給各組的實習任務:</p>
+<ol>
+<li>請在各組組長的 Github 帳號下建立各組的分組網站, 惟在 W1 進行各班定組序過程中, 發現即便採用 Ethercalc 以網際協同方式同步讓各班自選組員填入兩兩成組的學員學號, 但仍缺人工或自動定各班組序的有效方案, 在此責成各組在進行自選的協同產品開發項目之際 (W2-W4), 將此議題列為必選的題目之一, 詳細說明各組認為最有效率的第一階段與訂定組序的方法及流程.</li>
+<li>此外, 為了讓各組在 stage1 分組協同實習過程, 能透過網誌發表各組組員在 W2-W4 過程中的各項作為與心得報告, 說明可利用 Leo Editor 協助 CMSiMDE 中的 Pelican 發表協同網誌, 其目的是讓各分組在協同期間, 能完整呈現各階段所留下的網誌紀錄. 但此方式必須熟悉 Leo Editor 的操作, 因此有關透過 Pelican 建立協同網誌一事, 除利用 Leo Editor 協助設定並建立 pelican 網誌外, 也將此議題列為各組在 Stage1 協同產品設計流程中必選題目之二, 請各組詳細說明採用或不採用 Leo Editor 的兩種情況下, 各組員在設定與建立協同網誌的過程所可能遭遇或產生的問題與解決方案.</li>
+</ol>
+<div class="d-flex flex-justify-center width-full">
+<div class="Counter discussion-vote-count d-flex flex-row" style="min-width: 26px;">
+<div class="width-full" style="height: 1.5em; overflow: hidden;">
+<div class="d-flex flex-column"><span aria-hidden="true" class="downvoted-vote-count"></span> <a href="https://github.com/mdecourse/cd2021/discussions/11">2021 協同產品設計實習 W4 分組專題報告與影片繳交處</a><span aria-hidden="false" class="upvoted-vote-count"></span></div>
+</div>
+</div>
+</div>
+<h1>Group Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
@@ -98,7 +231,7 @@
 <p style="padding-left: 60px;"><a href="https://patentimages.storage.googleapis.com/26/64/17/a2d818ef688fd8/US6382038.pdf">transmission device patent</a> (<a href="http://cim.mcgill.ca/~rmsl/Index/Speed-o-Cam.htm">ref</a>)</p>
 <p style="padding-left: 60px;"><a href="/downloads/slide_o_cam_transmission_device.pdf">slide-o-cam transmission device</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/tinyc.games">https://github.com/mdecourse/tinyc.games</a></p>
-<p style="padding-left: 90px;"><a href="https://publications.gbdirect.co.uk//c_book/">https://publications.gbdirect.co.uk//c_book/</a> </p>
+<p style="padding-left: 90px;"><a href="https://publications.gbdirect.co.uk//c_book/">https://publications.gbdirect.co.uk//c_book/</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/Immediate-Mode-UI/Nuklear">https://github.com/Immediate-Mode-UI/Nuklear</a></p>
 <p style="padding-left: 30px;">ps2020:</p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/ps2020">https://github.com/mdecourse/ps2020</a></p>
@@ -134,7 +267,8 @@
 <p style="padding-left: 30px;">W10-W17</p>
 <p style="padding-left: 60px;">八人共同快速 (八週) 開發一組產品設計與實作模擬 (分組自評與互評, 說明遭遇問題與解決方法)</p>
 <p style="padding-left: 30px;">W18 上課之前必須將各組報告 html, pdf 與 Youtube 影片連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/14">2021 協同產品設計實習 期末 (W18) 分組專題報告與影片繳交處 </a></p>
-<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4><h2>Programming</h2>
+<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4>
+<h2>Programming</h2>
 <p><a href="https://www.gnu.org/education/edu-schools.zh-tw.html">https://www.gnu.org/education/edu-schools.zh-tw.html</a> (為什麼學校只應採用自由軟體)</p>
 <p style="padding-left: 30px;">相同概念: Why Engineers Should Exclusively Use English</p>
 <p>四設一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True</a></p>
@@ -247,28 +381,33 @@ pp.pprint(e.export("kkcao0lc2ew7"))
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ps2020/discussions/3">https://github.com/mdecourse/ps2020/discussions/3</a></p>
 <p style="padding-left: 30px;"><a href="https://fossil.kmol.info/ps2020">https://fossil.kmol.info/ps2020</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ps2020">https://github.com/mdecourse/ps2020</a></p>
-<p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/Pyslvs-UI">https://github.com/KmolYuan/Pyslvs-UI</a> </p>
-<p></p><h2>git config</h2>
+<p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/Pyslvs-UI">https://github.com/KmolYuan/Pyslvs-UI</a></p>
+<p></p>
+<h2>git config</h2>
 <p>y:\home\.gitconfig settings:</p>
 <p style="padding-left: 30px;">git config --global user.email "your github account associated email address"</p>
 <p style="padding-left: 30px;">git config --global user.name "your github account name"</p>
 <p style="padding-left: 30px;">Default pull stratege: pull = fetch + merge</p>
-<p style="padding-left: 60px;">git config --global pull.rebase false</p><h2>Reveal</h2>
+<p style="padding-left: 60px;">git config --global pull.rebase false</p>
+<h2>Reveal</h2>
 <p>Why Reveal.js?</p>
-<p><a href="https://revealjs.com/">https://revealjs.com/</a></p><h2>Blogs</h2>
+<p><a href="https://revealjs.com/">https://revealjs.com/</a></p>
+<h2>Blogs</h2>
 <p>Why Blogs?</p>
 <p><a href="https://www.blogger.com">https://www.blogger.com</a></p>
 <p><a href="https://blog.getpelican.com/">https://blog.getpelican.com/</a></p>
-<p><a href="https://fossil.kmol.info/fosgit/doc/0f7bf53ab9/content/index.html">https://fossil.kmol.info/fosgit/doc/0f7bf53ab9/content/index.html</a> </p><h2>LaTeX or Word</h2>
+<p><a href="https://fossil.kmol.info/fosgit/doc/0f7bf53ab9/content/index.html">https://fossil.kmol.info/fosgit/doc/0f7bf53ab9/content/index.html</a></p>
+<h2>LaTeX or Word</h2>
 <p>Why LaTeX?</p>
 <p><a href="https://en.wikibooks.org/wiki/LaTeX/Collaborative_Writing_of_LaTeX_Documents">https://en.wikibooks.org/wiki/LaTeX/Collaborative_Writing_of_LaTeX_Documents</a></p>
 <p><a href="https://www.natureindex.com/news-blog/three-ways-to-collaborate-on-writing">https://www.natureindex.com/news-blog/three-ways-to-collaborate-on-writing</a></p>
 <p><a href="https://www.authorea.com/">https://www.authorea.com/</a></p>
 <p><a href="https://github.com/PHPirates/travis-ci-latex-pdf">https://github.com/PHPirates/travis-ci-latex-pdf</a></p>
-<p><a href="https://medium.com/@baymac/continuous-integration-of-latex-documents-using-travis-ci-a1916c89e978">https://medium.com/@baymac/continuous-integration-of-latex-documents-using-travis-ci-a1916c89e978</a> </p>
+<p><a href="https://medium.com/@baymac/continuous-integration-of-latex-documents-using-travis-ci-a1916c89e978">https://medium.com/@baymac/continuous-integration-of-latex-documents-using-travis-ci-a1916c89e978</a></p>
 <p><a href="https://dfm.io/posts/travis-latex/">https://dfm.io/posts/travis-latex/</a></p>
 <p></p>
-<p></p><h1>CAD</h1>
+<p></p>
+<h1>CAD</h1>
 <h2>Onshape</h2>
 <p><a href="https://cad.onshape.com">https://cad.onshape.com</a></p>
 <p>What's new in Onshape 1.124<br/>We've added new functionality to Onshape since your last sign in. <a href="https://forum.onshape.com/discussion/15168">Click to learn more</a>.</p>
@@ -284,11 +423,15 @@ pp.pprint(e.export("kkcao0lc2ew7"))
 <p><a href="https://www.onshape.com/en/resource-center/articles/3-ways-to-improve-your-cad-collaboration">https://www.onshape.com/en/resource-center/articles/3-ways-to-improve-your-cad-collaboration</a></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/IZr1YhxHyMo" width="560"></iframe></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/0VMYtyKtU1k" width="560"></iframe></p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/y9oGWHYsPlY" width="560"></iframe></p><h2>Solidworks</h2>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/y9oGWHYsPlY" width="560"></iframe></p>
+<h2>Solidworks</h2>
 <p><a href="https://www.solidworks.com/">https://www.solidworks.com/</a></p>
-<p><a href="https://drive.google.com/file/d/1KPpXzumzBIvMCovZdBYh0s468uFO277k/view?usp=sharing">Download Solidworks 2017 DVD</a> (for @gm users only) - permanent license for 500 vpn users</p><h2>Inventor</h2>
-<p><a href="https://www.autodesk.com/products/inventor/overview">https://www.autodesk.com/products/inventor/overview</a> </p><h2>Solvespace</h2>
-<p><a href="https://solvespace.com">https://solvespace.com</a> </p><h1>Simulation</h1>
+<p><a href="https://drive.google.com/file/d/1KPpXzumzBIvMCovZdBYh0s468uFO277k/view?usp=sharing">Download Solidworks 2017 DVD</a> (for @gm users only) - permanent license for 500 vpn users</p>
+<h2>Inventor</h2>
+<p><a href="https://www.autodesk.com/products/inventor/overview">https://www.autodesk.com/products/inventor/overview</a></p>
+<h2>Solvespace</h2>
+<p><a href="https://solvespace.com">https://solvespace.com</a></p>
+<h2>Simulation</h2>
 <p><a href="https://github.com/mdecourse/Bipedal">https://github.com/mdecourse/Bipedal</a></p>
 <p><a href="https://github.com/mdecourse/biped_trajectory_optimization">https://github.com/mdecourse/biped_trajectory_optimization</a></p>
 <p><a href="https://cyberbotics.com/doc/guide/samples-howto#passive_dynamic_walker-wbt">https://cyberbotics.com/doc/guide/samples-howto#passive_dynamic_walker-wbt</a></p>
@@ -300,26 +443,30 @@ pp.pprint(e.export("kkcao0lc2ew7"))
 <p><a href="https://github.com/mdecourse/SolveSpace-Daily-Engineering">https://github.com/mdecourse/SolveSpace-Daily-Engineering</a> (<a href="https://www.youtube.com/playlist?list=PL53gPqUkbj3JndwS2T410KTbBymaimbiD">video</a>)</p>
 <p><a href="https://github.com/KmolYuan/program-learning">https://github.com/KmolYuan/program-learning</a></p>
 <p><a href="https://github.com/mdecourse/FreeCAD_Mod_Dev_Guide">https://github.com/mdecourse/FreeCAD_Mod_Dev_Guide</a></p>
-<p><a href="https://arnemertz.github.io/online-compilers/">https://arnemertz.github.io/online-compilers/</a> </p><h2>CoppeliaSim</h2>
-<p><a href="https://www.coppeliarobotics.com/">https://www.coppeliarobotics.com/</a> </p>
-<h2>Webots</h2>
-<p><a href="https://cyberbotics.com/">https://cyberbotics.com/</a> </p>
-<p><a href="https://robotbenchmark.net/">https://robotbenchmark.net/</a> </p>
-<h2>Pybullet</h2>
-<p><a href="https://pybullet.org/">https://pybullet.org/</a> </p><h1>CAE</h1>
+<p><a href="https://arnemertz.github.io/online-compilers/">https://arnemertz.github.io/online-compilers/</a></p>
+<h3>CoppeliaSim</h3>
+<p><a href="https://www.coppeliarobotics.com/">https://www.coppeliarobotics.com/</a></p>
+<h3>Webots</h3>
+<p><a href="https://cyberbotics.com/">https://cyberbotics.com/</a></p>
+<p><a href="https://robotbenchmark.net/">https://robotbenchmark.net/</a></p>
+<h3>Pybullet</h3>
+<p><a href="https://pybullet.org/">https://pybullet.org/</a></p>
+<h1>CAE</h1>
 <h2>Abaqus</h2>
 <p><a href="https://www.3ds.com/products-services/simulia/products/abaqus/">https://www.3ds.com/products-services/simulia/products/abaqus/</a></p>
-<p><a href="https://drive.google.com/drive/folders/1Jl3_OGCyQD6Tsw7pqMr45xnh6jSPvqom?usp=sharing">Download Abaqus 2020 DVD</a> (for @gm users only) - License up to 2021/08/08</p><h2>Comsol</h2>
-<p><a href="https://www.comsol.com/">https://www.comsol.com/</a> </p>
+<p><a href="https://drive.google.com/drive/folders/1Jl3_OGCyQD6Tsw7pqMr45xnh6jSPvqom?usp=sharing">Download Abaqus 2020 DVD</a> (for @gm users only) - License up to 2021/08/08</p>
+<h2>Comsol</h2>
+<p><a href="https://www.comsol.com/">https://www.comsol.com/</a></p>
 <h2>ANSYS</h2>
-<p><a href="https://www.ansys.com/">https://www.ansys.com/</a> </p>
+<p><a href="https://www.ansys.com/">https://www.ansys.com/</a></p>
 <h2>Range3</h2>
-<p><a href="https://github.com/Range-Software/range3">https://github.com/Range-Software/range3</a> </p>
+<p><a href="https://github.com/Range-Software/range3">https://github.com/Range-Software/range3</a></p>
 <h2>NGSolve</h2>
-<p><a href="https://ngsolve.org/">https://ngsolve.org/</a> </p><h1>Prototyping</h1>
+<p><a href="https://ngsolve.org/">https://ngsolve.org/</a></p>
+<h1>Prototyping</h1>
 <h2>3D printing</h2>
 <p><a href="https://github.com/mdecourse/virtualkossel">https://github.com/mdecourse/virtualkossel</a></p>
 <p style="padding-left: 30px;"><a href="http://mde.tw/virtualkossel/">http://mde.tw/virtualkossel/</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Hangprinter">https://en.wikipedia.org/wiki/Hangprinter</a> </p>
+<p><a href="https://en.wikipedia.org/wiki/Hangprinter">https://en.wikipedia.org/wiki/Hangprinter</a></p>
 <p><a href="https://gcode.ws/">https://gcode.ws/</a></p>
 <p><a href="http://shapeforge.loria.fr/vrprinter/">http://shapeforge.loria.fr/vrprinter/</a></p>
