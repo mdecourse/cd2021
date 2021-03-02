@@ -32,8 +32,8 @@
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/6VAhJ44qzbk" width="560"></iframe></p>
 <p>根據第一階段的分組要求, 嘗試採電腦程式執行的方式完成分組與排序, 目前結果如下:</p>
 <p>討論:</p>
-<p style="padding-left: 30px;">在無其他同步或非同步網際程式工具輔助下, 若採用 Ethercalc 以網際同步方式可取得各分組的學員學號, 但因無自動定組序的方法 (可類比至後續若要設法導入自動化流程讀取各組的分組網站, 則必須設法讓電腦程式可以讀取各分組的分組網站內容), 因此需要人工介入訂定組序並收集各組分組網站的連結並發布在網際環境中, 目前所面臨的問題是, 除了各組兩名組員可自選外, 其他流程 (定各班組序, 取得各班分組網站連結並自動嵌入預定地 content.htm 檔案中) 都希望以自動化方式完成.</p>
-<p style="padding-left: 30px;">目前已知 ethercalc-python 可協助讀取特地的 Ethercalc 表單, 以下列程式為例, 因為利用 Python 的 set 去除各列中重複的 None 值, 但因 set 資料的特性是 unordered, 因此雖達成去除重複資料的目的, 但卻弄亂原先的資料順序, 因此或可採直接讀取 Ethercalc 表單資料後, 依照各行固定的學員學號, 並設法忽略中間的空白列 (row) 內容後, 在與最終的各班選課名單進行比對後 (因其中可能包含未自選組員的情況, 則必須由電腦進行自動配對), 再進行各班組序的訂定, 並依各組組序與組長 Github 帳號, 自動產生各組的分組倉儲連結與分組網站連結後, 設法產生對應的 html 資料後, 再設法嵌入指定的 content.htm 中.</p>
+<p style="padding-left: 30px;">在無其他同步或非同步網際程式工具輔助下, 若採用 Ethercalc 以網際同步方式可取得各分組的學員學號, 但因無自動定組序的方法 (可類比至後續若要設法導入自動化流程讀取各組的分組網站, 則必須設法讓電腦程式可以讀取各分組的分組網站內容), 因此需要人工介入訂定組序並收集各組分組網站的連結並發布在網際環境中, 目前所面臨的問題是, 除了各組兩名組員可自選外, 其他流程 (定各班組序, 取得各班分組網站連結並自動嵌入預定的 content.htm 檔案中) 都希望以自動化方式完成.</p>
+<p style="padding-left: 30px;">目前已知 ethercalc-python 可協助讀取特定的 Ethercalc 表單, 以下列程式為例, 因為利用 Python 的 set 去除各列中重複的 None 值, 但因 set 資料的特性是 unordered, 因此雖達成去除重複資料的目的, 但卻弄亂原先的資料順序, 因此或可採直接讀取 Ethercalc 表單資料後, 依照各行固定位置的學員學號 (第二與第三行資料), 並設法忽略中間的空白列 (row) 內容後, 再與最終的各班選課名單 (透過 <a href="https://github.com/mdecourse/nfulist">https://github.com/mdecourse/nfulist</a> 讀取資料) 進行比對後 (因其中可能包含未自選組員的情況, 則必須由電腦進行自動配對), 再進行各班組序的訂定, 並依各組組序與組長 Github 帳號 (如何取得?), 自動產生各組的分組倉儲連結與分組網站連結後, 設法產生對應的 html 資料後, 再設法嵌入指定的 content.htm 中.</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python3
 import ethercalc
 import pprint
@@ -167,15 +167,15 @@ for i in range(len(output)):
 <p><a href="https://link.springer.com/book/10.1007/978-1-4842-3985-8">Hacking Product Design</a></p><h1>Stage1</h1>
 <p>第一階段分組協同實習:</p>
 <p style="padding-left: 30px;">每週分組報告必須包含 html, pdf 與 Youtube 影片:</p>
-<p style="padding-left: 60px;">標題: 2021-協同產品設計實習-stage1-ag1</p>
+<p style="padding-left: 60px;">標題: <span style="background-color: #ffff99;">2021-協同產品設計實習-stage1-ag1</span></p>
 <p style="padding-left: 90px;">專題題目:</p>
 <p style="padding-left: 90px;">第一位組員學號:(<a href="http://www.iesensor.com/HTML5pptCV/#/">Curriculum Vitae 範例</a>)</p>
 <p style="padding-left: 90px;">第二位組員學號:(<a href="https://mde.tw/cd2021/downloads/cv_example/cv_example.html">CV 範例</a>)</p>
 <p style="padding-left: 90px;">其他組員學號:</p>
 <p>交付給各組的實習任務:</p>
 <ol>
-<li>請在各組組長的 Github 帳號下建立各組的分組網站, 惟在 W1 進行各班定組序過程中, 發現即便採用 Ethercalc 以網際協同方式同步讓各班自選組員填入兩兩成組的學員學號, 但仍缺人工或自動定各班組序的有效方案, 在此責成各組在進行自選的協同產品開發項目之際 (W2-W4), 將此議題列為必選的題目之一, 詳細說明各組認為最有效率的第一階段與訂定組序的方法及流程.</li>
-<li>此外, 為了讓各組在 stage1 分組協同實習過程, 能透過網誌發表各組組員在 W2-W4 過程中的各項作為與心得報告, 說明可利用 Leo Editor 協助 CMSiMDE 中的 Pelican 發表協同網誌, 其目的是讓各分組在協同期間, 能完整呈現各階段所留下的網誌紀錄. 但此方式必須熟悉 Leo Editor 的操作, 因此有關透過 Pelican 建立協同網誌一事, 除利用 Leo Editor 協助設定並建立 pelican 網誌外, 也將此議題列為各組在 Stage1 協同產品設計流程中必選題目之二, 請各組詳細說明採用或不採用 Leo Editor 的兩種情況下, 各組員在設定與建立協同網誌的過程所可能遭遇或產生的問題與解決方案.</li>
+<li><span style="background-color: #ffff99;">請在各組組長的 Github 帳號下建立各組的分組網站, 惟在 W1 進行各班定組序過程中, 發現即便採用 Ethercalc 以網際協同方式同步讓各班自選組員填入兩兩成組的學員學號, 但仍缺人工或自動定各班組序的有效方案, 在此責成各組在進行自選的協同產品開發項目之際 (W2-W4), 將此議題列為必選的題目之一, 詳細說明各組認為最有效率的第一階段與訂定組序的方法及流程.</span></li>
+<li><span style="background-color: #ffff99;">此外, 為了讓各組在 stage1 分組協同實習過程, 能透過網誌發表各組組員在 W2-W4 過程中的各項作為與心得報告, 說明可利用 Leo Editor 協助 CMSiMDE 中的 Pelican 發表協同網誌, 其目的是讓各分組在協同期間, 能完整呈現各階段所留下的網誌紀錄. 但此方式必須熟悉 Leo Editor 的操作, 因此有關透過 Pelican 建立協同網誌一事, 除利用 Leo Editor 協助設定並建立 pelican 網誌外, 也將此議題列為各組在 Stage1 協同產品設計流程中必選題目之二, 請各組詳細說明採用或不採用 Leo Editor 的兩種情況下, 各組員在設定與建立協同網誌的過程所可能遭遇或產生的問題與解決方案.</span></li>
 </ol>
 <div class="d-flex flex-justify-center width-full">
 <div class="Counter discussion-vote-count d-flex flex-row" style="min-width: 26px;">
@@ -183,8 +183,7 @@ for i in range(len(output)):
 <div class="d-flex flex-column"><span aria-hidden="true" class="downvoted-vote-count"></span> <a href="https://github.com/mdecourse/cd2021/discussions/11">2021 協同產品設計實習 W4 分組專題報告與影片繳交處</a><span aria-hidden="false" class="upvoted-vote-count"></span></div>
 </div>
 </div>
-</div>
-<h1>Group Project</h1>
+</div><h1>Group Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
