@@ -21,7 +21,7 @@ os.environ['https_proxy'] = proxy
 os.environ['HTTPS_PROXY'] = proxy
 
 # read data from url
-with urllib.request.urlopen('https://nfulist.herokuapp.com/?semester=1092&courseno=0764&column=True') as response:
+with urllib.request.urlopen('https://nfulist.herokuapp.com/?semester=1092&courseno=0776&column=True') as response:
    html = response.read().decode('utf-8')
 
 # split data with "</br>" into list, up to here we get the student list of the cd2021 2a
@@ -31,7 +31,7 @@ Udata = html.split("</br>")
 # set group as vacent list
 group = []
 # open w2_a_list.txt which copied from http://c.kmol.info:8000/o616appencye at 2021/03/04 15:00
-with open("w2_a_list.txt") as file: 
+with open("w2_b_list.txt") as file: 
     content = file.readlines()
 for i in range(len(content)):
     data = content[i].rstrip("\n").split("\t")

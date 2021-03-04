@@ -34,6 +34,7 @@
 <p>討論:</p>
 <p style="padding-left: 30px;">在無其他同步或非同步網際程式工具輔助下, 若採用 Ethercalc 以網際同步方式可取得各分組的學員學號, 但因無自動定組序的方法 (可類比至後續若要設法導入自動化流程讀取各組的分組網站, 則必須設法讓電腦程式可以讀取各分組的分組網站內容), 因此需要人工介入訂定組序並收集各組分組網站的連結並發布在網際環境中, 目前所面臨的問題是, 除了各組兩名組員可自選外, 其他流程 (定各班組序, 取得各班分組網站連結並自動嵌入預定的 content.htm 檔案中) 都希望以自動化方式完成.</p>
 <p style="padding-left: 30px;">目前已知 ethercalc-python 可協助讀取特定的 Ethercalc 表單, 以下列程式為例, 因為利用 Python 的 set 去除各列中重複的 None 值, 但因 set 資料的特性是 unordered, 因此雖達成去除重複資料的目的, 但卻弄亂原先的資料順序, 因此或可採直接讀取 Ethercalc 表單資料後, 依照各行固定位置的學員學號 (第二與第三行資料), 並設法忽略中間的空白列 (row) 內容後, 再與最終的各班選課名單 (透過 <a href="https://github.com/mdecourse/nfulist">https://github.com/mdecourse/nfulist</a> 讀取資料) 進行比對後 (因其中可能包含未自選組員的情況, 則必須由電腦進行自動配對), 再進行各班組序的訂定, 並依各組組序與組長 Github 帳號 (如何取得?), 自動產生各組的分組倉儲連結與分組網站連結後, 設法產生對應的 html 資料後, 再設法嵌入指定的 content.htm 中.</p>
+<p><span style="background-color: #ffff99;">特別注意: 只有在上課時段, <a href="http://140.130.17.17:8000" style="background-color: #ffff99;">http://140.130.17.17:8000</a> Ethercalc 主機才會開啟, 各組若要自行建立測試用的 Ethercalc 主機, 請參考: <a href="http://mde.tw/cad2020/content/Ethercalc.html" style="background-color: #ffff99;">http://mde.tw/cad2020/content/Ethercalc.html</a> </span></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python3
 import ethercalc
 import pprint
@@ -183,7 +184,59 @@ for i in range(len(output)):
 <div class="d-flex flex-column"><span aria-hidden="true" class="downvoted-vote-count"></span> <a href="https://github.com/mdecourse/cd2021/discussions/11">2021 協同產品設計實習 W4 分組專題報告與影片繳交處</a><span aria-hidden="false" class="upvoted-vote-count"></span></div>
 </div>
 </div>
-</div><h1>Group Project</h1>
+</div><h2>W2</h2>
+<p>利用下列程式查驗尚未納分組人員:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True
+'''
+2021 spring:
+0741 1a
+0764 2a
+0776 2b
+2384 5j
+'''
+# for read data from url
+import urllib.request
+# for execution through proxy
+import os
+# for converting 2d list into 1d
+from itertools import chain 
+ 
+proxy = 'http://[2001:288:6004:17::69]:3128'
+ 
+os.environ['http_proxy'] = proxy 
+os.environ['HTTP_PROXY'] = proxy
+os.environ['https_proxy'] = proxy
+os.environ['HTTPS_PROXY'] = proxy
+
+# read data from url
+with urllib.request.urlopen('https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True') as response:
+   html = response.read().decode('utf-8')
+
+# split data with "&lt;/br&gt;" into list, up to here we get the student list of the cd2021 2a
+Udata = html.split("&lt;/br&gt;")
+#print("total:" + str(len(Udata)))
+
+# set group as vacent list
+group = []
+# open w2_a_list.txt which copied from http://c.kmol.info:8000/o616appencye at 2021/03/04 15:00
+with open("w2_a_list.txt") as file: 
+    content = file.readlines()
+for i in range(len(content)):
+    data = content[i].rstrip("\n").split("\t")
+    group.append(data)
+#print(group)
+
+# converting 2d list into 1d 
+# using chain.from_iterables 
+flatten_group= list(chain.from_iterable(group)) 
+for stud in Udata:
+    if stud not in flatten_group:
+        print(stud)
+
+
+</pre>
+<p>2a 查驗結果:</p>
+<p><img alt="" height="542" src="/images/w2_grouping_check_2a.png" width="600"/></p><h1>Group Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
@@ -266,8 +319,7 @@ for i in range(len(output)):
 <p style="padding-left: 30px;">W10-W17</p>
 <p style="padding-left: 60px;">八人共同快速 (八週) 開發一組產品設計與實作模擬 (分組自評與互評, 說明遭遇問題與解決方法)</p>
 <p style="padding-left: 30px;">W18 上課之前必須將各組報告 html, pdf 與 Youtube 影片連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/14">2021 協同產品設計實習 期末 (W18) 分組專題報告與影片繳交處 </a></p>
-<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4>
-<h2>Programming</h2>
+<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4><h2>Programming</h2>
 <p><a href="https://www.gnu.org/education/edu-schools.zh-tw.html">https://www.gnu.org/education/edu-schools.zh-tw.html</a> (為什麼學校只應採用自由軟體)</p>
 <p style="padding-left: 30px;">相同概念: Why Engineers Should Exclusively Use English</p>
 <p>四設一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True</a></p>

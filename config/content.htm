@@ -184,7 +184,61 @@ for i in range(len(output)):
 <div class="d-flex flex-column"><span aria-hidden="true" class="downvoted-vote-count"></span> <a href="https://github.com/mdecourse/cd2021/discussions/11">2021 協同產品設計實習 W4 分組專題報告與影片繳交處</a><span aria-hidden="false" class="upvoted-vote-count"></span></div>
 </div>
 </div>
-</div><h1>Group Project</h1>
+</div><h2>W2</h2>
+<p>利用下列程式查驗尚未納分組人員:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True
+'''
+2021 spring:
+0741 1a
+0764 2a
+0776 2b
+2384 5j
+'''
+# for read data from url
+import urllib.request
+# for execution through proxy
+import os
+# for converting 2d list into 1d
+from itertools import chain 
+ 
+proxy = 'http://[2001:288:6004:17::69]:3128'
+ 
+os.environ['http_proxy'] = proxy 
+os.environ['HTTP_PROXY'] = proxy
+os.environ['https_proxy'] = proxy
+os.environ['HTTPS_PROXY'] = proxy
+
+# read data from url
+with urllib.request.urlopen('https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True') as response:
+   html = response.read().decode('utf-8')
+
+# split data with "&lt;/br&gt;" into list, up to here we get the student list of the cd2021 2a
+Udata = html.split("&lt;/br&gt;")
+#print("total:" + str(len(Udata)))
+
+# set group as vacent list
+group = []
+# open w2_a_list.txt which copied from http://c.kmol.info:8000/o616appencye at 2021/03/04 15:00
+with open("w2_a_list.txt") as file: 
+    content = file.readlines()
+for i in range(len(content)):
+    data = content[i].rstrip("\n").split("\t")
+    group.append(data)
+#print(group)
+
+# converting 2d list into 1d 
+# using chain.from_iterables 
+flatten_group= list(chain.from_iterable(group)) 
+for stud in Udata:
+    if stud not in flatten_group:
+        print(stud)
+
+
+</pre>
+<p>2a 初步查驗結果:</p>
+<p><img alt="" height="542" src="/images/w2_grouping_check_2a.png" width="600"/></p>
+<p>2b 初步查驗結果:</p>
+<p><img alt="" height="542" src="/images/w2_grouping_check_2b.png" width="600"/></p><h1>Group Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
@@ -267,8 +321,7 @@ for i in range(len(output)):
 <p style="padding-left: 30px;">W10-W17</p>
 <p style="padding-left: 60px;">八人共同快速 (八週) 開發一組產品設計與實作模擬 (分組自評與互評, 說明遭遇問題與解決方法)</p>
 <p style="padding-left: 30px;">W18 上課之前必須將各組報告 html, pdf 與 Youtube 影片連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/14">2021 協同產品設計實習 期末 (W18) 分組專題報告與影片繳交處 </a></p>
-<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4>
-<h2>Programming</h2>
+<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4><h2>Programming</h2>
 <p><a href="https://www.gnu.org/education/edu-schools.zh-tw.html">https://www.gnu.org/education/edu-schools.zh-tw.html</a> (為什麼學校只應採用自由軟體)</p>
 <p style="padding-left: 30px;">相同概念: Why Engineers Should Exclusively Use English</p>
 <p>四設一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True</a></p>
