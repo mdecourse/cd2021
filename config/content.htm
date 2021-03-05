@@ -238,7 +238,23 @@ for stud in Udata:
 <p>2a 初步查驗結果:</p>
 <p><img alt="" height="542" src="/images/w2_grouping_check_2a.png" width="600"/></p>
 <p>2b 初步查驗結果:</p>
-<p><img alt="" height="542" src="/images/w2_grouping_check_2b.png" width="600"/></p><h1>Group Project</h1>
+<p><img alt="" height="542" src="/images/w2_grouping_check_2b.png" width="600"/></p>
+<p><a href="/downloads/grouping/w2_a_list.txt">2a stage1 分組名單</a></p>
+<p><a href="/downloads/grouping/w2_b_list.txt">2b stage1 分組名單</a></p><h3>cmsimde</h3>
+<p>修改動機:</p>
+<p style="padding-left: 30px;">1. 希望動態系統能夠直接在倉儲根目錄中直接以 cms.bat 啟動, 無需進入 cmsimde 子目錄中操作.</p>
+<p style="padding-left: 60px;">只要建立一個 cms.bat 內容為 python cmsimde/wsgi.py 即可.</p>
+<p style="padding-left: 30px;">2. 為了能夠在倉儲根目錄執行 wsgi.py, 必須將 localhost.key 與 localhost.crt 從 cmsimde 移到 up_dir 目錄.</p>
+<p style="padding-left: 30px;">3. localhost.key 與 localhost.crt 可以在命令列中執行 sh.exe 後, 以下列命令完成:</p>
+<p style="padding-left: 60px;">openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout localhost.key -out localhost.crt</p>
+<p style="padding-left: 30px;">4. 若已經採用 ssh 推送, 能否直接使用 acp.bat 加上提交字串完成 git add commit push. 其內容為:</p>
+<p>acp.bat 內容</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">echo off
+set message=%1
+git add .
+git commit -m %message%
+git push</pre>
+<p style="padding-left: 30px;"><br/><br/></p><h1>Group Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
