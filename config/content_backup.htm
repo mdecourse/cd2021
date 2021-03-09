@@ -34,6 +34,7 @@
 <p>討論:</p>
 <p style="padding-left: 30px;">在無其他同步或非同步網際程式工具輔助下, 若採用 Ethercalc 以網際同步方式可取得各分組的學員學號, 但因無自動定組序的方法 (可類比至後續若要設法導入自動化流程讀取各組的分組網站, 則必須設法讓電腦程式可以讀取各分組的分組網站內容), 因此需要人工介入訂定組序並收集各組分組網站的連結並發布在網際環境中, 目前所面臨的問題是, 除了各組兩名組員可自選外, 其他流程 (定各班組序, 取得各班分組網站連結並自動嵌入預定的 content.htm 檔案中) 都希望以自動化方式完成.</p>
 <p style="padding-left: 30px;">目前已知 ethercalc-python 可協助讀取特定的 Ethercalc 表單, 以下列程式為例, 因為利用 Python 的 set 去除各列中重複的 None 值, 但因 set 資料的特性是 unordered, 因此雖達成去除重複資料的目的, 但卻弄亂原先的資料順序, 因此或可採直接讀取 Ethercalc 表單資料後, 依照各行固定位置的學員學號 (第二與第三行資料), 並設法忽略中間的空白列 (row) 內容後, 再與最終的各班選課名單 (透過 <a href="https://github.com/mdecourse/nfulist">https://github.com/mdecourse/nfulist</a> 讀取資料) 進行比對後 (因其中可能包含未自選組員的情況, 則必須由電腦進行自動配對), 再進行各班組序的訂定, 並依各組組序與組長 Github 帳號 (如何取得?), 自動產生各組的分組倉儲連結與分組網站連結後, 設法產生對應的 html 資料後, 再設法嵌入指定的 content.htm 中.</p>
+<p><span style="background-color: #ffff99;">特別注意: 只有在上課時段, <a href="http://140.130.17.17:8000" style="background-color: #ffff99;">http://140.130.17.17:8000</a> Ethercalc 主機才會開啟, 各組若要自行建立測試用的 Ethercalc 主機, 請參考: <a href="http://mde.tw/cad2020/content/Ethercalc.html" style="background-color: #ffff99;">http://mde.tw/cad2020/content/Ethercalc.html</a> </span></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/env python3
 import ethercalc
 import pprint
@@ -181,9 +182,89 @@ for i in range(len(output)):
 <div class="Counter discussion-vote-count d-flex flex-row" style="min-width: 26px;">
 <div class="width-full" style="height: 1.5em; overflow: hidden;">
 <div class="d-flex flex-column"><span aria-hidden="true" class="downvoted-vote-count"></span> <a href="https://github.com/mdecourse/cd2021/discussions/11">2021 協同產品設計實習 W4 分組專題報告與影片繳交處</a><span aria-hidden="false" class="upvoted-vote-count"></span></div>
+<div class="d-flex flex-column"></div>
+<div class="d-flex flex-column"></div>
 </div>
 </div>
-</div><h1>Group Project</h1>
+</div>
+<div class="d-flex flex-justify-center width-full"></div>
+<div class="d-flex flex-justify-center width-full">2a 分組:</div>
+<div class="Counter discussion-vote-count d-flex flex-row" style="min-width: 26px;"></div>
+<div class="Counter discussion-vote-count d-flex flex-row" style="min-width: 26px;"><a href="http://github.com/40823145/stage1-ag1/cd2021">stage1-ag1 repo</a> | <a href="http://40823108.github.io/stage1-ag1">stage1-ag1 site</a> | <a href="http://github.com/40823145/cd2021">40823145 repo</a> | <a href="http://40823145.github.io/cd2021">40823145 site</a> | <a href="http://github.com/40823108/cd2021">40823108 repo</a> | <a href="http://40823108.github.io/cd2021">40823108 site</a><br/><a href="http://github.com/40523252/stage1-ag2/cd2021">stage1-ag2 repo</a> | <a href="http://40623121.github.io/stage1-ag2">stage1-ag2 site</a> | <a href="http://github.com/40523252/cd2021">40523252 repo</a> | <a href="http://40523252.github.io/cd2021">40523252 site</a> | <a href="http://github.com/40623121/cd2021">40623121 repo</a> | <a href="http://40623121.github.io/cd2021">40623121 site</a><br/><a href="http://github.com/40623234/stage1-ag3/cd2021">stage1-ag3 repo</a> | <a href="http://40423113.github.io/stage1-ag3">stage1-ag3 site</a> | <a href="http://github.com/40623234/cd2021">40623234 repo</a> | <a href="http://40623234.github.io/cd2021">40623234 site</a> | <a href="http://github.com/40423113/cd2021">40423113 repo</a> | <a href="http://40423113.github.io/cd2021">40423113 site</a><br/><a href="http://github.com/40823101/stage1-ag4/cd2021">stage1-ag4 repo</a> | <a href="http://40823104.github.io/stage1-ag4">stage1-ag4 site</a> | <a href="http://github.com/40823101/cd2021">40823101 repo</a> | <a href="http://40823101.github.io/cd2021">40823101 site</a> | <a href="http://github.com/40823104/cd2021">40823104 repo</a> | <a href="http://40823104.github.io/cd2021">40823104 site</a><br/><a href="http://github.com/40823102/stage1-ag5/cd2021">stage1-ag5 repo</a> | <a href="http://40823106.github.io/stage1-ag5">stage1-ag5 site</a> | <a href="http://github.com/40823102/cd2021">40823102 repo</a> | <a href="http://40823102.github.io/cd2021">40823102 site</a> | <a href="http://github.com/40823106/cd2021">40823106 repo</a> | <a href="http://40823106.github.io/cd2021">40823106 site</a><br/><a href="http://github.com/40823111/stage1-ag6/cd2021">stage1-ag6 repo</a> | <a href="http://40823139.github.io/stage1-ag6">stage1-ag6 site</a> | <a href="http://github.com/40823111/cd2021">40823111 repo</a> | <a href="http://40823111.github.io/cd2021">40823111 site</a> | <a href="http://github.com/40823139/cd2021">40823139 repo</a> | <a href="http://40823139.github.io/cd2021">40823139 site</a><br/><a href="http://github.com/40823129/stage1-ag7/cd2021">stage1-ag7 repo</a> | <a href="http://40823149.github.io/stage1-ag7">stage1-ag7 site</a> | <a href="http://github.com/40823129/cd2021">40823129 repo</a> | <a href="http://40823129.github.io/cd2021">40823129 site</a> | <a href="http://github.com/40823149/cd2021">40823149 repo</a> | <a href="http://40823149.github.io/cd2021">40823149 site</a><br/><a href="http://github.com/40823103/stage1-ag8/cd2021">stage1-ag8 repo</a> | <a href="http://40823107.github.io/stage1-ag8">stage1-ag8 site</a> | <a href="http://github.com/40823103/cd2021">40823103 repo</a> | <a href="http://40823103.github.io/cd2021">40823103 site</a> | <a href="http://github.com/40823107/cd2021">40823107 repo</a> | <a href="http://40823107.github.io/cd2021">40823107 site</a><br/><a href="http://github.com/40823115/stage1-ag9/cd2021">stage1-ag9 repo</a> | <a href="http://40823140.github.io/stage1-ag9">stage1-ag9 site</a> | <a href="http://github.com/40823115/cd2021">40823115 repo</a> | <a href="http://40823115.github.io/cd2021">40823115 site</a> | <a href="http://github.com/40823140/cd2021">40823140 repo</a> | <a href="http://40823140.github.io/cd2021">40823140 site</a><br/><a href="http://github.com/40823109/stage1-ag10/cd2021">stage1-ag10 repo</a> | <a href="http://40823112.github.io/stage1-ag10">stage1-ag10 site</a> | <a href="http://github.com/40823109/cd2021">40823109 repo</a> | <a href="http://40823109.github.io/cd2021">40823109 site</a> | <a href="http://github.com/a40823112/cd2021">40823112 repo</a> | <a href="http://a40823112.github.io/cd2021">40823112 site</a><br/><a href="http://github.com/40823119/stage1-ag11/cd2021">stage1-ag11 repo</a> | <a href="http://40823150.github.io/stage1-ag11">stage1-ag11 site</a> | <a href="http://github.com/40823119/cd2021">40823119 repo</a> | <a href="http://40823119.github.io/cd2021">40823119 site</a> | <a href="http://github.com/40823150/cd2021">40823150 repo</a> | <a href="http://40823150.github.io/cd2021">40823150 site</a><br/><a href="http://github.com/40823120/stage1-ag12/cd2021">stage1-ag12 repo</a> | <a href="http://40823124.github.io/stage1-ag12">stage1-ag12 site</a> | <a href="http://github.com/40823120/cd2021">40823120 repo</a> | <a href="http://40823120.github.io/cd2021">40823120 site</a> | <a href="http://github.com/40823124/cd2021">40823124 repo</a> | <a href="http://40823124.github.io/cd2021">40823124 site</a><br/><a href="http://github.com/40823117/stage1-ag13/cd2021">stage1-ag13 repo</a> | <a href="http://40823122.github.io/stage1-ag13">stage1-ag13 site</a> | <a href="http://github.com/40823117/cd2021">40823117 repo</a> | <a href="http://40823117.github.io/cd2021">40823117 site</a> | <a href="http://github.com/40823122/cd2021">40823122 repo</a> | <a href="http://40823122.github.io/cd2021">40823122 site</a><br/><a href="http://github.com/40823125/stage1-ag14/cd2021">stage1-ag14 repo</a> | <a href="http://40823110.github.io/stage1-ag14">stage1-ag14 site</a> | <a href="http://github.com/40823125/cd2021">40823125 repo</a> | <a href="http://40823125.github.io/cd2021">40823125 site</a> | <a href="http://github.com/40823110/cd2021">40823110 repo</a> | <a href="http://40823110.github.io/cd2021">40823110 site</a> | <a href="http://github.com/40823132/cd2021">40823132 repo</a>| <a href="http://40823132.github.io/cd2021">40823132 site</a><br/><a href="http://github.com/40823126/stage1-ag15/cd2021">stage1-ag15 repo</a> | <a href="http://40823128.github.io/stage1-ag15">stage1-ag15 site</a> | <a href="http://github.com/40823126/cd2021">40823126 repo</a> | <a href="http://40823126.github.io/cd2021">40823126 site</a> | <a href="http://github.com/40823128/cd2021">40823128 repo</a> | <a href="http://40823128.github.io/cd2021">40823128 site</a><br/><a href="http://github.com/40823146/stage1-ag16/cd2021">stage1-ag16 repo</a> | <a href="http://40823114.github.io/stage1-ag16">stage1-ag16 site</a> | <a href="http://github.com/40823146/cd2021">40823146 repo</a> | <a href="http://40823146.github.io/cd2021">40823146 site</a> | <a href="http://github.com/40823114/cd2021">40823114 repo</a> | <a href="http://40823114.github.io/cd2021">40823114 site</a><br/><a href="http://github.com/40823142/stage1-ag17/cd2021">stage1-ag17 repo</a> | <a href="http://40823144.github.io/stage1-ag17">stage1-ag17 site</a> | <a href="http://github.com/40823142/cd2021">40823142 repo</a> | <a href="http://40823142.github.io/cd2021">40823142 site</a> | <a href="http://github.com/40823144/cd2021">40823144 repo</a> | <a href="http://40823144.github.io/cd2021">40823144 site</a><br/><a href="http://github.com/40823135/stage1-ag18/cd2021">stage1-ag18 repo</a> | <a href="http://40823121.github.io/stage1-ag18">stage1-ag18 site</a> | <a href="http://github.com/40823135/cd2021">40823135 repo</a> | <a href="http://40823135.github.io/cd2021">40823135 site</a> | <a href="http://github.com/40823121/cd2021">40823121 repo</a> | <a href="http://40823121.github.io/cd2021">40823121 site</a><br/><a href="http://github.com/40823123/stage1-ag19/cd2021">stage1-ag19 repo</a> | <a href="http://40823136.github.io/stage1-ag19">stage1-ag19 site</a> | <a href="http://github.com/40823123/cd2021">40823123 repo</a> | <a href="http://40823123.github.io/cd2021">40823123 site</a> | <a href="http://github.com/40823136/cd2021">40823136 repo</a> | <a href="http://40823136.github.io/cd2021">40823136 site</a><br/><a href="http://github.com/40823127/stage1-ag20/cd2021">stage1-ag20 repo</a> | <a href="http://40823148.github.io/stage1-ag20">stage1-ag20 site</a> | <a href="http://github.com/40823127/cd2021">40823127 repo</a> | <a href="http://40823127.github.io/cd2021">40823127 site</a> | <a href="http://github.com/40823148/cd2021">40823148 repo</a> | <a href="http://40823148.github.io/cd2021">40823148 site</a><br/><a href="http://github.com/40823152/stage1-ag21/cd2021">stage1-ag21 repo</a> | <a href="http://40823153.github.io/stage1-ag21">stage1-ag21 site</a> | <a href="http://github.com/40823152/cd2021">40823152 repo</a> | <a href="http://40823152.github.io/cd2021">40823152 site</a> | <a href="http://github.com/40823153/cd2021">40823153 repo</a> | <a href="http://40823153.github.io/cd2021">40823153 site</a><br/><a href="http://github.com/40823151/stage1-ag22/cd2021">stage1-ag22 repo</a> | <a href="http://40871106.github.io/stage1-ag22">stage1-ag22 site</a> | <a href="http://github.com/40823151/cd2021">40823151 repo</a> | <a href="http://40823151.github.io/cd2021">40823151 site</a> | <a href="http://github.com/40871106/cd2021">40871106 repo</a> | <a href="http://40871106.github.io/cd2021">40871106 site</a><br/><a href="http://github.com/40823116/stage1-ag23/cd2021">stage1-ag23 repo</a> | <a href="http://40823131.github.io/stage1-ag23">stage1-ag23 site</a> | <a href="http://github.com/40823116/cd2021">40823116 repo</a> | <a href="http://40823116.github.io/cd2021">40823116 site</a> | <a href="http://github.com/40823131/cd2021">40823131 repo</a> | <a href="http://40823131.github.io/cd2021">40823131 site</a></div><h2>W2</h2>
+<p>利用下列程式查驗尚未納分組人員:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True
+'''
+2021 spring:
+0741 1a
+0764 2a
+0776 2b
+2384 5j
+'''
+# for read data from url
+import urllib.request
+# for execution through proxy
+import os
+# for converting 2d list into 1d
+from itertools import chain 
+ 
+proxy = 'http://[2001:288:6004:17::69]:3128'
+ 
+os.environ['http_proxy'] = proxy 
+os.environ['HTTP_PROXY'] = proxy
+os.environ['https_proxy'] = proxy
+os.environ['HTTPS_PROXY'] = proxy
+
+# read data from url
+with urllib.request.urlopen('https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True') as response:
+   html = response.read().decode('utf-8')
+
+# split data with "&lt;/br&gt;" into list, up to here we get the student list of the cd2021 2a
+Udata = html.split("&lt;/br&gt;")
+#print("total:" + str(len(Udata)))
+
+# set group as vacent list
+group = []
+# open w2_a_list.txt which copied from http://c.kmol.info:8000/o616appencye at 2021/03/04 15:00
+with open("w2_a_list.txt") as file: 
+    content = file.readlines()
+for i in range(len(content)):
+    data = content[i].rstrip("\n").split("\t")
+    group.append(data)
+#print(group)
+
+# converting 2d list into 1d 
+# using chain.from_iterables 
+flatten_group= list(chain.from_iterable(group)) 
+for stud in Udata:
+    if stud not in flatten_group:
+        print(stud)
+
+
+</pre>
+<p>2a 初步查驗結果:</p>
+<p><img alt="" height="542" src="/images/w2_grouping_check_2a.png" width="600"/></p>
+<p>2b 初步查驗結果:</p>
+<p><img alt="" height="542" src="/images/w2_grouping_check_2b.png" width="600"/></p>
+<p><a href="/downloads/grouping/w2_a_list.txt">2a stage1 分組名單</a></p>
+<p><a href="/downloads/grouping/w2_b_list.txt">2b stage1 分組名單</a></p><h3>cmsimde</h3>
+<p>修改動機:</p>
+<p style="padding-left: 30px;">1. 希望動態系統能夠直接在倉儲根目錄中直接以 cms.bat 啟動, 無需進入 cmsimde 子目錄中操作.</p>
+<p style="padding-left: 60px;">只要建立一個 cms.bat 內容為 python cmsimde/wsgi.py 即可.</p>
+<p style="padding-left: 30px;">2. 為了能夠在倉儲根目錄執行 wsgi.py, 必須將 localhost.key 與 localhost.crt 從 cmsimde 移到 up_dir 目錄.</p>
+<p style="padding-left: 30px;">3. localhost.key 與 localhost.crt 可以在命令列中執行 sh.exe 後, 以下列命令完成:</p>
+<p style="padding-left: 60px;">openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout localhost.key -out localhost.crt</p>
+<p style="padding-left: 30px;">4. 若已經採用 ssh 推送, 能否直接使用 acp.bat 加上提交字串完成 git add commit push. 其內容為:</p>
+<p>acp.bat 內容</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">echo off
+set message=%1
+git add .
+git commit -m %message%
+git push</pre>
+<p><br/>cms.bat 內容: python cmsimde/wsgi.py</p>
+<p>up.bat 內容:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
+robocopy up_dir ./../ /E</pre>
+<p></p><h1>Group Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
@@ -266,8 +347,7 @@ for i in range(len(output)):
 <p style="padding-left: 30px;">W10-W17</p>
 <p style="padding-left: 60px;">八人共同快速 (八週) 開發一組產品設計與實作模擬 (分組自評與互評, 說明遭遇問題與解決方法)</p>
 <p style="padding-left: 30px;">W18 上課之前必須將各組報告 html, pdf 與 Youtube 影片連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/14">2021 協同產品設計實習 期末 (W18) 分組專題報告與影片繳交處 </a></p>
-<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4>
-<h2>Programming</h2>
+<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4><h2>Programming</h2>
 <p><a href="https://www.gnu.org/education/edu-schools.zh-tw.html">https://www.gnu.org/education/edu-schools.zh-tw.html</a> (為什麼學校只應採用自由軟體)</p>
 <p style="padding-left: 30px;">相同概念: Why Engineers Should Exclusively Use English</p>
 <p>四設一甲網際內容管理: <a href="https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True">https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0741&amp;column=True</a></p>
