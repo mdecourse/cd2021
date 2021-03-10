@@ -1,6 +1,6 @@
 group = []
 
-with open("w2_b_list.txt") as file: 
+with open("w2_a_list.txt") as file: 
     content = file.readlines()
 for i in range(len(content)):
     data = content[i].rstrip("\n").split("\t")
