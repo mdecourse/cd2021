@@ -18,7 +18,7 @@ for i in group[1:]:
     gM1repo = "<a href='http://github.com/" + gM1 + "/cd2021'>" + gM1 + " repo</a>"
     gM1site = "<a href='http://" + gM1 + ".github.io/cd2021'>" + gM1 +  " site</a>"
     
-    gRepo = "<a href='http://github.com/" + gLeader + "/" + gName + "/cd2021'>" + gName + " repo</a>"
+    gRepo = "<a href='http://github.com/" + gLeader + "/" + gName + "'>" + gName + " repo</a>"
     gSite =  "<a href='http://" + gM1 + ".github.io/" + gName + "'>" + gName +  " site</a>"
     
     output += gRepo + " | " + gSite + " | " + gLeaderRepo + " | " + gLeaderSite + " | " +gM1repo + " | " + gM1site

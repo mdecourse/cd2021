@@ -1,0 +1,62 @@
+body {
+  margin: 0px;
+}
+.winkVideoContainerClass {
+  position: relative;
+}
+.winkVideoClass,
+.winkVideoOverlayClass,
+.winkVideoOverlayButtonClass,
+.winkVideoPlayOverlayClass,
+.winkVideoControlBarClass,
+.winkVideoControlBarClass * {
+  position: absolute;
+}
+.winkVideoPlayOverlayClass {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('playoverlay.png');
+}
+.winkVideoOverlayButtonClass {
+  cursor: pointer;
+}
+.winkVideoControlBarClass * {
+  border: 0px;
+  padding: 0px;
+  height: 100%;
+  background-repeat: repeat-x;
+}
+.winkVideoControlBarPlayButtonClass {
+  background-image: url('controlbar/playnormal.png');
+}
+.winkVideoControlBarPlayButtonClass:hover {
+  background-image: url('controlbar/playmouseover.png');
+}
+.winkVideoControlBarPlayButtonClass:active {
+  background-image: url('controlbar/playpressed.png');
+}
+.winkVideoControlBarPauseButtonClass {
+  background-image: url('controlbar/pausenormal.png');
+}
+.winkVideoControlBarPauseButtonClass:hover {
+  background-image: url('controlbar/pausemouseover.png');
+}
+.winkVideoControlBarPauseButtonClass:active {
+  background-image: url('controlbar/pausepressed.png');
+}
+.winkVideoControlBarProgressLeftClass {
+  background-image: url('controlbar/progressleft.png');
+}
+.winkVideoControlBarProgressRightClass {
+  background-image: url('controlbar/progressright.png');
+}
+.winkVideoControlBarProgressEmptyMiddleClass {
+  background-image: url('controlbar/progressemptymiddle.png');
+}
+.winkVideoControlBarProgressFilledMiddleClass {
+  background-image: url('controlbar/progressfilledmiddle.png');
+}
+.winkVideoControlBarProgressThumbClass {
+  background-image: url('controlbar/progressthumb.png');
+}
