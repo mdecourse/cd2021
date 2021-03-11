@@ -1,6 +1,19 @@
+def realA(account):
+    # 置入 2a 學員特殊情況轉換
+    if account == "40623234":
+        return account + "-1"
+    elif account[0:3] == "407": 
+        return "s" + account
+    elif account == "40823112":
+        return "a" + account
+    else:
+        return account
+        
+#print(realA("40823113"))
+
 group = []
 
-with open("w2_b_list.txt") as file: 
+with open("w2_a_list.txt") as file: 
     content = file.readlines()
 for i in range(len(content)):
     data = content[i].rstrip("\n").split("\t")
@@ -9,9 +22,10 @@ for i in range(len(content)):
 output = ""
 for i in group[1:]:
     gName = i[0]
-    gLeader = i[1]
-    gM1 = i[2]
-    gM2 = i[3]
+    gLeader = realA(i[1])
+    gM1 = realA(i[2])
+    gM2 = realA(i[3])
+    
     
     gLeaderRepo = "<a href='http://github.com/" + gLeader + "/cd2021'>" + gLeader + " repo</a>"
     gLeaderSite = "<a href='http://" + gLeader + ".github.io/cd2021'>" + gLeader +  " site</a>"
