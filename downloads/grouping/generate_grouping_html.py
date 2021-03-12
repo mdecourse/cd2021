@@ -6,6 +6,8 @@ def realA(account):
         return "s" + account
     elif account == "40823112":
         return "a" + account
+    elif account == "40823231":
+        return account + "-2"
     else:
         return account
         
