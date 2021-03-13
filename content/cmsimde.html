@@ -122,7 +122,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li><a href='分組協同.html'>分組協同</a></li></ul><li class='has-children'><a href='Stage1.html'>Stage1</a><ul class='dropdown'><li class='has-children'><a href='W2.html'>W2</a><ul class='dropdown'><li><a href='cmsimde.html'>cmsimde</a></li></ul><li><a href='Wink3.html'>Wink3</a></li></ul><li class='has-children'><a href='Group Project.html'>Group Project</a><ul class='dropdown'><li><a href='Programming.html'>Programming</a><li><a href='git config.html'>git config</a><li><a href='Reveal.html'>Reveal</a><li><a href='Blogs.html'>Blogs</a><li><a href='LaTeX or Word.html'>LaTeX or Word</a></li></ul><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Onshape.html'>Onshape</a><li><a href='Solidworks.html'>Solidworks</a><li><a href='Inventor.html'>Inventor</a><li><a href='Solvespace.html'>Solvespace</a><li class='has-children'><a href='Simulation.html'>Simulation</a><ul class='dropdown'><li><a href='CoppeliaSim.html'>CoppeliaSim</a><li><a href='Webots.html'>Webots</a><li><a href='Pybullet.html'>Pybullet</a></li></li></ul></ul><li class='has-children'><a href='CAE.html'>CAE</a><ul class='dropdown'><li><a href='Abaqus.html'>Abaqus</a><li><a href='Comsol.html'>Comsol</a><li><a href='ANSYS.html'>ANSYS</a><li><a href='Range3.html'>Range3</a><li><a href='NGSolve.html'>NGSolve</a></li></ul><li class='has-children'><a href='Prototyping.html'>Prototyping</a><ul class='dropdown'><li><a href='3D printing.html'>3D printing</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li><a href='分組協同.html'>分組協同</a></li></ul><li class='has-children'><a href='Stage1.html'>Stage1</a><ul class='dropdown'><li class='has-children'><a href='W2.html'>W2</a><ul class='dropdown'><li><a href='cmsimde.html'>cmsimde</a></li></ul><li><a href='分組題目.html'>分組題目</a><li><a href='Wink3.html'>Wink3</a></li></ul><li class='has-children'><a href='Group Project.html'>Group Project</a><ul class='dropdown'><li><a href='Programming.html'>Programming</a><li><a href='git config.html'>git config</a><li><a href='Reveal.html'>Reveal</a><li><a href='Blogs.html'>Blogs</a><li><a href='LaTeX or Word.html'>LaTeX or Word</a></li></ul><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Onshape.html'>Onshape</a><li><a href='Solidworks.html'>Solidworks</a><li><a href='Inventor.html'>Inventor</a><li><a href='Solvespace.html'>Solvespace</a><li class='has-children'><a href='Simulation.html'>Simulation</a><ul class='dropdown'><li><a href='CoppeliaSim.html'>CoppeliaSim</a><li><a href='Webots.html'>Webots</a><li><a href='Pybullet.html'>Pybullet</a></li></li></ul></ul><li class='has-children'><a href='CAE.html'>CAE</a><ul class='dropdown'><li><a href='Abaqus.html'>Abaqus</a><li><a href='Comsol.html'>Comsol</a><li><a href='ANSYS.html'>ANSYS</a><li><a href='Range3.html'>Range3</a><li><a href='NGSolve.html'>NGSolve</a></li></ul><li class='has-children'><a href='Prototyping.html'>Prototyping</a><ul class='dropdown'><li><a href='3D printing.html'>3D printing</a></li>
                       </ul>
                 </nav>
               </div>
@@ -133,7 +133,7 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">W2 << <a href='W2.html'>Previous</a> <a href='Wink3.html'>Next</a> >> Wink3<br /><h1>cmsimde</h1>
+    <div id="tipue_search_content">W2 << <a href='W2.html'>Previous</a> <a href='分組題目.html'>Next</a> >> 分組題目<br /><h1>cmsimde</h1>
 <p>修改動機:</p>
 <p style="padding-left: 30px;">1. 希望動態系統能夠直接在倉儲根目錄中直接以 cms.bat 啟動, 無需進入 cmsimde 子目錄中操作.</p>
 <p style="padding-left: 60px;">只要建立一個 cms.bat 內容為 python cmsimde/wsgi.py 即可.</p>
@@ -161,7 +161,7 @@ robocopy up_dir ./../ /E</pre>
 <p>而 acp.bat 執行時隨後必須輸入提交訊息字串的動作除了批次檔案的名稱可以再簡化為 a.bat 之外, 似乎已經省無可省, 但是使用者在開啟動態系統後, 通常若在近端則需要以瀏覽器開啟 <a>https://localhost:9443</a>, 因此若能在開啟動態網站的同時, 在批次檔案中同時開啟瀏覽器, 又可以省下不少時間, 在批次檔案中同時執行命令的機制稱為 pipe.</p>
 <p>假如採用 pipe 除了啟動 wsgi.py 外也利用 Firefox 瀏覽器開啟 <a href="/get_page/cmsimde/,">https://localhost:9443,</a> 則可以將 cms.bat 改為:<br/><br/></p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python cmsimde/wsgi.py 1&gt; nul | "C:\Program Files (x86)\Mozilla Firefox\firefox" https://localhost:9443</pre>
-<p></p><br />W2 << <a href='W2.html'>Previous</a> <a href='Wink3.html'>Next</a> >> Wink3</div>
+<p></p><br />W2 << <a href='W2.html'>Previous</a> <a href='分組題目.html'>Next</a> >> 分組題目</div>
         
     <!-- footer -->
       <div class="container">

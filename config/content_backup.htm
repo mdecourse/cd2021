@@ -171,7 +171,9 @@ for i in range(len(output)):
 <p>當 stage1 兩人一組進行協同時, 希望各學員 Github 帳號下都帶有分組倉儲與分組網站, 則可以透過 git remote add, 設法讓各組員 Github 帳號下的分組網站內容同步.</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/r9vGGuJjm6A" width="560"></iframe></p>
 <p>說明針對之前使用舊版 cmsimde 的學員進行更新的操作步驟:</p>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/kuQafyJByF0" width="560"></iframe></p><h1>Stage1</h1>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/kuQafyJByF0" width="560"></iframe></p>
+<p>除了利用 git remote add 設法從分組網站近端倉儲版本建立內容同步各學員分組網站外, 也可以利用 fork 及反向 pull request 讓學員附屬分組網站與主分組網站的內容保持同步.</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/0fKyPmNI1xg" width="560"></iframe></p><h1>Stage1</h1>
 <p>第一階段分組協同實習:</p>
 <p style="padding-left: 30px;">每週分組報告必須包含 html, pdf 與 Youtube 影片:</p>
 <p style="padding-left: 60px;">標題: <span style="background-color: #ffff99;">2021-協同產品設計實習-stage1-ag1</span></p>
@@ -272,7 +274,8 @@ robocopy up_dir ./../ /E</pre>
 <p>而 acp.bat 執行時隨後必須輸入提交訊息字串的動作除了批次檔案的名稱可以再簡化為 a.bat 之外, 似乎已經省無可省, 但是使用者在開啟動態系統後, 通常若在近端則需要以瀏覽器開啟 <a>https://localhost:9443</a>, 因此若能在開啟動態網站的同時, 在批次檔案中同時開啟瀏覽器, 又可以省下不少時間, 在批次檔案中同時執行命令的機制稱為 pipe.</p>
 <p>假如採用 pipe 除了啟動 wsgi.py 外也利用 Firefox 瀏覽器開啟 <a href="/get_page/cmsimde/,">https://localhost:9443,</a> 則可以將 cms.bat 改為:<br/><br/></p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python cmsimde/wsgi.py 1&gt; nul | "C:\Program Files (x86)\Mozilla Firefox\firefox" https://localhost:9443</pre>
-<p></p><h2>Wink3</h2>
+<p></p><h2>分組題目</h2>
+<h2>Wink3</h2>
 <p>在電腦輔助設計室可以下載 <a href="http://a.kmol.info:88/wink3.7z,">http://a.kmol.info:88/wink3.7z</a></p>
 <p><a href="https://www.debugmode.com/wink/">Wink 官方網站</a></p>
 <p><a href="/downloads/Wink User Guide.pdf">Wink user guide.pdf</a></p>
