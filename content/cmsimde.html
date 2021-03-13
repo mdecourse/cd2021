@@ -151,7 +151,17 @@ git push</pre>
 <p>up.bat 內容:</p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
 robocopy up_dir ./../ /E</pre>
-<br />W2 << <a href='W2.html'>Previous</a> <a href='Wink3.html'>Next</a> >> Wink3</div>
+<h4>能不能夠更方便?</h4>
+<p>上述修改 CMSiMDE 啟動, 版本提交推送與目錄內容複製的動機, 就是希望電腦執行能夠更人性化, 也就是能讓各項操作更具效率, 先前使用者必須:</p>
+<p>cd cmsimde</p>
+<p>python wsgi.py</p>
+<p>將這兩個動作合併, 以:</p>
+<p>python cmsimde/wsgi.py</p>
+<p>批次檔案 cms.bat 執行, 使用者只要輸入 cms 然後按下 enter 就可以將兩個動作減為止輸入三個單字, 當然使用者若再將 cms.bat 改為 c.bat 也是可以:-)</p>
+<p>而 acp.bat 執行時隨後必須輸入提交訊息字串的動作除了批次檔案的名稱可以再簡化為 a.bat 之外, 似乎已經省無可省, 但是使用者在開啟動態系統後, 通常若在近端則需要以瀏覽器開啟 <a>https://localhost:9443</a>, 因此若能在開啟動態網站的同時, 在批次檔案中同時開啟瀏覽器, 又可以省下不少時間, 在批次檔案中同時執行命令的機制稱為 pipe.</p>
+<p>假如採用 pipe 除了啟動 wsgi.py 外也利用 Firefox 瀏覽器開啟 <a href="/get_page/cmsimde/,">https://localhost:9443,</a> 則可以將 cms.bat 改為:<br/><br/></p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python cmsimde/wsgi.py 1&gt; nul | "C:\Program Files (x86)\Mozilla Firefox\firefox" https://localhost:9443</pre>
+<p></p><br />W2 << <a href='W2.html'>Previous</a> <a href='Wink3.html'>Next</a> >> Wink3</div>
         
     <!-- footer -->
       <div class="container">
