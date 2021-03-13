@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--Converted with LaTeX2HTML 97.1 (release) (July 13th, 1997)
+ by Nikos Drakos (nikos@cbl.leeds.ac.uk), CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippman, Marek Rouchal, Martin Wilck and others -->
+<html><head>
+<title>BUG Algorithms</title>
+<meta name="description" content="BUG Algorithms">
+<meta name="keywords" content="chapter">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="STYLESHEET" href="BUG%20Algorithms_files/chapter.css">
+<link rel="next" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node4.html">
+<link rel="previous" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node2.html">
+<link rel="up" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node1.html">
+<link rel="next" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node4.html">
+</head>
+<body>
+<!--Navigation Panel-->
+<a name="tex2html32" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node4.html">
+<img alt="next" src="BUG%20Algorithms_files/next_motif.html" width="37" height="24" border="0" align="BOTTOM"></a> 
+<a name="tex2html30" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node1.html">
+<img alt="up" src="BUG%20Algorithms_files/up_motif.html" width="26" height="24" border="0" align="BOTTOM"></a> 
+<a name="tex2html24" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node2.html">
+<img alt="previous" src="BUG%20Algorithms_files/previous_motif.html" width="63" height="24" border="0" align="BOTTOM"></a>   
+<br>
+<b> Next:</b> <a name="tex2html33" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node4.html">Visibility-Based Pursuit-Evasion</a>
+<b> Up:</b> <a name="tex2html31" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node1.html">Uncertainty</a>
+<b> Previous:</b> <a name="tex2html25" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node2.html">General Uncertainty Concepts</a>
+<br>
+<br>
+<!--End of Navigation Panel-->
+<h1><a name="SECTION001020000000000000000">
+BUG Algorithms</a>
+</h1>
+<p>
+This section addresses a motion strategy problem that deals with
+uncertainty with sensing.  The BUG algorithms make the following
+assumptions:
+</p><ul>
+<li> The robot is a point in a 2D world.
+</li><li> The obstacles are unknown and nonconvex.
+</li><li> An initial and goal positions are defined.
+</li><li> The robot is equipped with a short-range sensor that can detect
+an obstacle boundary from a very short distance.  This allows the
+robot to execute a trajectory that follows the obstacle boundary.
+</li><li> The robot has a sensor that allows it to always know the
+direction and Euclidean distance to the goal.
+</li></ul>
+<p><b>BUG1</b> This robot moves in the direction of the goal until an
+obstacle is encountered.  A canonical direction is followed
+(clockwise) until the location of the initial encounter is reached.
+The robot then follows the boundary to reach the point along the
+boundary that is closest to the goal.  At this location, the robot
+moves directly toward the goal.  If another obstacle is encountered,
+the same procedure is applied.
+</p><p>
+</p><div align="CENTER"><img src="BUG%20Algorithms_files/img6.gif" alt="\psfig {file=figs/bug1.idr,width=3.0truein}
+" width="339" height="322" border="0" align="BOTTOM">
+<br>
+</div>
+<p>
+The worst case performance, <i>L</i>, is
+
+</p><p align="CENTER"><img src="BUG%20Algorithms_files/img7.gif" alt="\begin{displaymath}
+L \leq d + \frac{3}{2} \sum_{i=1}^{N} p_i\end{displaymath}" width="112" height="54"></p>
+in which <i>d</i> is the Euclidean distance from the initial position to
+the goal position, <i>p</i><sub><i>i</i></sub> is the perimeter of the <i>i</i><sup><i>th</i></sup> obstacle,
+and <i>N</i> is the number of obstacles.
+<p><b>BUG2</b> In this algorithm, the robot always attempts to move along
+the line of sight toward the goal.  If an obstacle is encountered, a
+canonical direction is followed until the line of sight is
+encountered.
+</p><p>
+</p><div align="CENTER"><img src="BUG%20Algorithms_files/img8.gif" alt="\psfig {file=figs/bug2.idr,width=3.0truein}
+" width="339" height="308" border="0" align="BOTTOM">
+<br>
+</div>
+<p>
+The worst case performance, <i>L</i>, is
+
+</p><p align="CENTER"><img src="BUG%20Algorithms_files/img9.gif" alt="\begin{displaymath}
+L \leq d + \frac{1}{2} \sum_{i=1}^{N} n_i p_i\end{displaymath}" width="127" height="54"></p>
+in which <i>n</i><sub><i>i</i></sub> is the number of times the <i>i</i><sup><i>th</i></sup> obstacle crosses
+the line segment between the initial position and goal position.
+<p></p><hr>
+<!--Navigation Panel-->
+<a name="tex2html32" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node4.html">
+<img alt="next" src="BUG%20Algorithms_files/next_motif.html" width="37" height="24" border="0" align="BOTTOM"></a> 
+<a name="tex2html30" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node1.html">
+<img alt="up" src="BUG%20Algorithms_files/up_motif.html" width="26" height="24" border="0" align="BOTTOM"></a> 
+<a name="tex2html24" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node2.html">
+<img alt="previous" src="BUG%20Algorithms_files/previous_motif.html" width="63" height="24" border="0" align="BOTTOM"></a>   
+<br>
+<b> Next:</b> <a name="tex2html33" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node4.html">Visibility-Based Pursuit-Evasion</a>
+<b> Up:</b> <a name="tex2html31" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node1.html">Uncertainty</a>
+<b> Previous:</b> <a name="tex2html25" href="http://msl.cs.uiuc.edu/~lavalle/cs497_2001/book/uncertain/node2.html">General Uncertainty Concepts</a>
+<!--End of Navigation Panel-->
+<address>
+<i>Steven M. LaValle</i>
+<br><i>8/29/2001</i>
+</address>
+
+
+</body></html>
