@@ -251,6 +251,19 @@ pp.pprint(e.export("kkcao0lc2ew7"))
 <p style="padding-left: 30px;"><a href="https://fossil.kmol.info/ps2020">https://fossil.kmol.info/ps2020</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ps2020">https://github.com/mdecourse/ps2020</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/Pyslvs-UI">https://github.com/KmolYuan/Pyslvs-UI</a></p>
+<p>Walk in 特定目錄, 將所有 .html 檔案中的特定字串刪除:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+findText = """content to remove"""
+for dname, dirs, files in os.walk("path_name"):
+    for fname in files:
+        if fname[-5:] == ".html":
+            print(fname)
+            fpath = os.path.join(dname, fname)
+            with open(fpath, encoding="utf-8") as f:
+                s = f.read()
+            s = s.replace(findText, "")
+            with open(fpath, "w", encoding="utf-8") as f:
+                f.write(s)</pre>
 <p></p><br />Group Project << <a href='Group Project.html'>Previous</a> <a href='git config.html'>Next</a> >> git config</div>
         
     <!-- footer -->
