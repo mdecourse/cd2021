@@ -174,6 +174,7 @@ for i in range(len(output)):
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/kuQafyJByF0" width="560"></iframe></p>
 <p>除了利用 git remote add 設法從分組網站近端倉儲版本建立內容同步各學員分組網站外, 也可以利用 fork 及反向 pull request 讓學員附屬分組網站與主分組網站的內容保持同步.</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/0fKyPmNI1xg" width="560"></iframe></p><h1>Stage1</h1>
+<p>機構傳動分類</p>
 <p>第一階段分組協同實習:</p>
 <p style="padding-left: 30px;">每週分組報告必須包含 html, pdf 與 Youtube 影片:</p>
 <p style="padding-left: 60px;">標題: <span style="background-color: #ffff99;">2021-協同產品設計實習-stage1-ag1</span></p>
@@ -515,6 +516,19 @@ pp.pprint(e.export("kkcao0lc2ew7"))
 <p style="padding-left: 30px;"><a href="https://fossil.kmol.info/ps2020">https://fossil.kmol.info/ps2020</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ps2020">https://github.com/mdecourse/ps2020</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/Pyslvs-UI">https://github.com/KmolYuan/Pyslvs-UI</a></p>
+<p>Walk in 特定目錄, 將所有 .html 檔案中的特定字串刪除:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+findText = """content to remove"""
+for dname, dirs, files in os.walk("path_name"):
+    for fname in files:
+        if fname[-5:] == ".html":
+            print(fname)
+            fpath = os.path.join(dname, fname)
+            with open(fpath, encoding="utf-8") as f:
+                s = f.read()
+            s = s.replace(findText, "")
+            with open(fpath, "w", encoding="utf-8") as f:
+                f.write(s)</pre>
 <p></p><h2>git config</h2>
 <p>y:\home\.gitconfig settings:</p>
 <p style="padding-left: 30px;">git config --global user.email "your github account associated email address"</p>
