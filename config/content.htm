@@ -282,7 +282,19 @@ robocopy up_dir ./../ /E</pre>
 <p>而 acp.bat 執行時隨後必須輸入提交訊息字串的動作除了批次檔案的名稱可以再簡化為 a.bat 之外, 似乎已經省無可省, 但是使用者在開啟動態系統後, 通常若在近端則需要以瀏覽器開啟 <a>https://localhost:9443</a>, 因此若能在開啟動態網站的同時, 在批次檔案中同時開啟瀏覽器, 又可以省下不少時間, 在批次檔案中同時執行命令的機制稱為 pipe.</p>
 <p>假如採用 pipe 除了啟動 wsgi.py 外也利用 Firefox 瀏覽器開啟 <a href="/get_page/cmsimde/,">https://localhost:9443,</a> 則可以將 cms.bat 改為:<br/><br/></p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python cmsimde/wsgi.py 1&gt; nul | "C:\Program Files (x86)\Mozilla Firefox\firefox" https://localhost:9443</pre>
-<p></p><h2>分組題目</h2>
+<p></p><h2>W4</h2>
+<p>W4 2a stage1 自評表:</p>
+<p><a href="http://c.kmol.info:8000/0sbqt6glle0n">http://c.kmol.info:8000/0sbqt6glle0n</a>  (內容將隨即 copy 至成績登記倉儲)</p>
+<p>各組上課時只能使用 Browser 簡報, 並以 ShareX 分組錄影, ShareX Task settings-Upload-File naming 則採 cd20212a%ra(3)_%i 設定, 第一組簡報前按下 Shift + Print Scrn 後開始錄影, 結束時再按下 Shift + Print Scrn 則綠影檔案將存為 cd20212a三個亂數字元_1.mp4, 之後會將各班所有 mp4 以 sftp 傳至 <a href="http://c.kmol.info/downloads">http://c.kmol.info/downloads</a>  目錄下, 各組再自行將影片 upload 至各分組組員的 gm 帳號對應 Youtube, 並嵌入各分組的網站中.</p>
+<p>但是,</p>
+<p>由於 File naming 將原本應該是:</p>
+<p><img alt="" height="385" src="/images/w4_sharex_file_naming_correct.png" width="600"/></p>
+<p>的 %i 誤植為 %1 如下:</p>
+<p><img alt="" height="385" src="/images/w4_sharex_file_naming_error.png" width="600"/></p>
+<p>因此<a href="http://c.kmol.info/downloads/2021-03_2a_stage1.7z">http://c.kmol.info/downloads/2021-03_2a_stage1.7z</a> 壓縮檔中只能憑藉檔案建立的時間進行排序, 於是衍生出下列問題:</p>
+<p>該如何對各組簡報的 .mp4 檔案進行排序改名? 採手動? 以程式進行?</p>
+<p>請 stage1 中各組根據上述情況提供解決方案. 具體要求如下:</p>
+<p>對各組的 .mp4 進行改名, 將各檔案中的 %1 依照順序改為 1, 2, 3, 4 依此類推, 並且在分組網頁中列出一個表格, 設法列出各組簡報所花費的時間.</p><h2>分組題目</h2>
 <p>題目與研究內容的選定參考:</p>
 <p style="padding-left: 30px;">Floor-cleaning Robot: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage1">https://github.com/mdecourse/cd2021/tree/main/downloads/stage1</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/v-rep-robotics">https://github.com/mdecourse/v-rep-robotics</a></p>
