@@ -122,7 +122,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li><a href='分組協同.html'>分組協同</a></li></ul><li class='has-children'><a href='Stage1.html'>Stage1</a><ul class='dropdown'><li class='has-children'><a href='W2.html'>W2</a><ul class='dropdown'><li><a href='cmsimde.html'>cmsimde</a></li></ul><li><a href='分組題目.html'>分組題目</a><li><a href='Wink3.html'>Wink3</a></li></ul><li class='has-children'><a href='Group Project.html'>Group Project</a><ul class='dropdown'><li><a href='Programming.html'>Programming</a><li><a href='git config.html'>git config</a><li><a href='Reveal.html'>Reveal</a><li><a href='Blogs.html'>Blogs</a><li><a href='LaTeX or Word.html'>LaTeX or Word</a></li></ul><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Onshape.html'>Onshape</a><li><a href='Solidworks.html'>Solidworks</a><li><a href='Inventor.html'>Inventor</a><li><a href='Solvespace.html'>Solvespace</a><li class='has-children'><a href='Simulation.html'>Simulation</a><ul class='dropdown'><li><a href='CoppeliaSim.html'>CoppeliaSim</a><li><a href='Webots.html'>Webots</a><li><a href='Pybullet.html'>Pybullet</a></li></li></ul></ul><li class='has-children'><a href='CAE.html'>CAE</a><ul class='dropdown'><li><a href='Abaqus.html'>Abaqus</a><li><a href='Comsol.html'>Comsol</a><li><a href='ANSYS.html'>ANSYS</a><li><a href='Range3.html'>Range3</a><li><a href='NGSolve.html'>NGSolve</a></li></ul><li class='has-children'><a href='Prototyping.html'>Prototyping</a><ul class='dropdown'><li><a href='3D printing.html'>3D printing</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li><a href='分組協同.html'>分組協同</a></li></ul><li class='has-children'><a href='Stage1.html'>Stage1</a><ul class='dropdown'><li class='has-children'><a href='W2.html'>W2</a><ul class='dropdown'><li><a href='cmsimde.html'>cmsimde</a></li></ul><li><a href='W4.html'>W4</a><li><a href='分組題目.html'>分組題目</a><li><a href='Wink3.html'>Wink3</a></li></ul><li class='has-children'><a href='Project.html'>Project</a><ul class='dropdown'><li><a href='Programming.html'>Programming</a><li><a href='git config.html'>git config</a><li><a href='Reveal.html'>Reveal</a><li><a href='Blogs.html'>Blogs</a><li><a href='LaTeX or Word.html'>LaTeX or Word</a></li></ul><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Onshape.html'>Onshape</a><li><a href='Solidworks.html'>Solidworks</a><li><a href='Inventor.html'>Inventor</a><li><a href='Solvespace.html'>Solvespace</a><li class='has-children'><a href='Simulation.html'>Simulation</a><ul class='dropdown'><li><a href='CoppeliaSim.html'>CoppeliaSim</a><li><a href='Webots.html'>Webots</a><li><a href='Pybullet.html'>Pybullet</a></li></li></ul></ul><li class='has-children'><a href='CAE.html'>CAE</a><ul class='dropdown'><li><a href='Abaqus.html'>Abaqus</a><li><a href='Comsol.html'>Comsol</a><li><a href='ANSYS.html'>ANSYS</a><li><a href='Range3.html'>Range3</a><li><a href='NGSolve.html'>NGSolve</a></li></ul><li class='has-children'><a href='Prototyping.html'>Prototyping</a><ul class='dropdown'><li><a href='3D printing.html'>3D printing</a></li>
                       </ul>
                 </nav>
               </div>
@@ -133,7 +133,7 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Group Project << <a href='Group Project.html'>Previous</a> <a href='git config.html'>Next</a> >> git config<br /><h1>Programming</h1>
+    <div id="tipue_search_content">Project << <a href='Project.html'>Previous</a> <a href='git config.html'>Next</a> >> git config<br /><h1>Programming</h1>
 <p>KMOLab 建議使用者利用 Leo Editor 與 Pycharm 作為開發程式用的 IDE.</p>
 <p style="padding-left: 30px;">Leo Editor 作為資料管理套件, 可用於整理分散各處的程式開發相關資料.</p>
 <p style="padding-left: 30px;">Pycharm 則是典型的程式開發 IDE.</p>
@@ -264,7 +264,53 @@ for dname, dirs, files in os.walk("path_name"):
             s = s.replace(findText, "")
             with open(fpath, "w", encoding="utf-8") as f:
                 f.write(s)</pre>
-<p></p><br />Group Project << <a href='Group Project.html'>Previous</a> <a href='git config.html'>Next</a> >> git config</div>
+<p>進入特定目錄, 根據檔案最後建立時間, 對檔案改名:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># rename_according_file_time.py
+import os
+from pathlib import Path
+
+# put this file outside 2021-03_2a_stage1 directory
+files = []
+# directory name
+dname = "2021-03_2a_stage1"
+# iterdir() iterate over the files in directory
+paths = sorted(Path(dname).iterdir(), key=os.path.getmtime)
+for i in paths:
+    #os.fspath() eturn the file system representation of the path
+    files.append(os.fspath(i))
+#print(files)
+i = 0
+for fpath in files:
+    # original file name is fname
+    i += 1
+    # new file name
+    npath = os.path.join(dname, "cd2021_stage1_2a_g" + str(i) + ".mp4")
+    #print(npath)
+    os.rename(fpath, npath)
+
+
+</pre>
+<p>取得特定目錄中各 .mp4 影片檔案的長度:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># get_video_duration.py
+# pip install moviepy
+import os
+from moviepy.editor import VideoFileClip
+
+# Converts into more readable format
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return hours, mins, seconds
+    
+for dname, dirs, files in os.walk("2021-03_2a_stage1"):
+    for fname in files:
+        vName = os.path.join(dname, fname)
+        clip = VideoFileClip(vName)
+        hours, mins, secs = convert(clip.duration)
+        print(fname + "組:", str(int(mins)) + "分", str(int(secs)) + "秒")</pre>
+<p></p><br />Project << <a href='Project.html'>Previous</a> <a href='git config.html'>Next</a> >> git config</div>
         
     <!-- footer -->
       <div class="container">

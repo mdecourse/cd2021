@@ -174,7 +174,14 @@ for i in range(len(output)):
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/kuQafyJByF0" width="560"></iframe></p>
 <p>除了利用 git remote add 設法從分組網站近端倉儲版本建立內容同步各學員分組網站外, 也可以利用 fork 及反向 pull request 讓學員附屬分組網站與主分組網站的內容保持同步.</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/0fKyPmNI1xg" width="560"></iframe></p><h1>Stage1</h1>
-<p>機構傳動分類</p>
+<h4>實習目的:</h4>
+<ol>
+<li>讓學員利用<span style="background-color: #ccffcc;">電腦輔助機械設計套件</span>執行協同任務, 找出<span style="background-color: #ccffcc;">保存各設計資料版本</span>的有效方法</li>
+<li>讓學員利用最有效率的方式<span style="background-color: #ccffcc;">展示</span>協同產品設計過程的各相<span style="background-color: #ccffcc;">關細節與關鍵技術</span></li>
+<li>讓學員實習如何協同編寫淺顯易懂且內容充實的<span style="background-color: #ccffcc;">產品設計簡報與結案報告</span> (<a href="https://revealjs.com/">Reveal.js</a> 與 <a href="https://github.com/KmolYuan/latex-paper">latex-paper</a> 研究)</li>
+<li>讓學員在協同設計過程, 利用 <a href="http://mde.tw/cp2020/content/SSH.html">ssh</a> 維護個人與分組倉儲與網站</li>
+<li>讓學員利用 <a href="https://git-scm.com/book/zh-tw/v2/Git-%E5%9F%BA%E7%A4%8E-%E8%88%87%E9%81%A0%E7%AB%AF%E5%8D%94%E5%90%8C%E5%B7%A5%E4%BD%9C">git remote add</a> 建立 Github 與 Gitlab 上的同步倉儲與協同設計網站</li>
+</ol>
 <p>第一階段分組協同實習:</p>
 <p style="padding-left: 30px;">每週分組報告必須包含 html, pdf 與 Youtube 影片:</p>
 <p style="padding-left: 60px;">標題: <span style="background-color: #ffff99;">2021-協同產品設計實習-stage1-ag1</span></p>
@@ -275,7 +282,25 @@ robocopy up_dir ./../ /E</pre>
 <p>而 acp.bat 執行時隨後必須輸入提交訊息字串的動作除了批次檔案的名稱可以再簡化為 a.bat 之外, 似乎已經省無可省, 但是使用者在開啟動態系統後, 通常若在近端則需要以瀏覽器開啟 <a>https://localhost:9443</a>, 因此若能在開啟動態網站的同時, 在批次檔案中同時開啟瀏覽器, 又可以省下不少時間, 在批次檔案中同時執行命令的機制稱為 pipe.</p>
 <p>假如採用 pipe 除了啟動 wsgi.py 外也利用 Firefox 瀏覽器開啟 <a href="/get_page/cmsimde/,">https://localhost:9443,</a> 則可以將 cms.bat 改為:<br/><br/></p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">python cmsimde/wsgi.py 1&gt; nul | "C:\Program Files (x86)\Mozilla Firefox\firefox" https://localhost:9443</pre>
-<p></p><h2>分組題目</h2>
+<p></p><h2>W4</h2>
+<p>W4 2a stage1 自評表:</p>
+<p style="padding-left: 30px;"><a href="http://c.kmol.info:8000/0sbqt6glle0n">http://c.kmol.info:8000/0sbqt6glle0n</a>  (只有在取資料當下有效, 內容將隨即 copy 至成績登記倉儲)</p>
+<p>W4 2b stage1 自評表:</p>
+<p style="padding-left: 30px;">(只有在取資料當下有效, 內容將隨即 copy 至成績登記倉儲)</p>
+<p>各組上課時只能使用 Browser 簡報, 並以 ShareX 分組錄影, ShareX Task settings-Upload-File naming 則採 cd20212a%ra(3)_%i 設定, 第一組簡報前按下 Shift + Print Scrn 後開始錄影, 結束時再按下 Shift + Print Scrn 則綠影檔案將存為 cd20212a三個亂數字元_1.mp4, 之後會將各班所有 mp4 以 sftp 傳至 <a href="http://c.kmol.info/downloads">http://c.kmol.info/downloads</a>  目錄下, 各組再自行將影片 upload 至各分組組員的 gm 帳號對應 Youtube, 並嵌入各分組的網站中.</p>
+<p>但是,</p>
+<p>由於 File naming 將原本應該是:</p>
+<p><img alt="" height="385" src="/images/w4_sharex_file_naming_correct.png" width="600"/></p>
+<p>的 %i 誤植為 %1 如下:</p>
+<p><img alt="" height="385" src="/images/w4_sharex_file_naming_error.png" width="600"/></p>
+<p>因此<a href="http://c.kmol.info/downloads/2021-03_2a_stage1.7z">http://c.kmol.info/downloads/2021-03_2a_stage1.7z</a> 壓縮檔中只能憑藉檔案建立的時間進行排序, 於是衍生出下列問題:</p>
+<p style="padding-left: 30px;">該如何對各組簡報的 .mp4 檔案進行排序改名? 採手動? 以程式進行?</p>
+<p style="padding-left: 30px;">請 stage1 中各組根據上述情況提供解決方案. 具體要求如下:</p>
+<p style="padding-left: 60px;">對2a 各組的 .mp4 檔案進行改名, 將各檔案中的 %1 依照順序改為 1, 2, 3, 4 依此類推, 並且在分組網頁中列出一個表格, 列出各組簡報所花費的時間.</p>
+<p>討論:</p>
+<p style="padding-left: 30px;">目前因為只有 23 個 .mp4 檔案, 因此採用手動改名或逐一打開檔案計算每一影片檔案的簡報時間, 不至於太過繁雜, 但<span style="background-color: #ffff99;">若檔案數增加至 230 或 2300 個</span>, 決定採用手動改名與計算各組簡報時間的組別, 是否仍能夠接受使用手動處理與數位檔案有關的流程?</p>
+<p style="padding-left: 30px;">傳統汽車與電動汽車零件數比較:</p>
+<p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="/images/automobile_part_number_comparison.png" width="600"/></p><h2>分組題目</h2>
 <p>題目與研究內容的選定參考:</p>
 <p style="padding-left: 30px;">Floor-cleaning Robot: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage1">https://github.com/mdecourse/cd2021/tree/main/downloads/stage1</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/v-rep-robotics">https://github.com/mdecourse/v-rep-robotics</a></p>
@@ -315,7 +340,7 @@ robocopy up_dir ./../ /E</pre>
 <p>Wink3 tutorial 1:</p>
 <p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial1.htm" width="810"></iframe></p>
 <p>Wink 3 tutorial 2:</p>
-<p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial2.htm" width="810"></iframe></p><h1>Group Project</h1>
+<p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial2.htm" width="810"></iframe></p><h1>Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
@@ -326,6 +351,10 @@ robocopy up_dir ./../ /E</pre>
 <p style="padding-left: 90px;">第二位組員學號:(<a href="https://mde.tw/cd2021/downloads/cv_example/cv_example.html">CV 範例</a>)</p>
 <p style="padding-left: 90px;">其他組員學號:</p>
 <h4>參考:</h4>
+<p style="padding-left: 30px;">Typing:</p>
+<p style="padding-left: 60px;">練習英文打字與寫作編輯:</p>
+<p style="padding-left: 90px;">請將下列 paper 重新打字整理為 .txt 純文字檔案, 之後再利用 LaTeX 整理為 pdf 檔案.</p>
+<p style="padding-left: 90px;"><a href="/downloads/typing_practice/1990_evaluating_the_use_of_cad_systems_in_mechanical_design_engineering.pdf">1990_evaluating_the_use_of_cad_systems_in_mechanical_design_engineering.pdf</a></p>
 <p style="padding-left: 30px;">Math:</p>
 <p style="padding-left: 60px;"><a href="http://mde.tw/cad2020/content/Sigmoid.html">http://mde.tw/cad2020/content/Sigmoid.html</a></p>
 <p style="padding-left: 30px;">Onshape:</p>
@@ -529,6 +558,52 @@ for dname, dirs, files in os.walk("path_name"):
             s = s.replace(findText, "")
             with open(fpath, "w", encoding="utf-8") as f:
                 f.write(s)</pre>
+<p>進入特定目錄, 根據檔案最後建立時間, 對檔案改名:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># rename_according_file_time.py
+import os
+from pathlib import Path
+
+# put this file outside 2021-03_2a_stage1 directory
+files = []
+# directory name
+dname = "2021-03_2a_stage1"
+# iterdir() iterate over the files in directory
+paths = sorted(Path(dname).iterdir(), key=os.path.getmtime)
+for i in paths:
+    #os.fspath() eturn the file system representation of the path
+    files.append(os.fspath(i))
+#print(files)
+i = 0
+for fpath in files:
+    # original file name is fname
+    i += 1
+    # new file name
+    npath = os.path.join(dname, "cd2021_stage1_2a_g" + str(i) + ".mp4")
+    #print(npath)
+    os.rename(fpath, npath)
+
+
+</pre>
+<p>取得特定目錄中各 .mp4 影片檔案的長度:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># get_video_duration.py
+# pip install moviepy
+import os
+from moviepy.editor import VideoFileClip
+
+# Converts into more readable format
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return hours, mins, seconds
+    
+for dname, dirs, files in os.walk("2021-03_2a_stage1"):
+    for fname in files:
+        vName = os.path.join(dname, fname)
+        clip = VideoFileClip(vName)
+        hours, mins, secs = convert(clip.duration)
+        print(fname + "組:", str(int(mins)) + "分", str(int(secs)) + "秒")</pre>
 <p></p><h2>git config</h2>
 <p>y:\home\.gitconfig settings:</p>
 <p style="padding-left: 30px;">git config --global user.email "your github account associated email address"</p>
