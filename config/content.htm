@@ -558,6 +558,52 @@ for dname, dirs, files in os.walk("path_name"):
             s = s.replace(findText, "")
             with open(fpath, "w", encoding="utf-8") as f:
                 f.write(s)</pre>
+<p>進入特定目錄, 根據檔案最後建立時間, 對檔案改名:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># rename_according_file_time.py
+import os
+from pathlib import Path
+
+# put this file outside 2021-03_2a_stage1 directory
+files = []
+# directory name
+dname = "2021-03_2a_stage1"
+# iterdir() iterate over the files in directory
+paths = sorted(Path(dname).iterdir(), key=os.path.getmtime)
+for i in paths:
+    #os.fspath() eturn the file system representation of the path
+    files.append(os.fspath(i))
+#print(files)
+i = 0
+for fpath in files:
+    # original file name is fname
+    i += 1
+    # new file name
+    npath = os.path.join(dname, "cd2021_stage1_2a_g" + str(i) + ".mp4")
+    #print(npath)
+    os.rename(fpath, npath)
+
+
+</pre>
+<p>取得特定目錄中各 .mp4 影片檔案的長度:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># get_video_duration.py
+# pip install moviepy
+import os
+from moviepy.editor import VideoFileClip
+
+# Converts into more readable format
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return hours, mins, seconds
+    
+for dname, dirs, files in os.walk("2021-03_2a_stage1"):
+    for fname in files:
+        vName = os.path.join(dname, fname)
+        clip = VideoFileClip(vName)
+        hours, mins, secs = convert(clip.duration)
+        print(fname + "組:", str(int(mins)) + "分", str(int(secs)) + "秒")</pre>
 <p></p><h2>git config</h2>
 <p>y:\home\.gitconfig settings:</p>
 <p style="padding-left: 30px;">git config --global user.email "your github account associated email address"</p>
