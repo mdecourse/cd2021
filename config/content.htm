@@ -302,14 +302,39 @@ robocopy up_dir ./../ /E</pre>
 <p style="padding-left: 30px;">目前因為只有 23 個 .mp4 檔案, 因此採用手動改名或逐一打開檔案計算每一影片檔案的簡報時間, 不至於太過繁雜, 但<span style="background-color: #ffff99;">若檔案數增加至 230 或 2300 個</span>, 決定採用手動改名與計算各組簡報時間的組別, 是否仍能夠接受使用手動處理與數位檔案有關的流程?</p>
 <p style="padding-left: 30px;">傳統汽車與電動汽車零件數比較:</p>
 <p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="/images/automobile_part_number_comparison.png" width="600"/></p><h2>W5</h2>
-<h4>台灣 2030 科技願景:</h4>
-<p style="padding-left: 30px;"><a href="/downloads/taiwan_2030_tech_vision.pdf">taiwan_2030_tech_vision.pdf</a></p>
+<h4>分組專案設計與簡報重點:</h4>
+<ol>
+<li>在無實體原型製造情況下, 是否能夠產出自我驗證的結果?</li>
+<li>設計流程若能輔以理論分析或文獻參考與探討佐證, 將可凸顯題目或結果的重要性.</li>
+<li>善用 What? Why? When? Who? How? and Where? 式的自我定性與定量檢視, 將各種資源用於刀口並呈現歷程.</li>
+<li>簡報若能以 Web based 投影片為主, 可方便使用者隨時參閱, 簡報內容要呈現重點, 而且文具經過仔細查驗與校正.</li>
+</ol>
+<h4>協同產品設計工具</h4>
+<h4>CoppeliaSim (之前稱為 Virtual Robot Experimentation Platform, V-REP)</h4>
+<p>從 CoppeliaSim 之前的名稱, V-rep 比較能夠了解這項工具的特定, 虛擬機器人實驗平台.</p>
+<p>將具備 Kinematic, Dynamic 與 Automatic Control 特性的產品設計從 MCAD 設計繪圖套件將零組件轉入 CoppeliaSim 平台進行虛擬實驗的目的, 就是希望展示其:</p>
+<ol>
+<li>運動特性 - Kinematic Characteristics, <a href="https://en.wikipedia.org/wiki/Kinematics">https://en.wikipedia.org/wiki/Kinematics</a></li>
+<li>動力特性 - Dynamic Characteristics, <a href="https://en.wikipedia.org/wiki/Dynamics_(mechanics)">https://en.wikipedia.org/wiki/Dynamics_(mechanics)</a></li>
+<li>可受控制特性 - <a href="https://en.wikipedia.org/wiki/Controllability">https://en.wikipedia.org/wiki/Controllability</a></li>
+</ol>
+<p>而且設計者可以利用 Lua Scripting 以及 Python Remote API 的方式直接或遙控的方式進行互動控制或監測. 使用 CoppeliaSim 進行<span style="background-color: #ccffcc;">產品系統的虛擬展示</span>目的, 是作為<span style="background-color: #ffff99;">後續原型實作測試之前</span>的重要<span style="background-color: #ffff99;">評量與設計內容取捨</span>用.</p>
 <p>這個禮拜開始將要著手研究 <a href="https://www.coppeliarobotics.com/">https://www.coppeliarobotics.com/</a>, 從下載教育版的檔案中, 可以發現最新的版本為 4.1.0, 於 2020.07.21 推出.</p>
 <p>Coppeliasim 的 documentation 位於 helpFiles 中的 en 目錄中, 且說明檔案中的影像檔案位於 images 中. 假如將 en 目錄中的所有檔案分兩次 (避免一次提交推送超過 1000 個檔案), 送到 <a href="https://github.com/mdecourse/copsim">https://github.com/mdecourse/copsim</a> 倉儲中的 content 目錄, 且將 main 分支設為 Github Pages 的根目錄, 可以得到:</p>
 <p><a href="https://mde.tw/copsim">https://mde.tw/copsim</a></p>
 <p>由於 <a href="https://mde.tw/cmstemplate">https://mde.tw/cmstemplate</a> 的資料架構, 其靜態網站位於 content 目錄中, 且索引檔案名稱為 index.html, 因此前述的 content 檔案複製中, 已經將 en 目錄中的導引檔案 welcome.htm 複製一份命名為 index.html.</p>
 <p>但如此設置的 <a href="https://mde.tw/copsim">https://mde.tw/copsim</a> 無關鍵字查詢的功能, 也沒有動態網頁的內容, 比較不容易修改註記, 所以接下來要研究該如何處理此一架構的文檔, 讓它成為協同產品設計實習流程在研究 Coppeliasim 時的靈活參考文件.</p>
-<p>而 github.com 的免費倉儲使用有總檔案數與個別檔案容量大小的限制, 因此最後所完成的 copsim 倉儲或許要以工作站中的主機採 <a href="https://fossil.kmol.info">https://fossil.kmol.info</a> 的方式伺服.</p><h2>分組題目</h2>
+<p>而 github.com 的免費倉儲使用有總檔案數與個別檔案容量大小的限制, 因此最後所完成的 copsim 倉儲或許要以工作站中的主機採 <a href="https://fossil.kmol.info">https://fossil.kmol.info</a> 的方式伺服.</p>
+<h4>Webots</h4>
+<p>研究 <a href="https://cyberbotics.com/">https://cyberbotics.com/</a> 也必須從其<a href="https://cyberbotics.com/doc/guide">技術手冊</a>下手. Webots 在 2018年12月18日<a href="https://cyberbotics.com/doc/blog/Webots-2019-a-release">宣布開源</a>, Webots 的公司訊息以 <a href="https://twitter.com/webots?ref_src=twsrc%5Etfw">twitter 發布</a>. Webots 的使用對商業公司採取比 CoppeliaSim 更加友善的<a href="https://cyberbotics.com/doc/guide/webots-license-agreement">授權</a>. 主要的差別是: Webots 套件不僅開源, 而且允許營利或教育單位免付費情況下使用, 也就是必須在遵循 <a href="https://www.apache.org/licenses/LICENSE-2.0">https://www.apache.org/licenses/LICENSE-2.0</a> 授權下使用, 但 CoppeliaSim 雖然也是開源, 但只允許教育單位免費使用, 營利或商業使用則必須付費取得授權.</p>
+<h4>Onshape and A360</h4>
+<p>從協同產品設計的角度, 除了善用 Github, Gitlab, Heroku 與 Fossil SCM 外, 用於零組件設計繪圖的工具也應優先採用 cloud based 的 <a href="https://www.onshape.com/en/">Onshape</a> 與 <a href="https://knowledge.autodesk.com/search-result/caas/CloudHelp/cloudhelp/ENU/3DSMAS-Install/files/GUID-BC135F3B-55C0-44BC-8596-3B63A6CFE9C6-htm.html">A360</a>. 主要原因除了避免各參與協同設計的組員採用不同版次的 MCAD (Mechanical Computer Aided Design) 套件產生問題外, 也希望能夠將平板與手機導入機械設計工程師的產品開發流程中.</p>
+<p>Onshape 的基本介面程式採用 <a href="https://cad.onshape.com/FsDoc/">https://cad.onshape.com/FsDoc/</a></p>
+<p style="padding-left: 30px;"><a href="https://www.onshape.com/en/features/custom-features">Featurescript 範例</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/dcowden/featurescript">https://github.com/dcowden/featurescript</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/Rmmshv/FeatureScript">https://github.com/Rmmshv/FeatureScript</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/mbartlett21/featurescript-tutorials">https://github.com/mbartlett21/featurescript-tutorials</a></p>
+<p></p><h2>分組題目</h2>
 <p>題目與研究內容的選定參考:</p>
 <p style="padding-left: 30px;">Floor-cleaning Robot: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage1">https://github.com/mdecourse/cd2021/tree/main/downloads/stage1</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/v-rep-robotics">https://github.com/mdecourse/v-rep-robotics</a></p>
