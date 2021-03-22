@@ -318,7 +318,7 @@ robocopy up_dir ./../ /E</pre>
 <li>動力特性 - Dynamic Characteristics, <a href="https://en.wikipedia.org/wiki/Dynamics_(mechanics)">https://en.wikipedia.org/wiki/Dynamics_(mechanics)</a></li>
 <li>可受控制特性 - <a href="https://en.wikipedia.org/wiki/Controllability">https://en.wikipedia.org/wiki/Controllability</a></li>
 </ol>
-<p style="padding-left: 60px;"><a href="/downloads/automatic control in mechatronics.pdf">automatic control in mechatronics.pdf</a></p>
+<p style="padding-left: 60px;"><a href="/downloads/Automatic_Control_in_Mechatronics.pdf">Automatic_Control_in_Mechatronics.pdf</a></p>
 <p>而且設計者可以利用 Lua Scripting 以及 Python Remote API 的方式直接或遙控的方式進行互動控制或監測. 使用 CoppeliaSim 進行<span style="background-color: #ccffcc;">產品系統的虛擬展示</span>目的, 是作為<span style="background-color: #ffff99;">後續原型實作測試之前</span>的重要<span style="background-color: #ffff99;">評量與設計內容取捨</span>用.</p>
 <p>這個禮拜開始將要著手研究 <a href="https://www.coppeliarobotics.com/">https://www.coppeliarobotics.com/</a>, 從下載教育版的檔案中, 可以發現最新的版本為 4.1.0, 於 2020.07.21 推出.</p>
 <p>Coppeliasim 的 documentation 位於 helpFiles 中的 en 目錄中, 且說明檔案中的影像檔案位於 images 中. 假如將 en 目錄中的所有檔案分兩次 (避免一次提交推送超過 1000 個檔案), 送到 <a href="https://github.com/mdecourse/copsim">https://github.com/mdecourse/copsim</a> 倉儲中的 content 目錄, 且將 main 分支設為 Github Pages 的根目錄, 可以得到:</p>
@@ -335,6 +335,28 @@ robocopy up_dir ./../ /E</pre>
 <p style="padding-left: 30px;"><a href="https://github.com/dcowden/featurescript">https://github.com/dcowden/featurescript</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/Rmmshv/FeatureScript">https://github.com/Rmmshv/FeatureScript</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/mbartlett21/featurescript-tutorials">https://github.com/mbartlett21/featurescript-tutorials</a></p>
+<p></p><h3>SSH 了沒</h3>
+<p>先前在 <a href="http://mde.tw/cp2020/content/SSH.html">http://mde.tw/cp2020/content/SSH.html</a> 曾經說明過如何使用 SSH push 近端的改版資料到 Github, 但進入協同產品設計實習課程之後, 仍然有許多人還是沒能採用 SSH 對 Github 連線. 可見之前的說明仍然不夠清楚明白.</p>
+<p>在這裡我們看看能不能找到更方便的方法來使用 SSH 對 Github 連線.</p>
+<p>首先來看幾個專有名詞:</p>
+<p>SSH - Secure SHell 這是安全的"殼"嗎? 是的, 穿過安全的殼層, 就可以直通核心! 那麼有安全的殼層, 也就是有"不安全"的殼層嗎? 先說到底甚麼是殼層 (Shell):</p>
+<p>從 <a href="https://en.wikipedia.org/wiki/Shell_(computing)">https://en.wikipedia.org/wiki/Shell_(computing)</a> 直接 copy 第一行解釋:</p>
+<p>In computing, a shell is <span style="background-color: #ffff99;">a computer program</span> which exposes an operating system's services to a human user or other program.</p>
+<p>哇, 原來 <span style="background-color: #ffff99;">Shell 是一個電腦程式</span>, 可以讓使用者<span style="background-color: #ffff99;">直接使用操作系統的服務</span>.</p>
+<p>假如針對 Shell 的說明頁, 再往內 copy 兩段說明, 真相就可以大白了:</p>
+<p>In general, operating system shells use either a command-line interface (CLI) or graphical user interface (GUI), depending on a computer's role and particular operation. It is named a shell because it is the outermost layer around the operating system.</p>
+<p>用中文說明:</p>
+<ol>
+<li>之所以稱為"殼層", 是因為 Shell 程式位於操作系統的最外層, 進入這一層就可以操縱操作系統的各項服務.</li>
+<li>操作系統的殼層程式可以透過 CLI (指令介面) 或 GUI (圖形介面) 執行.</li>
+</ol>
+<p>假如 SSH 是 Secure SHell, 那麼不安全的"殼"層又是什麼? 是 Telnet! 現在應該已經沒有人用 telnet 對遠端操作系統 (Linux, BSD 或其他 Unix 類操作系統), 而是使用 ssh.</p>
+<p>接著讓大家練習一下使用 ssh 對 Ubuntu 操作系統連線, 使用其 Service.</p>
+<p>假如您們小組想要自行安裝 Virtualbox 上的 Ubuntu 20.04 伺服器版本, 可以從 <a href="http://c.kmol.info/downloads/">http://c.kmol.info/downloads/</a>  下載 ubuntu-20.04.2-live-server-amd64.iso 後試著安裝設定. (需要摸索一下, 這裡有<a href="https://assets.ubuntu.com/v1/f954307f-ubuntu-server-guide.pdf">參考書</a>)</p>
+<p>或者直接從 <a href="http://c.kmol.info/downloads/">http://c.kmol.info/downloads/</a> 下載 ub2021_vdi.7z 解開後就是已經安裝完成的 Ubuntu 20.04 操作系統 vdi 檔案.</p>
+<p>上述 Virtualbox 上的 Ubuntu 除了可以用於練習 ssh 對 Ubuntu 連線外, 後續也將用於 Fossil SCM server 與 Windows 10 client 的實習.</p>
+<p></p>
+<p></p>
 <p></p><h2>分組題目</h2>
 <p>題目與研究內容的選定參考:</p>
 <p style="padding-left: 30px;">Floor-cleaning Robot: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage1">https://github.com/mdecourse/cd2021/tree/main/downloads/stage1</a></p>
