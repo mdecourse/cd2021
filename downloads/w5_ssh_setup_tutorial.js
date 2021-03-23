@@ -7,60 +7,60 @@
     "2": [
       { type: "gotoframe", rect: { x: 142, y: 492, width: 47, height: 19 }, target: 3 },
     ],
-    "8": [
-      { type: "gotoframe", rect: { x: 276, y: 492, width: 47, height: 19 }, target: 9 },
+    "7": [
+      { type: "gotoframe", rect: { x: 276, y: 492, width: 47, height: 19 }, target: 8 },
       { type: "gotoframe", rect: { x: 216, y: 492, width: 47, height: 19 }, target: 2 },
     ],
-    "14": [
-      { type: "gotoframe", rect: { x: 270, y: 509, width: 47, height: 19 }, target: 15 },
-      { type: "gotoframe", rect: { x: 210, y: 510, width: 47, height: 19 }, target: 8 },
+    "12": [
+      { type: "gotoframe", rect: { x: 270, y: 509, width: 47, height: 19 }, target: 13 },
+      { type: "gotoframe", rect: { x: 210, y: 510, width: 47, height: 19 }, target: 7 },
     ],
-    "19": [
-      { type: "gotoframe", rect: { x: 270, y: 513, width: 47, height: 19 }, target: 20 },
-      { type: "gotoframe", rect: { x: 207, y: 514, width: 47, height: 19 }, target: 14 },
+    "17": [
+      { type: "gotoframe", rect: { x: 270, y: 513, width: 47, height: 19 }, target: 18 },
+      { type: "gotoframe", rect: { x: 207, y: 514, width: 47, height: 19 }, target: 12 },
     ],
-    "25": [
-      { type: "gotoframe", rect: { x: 271, y: 514, width: 47, height: 19 }, target: 26 },
-      { type: "gotoframe", rect: { x: 214, y: 513, width: 47, height: 19 }, target: 19 },
+    "22": [
+      { type: "gotoframe", rect: { x: 271, y: 514, width: 47, height: 19 }, target: 23 },
+      { type: "gotoframe", rect: { x: 214, y: 513, width: 47, height: 19 }, target: 17 },
     ],
-    "30": [
-      { type: "gotoframe", rect: { x: 298, y: 531, width: 47, height: 19 }, target: 31 },
-      { type: "gotoframe", rect: { x: 235, y: 531, width: 47, height: 19 }, target: 25 },
+    "27": [
+      { type: "gotoframe", rect: { x: 298, y: 531, width: 47, height: 19 }, target: 28 },
+      { type: "gotoframe", rect: { x: 235, y: 531, width: 47, height: 19 }, target: 22 },
     ],
-    "35": [
-      { type: "gotoframe", rect: { x: 256, y: 403, width: 47, height: 19 }, target: 30 },
-      { type: "gotoframe", rect: { x: 319, y: 404, width: 47, height: 19 }, target: 36 },
+    "32": [
+      { type: "gotoframe", rect: { x: 256, y: 403, width: 47, height: 19 }, target: 27 },
+      { type: "gotoframe", rect: { x: 319, y: 404, width: 47, height: 19 }, target: 33 },
     ],
-    "40": [
-      { type: "gotoframe", rect: { x: 157, y: 470, width: 47, height: 19 }, target: 35 },
-      { type: "gotoframe", rect: { x: 233, y: 470, width: 47, height: 19 }, target: 41 },
+    "37": [
+      { type: "gotoframe", rect: { x: 157, y: 470, width: 47, height: 19 }, target: 32 },
+      { type: "gotoframe", rect: { x: 233, y: 470, width: 47, height: 19 }, target: 38 },
     ],
-    "46": [
-      { type: "gotoframe", rect: { x: 259, y: 498, width: 47, height: 19 }, target: 40 },
-      { type: "gotoframe", rect: { x: 333, y: 497, width: 47, height: 19 }, target: 47 },
+    "42": [
+      { type: "gotoframe", rect: { x: 259, y: 498, width: 47, height: 19 }, target: 37 },
+      { type: "gotoframe", rect: { x: 333, y: 497, width: 47, height: 19 }, target: 43 },
     ],
-    "51": [
-      { type: "gotoframe", rect: { x: 109, y: 440, width: 47, height: 19 }, target: 46 },
-      { type: "gotoframe", rect: { x: 173, y: 439, width: 47, height: 19 }, target: 52 },
+    "47": [
+      { type: "gotoframe", rect: { x: 109, y: 440, width: 47, height: 19 }, target: 42 },
+      { type: "gotoframe", rect: { x: 173, y: 439, width: 47, height: 19 }, target: 48 },
     ],
-    "56": [
-      { type: "gotoframe", rect: { x: 204, y: 421, width: 47, height: 19 }, target: 51 },
-      { type: "gotoframe", rect: { x: 284, y: 421, width: 47, height: 19 }, target: 57 },
+    "52": [
+      { type: "gotoframe", rect: { x: 204, y: 421, width: 47, height: 19 }, target: 47 },
+      { type: "gotoframe", rect: { x: 284, y: 421, width: 47, height: 19 }, target: 53 },
     ],
-    "61": [
-      { type: "gotoframe", rect: { x: 208, y: 318, width: 47, height: 19 }, target: 56 },
-      { type: "gotoframe", rect: { x: 275, y: 318, width: 47, height: 19 }, target: 62 },
+    "57": [
+      { type: "gotoframe", rect: { x: 208, y: 318, width: 47, height: 19 }, target: 52 },
+      { type: "gotoframe", rect: { x: 275, y: 318, width: 47, height: 19 }, target: 58 },
     ],
-    "87": [
-      { type: "gotoframe", rect: { x: 341, y: 189, width: 47, height: 19 }, target: 88 },
-      { type: "gotoframe", rect: { x: 279, y: 189, width: 47, height: 19 }, target: 61 },
+    "62": [
+      { type: "gotoframe", rect: { x: 341, y: 189, width: 47, height: 19 }, target: 63 },
+      { type: "gotoframe", rect: { x: 279, y: 189, width: 47, height: 19 }, target: 57 },
     ],
-    "105": [
-      { type: "gotoframe", rect: { x: 204, y: 514, width: 47, height: 19 }, target: 106 },
-      { type: "gotoframe", rect: { x: 127, y: 513, width: 47, height: 19 }, target: 87 },
+    "67": [
+      { type: "gotoframe", rect: { x: 204, y: 514, width: 47, height: 19 }, target: 68 },
+      { type: "gotoframe", rect: { x: 127, y: 513, width: 47, height: 19 }, target: 62 },
     ],
-    "145": [
-      { type: "gotoframe", rect: { x: 213, y: 531, width: 47, height: 19 }, target: 105 },
+    "72": [
+      { type: "gotoframe", rect: { x: 213, y: 531, width: 47, height: 19 }, target: 67 },
     ],
   },
 };
