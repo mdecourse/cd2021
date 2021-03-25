@@ -301,7 +301,52 @@ robocopy up_dir ./../ /E</pre>
 <p>討論:</p>
 <p style="padding-left: 30px;">目前因為只有 23 個 .mp4 檔案, 因此採用手動改名或逐一打開檔案計算每一影片檔案的簡報時間, 不至於太過繁雜, 但<span style="background-color: #ffff99;">若檔案數增加至 230 或 2300 個</span>, 決定採用手動改名與計算各組簡報時間的組別, 是否仍能夠接受使用手動處理與數位檔案有關的流程?</p>
 <p style="padding-left: 30px;">傳統汽車與電動汽車零件數比較:</p>
-<p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="/images/automobile_part_number_comparison.png" width="600"/></p><h2>W5</h2>
+<p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="/images/automobile_part_number_comparison.png" width="600"/></p>
+<p><a href="https://github.com/mdecourse/cd2021/blob/main/downloads/stage1/rename_according_file_time.py">rename_according_to_file_time.py</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+from pathlib import Path
+
+# put this file outside 2021-03_2a_stage1 directory
+files = []
+# directory name
+dname = "2021-03_2a_stage1"
+# iterdir() iterate over the files in directory
+paths = sorted(Path(dname).iterdir(), key=os.path.getmtime)
+for i in paths:
+    #os.fspath() eturn the file system representation of the path
+    files.append(os.fspath(i))
+#print(files)
+i = 0
+for fpath in files:
+    # original file name is fname
+    i += 1
+    # new file name
+    npath = os.path.join(dname, "cd2021_stage1_2a_g" + str(i) + ".mp4")
+    #print(npath)
+    os.rename(fpath, npath)
+
+
+</pre>
+<p><a href="https://github.com/mdecourse/cd2021/blob/main/downloads/stage1/get_video_duration.py">get_video_duration.py</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install moviepy
+import os
+from moviepy.editor import VideoFileClip
+
+# Converts into more readable format
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return hours, mins, seconds
+    
+for dname, dirs, files in os.walk("2021-03_2a_stage1"):
+    for fname in files:
+        vName = os.path.join(dname, fname)
+        clip = VideoFileClip(vName)
+        hours, mins, secs = convert(clip.duration)
+        print(fname + "組:", str(int(mins)) + "分", str(int(secs)) + "秒")</pre>
+<p style="padding-left: 30px;"></p><h2>W5</h2>
 <h4>分組專案設計與簡報重點:</h4>
 <ol>
 <li>在無實體原型製造情況下, 是否能夠產出自我驗證的結果?</li>
@@ -311,6 +356,14 @@ robocopy up_dir ./../ /E</pre>
 </ol>
 <p>所謂能夠自我驗證的模擬範例:</p>
 <p style="padding-left: 30px;"><a href="/downloads/2019_Construction and theoretical study of a ball balancing platform.pdf">2019_Construction and theoretical study of a ball balancing platform.pdf</a></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/tPr6-Rh0m-8" title="YouTube video player" width="560"></iframe></p>
+<h4>Reference:</h4>
+<p style="padding-left: 30px;"><a href="/downloads/2018_A real time control system for balancing a ball on a platform.pdf">2018_A real time control system for balancing a ball on a platform.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/control of a ball and plate sys using a state-feedback controller.pdf">control of a ball and plate sys using a state-feedback controller.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/2020_Dynamic output-feedback control design for ball and plate system.pdf">2020_Dynamic output-feedback control design for ball and plate system.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/ros-based-control-of-a-manipulator-arm-for-balancing-a-ball-on-a-plate.pdf">ros-based-control-of-a-manipulator-arm-for-balancing-a-ball-on-a-plate.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/Using Tablets in the Vision-based Control of a Ball and Beam Test-bed.pdf">Using Tablets in the Vision-based Control of a Ball and Beam Test-bed.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/made-for-science-Quanser-2-dof-ball-balancer-CoursewareStud-MATLAB.pdf">made-for-science-Quanser-2-dof-ball-balancer-CoursewareStud-MATLAB.pdf</a></p>
 <h4>協同產品設計工具</h4>
 <h4>CoppeliaSim (之前稱為 Virtual Robot Experimentation Platform, V-REP)</h4>
 <p>從 CoppeliaSim 之前的名稱, V-rep 比較能夠了解這項工具的特性, 也就是所謂的<span style="background-color: #ffff99;">虛擬機器人實驗平台</span>.</p>
@@ -431,7 +484,10 @@ robocopy up_dir ./../ /E</pre>
 <p>Wink3 tutorial 1:</p>
 <p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial1.htm" width="810"></iframe></p>
 <p>Wink 3 tutorial 2:</p>
-<p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial2.htm" width="810"></iframe></p><h1>Project</h1>
+<p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial2.htm" width="810"></iframe></p><h1>Stage2</h1>
+<h4>2a stage2 分組</h4>
+<p><a href="http://github.com/40823108/stage2-ag1">stage2-ag1 repo</a> | <a href="http://40823145.github.io/stage2-ag1">stage2-ag1 site</a> | <a href="http://github.com/40823108/cd2021">40823108 repo</a> | <a href="http://40823108.github.io/cd2021">40823108 site</a> | <a href="http://github.com/40823145/cd2021">40823145 repo</a> | <a href="http://40823145.github.io/cd2021">40823145 site</a> | <a href="http://github.com/40823109/cd2021">40823109 repo</a> | <a href="http://40823109.github.io/cd2021">40823109 site</a> | <a href="http://github.com/a40823112/cd2021">a40823112 repo</a> | <a href="http://a40823112.github.io/cd2021">a40823112 site</a><br/>--------------------<br/><a href="http://github.com/40623121/stage2-ag2">stage2-ag2 repo</a> | <a href="http://40823151.github.io/stage2-ag2">stage2-ag2 site</a> | <a href="http://github.com/40623121/cd2021">40623121 repo</a> | <a href="http://40623121.github.io/cd2021">40623121 site</a> | <a href="http://github.com/40823151/cd2021">40823151 repo</a> | <a href="http://40823151.github.io/cd2021">40823151 site</a> | <a href="http://github.com/40871106/cd2021">40871106 repo</a> | <a href="http://40871106.github.io/cd2021">40871106 site</a> | <a href="http://github.com/40823132/cd2021">40823132 repo</a> | <a href="http://40823132.github.io/cd2021">40823132 site</a><br/>--------------------<br/><a href="http://github.com/40623234-1/stage2-ag3">stage2-ag3 repo</a> | <a href="http://40423113.github.io/stage2-ag3">stage2-ag3 site</a> | <a href="http://github.com/40623234-1/cd2021">40623234-1 repo</a> | <a href="http://40623234-1.github.io/cd2021">40623234-1 site</a> | <a href="http://github.com/40423113/cd2021">40423113 repo</a> | <a href="http://40423113.github.io/cd2021">40423113 site</a> | <a href="http://github.com/40823126/cd2021">40823126 repo</a> | <a href="http://40823126.github.io/cd2021">40823126 site</a> | <a href="http://github.com/40823128/cd2021">40823128 repo</a> | <a href="http://40823128.github.io/cd2021">40823128 site</a><br/>--------------------<br/><a href="http://github.com/40823101/stage2 ag4">stage2 ag4 repo</a> | <a href="http://40823104.github.io/stage2 ag4">stage2 ag4 site</a> | <a href="http://github.com/40823101/cd2021">40823101 repo</a> | <a href="http://40823101.github.io/cd2021">40823101 site</a> | <a href="http://github.com/40823104/cd2021">40823104 repo</a> | <a href="http://40823104.github.io/cd2021">40823104 site</a> | <a href="http://github.com/40823119/cd2021">40823119 repo</a> | <a href="http://40823119.github.io/cd2021">40823119 site</a> | <a href="http://github.com/40823150/cd2021">40823150 repo</a> | <a href="http://40823150.github.io/cd2021">40823150 site</a><br/>--------------------<br/><a href="http://github.com/40823102/stage2-ag5">stage2-ag5 repo</a> | <a href="http://40823106.github.io/stage2-ag5">stage2-ag5 site</a> | <a href="http://github.com/40823102/cd2021">40823102 repo</a> | <a href="http://40823102.github.io/cd2021">40823102 site</a> | <a href="http://github.com/40823106/cd2021">40823106 repo</a> | <a href="http://40823106.github.io/cd2021">40823106 site</a> | <a href="http://github.com/40823121/cd2021">40823121 repo</a> | <a href="http://40823121.github.io/cd2021">40823121 site</a> | <a href="http://github.com/40823135/cd2021">40823135 repo</a> | <a href="http://40823135.github.io/cd2021">40823135 site</a><br/>--------------------<br/><a href="http://github.com/40823111/stage2-ag6">stage2-ag6 repo</a> | <a href="http://40823120.github.io/stage2-ag6">stage2-ag6 site</a> | <a href="http://github.com/40823111/cd2021">40823111 repo</a> | <a href="http://40823111.github.io/cd2021">40823111 site</a> | <a href="http://github.com/40823120/cd2021">40823120 repo</a> | <a href="http://40823120.github.io/cd2021">40823120 site</a> | <a href="http://github.com/40823124/cd2021">40823124 repo</a> | <a href="http://40823124.github.io/cd2021">40823124 site</a> | <a href="http://github.com/40823139/cd2021">40823139 repo</a> | <a href="http://40823139.github.io/cd2021">40823139 site</a><br/>--------------------<br/><a href="http://github.com/40823129/stage2-ag7">stage2-ag7 repo</a> | <a href="http://40823149.github.io/stage2-ag7">stage2-ag7 site</a> | <a href="http://github.com/40823129/cd2021">40823129 repo</a> | <a href="http://40823129.github.io/cd2021">40823129 site</a> | <a href="http://github.com/40823149/cd2021">40823149 repo</a> | <a href="http://40823149.github.io/cd2021">40823149 site</a> | <a href="http://github.com/40823117/cd2021">40823117 repo</a> | <a href="http://40823117.github.io/cd2021">40823117 site</a> | <a href="http://github.com/40823122/cd2021">40823122 repo</a> | <a href="http://40823122.github.io/cd2021">40823122 site</a><br/>--------------------<br/><a href="http://github.com/40523252/stage2-ag8">stage2-ag8 repo</a> | <a href="http://40823154.github.io/stage2-ag8">stage2-ag8 site</a> | <a href="http://github.com/40523252/cd2021">40523252 repo</a> | <a href="http://40523252.github.io/cd2021">40523252 site</a> | <a href="http://github.com/40823154/cd2021">40823154 repo</a> | <a href="http://40823154.github.io/cd2021">40823154 site</a> | <a href="http://github.com/40823103/cd2021">40823103 repo</a> | <a href="http://40823103.github.io/cd2021">40823103 site</a> | <a href="http://github.com/40823107/cd2021">40823107 repo</a> | <a href="http://40823107.github.io/cd2021">40823107 site</a><br/>--------------------<br/><a href="http://github.com/40823115/stage2-ag9">stage2-ag9 repo</a> | <a href="http://40823140.github.io/stage2-ag9">stage2-ag9 site</a> | <a href="http://github.com/40823115/cd2021">40823115 repo</a> | <a href="http://40823115.github.io/cd2021">40823115 site</a> | <a href="http://github.com/40823140/cd2021">40823140 repo</a> | <a href="http://40823140.github.io/cd2021">40823140 site</a> | <a href="http://github.com/40823114/cd2021">40823114 repo</a> | <a href="http://40823114.github.io/cd2021">40823114 site</a> | <a href="http://github.com/40823146/cd2021">40823146 repo</a> | <a href="http://40823146.github.io/cd2021">40823146 site</a><br/>--------------------<br/><a href="http://github.com/40823142/stage2-ag10">stage2-ag10 repo</a> | <a href="http://40823144.github.io/stage2-ag10">stage2-ag10 site</a> | <a href="http://github.com/40823142/cd2021">40823142 repo</a> | <a href="http://40823142.github.io/cd2021">40823142 site</a> | <a href="http://github.com/40823144/cd2021">40823144 repo</a> | <a href="http://40823144.github.io/cd2021">40823144 site</a> | <a href="http://github.com/40823127/cd2021">40823127 repo</a> | <a href="http://40823127.github.io/cd2021">40823127 site</a> | <a href="http://github.com/40823148/cd2021">40823148 repo</a> | <a href="http://40823148.github.io/cd2021">40823148 site</a><br/>--------------------<br/><a href="http://github.com/40823116/stage2-ag11">stage2-ag11 repo</a> | <a href="http://40823123.github.io/stage2-ag11">stage2-ag11 site</a> | <a href="http://github.com/40823116/cd2021">40823116 repo</a> | <a href="http://40823116.github.io/cd2021">40823116 site</a> | <a href="http://github.com/40823123/cd2021">40823123 repo</a> | <a href="http://40823123.github.io/cd2021">40823123 site</a> | <a href="http://github.com/40823131/cd2021">40823131 repo</a> | <a href="http://40823131.github.io/cd2021">40823131 site</a> | <a href="http://github.com/40823136/cd2021">40823136 repo</a> | <a href="http://40823136.github.io/cd2021">40823136 site</a><br/>--------------------<br/><a href="http://github.com/40823152/stage2-ag12">stage2-ag12 repo</a> | <a href="http://40823153.github.io/stage2-ag12">stage2-ag12 site</a> | <a href="http://github.com/40823152/cd2021">40823152 repo</a> | <a href="http://40823152.github.io/cd2021">40823152 site</a> | <a href="http://github.com/40823153/cd2021">40823153 repo</a> | <a href="http://40823153.github.io/cd2021">40823153 site</a> | <a href="http://github.com/40823125/cd2021">40823125 repo</a> | <a href="http://40823125.github.io/cd2021">40823125 site</a> | <a href="http://github.com/40823110/cd2021">40823110 repo</a> | <a href="http://40823110.github.io/cd2021">40823110 site</a><br/>--------------------</p>
+<h4>2b stage2 分組</h4><h1>Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
