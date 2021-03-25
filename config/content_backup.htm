@@ -337,6 +337,7 @@ robocopy up_dir ./../ /E</pre>
 <p style="padding-left: 60px;"><a href="/downloads/Automatic_Control_in_Mechatronics.pdf">Automatic_Control_in_Mechatronics.pdf</a></p>
 <p style="padding-left: 60px;"><a href="/downloads/2015_reinforcement_learning_an_introduction.pdf">2015_reinforcement_learning_an_introduction.pdf</a></p>
 <p>而且設計者可以利用 Lua Scripting 以及 Python Remote API 的方式直接或遙控的方式進行互動控制或監測. 使用 CoppeliaSim 進行<span style="background-color: #ccffcc;">產品系統的虛擬展示</span>目的, 是作為<span style="background-color: #ffff99;">後續原型實作測試之前</span>的重要<span style="background-color: #ffff99;">評量與設計內容取捨</span>用.</p>
+<p style="padding-left: 30px;"><a href="/downloads/Programming_in_Lua.pdf">Programming_in_Lua.pdf</a></p>
 <p>這個禮拜開始將要著手研究 <a href="https://www.coppeliarobotics.com/">https://www.coppeliarobotics.com/</a>, 從下載教育版的檔案中, 可以發現最新的版本為 4.1.0, 於 2020.07.21 推出.</p>
 <p>Coppeliasim 的 documentation 位於 helpFiles 中的 en 目錄中, 且說明檔案中的影像檔案位於 images 中. 假如將 en 目錄中的所有檔案分兩次 (避免一次提交推送超過 1000 個檔案), 送到 <a href="https://github.com/mdecourse/copsim">https://github.com/mdecourse/copsim</a> 倉儲中的 content 目錄, 且將 main 分支設為 Github Pages 的根目錄, 可以得到:</p>
 <p><a href="https://mde.tw/copsim">https://mde.tw/copsim</a></p>
@@ -363,6 +364,7 @@ robocopy up_dir ./../ /E</pre>
 <li>接下來在上一步驟中 puttygen.exe 視窗下方, 選擇 <span style="background-color: #ccffcc;">Save private key</span> 後, 將 key 存為 my_key.ppk 或"學號.ppk"備用.</li>
 <li>接下來則需要在 putty.exe 中建立一個 session, 用於以 ssh 協定連線到 github.com, 而 session 名稱可以自行命名, 但是必須與倉儲 .git 目錄中 config 的連線 url session 名稱對應.</li>
 <li>當利用 putty.exe 設定連線 session 時必須注意是否使用 Proxy, 以及 SSH 中的 Auth 是否對應到前面所存檔的 .ppk private key 位置.</li>
+<li>一旦 Github session 設定完成, 可以從 [HKEY_CURRENT_USER\SOFTWARE\SimonTatham] 將 registry 設定匯出存為 y:\my_github.reg, 並在 start_ipv6.bat 中以  regedit.exe /S y:\my_github.reg 將設定匯入.</li>
 </ol>
 <p>操作導引如下:</p>
 <p><iframe height="600" src="/downloads/w5_ssh_setup_tutorial.htm" width="553"></iframe></p>

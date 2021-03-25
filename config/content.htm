@@ -301,7 +301,52 @@ robocopy up_dir ./../ /E</pre>
 <p>討論:</p>
 <p style="padding-left: 30px;">目前因為只有 23 個 .mp4 檔案, 因此採用手動改名或逐一打開檔案計算每一影片檔案的簡報時間, 不至於太過繁雜, 但<span style="background-color: #ffff99;">若檔案數增加至 230 或 2300 個</span>, 決定採用手動改名與計算各組簡報時間的組別, 是否仍能夠接受使用手動處理與數位檔案有關的流程?</p>
 <p style="padding-left: 30px;">傳統汽車與電動汽車零件數比較:</p>
-<p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="/images/automobile_part_number_comparison.png" width="600"/></p><h2>W5</h2>
+<p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="/images/automobile_part_number_comparison.png" width="600"/></p>
+<p><a href="https://github.com/mdecourse/cd2021/blob/main/downloads/stage1/rename_according_file_time.py">rename_according_to_file_time.py</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+from pathlib import Path
+
+# put this file outside 2021-03_2a_stage1 directory
+files = []
+# directory name
+dname = "2021-03_2a_stage1"
+# iterdir() iterate over the files in directory
+paths = sorted(Path(dname).iterdir(), key=os.path.getmtime)
+for i in paths:
+    #os.fspath() eturn the file system representation of the path
+    files.append(os.fspath(i))
+#print(files)
+i = 0
+for fpath in files:
+    # original file name is fname
+    i += 1
+    # new file name
+    npath = os.path.join(dname, "cd2021_stage1_2a_g" + str(i) + ".mp4")
+    #print(npath)
+    os.rename(fpath, npath)
+
+
+</pre>
+<p><a href="https://github.com/mdecourse/cd2021/blob/main/downloads/stage1/get_video_duration.py">get_video_duration.py</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install moviepy
+import os
+from moviepy.editor import VideoFileClip
+
+# Converts into more readable format
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return hours, mins, seconds
+    
+for dname, dirs, files in os.walk("2021-03_2a_stage1"):
+    for fname in files:
+        vName = os.path.join(dname, fname)
+        clip = VideoFileClip(vName)
+        hours, mins, secs = convert(clip.duration)
+        print(fname + "組:", str(int(mins)) + "分", str(int(secs)) + "秒")</pre>
+<p style="padding-left: 30px;"></p><h2>W5</h2>
 <h4>分組專案設計與簡報重點:</h4>
 <ol>
 <li>在無實體原型製造情況下, 是否能夠產出自我驗證的結果?</li>
@@ -364,6 +409,7 @@ robocopy up_dir ./../ /E</pre>
 <li>接下來在上一步驟中 puttygen.exe 視窗下方, 選擇 <span style="background-color: #ccffcc;">Save private key</span> 後, 將 key 存為 my_key.ppk 或"學號.ppk"備用.</li>
 <li>接下來則需要在 putty.exe 中建立一個 session, 用於以 ssh 協定連線到 github.com, 而 session 名稱可以自行命名, 但是必須與倉儲 .git 目錄中 config 的連線 url session 名稱對應.</li>
 <li>當利用 putty.exe 設定連線 session 時必須注意是否使用 Proxy, 以及 SSH 中的 Auth 是否對應到前面所存檔的 .ppk private key 位置.</li>
+<li>一旦 Github session 設定完成, 可以從 [HKEY_CURRENT_USER\SOFTWARE\SimonTatham] 將 registry 設定匯出存為 y:\my_github.reg, 並在 start_ipv6.bat 中以  regedit.exe /S y:\my_github.reg 將設定匯入.</li>
 </ol>
 <p>操作導引如下:</p>
 <p><iframe height="600" src="/downloads/w5_ssh_setup_tutorial.htm" width="553"></iframe></p>

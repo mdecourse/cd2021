@@ -151,7 +151,52 @@ img.add_border {
 <p>討論:</p>
 <p style="padding-left: 30px;">目前因為只有 23 個 .mp4 檔案, 因此採用手動改名或逐一打開檔案計算每一影片檔案的簡報時間, 不至於太過繁雜, 但<span style="background-color: #ffff99;">若檔案數增加至 230 或 2300 個</span>, 決定採用手動改名與計算各組簡報時間的組別, 是否仍能夠接受使用手動處理與數位檔案有關的流程?</p>
 <p style="padding-left: 30px;">傳統汽車與電動汽車零件數比較:</p>
-<p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="./../images/automobile_part_number_comparison.png" width="600"/></p><br />cmsimde << <a href='cmsimde.html'>Previous</a> <a href='W5.html'>Next</a> >> W5</div>
+<p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="./../images/automobile_part_number_comparison.png" width="600"/></p>
+<p><a href="https://github.com/mdecourse/cd2021/blob/main/downloads/stage1/rename_according_file_time.py">rename_according_to_file_time.py</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import os
+from pathlib import Path
+
+# put this file outside 2021-03_2a_stage1 directory
+files = []
+# directory name
+dname = "2021-03_2a_stage1"
+# iterdir() iterate over the files in directory
+paths = sorted(Path(dname).iterdir(), key=os.path.getmtime)
+for i in paths:
+    #os.fspath() eturn the file system representation of the path
+    files.append(os.fspath(i))
+#print(files)
+i = 0
+for fpath in files:
+    # original file name is fname
+    i += 1
+    # new file name
+    npath = os.path.join(dname, "cd2021_stage1_2a_g" + str(i) + ".mp4")
+    #print(npath)
+    os.rename(fpath, npath)
+
+
+</pre>
+<p><a href="https://github.com/mdecourse/cd2021/blob/main/downloads/stage1/get_video_duration.py">get_video_duration.py</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install moviepy
+import os
+from moviepy.editor import VideoFileClip
+
+# Converts into more readable format
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return hours, mins, seconds
+    
+for dname, dirs, files in os.walk("2021-03_2a_stage1"):
+    for fname in files:
+        vName = os.path.join(dname, fname)
+        clip = VideoFileClip(vName)
+        hours, mins, secs = convert(clip.duration)
+        print(fname + "組:", str(int(mins)) + "分", str(int(secs)) + "秒")</pre>
+<p style="padding-left: 30px;"></p><br />cmsimde << <a href='cmsimde.html'>Previous</a> <a href='W5.html'>Next</a> >> W5</div>
         
     <!-- footer -->
       <div class="container">
