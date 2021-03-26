@@ -15,7 +15,7 @@ def realA(account):
 
 group = []
 
-with open("w5_a_stage2.txt", encoding="utf-8") as file: 
+with open("w5_b_stage2.txt", encoding="utf-8") as file: 
     content = file.readlines()
 for i in range(len(content)):
     data = content[i].rstrip("\n").split("\t")

@@ -17,7 +17,7 @@
 <h4>電腦輔助設計室與協同設計室行事曆</h4>
 <p><a href="https://calendar.google.com/calendar/embed?src=mde.nfu.edu.tw_3439313938333136353439%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;mode=week&amp;src=mde.nfu.edu.tw_35303530373431313438%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;src=yen%40gm.nfu.edu.tw&amp;ctz=Asia%2FTaipei">全頁檢視</a></p>
 <p><iframe height="600" src="https://calendar.google.com/calendar/embed?src=mde.nfu.edu.tw_3439313938333136353439%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;mode=week&amp;src=mde.nfu.edu.tw_35303530373431313438%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;src=yen%40gm.nfu.edu.tw&amp;ctz=Asia%2FTaipei" width="800"></iframe></p>
-<h1>Topics</h1>
+<h2>Topics</h2>
 <h4>課程簡介</h4>
 <p>從英文單字解釋了解何謂協同? 產品? 設計? 以及實習?</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/ljJRENnHr68" width="560"></iframe></p>
@@ -300,7 +300,7 @@ robocopy up_dir ./../ /E</pre>
 <p style="padding-left: 60px;">對2a 各組的 .mp4 檔案進行改名, 將各檔案中的 %1 依照順序改為 1, 2, 3, 4 依此類推, 並且在分組網頁中列出一個表格, 列出各組簡報所花費的時間.</p>
 <p>討論:</p>
 <p style="padding-left: 30px;">目前因為只有 23 個 .mp4 檔案, 因此採用手動改名或逐一打開檔案計算每一影片檔案的簡報時間, 不至於太過繁雜, 但<span style="background-color: #ffff99;">若檔案數增加至 230 或 2300 個</span>, 決定採用手動改名與計算各組簡報時間的組別, 是否仍能夠接受使用手動處理與數位檔案有關的流程?</p>
-<p style="padding-left: 30px;">傳統汽車與電動汽車零件數比較, 總零件數多達上萬件, 若需要進入各零組件擷取相關資料或進行特定資料更動, 就符合上述以程式方法處理大量文字檔或數位檔案的情境':</p>
+<p style="padding-left: 30px;">傳統汽車與電動汽車零件數比較, 總零件數多達上萬件, 若需要進入各零組件擷取相關資料或進行特定資料更動, 就符合上述以程式方法處理大量文字檔或數位檔案的情境:</p>
 <p style="padding-left: 30px;"><img alt="" class="add_border" height="343" src="/images/automobile_part_number_comparison.png" width="600"/></p>
 <p><a href="https://github.com/mdecourse/cd2021/blob/main/downloads/stage1/rename_according_file_time.py">rename_according_to_file_time.py</a></p>
 <p style="padding-left: 30px;"><a href="https://docs.python.org/3/library/pathlib.html">https://docs.python.org/3/library/pathlib.html</a></p>
@@ -428,6 +428,14 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <li>當利用 putty.exe 設定連線 session 時必須注意是否使用 Proxy, 以及 SSH 中的 Auth 是否對應到前面所存檔的 .ppk private key 位置.</li>
 <li>一旦 Github session 設定完成, 可以從 [HKEY_CURRENT_USER\SOFTWARE\SimonTatham] 將 registry 設定匯出存為 y:\my_github.reg, 並在 start_ipv6.bat 中以  regedit.exe /S y:\my_github.reg 將設定匯入.</li>
 </ol>
+<p>重要步驟摘要如下:</p>
+<ol>
+<li>啟動時宣告 Git_SSH 變數, 表示要透過 plink.exe 以 putty.exe 進行 ssh 連線.</li>
+<li>利用 puttygen.exe 建立送到 Github 與近端設定 session 的 key pair.</li>
+<li>putty session 設定至少要給定近端 .ppk 格式的 private key 位置, 並視需要對 session 設定 proxy 伺服器.</li>
+<li>要採用 ssh push 的倉儲需要將 https 的連線 url 改為 ssh 連線格式, 並透過 <a href="mailto:git@session:帳號">git@session:帳號</a>/倉儲.git 設定 url.</li>
+<li>每次啟動可攜系統, 利用 regedit.exe /S 將先前設定好的登錄檔案 .reg 匯入, 確定連線 session 指到正確的 .ppk 位置.</li>
+</ol>
 <p>操作導引如下:</p>
 <p><iframe height="600" src="/downloads/w5_ssh_setup_tutorial.htm" width="553"></iframe></p>
 <p>以上設定的重要關鍵為:</p>
@@ -465,7 +473,7 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <p style="padding-left: 30px;"><a href="https://nginx.org/en/docs/">https://nginx.org/en/docs/</a></p>
 <p style="padding-left: 30px;"><a href="http://nginx.org/en/docs/beginners_guide.html">http://nginx.org/en/docs/beginners_guide.html</a></p>
 <p style="padding-left: 30px;"><a href="http://www.squid-cache.org/Doc/">http://www.squid-cache.org/Doc/</a></p>
-<p style="padding-left: 30px;"><a href="https://uwsgi-docs.readthedocs.io/en/latest/">https://uwsgi-docs.readthedocs.io/en/latest/</a> </p>
+<p style="padding-left: 30px;"><a href="https://uwsgi-docs.readthedocs.io/en/latest/">https://uwsgi-docs.readthedocs.io/en/latest/</a></p>
 <p style="padding-left: 30px;"><a href="/downloads/ubuntu/uwsgi_document.pdf">uwsgi_document.pdf</a></p>
 <p style="padding-left: 30px;"></p>
 <p style="padding-left: 30px;"></p><h2>分組題目</h2>
