@@ -428,6 +428,14 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <li>當利用 putty.exe 設定連線 session 時必須注意是否使用 Proxy, 以及 SSH 中的 Auth 是否對應到前面所存檔的 .ppk private key 位置.</li>
 <li>一旦 Github session 設定完成, 可以從 [HKEY_CURRENT_USER\SOFTWARE\SimonTatham] 將 registry 設定匯出存為 y:\my_github.reg, 並在 start_ipv6.bat 中以  regedit.exe /S y:\my_github.reg 將設定匯入.</li>
 </ol>
+<p>重要步驟摘要如下:</p>
+<ol>
+<li>啟動時宣告 Git_SSH 變數, 表示要透過 plink.exe 以 putty.exe 進行 ssh 連線.</li>
+<li>利用 puttygen.exe 建立送到 Github 與近端設定 session 的 key pair.</li>
+<li>putty session 設定至少要給定近端 .ppk 格式的 private key 位置, 並視需要對 session 設定 proxy 伺服器.</li>
+<li>要採用 ssh push 的倉儲需要將 https 的連線 url 改為 ssh 連線格式, 並透過 <a href="mailto:git@session:帳號">git@session:帳號</a>/倉儲.git 設定 url.</li>
+<li>每次啟動可攜系統, 利用 regedit.exe /S 將先前設定好的登錄檔案 .reg 匯入, 確定連線 session 指到正確的 .ppk 位置.</li>
+</ol>
 <p>操作導引如下:</p>
 <p><iframe height="600" src="/downloads/w5_ssh_setup_tutorial.htm" width="553"></iframe></p>
 <p>以上設定的重要關鍵為:</p>
@@ -453,7 +461,22 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <p>接著讓大家練習一下使用 ssh 對 Ubuntu 操作系統連線, 使用其 Service.</p>
 <p>假如您們小組想要自行安裝 Virtualbox 上的 Ubuntu 20.04 伺服器版本, 可以從 <a href="http://c.kmol.info/downloads/">http://c.kmol.info/downloads/</a>  下載 ubuntu-20.04.2-live-server-amd64.iso 後試著安裝設定. (需要摸索一下, 這裡有<a href="https://assets.ubuntu.com/v1/f954307f-ubuntu-server-guide.pdf">參考書</a>)</p>
 <p>或者直接從 <a href="http://c.kmol.info/downloads/">http://c.kmol.info/downloads/</a> 下載 ub2021_vdi.7z 解開後就是已經安裝完成的 Ubuntu 20.04 操作系統 vdi 檔案.</p>
-<p>上述 Virtualbox 上的 Ubuntu 除了可以用於練習 ssh 對 Ubuntu 連線外, 後續也將用於 Fossil SCM server 與 Windows 10 client 的實習.</p><h2>分組題目</h2>
+<p>上述 Virtualbox 上的 Ubuntu 除了可以用於練習 ssh 對 Ubuntu 連線外, 後續也將用於 Fossil SCM server 與 Windows 10 client 的實習.</p>
+<h4><a href="https://ubuntu.com/">Ubuntu</a> 與 <a href="https://www.virtualbox.org/">Virtualbox</a> 操作參考資料:</h4>
+<p style="padding-left: 30px;"><a href="http://download.virtualbox.org/virtualbox/UserManual.pdf">http://download.virtualbox.org/virtualbox/UserManual.pdf</a></p>
+<p style="padding-left: 30px;"><a href="https://www.virtualbox.org/manual/">https://www.virtualbox.org/manual/</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/ubuntu/ubuntu-server-guide.pdf">ubuntu-server-guide.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/ubuntu/vi_cheat_sheet.pdf">vi_cheat_sheet.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/ubuntu/vim_guide.pdf">vim_guide.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/ubuntu/vi-ref.pdf">vi-ref.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/ubuntu/securing_communication.pdf">securing_communication.pdf</a></p>
+<p style="padding-left: 30px;"><a href="https://nginx.org/en/docs/">https://nginx.org/en/docs/</a></p>
+<p style="padding-left: 30px;"><a href="http://nginx.org/en/docs/beginners_guide.html">http://nginx.org/en/docs/beginners_guide.html</a></p>
+<p style="padding-left: 30px;"><a href="http://www.squid-cache.org/Doc/">http://www.squid-cache.org/Doc/</a></p>
+<p style="padding-left: 30px;"><a href="https://uwsgi-docs.readthedocs.io/en/latest/">https://uwsgi-docs.readthedocs.io/en/latest/</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/ubuntu/uwsgi_document.pdf">uwsgi_document.pdf</a></p>
+<p style="padding-left: 30px;"></p>
+<p style="padding-left: 30px;"></p><h2>分組題目</h2>
 <p>題目與研究內容的選定參考:</p>
 <p style="padding-left: 30px;">Floor-cleaning Robot: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage1">https://github.com/mdecourse/cd2021/tree/main/downloads/stage1</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/v-rep-robotics">https://github.com/mdecourse/v-rep-robotics</a></p>
