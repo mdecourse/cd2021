@@ -476,7 +476,192 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <p style="padding-left: 30px;"><a href="https://uwsgi-docs.readthedocs.io/en/latest/">https://uwsgi-docs.readthedocs.io/en/latest/</a></p>
 <p style="padding-left: 30px;"><a href="/downloads/ubuntu/uwsgi_document.pdf">uwsgi_document.pdf</a></p>
 <p style="padding-left: 30px;"></p>
-<p style="padding-left: 30px;"></p><h2>分組題目</h2>
+<h3>Youtube_API</h3>
+<p>2021 協同產品設計實習 Stage1 <a href="https://drive.google.com/drive/folders/1t38qYM30FeKw37F49nd0DAD5EMQseDnj?usp=sharing">W4 各組簡報 mp4</a></p>
+<p>假如希望利用 <a href="https://developers.google.com/youtube/v3">https://developers.google.com/youtube/v3</a> API 將近端影片上傳並自動取得相關網際連結編號, 可以從 <a href="https://developers.google.com/youtube/v3/guides/uploading_a_video">https://developers.google.com/youtube/v3/guides/uploading_a_video</a> 取得參考資料.</p>
+<p>以下為參考程式:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#!/usr/bin/python
+
+import httplib
+import httplib2
+import os
+import random
+import sys
+import time
+
+from apiclient.discovery import build
+from apiclient.errors import HttpError
+from apiclient.http import MediaFileUpload
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.file import Storage
+from oauth2client.tools import argparser, run_flow
+
+
+# Explicitly tell the underlying HTTP transport library not to retry, since
+# we are handling retry logic ourselves.
+httplib2.RETRIES = 1
+
+# Maximum number of times to retry before giving up.
+MAX_RETRIES = 10
+
+# Always retry when these exceptions are raised.
+RETRIABLE_EXCEPTIONS = (httplib2.HttpLib2Error, IOError, httplib.NotConnected,
+  httplib.IncompleteRead, httplib.ImproperConnectionState,
+  httplib.CannotSendRequest, httplib.CannotSendHeader,
+  httplib.ResponseNotReady, httplib.BadStatusLine)
+
+# Always retry when an apiclient.errors.HttpError with one of these status
+# codes is raised.
+RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
+
+# The CLIENT_SECRETS_FILE variable specifies the name of a file that contains
+# the OAuth 2.0 information for this application, including its client_id and
+# client_secret. You can acquire an OAuth 2.0 client ID and client secret from
+# the Google API Console at
+# https://console.developers.google.com/.
+# Please ensure that you have enabled the YouTube Data API for your project.
+# For more information about using OAuth2 to access the YouTube Data API, see:
+#   https://developers.google.com/youtube/v3/guides/authentication
+# For more information about the client_secrets.json file format, see:
+#   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
+CLIENT_SECRETS_FILE = "client_secrets.json"
+
+# This OAuth 2.0 access scope allows an application to upload files to the
+# authenticated user's YouTube channel, but doesn't allow other types of access.
+YOUTUBE_UPLOAD_SCOPE = "https://www.googleapis.com/auth/youtube.upload"
+YOUTUBE_API_SERVICE_NAME = "youtube"
+YOUTUBE_API_VERSION = "v3"
+
+# This variable defines a message to display if the CLIENT_SECRETS_FILE is
+# missing.
+MISSING_CLIENT_SECRETS_MESSAGE = """
+WARNING: Please configure OAuth 2.0
+
+To make this sample run you will need to populate the client_secrets.json file
+found at:
+
+   %s
+
+with information from the API Console
+https://console.developers.google.com/
+
+For more information about the client_secrets.json file format, please visit:
+https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
+""" % os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                   CLIENT_SECRETS_FILE))
+
+VALID_PRIVACY_STATUSES = ("public", "private", "unlisted")
+
+
+def get_authenticated_service(args):
+  flow = flow_from_clientsecrets(CLIENT_SECRETS_FILE,
+    scope=YOUTUBE_UPLOAD_SCOPE,
+    message=MISSING_CLIENT_SECRETS_MESSAGE)
+
+  storage = Storage("%s-oauth2.json" % sys.argv[0])
+  credentials = storage.get()
+
+  if credentials is None or credentials.invalid:
+    credentials = run_flow(flow, storage, args)
+
+  return build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,
+    http=credentials.authorize(httplib2.Http()))
+
+def initialize_upload(youtube, options):
+  tags = None
+  if options.keywords:
+    tags = options.keywords.split(",")
+
+  body=dict(
+    snippet=dict(
+      title=options.title,
+      description=options.description,
+      tags=tags,
+      categoryId=options.category
+    ),
+    status=dict(
+      privacyStatus=options.privacyStatus
+    )
+  )
+
+  # Call the API's videos.insert method to create and upload the video.
+  insert_request = youtube.videos().insert(
+    part=",".join(body.keys()),
+    body=body,
+    # The chunksize parameter specifies the size of each chunk of data, in
+    # bytes, that will be uploaded at a time. Set a higher value for
+    # reliable connections as fewer chunks lead to faster uploads. Set a lower
+    # value for better recovery on less reliable connections.
+    #
+    # Setting "chunksize" equal to -1 in the code below means that the entire
+    # file will be uploaded in a single HTTP request. (If the upload fails,
+    # it will still be retried where it left off.) This is usually a best
+    # practice, but if you're using Python older than 2.6 or if you're
+    # running on App Engine, you should set the chunksize to something like
+    # 1024 * 1024 (1 megabyte).
+    media_body=MediaFileUpload(options.file, chunksize=-1, resumable=True)
+  )
+
+  resumable_upload(insert_request)
+
+# This method implements an exponential backoff strategy to resume a
+# failed upload.
+def resumable_upload(insert_request):
+  response = None
+  error = None
+  retry = 0
+  while response is None:
+    try:
+      print "Uploading file..."
+      status, response = insert_request.next_chunk()
+      if response is not None:
+        if 'id' in response:
+          print "Video id '%s' was successfully uploaded." % response['id']
+        else:
+          exit("The upload failed with an unexpected response: %s" % response)
+    except HttpError, e:
+      if e.resp.status in RETRIABLE_STATUS_CODES:
+        error = "A retriable HTTP error %d occurred:\n%s" % (e.resp.status,
+                                                             e.content)
+      else:
+        raise
+    except RETRIABLE_EXCEPTIONS, e:
+      error = "A retriable error occurred: %s" % e
+
+    if error is not None:
+      print error
+      retry += 1
+      if retry &gt; MAX_RETRIES:
+        exit("No longer attempting to retry.")
+
+      max_sleep = 2 ** retry
+      sleep_seconds = random.random() * max_sleep
+      print "Sleeping %f seconds and then retrying..." % sleep_seconds
+      time.sleep(sleep_seconds)
+
+if __name__ == '__main__':
+  argparser.add_argument("--file", required=True, help="Video file to upload")
+  argparser.add_argument("--title", help="Video title", default="Test Title")
+  argparser.add_argument("--description", help="Video description",
+    default="Test Description")
+  argparser.add_argument("--category", default="22",
+    help="Numeric video category. " +
+      "See https://developers.google.com/youtube/v3/docs/videoCategories/list")
+  argparser.add_argument("--keywords", help="Video keywords, comma separated",
+    default="")
+  argparser.add_argument("--privacyStatus", choices=VALID_PRIVACY_STATUSES,
+    default=VALID_PRIVACY_STATUSES[0], help="Video privacy status.")
+  args = argparser.parse_args()
+
+  if not os.path.exists(args.file):
+    exit("Please specify a valid file using the --file= parameter.")
+
+  youtube = get_authenticated_service(args)
+  try:
+    initialize_upload(youtube, args)
+  except HttpError, e:
+    print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)</pre>
+<p></p><h2>分組題目</h2>
 <p>題目與研究內容的選定參考:</p>
 <p style="padding-left: 30px;">Floor-cleaning Robot: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage1">https://github.com/mdecourse/cd2021/tree/main/downloads/stage1</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/v-rep-robotics">https://github.com/mdecourse/v-rep-robotics</a></p>
@@ -519,7 +704,8 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial2.htm" width="810"></iframe></p><h1>Stage2</h1>
 <h4>2a stage2 分組</h4>
 <p><a href="http://github.com/40823108/stage2-ag1">stage2-ag1 repo</a> | <a href="http://40823145.github.io/stage2-ag1">stage2-ag1 site</a> | <a href="http://github.com/40823108/cd2021">40823108 repo</a> | <a href="http://40823108.github.io/cd2021">40823108 site</a> | <a href="http://github.com/40823145/cd2021">40823145 repo</a> | <a href="http://40823145.github.io/cd2021">40823145 site</a> | <a href="http://github.com/40823109/cd2021">40823109 repo</a> | <a href="http://40823109.github.io/cd2021">40823109 site</a> | <a href="http://github.com/a40823112/cd2021">a40823112 repo</a> | <a href="http://a40823112.github.io/cd2021">a40823112 site</a><br/>--------------------<br/><a href="http://github.com/40623121/stage2-ag2">stage2-ag2 repo</a> | <a href="http://40823151.github.io/stage2-ag2">stage2-ag2 site</a> | <a href="http://github.com/40623121/cd2021">40623121 repo</a> | <a href="http://40623121.github.io/cd2021">40623121 site</a> | <a href="http://github.com/40823151/cd2021">40823151 repo</a> | <a href="http://40823151.github.io/cd2021">40823151 site</a> | <a href="http://github.com/40871106/cd2021">40871106 repo</a> | <a href="http://40871106.github.io/cd2021">40871106 site</a> | <a href="http://github.com/40823132/cd2021">40823132 repo</a> | <a href="http://40823132.github.io/cd2021">40823132 site</a><br/>--------------------<br/><a href="http://github.com/40623234-1/stage2-ag3">stage2-ag3 repo</a> | <a href="http://40423113.github.io/stage2-ag3">stage2-ag3 site</a> | <a href="http://github.com/40623234-1/cd2021">40623234-1 repo</a> | <a href="http://40623234-1.github.io/cd2021">40623234-1 site</a> | <a href="http://github.com/40423113/cd2021">40423113 repo</a> | <a href="http://40423113.github.io/cd2021">40423113 site</a> | <a href="http://github.com/40823126/cd2021">40823126 repo</a> | <a href="http://40823126.github.io/cd2021">40823126 site</a> | <a href="http://github.com/40823128/cd2021">40823128 repo</a> | <a href="http://40823128.github.io/cd2021">40823128 site</a><br/>--------------------<br/><a href="http://github.com/40823101/stage2 ag4">stage2 ag4 repo</a> | <a href="http://40823104.github.io/stage2 ag4">stage2 ag4 site</a> | <a href="http://github.com/40823101/cd2021">40823101 repo</a> | <a href="http://40823101.github.io/cd2021">40823101 site</a> | <a href="http://github.com/40823104/cd2021">40823104 repo</a> | <a href="http://40823104.github.io/cd2021">40823104 site</a> | <a href="http://github.com/40823119/cd2021">40823119 repo</a> | <a href="http://40823119.github.io/cd2021">40823119 site</a> | <a href="http://github.com/40823150/cd2021">40823150 repo</a> | <a href="http://40823150.github.io/cd2021">40823150 site</a><br/>--------------------<br/><a href="http://github.com/40823102/stage2-ag5">stage2-ag5 repo</a> | <a href="http://40823106.github.io/stage2-ag5">stage2-ag5 site</a> | <a href="http://github.com/40823102/cd2021">40823102 repo</a> | <a href="http://40823102.github.io/cd2021">40823102 site</a> | <a href="http://github.com/40823106/cd2021">40823106 repo</a> | <a href="http://40823106.github.io/cd2021">40823106 site</a> | <a href="http://github.com/40823121/cd2021">40823121 repo</a> | <a href="http://40823121.github.io/cd2021">40823121 site</a> | <a href="http://github.com/40823135/cd2021">40823135 repo</a> | <a href="http://40823135.github.io/cd2021">40823135 site</a><br/>--------------------<br/><a href="http://github.com/40823111/stage2-ag6">stage2-ag6 repo</a> | <a href="http://40823120.github.io/stage2-ag6">stage2-ag6 site</a> | <a href="http://github.com/40823111/cd2021">40823111 repo</a> | <a href="http://40823111.github.io/cd2021">40823111 site</a> | <a href="http://github.com/40823120/cd2021">40823120 repo</a> | <a href="http://40823120.github.io/cd2021">40823120 site</a> | <a href="http://github.com/40823124/cd2021">40823124 repo</a> | <a href="http://40823124.github.io/cd2021">40823124 site</a> | <a href="http://github.com/40823139/cd2021">40823139 repo</a> | <a href="http://40823139.github.io/cd2021">40823139 site</a><br/>--------------------<br/><a href="http://github.com/40823129/stage2-ag7">stage2-ag7 repo</a> | <a href="http://40823149.github.io/stage2-ag7">stage2-ag7 site</a> | <a href="http://github.com/40823129/cd2021">40823129 repo</a> | <a href="http://40823129.github.io/cd2021">40823129 site</a> | <a href="http://github.com/40823149/cd2021">40823149 repo</a> | <a href="http://40823149.github.io/cd2021">40823149 site</a> | <a href="http://github.com/40823117/cd2021">40823117 repo</a> | <a href="http://40823117.github.io/cd2021">40823117 site</a> | <a href="http://github.com/40823122/cd2021">40823122 repo</a> | <a href="http://40823122.github.io/cd2021">40823122 site</a><br/>--------------------<br/><a href="http://github.com/40523252/stage2-ag8">stage2-ag8 repo</a> | <a href="http://40823154.github.io/stage2-ag8">stage2-ag8 site</a> | <a href="http://github.com/40523252/cd2021">40523252 repo</a> | <a href="http://40523252.github.io/cd2021">40523252 site</a> | <a href="http://github.com/40823154/cd2021">40823154 repo</a> | <a href="http://40823154.github.io/cd2021">40823154 site</a> | <a href="http://github.com/40823103/cd2021">40823103 repo</a> | <a href="http://40823103.github.io/cd2021">40823103 site</a> | <a href="http://github.com/40823107/cd2021">40823107 repo</a> | <a href="http://40823107.github.io/cd2021">40823107 site</a><br/>--------------------<br/><a href="http://github.com/40823115/stage2-ag9">stage2-ag9 repo</a> | <a href="http://40823140.github.io/stage2-ag9">stage2-ag9 site</a> | <a href="http://github.com/40823115/cd2021">40823115 repo</a> | <a href="http://40823115.github.io/cd2021">40823115 site</a> | <a href="http://github.com/40823140/cd2021">40823140 repo</a> | <a href="http://40823140.github.io/cd2021">40823140 site</a> | <a href="http://github.com/40823114/cd2021">40823114 repo</a> | <a href="http://40823114.github.io/cd2021">40823114 site</a> | <a href="http://github.com/40823146/cd2021">40823146 repo</a> | <a href="http://40823146.github.io/cd2021">40823146 site</a><br/>--------------------<br/><a href="http://github.com/40823142/stage2-ag10">stage2-ag10 repo</a> | <a href="http://40823144.github.io/stage2-ag10">stage2-ag10 site</a> | <a href="http://github.com/40823142/cd2021">40823142 repo</a> | <a href="http://40823142.github.io/cd2021">40823142 site</a> | <a href="http://github.com/40823144/cd2021">40823144 repo</a> | <a href="http://40823144.github.io/cd2021">40823144 site</a> | <a href="http://github.com/40823127/cd2021">40823127 repo</a> | <a href="http://40823127.github.io/cd2021">40823127 site</a> | <a href="http://github.com/40823148/cd2021">40823148 repo</a> | <a href="http://40823148.github.io/cd2021">40823148 site</a><br/>--------------------<br/><a href="http://github.com/40823116/stage2-ag11">stage2-ag11 repo</a> | <a href="http://40823123.github.io/stage2-ag11">stage2-ag11 site</a> | <a href="http://github.com/40823116/cd2021">40823116 repo</a> | <a href="http://40823116.github.io/cd2021">40823116 site</a> | <a href="http://github.com/40823123/cd2021">40823123 repo</a> | <a href="http://40823123.github.io/cd2021">40823123 site</a> | <a href="http://github.com/40823131/cd2021">40823131 repo</a> | <a href="http://40823131.github.io/cd2021">40823131 site</a> | <a href="http://github.com/40823136/cd2021">40823136 repo</a> | <a href="http://40823136.github.io/cd2021">40823136 site</a><br/>--------------------<br/><a href="http://github.com/40823152/stage2-ag12">stage2-ag12 repo</a> | <a href="http://40823153.github.io/stage2-ag12">stage2-ag12 site</a> | <a href="http://github.com/40823152/cd2021">40823152 repo</a> | <a href="http://40823152.github.io/cd2021">40823152 site</a> | <a href="http://github.com/40823153/cd2021">40823153 repo</a> | <a href="http://40823153.github.io/cd2021">40823153 site</a> | <a href="http://github.com/40823125/cd2021">40823125 repo</a> | <a href="http://40823125.github.io/cd2021">40823125 site</a> | <a href="http://github.com/40823110/cd2021">40823110 repo</a> | <a href="http://40823110.github.io/cd2021">40823110 site</a><br/>--------------------</p>
-<h4>2b stage2 分組</h4><h1>Project</h1>
+<h4>2b stage2 分組</h4>
+<p><a href="http://github.com/40823245/stage2-bg1">stage2-bg1 repo</a> | <a href="http://40823251.github.io/stage2-bg1">stage2-bg1 site</a> | <a href="http://github.com/40823245/cd2021">40823245 repo</a> | <a href="http://40823245.github.io/cd2021">40823245 site</a> | <a href="http://github.com/40823251/cd2021">40823251 repo</a> | <a href="http://40823251.github.io/cd2021">40823251 site</a> | <a href="http://github.com/40823246/cd2021">40823246 repo</a> | <a href="http://40823246.github.io/cd2021">40823246 site</a> | <a href="http://github.com/40823208/cd2021">40823208 repo</a> | <a href="http://40823208.github.io/cd2021">40823208 site</a><br/>--------------------<br/><a href="http://github.com/40823213/stage2-bg2">stage2-bg2 repo</a> | <a href="http://40823232.github.io/stage2-bg2">stage2-bg2 site</a> | <a href="http://github.com/40823213/cd2021">40823213 repo</a> | <a href="http://40823213.github.io/cd2021">40823213 site</a> | <a href="http://github.com/40823232/cd2021">40823232 repo</a> | <a href="http://40823232.github.io/cd2021">40823232 site</a> | <a href="http://github.com/40823234/cd2021">40823234 repo</a> | <a href="http://40823234.github.io/cd2021">40823234 site</a> | <a href="http://github.com/40823235/cd2021">40823235 repo</a> | <a href="http://40823235.github.io/cd2021">40823235 site</a><br/>--------------------<br/><a href="http://github.com/40823206/stage2-bg3">stage2-bg3 repo</a> | <a href="http://40823207.github.io/stage2-bg3">stage2-bg3 site</a> | <a href="http://github.com/40823206/cd2021">40823206 repo</a> | <a href="http://40823206.github.io/cd2021">40823206 site</a> | <a href="http://github.com/40823207/cd2021">40823207 repo</a> | <a href="http://40823207.github.io/cd2021">40823207 site</a> | <a href="http://github.com/40823223/cd2021">40823223 repo</a> | <a href="http://40823223.github.io/cd2021">40823223 site</a> | <a href="http://github.com/40823224/cd2021">40823224 repo</a> | <a href="http://40823224.github.io/cd2021">40823224 site</a><br/>--------------------<br/><a href="http://github.com/s40723215/stage2-bg4">stage2-bg4 repo</a> | <a href="http://s40723128.github.io/stage2-bg4">stage2-bg4 site</a> | <a href="http://github.com/s40723215/cd2021">s40723215 repo</a> | <a href="http://s40723215.github.io/cd2021">s40723215 site</a> | <a href="http://github.com/s40723128/cd2021">s40723128 repo</a> | <a href="http://s40723128.github.io/cd2021">s40723128 site</a> | <a href="http://github.com/s40723140/cd2021">s40723140 repo</a> | <a href="http://s40723140.github.io/cd2021">s40723140 site</a> | <a href="http://github.com/s40723135/cd2021">s40723135 repo</a> | <a href="http://s40723135.github.io/cd2021">s40723135 site</a><br/>--------------------<br/><a href="http://github.com/40823227/stage2-bg5">stage2-bg5 repo</a> | <a href="http://40823241.github.io/stage2-bg5">stage2-bg5 site</a> | <a href="http://github.com/40823227/cd2021">40823227 repo</a> | <a href="http://40823227.github.io/cd2021">40823227 site</a> | <a href="http://github.com/40823241/cd2021">40823241 repo</a> | <a href="http://40823241.github.io/cd2021">40823241 site</a> | <a href="http://github.com/s40723233/cd2021">s40723233 repo</a> | <a href="http://s40723233.github.io/cd2021">s40723233 site</a> | <a href="http://github.com/s40723141/cd2021">s40723141 repo</a> | <a href="http://s40723141.github.io/cd2021">s40723141 site</a><br/>--------------------<br/><a href="http://github.com/40823214/stage2-bg6">stage2-bg6 repo</a> | <a href="http://40823225.github.io/stage2-bg6">stage2-bg6 site</a> | <a href="http://github.com/40823214/cd2021">40823214 repo</a> | <a href="http://40823214.github.io/cd2021">40823214 site</a> | <a href="http://github.com/40823225/cd2021">40823225 repo</a> | <a href="http://40823225.github.io/cd2021">40823225 site</a> | <a href="http://github.com/40823247/cd2021">40823247 repo</a> | <a href="http://40823247.github.io/cd2021">40823247 site</a> | <a href="http://github.com/40823248/cd2021">40823248 repo</a> | <a href="http://40823248.github.io/cd2021">40823248 site</a><br/>--------------------<br/><a href="http://github.com/40823211/stage2-bg7">stage2-bg7 repo</a> | <a href="http://40823216.github.io/stage2-bg7">stage2-bg7 site</a> | <a href="http://github.com/40823211/cd2021">40823211 repo</a> | <a href="http://40823211.github.io/cd2021">40823211 site</a> | <a href="http://github.com/40823216/cd2021">40823216 repo</a> | <a href="http://40823216.github.io/cd2021">40823216 site</a> | <a href="http://github.com/40823218/cd2021">40823218 repo</a> | <a href="http://40823218.github.io/cd2021">40823218 site</a> | <a href="http://github.com/40823238/cd2021">40823238 repo</a> | <a href="http://40823238.github.io/cd2021">40823238 site</a><br/>--------------------<br/><a href="http://github.com/40623144/stage2-bg8">stage2-bg8 repo</a> | <a href="http://s40723224.github.io/stage2-bg8">stage2-bg8 site</a> | <a href="http://github.com/40623144/cd2021">40623144 repo</a> | <a href="http://40623144.github.io/cd2021">40623144 site</a> | <a href="http://github.com/s40723224/cd2021">s40723224 repo</a> | <a href="http://s40723224.github.io/cd2021">s40723224 site</a> | <a href="http://github.com/40423155/cd2021">40423155 repo</a> | <a href="http://40423155.github.io/cd2021">40423155 site</a> | <a href="http://github.com/40823233/cd2021">40823233 repo</a> | <a href="http://40823233.github.io/cd2021">40823233 site</a><br/>--------------------<br/><a href="http://github.com/40823219/stage2-bg9">stage2-bg9 repo</a> | <a href="http://40823231-2.github.io/stage2-bg9">stage2-bg9 site</a> | <a href="http://github.com/40823219/cd2021">40823219 repo</a> | <a href="http://40823219.github.io/cd2021">40823219 site</a> | <a href="http://github.com/40823231-2/cd2021">40823231-2 repo</a> | <a href="http://40823231-2.github.io/cd2021">40823231-2 site</a> | <a href="http://github.com/40823212/cd2021">40823212 repo</a> | <a href="http://40823212.github.io/cd2021">40823212 site</a> | <a href="http://github.com/40823236/cd2021">40823236 repo</a> | <a href="http://40823236.github.io/cd2021">40823236 site</a><br/>--------------------<br/><a href="http://github.com/40823202/stage2-bg10">stage2-bg10 repo</a> | <a href="http://40823203.github.io/stage2-bg10">stage2-bg10 site</a> | <a href="http://github.com/40823202/cd2021">40823202 repo</a> | <a href="http://40823202.github.io/cd2021">40823202 site</a> | <a href="http://github.com/40823203/cd2021">40823203 repo</a> | <a href="http://40823203.github.io/cd2021">40823203 site</a> | <a href="http://github.com/40823222/cd2021">40823222 repo</a> | <a href="http://40823222.github.io/cd2021">40823222 site</a> | <a href="http://github.com/40823244/cd2021">40823244 repo</a> | <a href="http://40823244.github.io/cd2021">40823244 site</a><br/>--------------------<br/><a href="http://github.com/40823217/stage2-bg11">stage2-bg11 repo</a> | <a href="http://40823201.github.io/stage2-bg11">stage2-bg11 site</a> | <a href="http://github.com/40823217/cd2021">40823217 repo</a> | <a href="http://40823217.github.io/cd2021">40823217 site</a> | <a href="http://github.com/40823201/cd2021">40823201 repo</a> | <a href="http://40823201.github.io/cd2021">40823201 site</a> | <a href="http://github.com/40823209/cd2021">40823209 repo</a> | <a href="http://40823209.github.io/cd2021">40823209 site</a> | <a href="http://github.com/40823210/cd2021">40823210 repo</a> | <a href="http://40823210.github.io/cd2021">40823210 site</a><br/>--------------------<br/><a href="http://github.com/40823237/stage2-bg12">stage2-bg12 repo</a> | <a href="http://40823221.github.io/stage2-bg12">stage2-bg12 site</a> | <a href="http://github.com/40823237/cd2021">40823237 repo</a> | <a href="http://40823237.github.io/cd2021">40823237 site</a> | <a href="http://github.com/40823221/cd2021">40823221 repo</a> | <a href="http://40823221.github.io/cd2021">40823221 site</a> | <a href="http://github.com/40823250/cd2021">40823250 repo</a> | <a href="http://40823250.github.io/cd2021">40823250 site</a> | <a href="http://github.com/40832244/cd2021">40832244 repo</a> | <a href="http://40832244.github.io/cd2021">40832244 site</a><br/>--------------------<br/><a href="http://github.com/s40723106/stage2-bg13">stage2-bg13 repo</a> | <a href="http://s40723139.github.io/stage2-bg13">stage2-bg13 site</a> | <a href="http://github.com/s40723106/cd2021">s40723106 repo</a> | <a href="http://s40723106.github.io/cd2021">s40723106 site</a> | <a href="http://github.com/s40723139/cd2021">s40723139 repo</a> | <a href="http://s40723139.github.io/cd2021">s40723139 site</a> | <a href="http://github.com/s40723143/cd2021">s40723143 repo</a> | <a href="http://s40723143.github.io/cd2021">s40723143 site</a> | <a href="http://github.com/40823239/cd2021">40823239 repo</a> | <a href="http://40823239.github.io/cd2021">40823239 site</a><br/>--------------------<br/><a href="http://github.com/40823228/stage2-bg14">stage2-bg14 repo</a> | <a href="http://40823242.github.io/stage2-bg14">stage2-bg14 site</a> | <a href="http://github.com/40823228/cd2021">40823228 repo</a> | <a href="http://40823228.github.io/cd2021">40823228 site</a> | <a href="http://github.com/40823242/cd2021">40823242 repo</a> | <a href="http://40823242.github.io/cd2021">40823242 site</a> | <a href="http://github.com/40823204/cd2021">40823204 repo</a> | <a href="http://40823204.github.io/cd2021">40823204 site</a> | <a href="http://github.com/40823220/cd2021">40823220 repo</a> | <a href="http://40823220.github.io/cd2021">40823220 site</a><br/>--------------------</p><h1>Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
