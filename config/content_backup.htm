@@ -529,7 +529,7 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <p style="padding-left: 30px;"><a href="http://www.farwire.net/SolveSpace-LearningGuide.htm">http://www.farwire.net/SolveSpace-LearningGuide.htm</a></p>
 <h4>Solvespace 編譯:</h4>
 <p style="padding-left: 30px;">利用 <a href="https://www.msys2.org/">MSYS2</a> 編譯 Solvespace, 需要 install cmake<br/><br/>pacman -S mingw-w64-x86_64-cmake<br/><br/>而且必須 rename Y:\msys64\usr\bin\sh.exe 換成其他名稱.<br/><br/>cd solvespace<br/>mkdir build<br/>cd build<br/>cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release<br/>make<br/><br/>need libwinpthread-1.dll to execute solvespace.exe<br/>上述<a href="https://www.youtube.com/watch?v=OHyeZz6XE8A">流程影片</a>編譯時間約需 19 分鐘, 完成的 <a href="https://drive.google.com/file/d/1tMy9ir-gIuXSYbUKTFQ0W5hd00pRozEM/view?usp=sharing">solvespace 可執行檔案下載</a></p>
-<p style="padding-left: 30px;">為什麼不使用 IDE (Visual Studio) 編譯 Solvespace?</p>
+<p style="padding-left: 30px;">為什麼不使用 IDE (Visual Studio) 編譯 Solvespace? Visual Studio 其實與 cms.bat, acp.bat 等整合工具類似, 使用時非常方便, 但久了之後, 若無法在新環境中自行建立各種整合工具, 不深入瞭解設計原理與細節, 將導致新產品設計流程窒礙難行.</p>
 <h4>以 Msys2 編譯 Solvespace:</h4>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/OHyeZz6XE8A" title="YouTube video player" width="560"></iframe></p><h1>Project</h1>
 <p>W1: 課程說明</p>
