@@ -436,6 +436,11 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <li>要採用 ssh push 的倉儲需要將 https 的連線 url 改為 ssh 連線格式, 並透過 <a href="mailto:git@session:帳號">git@session:帳號</a>/倉儲.git 設定 url.</li>
 <li>每次啟動可攜系統, 利用 regedit.exe /S 將先前設定好的登錄檔案 .reg 匯入, 確定連線 session 指到正確的 .ppk 位置.</li>
 </ol>
+<p>SSH 設定原理說明如下:</p>
+<ol>
+<li>在 start_ipv5.bat 中設定 <span style="background-color: #ccffcc;">set GIT_SSH=%Disk%:\putty\plink.exe</span> 會讓原本 Github 倉儲中 .git/config url 指向 domain name 的機制, 轉為透過 Putty 設定的 session 名稱連線, 意即, 原先的 url = <a href="mailto:git@github.com:user_account/repo_name.git">git@github.com:user_account/repo_name.git</a> 中的 github.com 在沒有設定 GIT_SSH 變數前, 為 Github  主機連線的符號名稱, 一旦設定 GIT_SSH 變數與 plink.exe 連結, 則 github.com 將代表 session 名稱, 而且是以 Windows 10 操作系統中登錄檔的 [HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions] 設定指向對應的 session 名稱.</li>
+<li>一旦 .git/config 中 url 連線到 session 的機制完成,  在 putty.exe 中的對應 session 就必須設定 Porxy 與 Auth, 目前只有在電腦輔助設計室使用純 IPv6 環境需要設定雙支援的 Proxy server, 若使用 start_ipv4 啟動時, 以 IPv4 連線則 session 只需要設定 Auth.</li>
+</ol>
 <p>操作導引如下:</p>
 <p><iframe height="600" src="/downloads/w5_ssh_setup_tutorial.htm" width="553"></iframe></p>
 <p>以上設定的重要關鍵為:</p>
@@ -475,8 +480,7 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 <p style="padding-left: 30px;"><a href="http://www.squid-cache.org/Doc/">http://www.squid-cache.org/Doc/</a></p>
 <p style="padding-left: 30px;"><a href="https://uwsgi-docs.readthedocs.io/en/latest/">https://uwsgi-docs.readthedocs.io/en/latest/</a></p>
 <p style="padding-left: 30px;"><a href="/downloads/ubuntu/uwsgi_document.pdf">uwsgi_document.pdf</a></p>
-<p style="padding-left: 30px;"></p>
-<h3>Youtube_API</h3>
+<p style="padding-left: 30px;"></p><h3>Youtube_API</h3>
 <p>2021 協同產品設計實習 Stage1 <a href="https://drive.google.com/drive/folders/1t38qYM30FeKw37F49nd0DAD5EMQseDnj?usp=sharing">W4 各組簡報 mp4</a></p>
 <p>假如希望利用 <a href="https://developers.google.com/youtube/v3">https://developers.google.com/youtube/v3</a> API 將近端影片上傳並自動取得相關網際連結編號, 可以從 <a href="https://developers.google.com/youtube/v3/guides/uploading_a_video">https://developers.google.com/youtube/v3/guides/uploading_a_video</a> 取得參考資料.</p><h2>分組題目</h2>
 <p>題目與研究內容的選定參考:</p>

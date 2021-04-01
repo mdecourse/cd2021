@@ -438,7 +438,7 @@ for dname, dirs, files in os.walk("2021-03_2a_stage1"):
 </ol>
 <p>SSH 設定原理說明如下:</p>
 <ol>
-<li>在 start_ipv5.bat 中設定 <span style="background-color: #ccffcc;">set GIT_SSH=%Disk%:\putty\plink.exe</span> 會讓原本 Github 倉儲中 .git/config url 指向 domain name 的機制, 轉為透過 Putty 設定的 session 名稱連線, 意即, 原先的 url = <a href="mailto:git@github.com:user_account/repo_name.git">git@github.com:user_account/repo_name.git</a> 中的 github.com 在沒有設定 GIT_SSH 變數前, 為 Github  主機連線的符號名稱, 一旦設定 GIT_SSH 變數與 plink.exe 連結, 則 github.com 將代表 session 名稱, 而且是以 Windows 10 操作系統中登錄檔的 [HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions] 設定指向對應的 session 名稱.</li>
+<li>在 start_ipv6.bat 中設定 <span style="background-color: #ccffcc;">set GIT_SSH=%Disk%:\putty\plink.exe</span> 會讓原本 Github 倉儲中 .git/config url 指向 domain name 的機制, 轉為透過 Putty 設定的 session 名稱連線, 意即, 原先的 url = <a href="mailto:git@github.com:user_account/repo_name.git">git@github.com:user_account/repo_name.git</a> 中的 github.com 在沒有設定 GIT_SSH 變數前, 為 Github  主機連線的符號名稱, 一旦設定 GIT_SSH 變數與 plink.exe 連結, 則 github.com 將代表 session 名稱, 而且是以 Windows 10 操作系統中登錄檔的 [HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY\Sessions] 設定指向對應的 session 名稱.</li>
 <li>一旦 .git/config 中 url 連線到 session 的機制完成,  在 putty.exe 中的對應 session 就必須設定 Porxy 與 Auth, 目前只有在電腦輔助設計室使用純 IPv6 環境需要設定雙支援的 Proxy server, 若使用 start_ipv4 啟動時, 以 IPv4 連線則 session 只需要設定 Auth.</li>
 </ol>
 <p>操作導引如下:</p>
