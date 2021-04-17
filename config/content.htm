@@ -634,10 +634,57 @@ for i in range(1, 15):
 <p style="padding-left: 30px;">2. 哪一組可以提供各種不同 CAD 在建立機電資整合專案零組件的工程, 簡潔有用的 CAD 操作 tutorial 教學方案 (例如: 對 <a href="https://learn.onshape.com/collections/onshape-fundamentals-cad">https://learn.onshape.com/collections/onshape-fundamentals-cad</a> 或 <a href="http://www.farwire.net/SolveSpace-LearningGuide.htm">http://www.farwire.net/SolveSpace-LearningGuide.htm</a> 內容進行摘要整理, 教導其他從來沒有用過 Onshape 或 Solvespace 的學員快速學會用於建立所需零組件).</p>
 <p style="padding-left: 30px;">3. 將 CAD 零組件轉入 CoppeliaSim 過程, 場景中是應該直接利用外部零組件進行模擬運算, 或者如套件手冊建議, 設法從複雜零件 (展示用), 建立簡化 (運算用) 零組件後, 再利用 hide and show 設定進行模擬.</p>
 <p style="padding-left: 30px;">4. 當模擬園區中充滿<a href="https://youtu.be/xIYiKpd4v10">機械手臂</a>, 推高機, <a href="https://youtu.be/WxApb-wg7es">輸送帶</a>以及各種 STEM (Science, Technology, Engineering and Mathematics) 遊樂展示設施時, 是否應該建置許多安全<a href="https://www.youtube.com/watch?v=Zt21o1qsOB4">感測器</a>, 並導入 <a href="https://youtu.be/qJr2drq6kMw">Human</a> 模型, 讓園區可以更貼近實際的製造工廠或遊樂園區?</p>
-<p style="padding-left: 30px;">5. CoppeliaSim 於 2021.04.6 推出 <a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">4.2.0 版</a> (<a href="https://drive.google.com/file/d/1R1PYZ5b2bWwFMUd9ScjVdpLRTBdKaG_a/view?usp=sharing">可攜版下載</a> 128MB), 對先前所建立的模型有何影響, 有哪些新功能可以使用?</p>
+<p style="padding-left: 30px;">5. CoppeliaSim 於 2021.04.6 推出 <a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">4.2.0 版</a> (<a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 對先前所建立的模型有何影響, 有哪些新功能可以使用?</p>
 <p style="padding-left: 30px;">6. 哪一組可以整理 <a href="https://www.coppeliarobotics.com/resources">https://www.coppeliarobotics.com/resources</a> 中的資料, 或者將所面臨的問題, 至 <a href="https://forum.coppeliarobotics.com/">https://forum.coppeliarobotics.com/</a> 提問, 並得到可用的解決方案?</p>
-<p style="padding-left: 30px;">7. W15 之前將要求各組針對 stage1 與 stage2 的其他組別專案進行互評, 該如何進行評分? 如何取分? 可用的程式套件在哪裡?</p>
-<h1>Stage3</h1>
+<p style="padding-left: 30px;">7. W15 之前將要求各組針對 stage1 與 stage2 的其他組別專案進行互評, 該如何進行評分? 如何取分? 可用的程式套件在哪裡?</p><h3>設計繪圖</h3>
+<h4>參數式繪圖零組件與轉檔</h4>
+<p>在協同產品設計過程採用 Onshape 最方便, 不僅無需安裝, 維護版本, 所有零組件可以直接在瀏覽器中分享展示, 且各組員可以同步進行具特徵版本的設計繪圖.</p>
+<p>以 Jansen's Walker 為例, 點級圖檔即可直接在瀏覽器中檢視 3D 行走機構組件:</p>
+<p><a href="https://cad.onshape.com/documents/0ee02983439ee6287a6df2c2/w/bb8322c0de30701a5d72fc8d/e/751979e87e536709dd99fe42"><img alt="" height="520" src="/images/jansen_walker.png" width="600"/></a></p><h3>V-rep</h3>
+<p>CoppeliaSim 的前身稱為 V-rep, 目前在網路上仍存在許多 V-rep 相關的教學資源. 其中包括利用 C++ 編譯環境從原始碼自行建立套件的可攜環境 (<a href="https://drive.google.com/file/d/1LcIvnjyQAzhbienqkvrDjYWZT2RLbhX8/view?usp=sharing" rel="nofollow">kmol2018_for_compiling_vrep.zip</a> 6GB) 與編譯結果(3.4.0 rev1, <a href="https://drive.google.com/file/d/1iKLZquVVdgwd9Ejw4NGibQIdFhtuBVvI/view?usp=sharing" rel="nofollow">vrep_kmol.7z</a> 117MB).</p>
+<p>2021.04.06 最新版的 CoppeliaSim 教育版為 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">CoppeliaSimEdu_4.2.0.7z</a>, 將此套件轉為可攜版本的方法為:</p>
+<ol>
+<li>在 Windows 10 64 位元中安裝 CoppeliaSim 4.2.0 教育版, 過程中將同步安裝 MS C++ 2015-2019 redistributable 套件, 取得主要安裝目錄檔案後, 將操作系統上的 CoppeliaSim 與 redistributable 安裝移除.</li>
+<li>接著使用 <a href="https://drive.google.com/file/d/1mAX9cIOrkauWshl0XdtOKb9N90rAjNew/view?usp=sharing">UniExtractor</a> (或 <a href="https://github.com/Bioruebe/UniExtract2">UniExtractor2</a>) 解開 CoppeliaSimEdu 4.2.0 套件 vcRedist 目錄中的 vc2019redist_x64.exe 安裝檔案, 亦即在上述套件目錄中納入 vcRuntimeMinimum_amd64\vc_runtimeMinimum_x64\ 中的所有 dll 檔案 (<a href="https://drive.google.com/file/d/12ergY2eRrKJ65h3yln4Qym7dnCxj4Tcr/view?usp=sharing">vc_runtimeMinimum_x64_System64.7z</a>). 之後即可取得能可攜執行的 CoppeliaSim 4.2.0 教育版本.</li>
+</ol>
+<p>學習使用 V-rep (CoppeliaSim) 的方法建議根據既有的範例場景配置與 Scripts 寫法, 參照 <a href="https://www.coppeliarobotics.com/helpFiles/index.html">https://www.coppeliarobotics.com/helpFiles/index.html</a> 中的參考資料用法, 逐步熟悉模型的建立流程. 以下為使用 V-rep 的教學檔案:</p>
+<p><a href="/downloads/V-REP Lecture.pdf">V-REP Lecture.pdf</a></p>
+<p><a href="/downloads/V-rep_ Position control mode.pdf">V-rep_ Position control mode.pdf</a></p>
+<p><a href="/downloads/V-rep_ tutorial_1.pdf">V-rep_ tutorial_1.pdf</a></p>
+<p><a href="http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction">http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction</a></p>
+<p><a href="http://hades.mech.northwestern.edu/index.php/Getting_Started_with_the_CoppeliaSim_Simulator">http://hades.mech.northwestern.edu/index.php/Getting_Started_with_the_CoppeliaSim_Simulator</a></p>
+<p><a href="http://hades.mech.northwestern.edu/index.php/Mobile_Manipulation_Capstone">http://hades.mech.northwestern.edu/index.php/Mobile_Manipulation_Capstone</a></p>
+<p><a href="http://hades.mech.northwestern.edu/index.php/Writing_a_CSV_File">http://hades.mech.northwestern.edu/index.php/Writing_a_CSV_File</a></p>
+<p><a href="http://hades.mech.northwestern.edu/index.php/ME_449_Robotic_Manipulation_(Archive_Fall_2019)">http://hades.mech.northwestern.edu/index.php/ME_449_Robotic_Manipulation_(Archive_Fall_2019)</a></p>
+<p><a href="http://hades.mech.northwestern.edu/index.php/ME_449_Assignment_1">http://hades.mech.northwestern.edu/index.php/ME_449_Assignment_1</a></p>
+<p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/w5/onelink/onelink.ttt">Onelink.ttt</a></p>
+<p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/w6/cdw6.ttt">平面四連桿機構.ttt</a></p>
+<p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/fourbar_numerical_solvespace.7z">fourbar_numerical_solvespace.7z</a></p>
+<p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/fourbar_eightbar_solvespace_vrep.7z">fourbar-eightbar-solvespace-vrep.7z</a></p>
+<p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/w12/%E5%9B%9B%E8%85%B3%E4%BB%BF%E7%94%9F%E7%8D%B8%E6%B8%AC%E8%A9%A6.ttt">Jansen's Walker 仿生獸測試.ttt</a></p>
+<p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/final/jansen_walker.7z">Jansen's Walker.7z</a></p>
+<p><a href="https://github.com/mdecourse/cd2018/tree/gh-pages/v-rep">cd2018 repository v-rep ref</a></p>
+<p><a href="/downloads/V-REP_scenes.zip">V-REP_scenes.zip</a></p>
+<p><a href="/downloads/V-REP_scenes-Nov2019.zip">V-REP_scenes-Nov2019.zip</a></p>
+<p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/v-rep_remoteapi_ex.7z">vrep_remote_api_ex.7z</a></p>
+<p></p>
+<p></p><h3>Lua Scripts</h3>
+<p><a href="https://coppeliarobotics.com/helpFiles/en/writingCode.htm">https://coppeliarobotics.com/helpFiles/en/writingCode.htm</a></p>
+<p><a href="https://www.youtube.com/watch?v=Zt21o1qsOB4">https://www.youtube.com/watch?v=Zt21o1qsOB4</a></p>
+<p><a href="https://www.youtube.com/watch?v=xI-ZEewIzzI">https://www.youtube.com/watch?v=xI-ZEewIzzI</a></p>
+<p><a href="https://www.programmersought.com/article/85073875161/">https://www.programmersought.com/article/85073875161/</a> </p>
+<p><a href="https://www.programmersought.com/article/64764406559/">https://www.programmersought.com/article/64764406559/</a></p>
+<p><a href="https://www.programmersought.com/article/54753613864/">https://www.programmersought.com/article/54753613864/</a></p>
+<p><a href="https://www.programmersought.com/article/94434543577/">https://www.programmersought.com/article/94434543577/</a></p>
+<p><a href="https://www.programmersought.com/article/34614239213/">https://www.programmersought.com/article/34614239213/</a></p>
+<p><a href="https://www.programmersought.com/article/9000990639/">https://www.programmersought.com/article/9000990639/</a></p><h3>Python API</h3>
+<p><a href="https://www.programmersought.com/article/42232616440/">https://www.programmersought.com/article/42232616440/</a> </p><h3>Image Streaming</h3>
+<h3>Compile CP</h3>
+<h4>編譯 CoppeliaSim</h4>
+<p><a href="https://www.programmersought.com/article/70386748292/">https://www.programmersought.com/article/70386748292/</a> </p>
+<h3>Flutter Apps</h3>
+<p></p>
+<p></p><h1>Stage3</h1>
 <p><a href="https://github.com/mdecourse/cd2021/discussions/14">W18 期末分組專題報告與影片繳交處</a> (期末考週才會開啟)</p>
 <h4>取分議題:</h4>
 <p style="padding-left: 30px;">用什麼方法可以快速取得兩班各組 stage3 的分組倉儲及網站資料, 其中內含各組員的倉儲與網站連結?</p>
