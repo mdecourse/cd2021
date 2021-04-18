@@ -667,6 +667,10 @@ for i in range(1, 15):
 <p><a href="/downloads/V-REP_scenes.zip">V-REP_scenes.zip</a></p>
 <p><a href="/downloads/V-REP_scenes-Nov2019.zip">V-REP_scenes-Nov2019.zip</a></p>
 <p><a href="https://github.com/mdecourse/2017springcd/blob/gh-pages/data/v-rep_remoteapi_ex.7z">vrep_remote_api_ex.7z</a></p>
+<p>參考資料:</p>
+<p style="padding-left: 30px;"><a href="http://hades.mech.northwestern.edu/images/7/7f/MR.pdf">Modern Robotics Textbook</a></p>
+<p style="padding-left: 30px;"><a href="http://publish.illinois.edu/belabbas/ece-470-fall-2020/">http://publish.illinois.edu/belabbas/ece-470-fall-2020/</a> </p>
+<p style="padding-left: 60px;"><a href="/downloads/about_jacobian.pdf">about_jacobian.pdf</a></p>
 <p></p>
 <p></p><h3>Lua Scripts</h3>
 <p><a href="https://coppeliarobotics.com/helpFiles/en/writingCode.htm">https://coppeliarobotics.com/helpFiles/en/writingCode.htm</a></p>
@@ -678,8 +682,102 @@ for i in range(1, 15):
 <p><a href="https://www.programmersought.com/article/94434543577/">https://www.programmersought.com/article/94434543577/</a></p>
 <p><a href="https://www.programmersought.com/article/34614239213/">https://www.programmersought.com/article/34614239213/</a></p>
 <p><a href="https://www.programmersought.com/article/9000990639/">https://www.programmersought.com/article/9000990639/</a></p><h3>Python API</h3>
-<p><a href="https://www.programmersought.com/article/42232616440/">https://www.programmersought.com/article/42232616440/</a> </p><h3>Image Streaming</h3>
-<h3>Compile CP</h3>
+<p><a href="https://www.programmersought.com/article/42232616440/">https://www.programmersought.com/article/42232616440/</a></p>
+<p><a href="http://fid.cl/courses/ai-robotics/vrep-tut/pythonBubbleRob.pdf">Controlling your robot with Python</a></p>
+<h4>Python remote API:</h4>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm">https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/Troxid/vrep-api-python">https://github.com/Troxid/vrep-api-python</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/nemilya/vrep-api-python-opencv">https://github.com/nemilya/vrep-api-python-opencv</a></p>
+<p style="padding-left: 30px;"><a href="https://pypi.org/project/vrep-api-python/0.1.0/">https://pypi.org/project/vrep-api-python/0.1.0/</a></p>
+<p style="padding-left: 30px;"><a href="https://www.youtube.com/watch?v=SQont-mTnfM">Python Robot Simulation</a></p>
+<p style="padding-left: 30px;"><a href="https://arxiv.org/pdf/1906.11176.pdf">PyRep: Bringing V-rep to deep robot learning</a></p><h3>Image Streaming</h3>
+<p>希望將執行中的 CoppeliaSim 場景 vision sensor 影像, 從 Python Flask server 將 <a href="https://www.coppeliarobotics.com/helpFiles/en/renderableObjects.htm">renderable</a> 物件串流至客戶瀏覽器端, 必須先充分了解 vision sensor 的功能.</p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/visionSensors.htm">https://www.coppeliarobotics.com/helpFiles/en/visionSensors.htm</a></p>
+<p style="padding-left: 30px;"><a href="https://programmer.group/v-rep-adding-vision-sensor-and-image-acquisition.html">https://programmer.group/v-rep-adding-vision-sensor-and-image-acquisition.html</a></p>
+<p style="padding-left: 30px;"><a href="https://www.programmersought.com/article/23254518122/">Using vision sensor</a></p>
+<p style="padding-left: 30px;"><a href="https://sudonull.com/post/89340-Computer-vision-and-mobile-robots-Part-1-V-REP-Python-OpenCV-MakeItLab-Blog">https://sudonull.com/post/89340-Computer-vision-and-mobile-robots-Part-1-V-REP-Python-OpenCV-MakeItLab-Blog</a></p>
+<h4>Read an image from vision sensor (<a href="https://forum.coppeliarobotics.com/viewtopic.php?t=2695">參考</a>):</h4>
+<p style="padding-left: 30px;">enabling the remote api: <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiServerSide.htm">https://www.coppeliarobotics.com/helpFiles/en/remoteApiServerSide.htm</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import vrep
+
+print('Program started')
+vrep.simxFinish(-1) # just in case, close all opened connections
+clientID=vrep.simxStart('127.0.0.1',19999,True,True,5000,5)
+if clientID!=-1:
+    print('Connected to remote API server')
+    res,v0=vrep.simxGetObjectHandle(clientID,'Vision_sensor',vrep.simx_opmode_oneshot_wait)
+    res,v1=vrep.simxGetObjectHandle(clientID,'PassiveVision_sensor',vrep.simx_opmode_oneshot_wait)
+
+    res,resolution,image=vrep.simxGetVisionSensorImage(clientID,v0,0,vrep.simx_opmode_streaming)
+    while (vrep.simxGetConnectionId(clientID)!=-1):
+        res,resolution,image=vrep.simxGetVisionSensorImage(clientID,v0,0,vrep.simx_opmode_buffer)
+        if res==vrep.simx_return_ok:
+            res=vrep.simxSetVisionSensorImage(clientID,v1,image,0,vrep.simx_opmode_oneshot)
+    vrep.simxFinish(clientID)
+else:
+    print('Failed connecting to remote API server')
+print('Program ended')</pre>
+<h4>Get image from vision sensor (<a href="https://forum.coppeliarobotics.com/viewtopic.php?t=3925">參考</a>):</h4>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from PIL import Image
+import array
+
+    res,v0=vrep.simxGetObjectHandle(clientID,'NAO_vision1',vrep.simx_opmode_oneshot_wait)
+    
+    res,resolution,image=vrep.simxGetVisionSensorImage(clientID,v0,0,vrep.simx_opmode_streaming)
+    
+    image_byte_array = array.array('b',image)
+    im = Image.frombuffer("RGB", (256,144), image_byte_array, "raw", "RGB", 0, 1)
+    im.show()
+    #image obtained as a Image object. Use it according to need. </pre>
+<h4>Stream and display image from vision sensor (<a href="https://forum.coppeliarobotics.com/viewtopic.php?t=7012">參考</a>):</h4>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># -*- coding: utf-8 -*-
+"""
+Created on Sun Jul 05 15:01:58 2015
+
+@author: ACSECKIN
+"""
+
+import vrep
+import time
+import cv2
+import numpy as np
+
+vrep.simxFinish(-1)
+
+clientID = vrep.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
+
+if clientID!=-1:
+    print('Connected to remote API server')
+    print('Vision Sensor object handling')
+    res, v1 = vrep.simxGetObjectHandle(clientID, 'vs1', vrep.simx_opmode_oneshot_wait)
+    print('Getting first image')
+    err, resolution, image = vrep.simxGetVisionSensorImage(clientID, v1, 0, vrep.simx_opmode_streaming)
+    while (vrep.simxGetConnectionId(clientID) != -1):
+        err, resolution, image = vrep.simxGetVisionSensorImage(clientID, v1, 0, vrep.simx_opmode_buffer)
+        if err == vrep.simx_return_ok:
+            print("image OK!!!")
+            img = np.array(image,dtype=np.uint8)
+            img.resize([resolution[1],resolution[0],3])
+            cv2.imshow('image',img)
+            if cv2.waitKey(1) &amp; 0xFF == ord('q'):
+                break
+        elif err == vrep.simx_return_novalue_flag:
+            print("no image yet")
+            pass
+        else:
+          print(err)
+else:
+  print("Failed to connect to remote API Server")
+  vrep.simxFinish(clientID)
+
+cv2.destroyAllWindows()</pre>
+<h4>Vision based control example:</h4>
+<p style="padding-left: 30px;"><a href="https://www.youtube.com/watch?v=kOjQRYmeX_o">https://www.youtube.com/watch?v=kOjQRYmeX_o</a></p>
+<h4>參考資料:</h4>
+<p style="padding-left: 30px;"><a href="/downloads/2020_Development of a Computer Vision based robotic guidance system.pdf">2020_Development of a Computer Vision based robotic guidance system.pdf</a></p>
+<p style="padding-left: 30px;"><a href="/downloads/2016_INTERFACING SIMULINK MATLAB WITH V-REP FOR ANALYSIS AND CONTROL SYNTHESIS OF AQUADROTOR.pdf">2016_INTERFACING SIMULINK MATLAB WITH V-REP FOR ANALYSIS AND CONTROL SYNTHESIS OF AQUADROTOR.pdf</a></p>
+<p style="padding-left: 30px;"><a href="https://www.programmersought.com/article/3406784715/">Python acquires lidar data</a></p>
+<p></p><h3>Compile CP</h3>
 <h4>編譯 CoppeliaSim</h4>
 <p><a href="https://www.programmersought.com/article/70386748292/">https://www.programmersought.com/article/70386748292/</a> </p>
 <h3>Flutter Apps</h3>
@@ -694,7 +792,14 @@ for i in range(1, 15):
 <p style="padding-left: 30px;">請問假如希望各組 stage3 所完成的機電資整合系統, 能夠每兩組整合在同一個場景中, 且分別透過各組位於不同電腦的 Python Remote API 程式對遠端的整合場景進行監視與調控, 此一協同系統設計需要那些技術? 是否能夠完成? Why? How? 此類系統設計模擬與控制能夠應用在何種產品的開發流程中?</p>
 <p style="padding-left: 30px;">請問在貴組執行各階段專案過程, 是否已經突破<a href="http://mde.tw/wcm2021/content/%E4%B8%89%E9%81%93%E7%89%86%E7%90%86%E8%AB%96.html">這裡</a>所謂的障礙? 望見前方的目標? 請舉例說明.</p>
 <h4>2a stage3 分組</h4>
-<h4>2b stage3 分組</h4><h1>Project</h1>
+<h4>2b stage3 分組</h4>
+<h2>Fossil SCM</h2>
+<p>有了 Github 帳號, 為何還需要 <a href="https://fossil-scm.org">Fossil SCM</a>? 尤其當 <a href="https://gitlab.com/gitlab-org/gitlab">Gitlab 開放原始碼</a>可以在自己的伺服器中安裝 Gitlab like server. 還是需要進一步學會利用 <a href="https://fossil-scm.org">Fossil SCM</a> 進行設計內容的分散式版次管理嗎? 從 <a href="https://mde.tw">KMOLab</a> 的角度來看, 答案是肯定的. 主要原因是: <a href="https://fossil-scm.org">Fossil SCM</a> 可以直接讓使用者即時擷取各版次的 cmsimde 靜態網頁, 而 Github Pages 與 Gitlab Pages 則尚無此一功能, 光憑這一點, 學會運用 <a href="https://fossil-scm.org">Fossil SCM</a> 管理機械協同設計產品流程所衍生的各種資料, 有其必要性.</p>
+<p>有關 <a href="https://fossil-scm.org">Fossil SCM</a> 的使用, 請參考:</p>
+<p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html">https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html</a> </p>
+<p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm.html">Fossil SCM 使用案例</a></p>
+<p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm-github.html">Fossil SCM 與 Github 整合</a></p>
+<p></p><h1>Project</h1>
 <p>W1: 課程說明</p>
 <p style="padding-left: 30px;">2D 工程圖, 3D 爆炸圖, BOM, 設計分析規劃簡報 (html) 與產品設計報告書 (pdf)</p>
 <p style="padding-left: 30px;">設計工具, 設計動機, 協同設計方法與流程, 設計結果與自評</p>
