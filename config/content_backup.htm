@@ -810,10 +810,14 @@ cv2.destroyAllWindows()</pre>
 <p style="padding-left: 30px;">請問假如希望各組 stage3 所完成的機電資整合系統, 能夠每兩組整合在同一個場景中, 且分別透過各組位於不同電腦的 Python Remote API 程式對遠端的整合場景進行監視與調控, 此一協同系統設計需要那些技術? 是否能夠完成? Why? How? 此類系統設計模擬與控制能夠應用在何種產品的開發流程中?</p>
 <p style="padding-left: 30px;">請問在貴組執行各階段專案過程, 是否已經突破<a href="http://mde.tw/wcm2021/content/%E4%B8%89%E9%81%93%E7%89%86%E7%90%86%E8%AB%96.html">這裡</a>所謂的障礙? 望見前方的目標? 請舉例說明.</p>
 <h4>2a stage3 分組</h4>
-<h4>2b stage3 分組</h4><h2>Fossil SCM</h2>
+<h4>2b stage3 分組</h4><h2>Problem Solving</h2>
+<p>在 <a href="http://mde.tw/cd2021/content/W5.html">W5</a> 的教學內容中, 已經說明要熟悉利用一個套件來解決問題的重點, 必須從其說明手冊的研讀開始, 以 CoppeliaSim 為例, 就必須仔細研讀其 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a>, 並且經常造訪其官方網站.</p>
+<p>由於 CoppeliaSim 於 2021.04.06 已經<a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">改版為 4.2.0</a> (CoppeliaSim 4.2.0 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 而且引用的 Lua 版次已經從 5.1 升級為 5.3, 因此目前散布在網路上的許多 V-rep 或 CoppeliaSim 既有模型, 若採用 Lua 5.3 版不相容的 Script 進行控制, 將無法在 CoppeliaSim 4.2.0 版次中執行. 其中牽涉的語法包括與 <a href="http://www.lua.org/manual/5.2/manual.html#8">Lua 5.2 不相容部分</a>及 <a href="http://www.lua.org/manual/5.3/manual.html#8">Lua 5.3 不相容部分</a>.</p>
+<p></p>
+<p></p><h2>Fossil SCM</h2>
 <p>有了 Github 帳號, 為何還需要 <a href="https://fossil-scm.org">Fossil SCM</a>? 尤其當 <a href="https://gitlab.com/gitlab-org/gitlab">Gitlab 開放原始碼</a>可以在自己的伺服器中安裝 Gitlab like server. 還是需要進一步學會利用 <a href="https://fossil-scm.org">Fossil SCM</a> 進行設計內容的分散式版次管理嗎? 從 <a href="https://mde.tw">KMOLab</a> 的角度來看, 答案是肯定的. 主要原因是: <a href="https://fossil-scm.org">Fossil SCM</a> 可以直接讓使用者即時擷取各版次的 cmsimde 靜態網頁, 而 Github Pages 與 Gitlab Pages 則尚無此一功能, 光憑這一點, 學會運用 <a href="https://fossil-scm.org">Fossil SCM</a> 管理機械協同設計產品流程所衍生的各種資料, 有其必要性.</p>
 <p>有關 <a href="https://fossil-scm.org">Fossil SCM</a> 的使用, 請參考:</p>
-<p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html">https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html</a> </p>
+<p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html">https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html</a></p>
 <p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm.html">Fossil SCM 使用案例</a></p>
 <p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm-github.html">Fossil SCM 與 Github 整合</a></p>
 <p></p><h1>Project</h1>
@@ -823,6 +827,7 @@ cv2.destroyAllWindows()</pre>
 <p style="padding-left: 30px;"><a href="http://mde.tw/airhockey/2020_csme_en_kmol_paper.pdf">研討會論文 pdf 檔案 </a></p>
 <p style="padding-left: 30px;"><a href="http://mde.tw/airhockey/reveal/index.html#/">網際簡報</a></p>
 <p><a href="/downloads/2011_Planning and Development tools forAutomation System Design.pdf">2011 Planning and Development tools forAutomation System Design.pdf</a></p>
+<p><a href="/downloads/Development of a Robotic Prototype System for the Preparation and Partition of Radioactive Products.pdf">Development of a Robotic Prototype System for the Preparation and Partition of Radioactive Products.pdf</a></p>
 <p>專題製作要點:</p>
 <p style="padding-left: 30px;">研究摘要 (研究回顧)</p>
 <p style="padding-left: 30px;">決定研究題目的動機 (研究簡介)</p>
