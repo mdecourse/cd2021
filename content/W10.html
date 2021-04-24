@@ -2,6 +2,7 @@
         <head>
         <title>CD2021</title>
         <meta charset="utf-8">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -137,12 +138,23 @@ img.add_border {
 <p>請各組將 Stage2 相關資料繳交到 <a href="https://github.com/mdecourse/cd2021/discussions/13">https://github.com/mdecourse/cd2021/discussions/13</a></p>
 <p>請各組在開始執行 Stage3 專案前, 將 Stage1 與 Stage2 各組員所參與執行的專案內容, 寫在 Stage3 的分組網站上.</p>
 <p>Stage3 將在 <a href="http://mde.tw/eng/content/ForkIT%20Park.html">ForkIT Park</a> 的說明下開始進行. 其中園區將包含機電資整合遊樂區與自動化工廠展示區.</p>
-<h4>遊樂區:</h4>
+<h4>採用 Onshape, Github 與 Coppeliasim (或 Webots) 的協同產品設計特性:</h4>
+<p>利用 MCAD (Mechanical Computer Aided Design) 套件進行設計繪圖後, 將零組件轉入機電整合系統模擬過程, 除了納入感測器與監控系統外, 還必須根據 Kinematic 模擬確定機械構件的組合搭配可以滿足設計需求, 並且就剛體零組件的 Dynamic 分析決定控制系統參數設計以及致動器 (Actuator) 的容量設計等. 採用可遠端監視遙控並進行接近實體模型運作流程的的虛擬展示, 可有效提升協同產品設計的效能.</p>
+<p>本課程所完成的協同產品設計模型, 必須能夠採 3D 列印的方式完成大多數零件, 並且搭配鋁擠件,  Arduino 或Raspberry Pi 控制卡, 各式電子感測器 (或極限開關), 直流馬達, 伺服馬達與線性滑軌 (或光軸) 等元件配合各式機電標準零組件製作實體模型.</p>
+<p>而利用分散式版次管理的流程管理設計文案, 可以讓各參與協同的人員明確註記各設計階段進行時, 所完成的設計改版內容. 必要情況下, 各設計者可以從設計倉儲中 branch 出其他設計修改, 不致影響主分支的既定設計流程, 待其他設計分支內容經過討論與驗證後, 再決定是否與主分支內容進行合併.</p>
+<h4>2021 Spring CD 協同產品設計遊樂區:</h4>
 <p style="padding-left: 30px;">Merry-go-round (旋轉木馬)</p>
 <p style="padding-left: 30px;">Self control plane rides (旋轉飛機)</p>
 <p style="padding-left: 30px;">Claw machine (抓娃娃機)</p>
 <p style="padding-left: 30px;">3D Pinball machine (彈珠檯)</p>
+<p style="padding-left: 60px;"><a href="./../downloads/1994_Pinball Planning and Learningin a Dynamic Real-Time Environment.pdf">1994_Pinball Planning and Learningin a Dynamic Real-Time Environment.pdf</a></p>
+<p style="padding-left: 60px;"><a href="https://pinballmakers.com/wiki/index.php?title=Design">https://pinballmakers.com/wiki/index.php?title=Design</a></p>
+<p style="padding-left: 60px;"><a href="https://www.gamasutra.com/view/feature/130829/designers_notebook_the_unique_.php">https://www.gamasutra.com/view/feature/130829/designers_notebook_the_unique_.php</a></p>
+<p style="padding-left: 60px;"><a href="https://www.thisweekinpinball.com/guest-post-a-beginners-guide-to-pinball-designers/">https://www.thisweekinpinball.com/guest-post-a-beginners-guide-to-pinball-designers/</a></p>
+<p style="padding-left: 60px;"><a href="./../downloads/2010_Implementing Games on Pinball Machines.pdf">2010_Implementing Games on Pinball Machines.pdf</a></p>
 <p style="padding-left: 30px;">Vending machine (販賣機)</p>
+<p style="padding-left: 60px;"><a href="./../downloads/2012_ece_The Design, Simulation, Verification and Implementation of Vending MachineBased on FPGA.pdf">ECE 的 Vending Machine 設計與模擬</a></p>
+<p style="padding-left: 60px;">MDE 的 Vending Machine 設計與模擬 (應該著重那些特點, 現沖咖啡? 現泡茶飲? <a href="https://youtu.be/TisRd9QDGpM">V-rep particle simulation</a>)</p>
 <p style="padding-left: 30px;">Basketball shooting machine (投籃機)</p>
 <p style="padding-left: 30px;">Pitching machine (投球機)</p>
 <p style="padding-left: 30px;">Steam locomotive (蒸汽火車)</p>
@@ -152,6 +164,15 @@ img.add_border {
 <p style="padding-left: 30px;">Industrial robot (機器手臂)</p>
 <p style="padding-left: 30px;">Conveyor (輸送帶)</p>
 <p style="padding-left: 30px;">AS/RS (Automatic Storage ＆ Retrieval System) 自動倉儲系統</p>
+<h4>控制系統設計:</h4>
+<p style="padding-left: 30px;"><a href="https://www.tinkercad.com/">https://www.tinkercad.com/</a> </p>
+<p style="padding-left: 30px;">Uno Arduino Simulator:</p>
+<p style="padding-left: 60px;"><a href="https://www.sites.google.com/site/unoardusim/services">https://www.sites.google.com/site/unoardusim/services</a></p>
+<p style="padding-left: 30px;"><a href="https://diyprojects.io/drive-nema-17-stepper-motor-rpimotorlib-python-library-a4988/#.YIPYQz9-UdU">https://diyprojects.io/drive-nema-17-stepper-motor-rpimotorlib-python-library-a4988/#.YIPYQz9-UdU</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/gavinlyonsrepo/RpiMotorLib">https://github.com/gavinlyonsrepo/RpiMotorLib</a></p>
+<p style="padding-left: 30px;"><a href="http://www.python-exemplary.com">http://www.python-exemplary.com</a></p>
+<p style="padding-left: 30px;"><a href="https://lcgamboa.github.io/">https://lcgamboa.github.io/</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/lcgamboa/picsimlab">https://github.com/lcgamboa/picsimlab</a></p>
 <pre class="tw-data-text tw-text-large XcVN5d tw-ta" data-placeholder="翻譯" dir="ltr" id="tw-target-text" style="text-align: left;"><span class="Y2IQFc" lang="en"> </span></pre><br />Stage3 << <a href='Stage3.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->
