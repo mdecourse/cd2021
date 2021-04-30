@@ -135,7 +135,7 @@ img.add_border {
         </header>
     <div id="tipue_search_content">Problem Solving << <a href='Problem Solving.html'>Previous</a> <a href='task2.html'>Next</a> >> task2<br /><h1>task1</h1>
 <p>讀取 stage3_2a.txt, 建立 Stage3 的分組倉儲, 分組網頁, 以及各組員倉儲及網頁連結.</p>
-<p>已知 <a href="./../downloads/stage3/stage3_2a.txt">stage3_2a.txt</a> 內容, 以及初步資料讀取程式:</p>
+<p>已知 <a href="./../downloads/stage3/stage3_2a.txt">stage3_2a.txt</a> 與 <a href="./../downloads/stage3/stage3_2b.txt">stage3_2b.txt</a> 內容, 以及初步資料讀取程式:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># open file, default is read mode, since txt content no chinese char
 # no encoding = "UTF-8" is needed
 with open("stage3_2a.txt") as fh:
@@ -146,8 +146,7 @@ with open("stage3_2a.txt") as fh:
 for i in range(len(data)):
     group = data[i].rstrip("\n").split("\t")
     print(group)
-# the following will use group data to generate needed html</pre>
-<br />Problem Solving << <a href='Problem Solving.html'>Previous</a> <a href='task2.html'>Next</a> >> task2</div>
+# the following will use group data to generate needed html</pre><br />Problem Solving << <a href='Problem Solving.html'>Previous</a> <a href='task2.html'>Next</a> >> task2</div>
         
     <!-- footer -->
       <div class="container">

@@ -859,7 +859,7 @@ cv2.destroyAllWindows()</pre>
 <p>此類開發中的 CoppeliaSim 的說明文檔可參見: <a href="https://github.com/mdecourse/copsim">https://github.com/mdecourse/copsim</a> (網站: <a href="https://mde.tw/copsim">https://mde.tw/copsim</a>)</p>
 <h3>task1</h3>
 <p>讀取 stage3_2a.txt, 建立 Stage3 的分組倉儲, 分組網頁, 以及各組員倉儲及網頁連結.</p>
-<p>已知 <a href="/downloads/stage3/stage3_2a.txt">stage3_2a.txt</a> 內容, 以及初步資料讀取程式:</p>
+<p>已知 <a href="/downloads/stage3/stage3_2a.txt">stage3_2a.txt</a> 與 <a href="/downloads/stage3/stage3_2b.txt">stage3_2b.txt</a> 內容, 以及初步資料讀取程式:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># open file, default is read mode, since txt content no chinese char
 # no encoding = "UTF-8" is needed
 with open("stage3_2a.txt") as fh:
@@ -870,8 +870,7 @@ with open("stage3_2a.txt") as fh:
 for i in range(len(data)):
     group = data[i].rstrip("\n").split("\t")
     print(group)
-# the following will use group data to generate needed html</pre>
-<h3>task2</h3>
+# the following will use group data to generate needed html</pre><h3>task2</h3>
 <p>請各組員分別將個人在 stage1 與 stage2 所完成的 coppeliasim 場景, 採 Python remote API 進行操控, 並將過程拍成影片後, 放在個人與分組網站上.</p>
 <p>stage3 專案中的 CoppeliaSim 請一律使用 <a href="http://a.kmol.info:88/CoppeliaSimEdu_4.2.0.7z">4.2.0 版</a>.</p>
 <p>範例: <a href="http://mde.tw/cad2020/content/CoppeliaSim.html">http://mde.tw/cad2020/content/CoppeliaSim.html</a></p>
