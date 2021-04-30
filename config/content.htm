@@ -874,6 +874,115 @@ for i in range(len(data)):
 <p>請各組員分別將個人在 stage1 與 stage2 所完成的 coppeliasim 場景, 採 Python remote API 進行操控, 並將過程拍成影片後, 放在個人與分組網站上.</p>
 <p>stage3 專案中的 CoppeliaSim 請一律使用 <a href="http://a.kmol.info:88/CoppeliaSimEdu_4.2.0.7z">4.2.0 版</a>.</p>
 <p>範例: <a href="http://mde.tw/cad2020/content/CoppeliaSim.html">http://mde.tw/cad2020/content/CoppeliaSim.html</a></p>
+<h4>W10 範例:</h4>
+<p style="padding-left: 30px;">各班上課時所分配到的內部 IP, 192.168.192.1+組別+排序別</p>
+<p style="padding-left: 30px;">意即, 第五組排序別第一即為該組組長, 其 IP 為 192.168.192.151</p>
+<p style="padding-left: 30px;">以 <a href="http://mde.tw/cad2020/downloads/coppeliasim/vrep_remoteapi_ex.7z">http://mde.tw/cad2020/downloads/coppeliasim/vrep_remoteapi_ex.7z</a> 為例, 每一個 Python3 remote api 程式執行需要 <a href="https://raw.githubusercontent.com/CoppeliaRobotics/remoteApiBindings/master/python/python/sim.py">sim.py</a>, <a href="https://raw.githubusercontent.com/CoppeliaRobotics/remoteApiBindings/master/python/python/simConst.py">simConst.py</a> 與 remoteApi.dll 等三個檔案, 若針對 2w1a.ttt 場景, 以下列 Python 程式對位於 192.168.192.1 伺服器上的 CoppeliaSim 場景進行操控:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
+import math
+import random
+import time
+
+print ('Start')
+
+# Close eventual old connections
+vrep.simxFinish(-1)
+# Connect to V-REP remote server
+clientID = vrep.simxStart('192.168.192.1', 19997, True, True, 5000, 5)
+
+if clientID != -1:
+    print ('Connected to remote API server')
+
+    res = vrep.simxAddStatusbarMessage(
+        clientID, "teacher",
+        vrep.simx_opmode_oneshot)
+    if res not in (vrep.simx_return_ok, vrep.simx_return_novalue_flag):
+        print("Could not add a message to the status bar.")
+    # Communication operating mode with the remote API : wait for its answer before continuing (blocking mode)
+    # http://www.coppeliarobotics.com/helpFiles/en/remoteApiConstants.htm
+    opmode = vrep.simx_opmode_oneshot_wait
+
+    # Try to retrieve motors and robot handlers
+    # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxGetObjectHandle
+    ret1, wristHandle = vrep.simxGetObjectHandle(clientID, "WristMotor", opmode)
+    ret2, elbowHandle = vrep.simxGetObjectHandle(clientID, "ElbowMotor", opmode)
+    ret3, shoulderHandle = vrep.simxGetObjectHandle(clientID, "ShoulderMotor", opmode)
+    ret4, robotHandle = vrep.simxGetObjectHandle(clientID, "2W1A", opmode)
+
+    # If handlers are OK, execute three random simulations
+    if ret1 == 0 and ret2 == 0 and ret3 == 0:
+        random.seed()
+        for i in range(0, 3):
+            # Start the simulation
+            # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxStartSimulation
+            vrep.simxStartSimulation(clientID, opmode)
+            print("----- Simulation started -----")
+
+            # Start getting the robot position
+            # Unlike other commands, we will use a streaming operating mode
+            # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxGetObjectPosition
+            pret, robotPos = vrep.simxGetObjectPosition(clientID, robotHandle, -1, vrep.simx_opmode_streaming)
+            print("2w1a position: (x = " + str(robotPos[0]) +\
+                  ", y = " + str(robotPos[1]) + ")")
+
+            # Start getting the robot orientation
+            # Unlike other commands, we will use a streaming operating mode
+            # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxGetObjectOrientation
+            oret, robotOrient = vrep.simxGetObjectOrientation(clientID, robotHandle, -1, vrep.simx_opmode_streaming)
+            print("2w1a orientation: (x = " + str(robotOrient[0]) + \
+                  ", y = " + str(robotOrient[1]) +\
+                  ", z = " + str(robotOrient[2]) + ")")
+
+            # Make the robot move randomly five times
+            for j in range(0, 5):
+                # Generating random positions for the motors
+                awrist = random.randint(0, 300)
+                aelbow = random.randint(0, 300)
+                ashoulder = random.randint(0, 300)
+
+                # The control functions use Radians to determine the target position.
+                # Here, we use maths.radians to convert degrees into radians.
+                # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxSetJointTargetPosition
+                print("Motors target positions: " + str(ashoulder) + " " + str(aelbow) + " " + str(awrist))
+                vrep.simxSetJointTargetPosition(clientID, wristHandle, math.radians(awrist), opmode)
+                vrep.simxSetJointTargetPosition(clientID, elbowHandle, math.radians(aelbow), opmode)
+                vrep.simxSetJointTargetPosition(clientID, shoulderHandle, math.radians(ashoulder), opmode)
+
+                # Wait in order to let the motors finish their movements
+                # Tip: there must be a more efficient way to do it...
+                time.sleep(5)
+
+                # Get the motors effective positions after the movement sequence
+                # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxGetJointPosition
+                pwrist = vrep.simxGetJointPosition(clientID, wristHandle, opmode)
+                pelbow = vrep.simxGetJointPosition(clientID, elbowHandle, opmode)
+                pshoulder = vrep.simxGetJointPosition(clientID, shoulderHandle, opmode)
+                print("Motors reached positions: " + str(ashoulder) + " " + str(aelbow) + " " + str(awrist))
+
+                # Get the robot position after the movement sequence
+                pret, robotPos = vrep.simxGetObjectPosition(clientID, robotHandle, -1, vrep.simx_opmode_buffer)
+                print("2w1a position: (x = " + str(robotPos[0]) +\
+                      ", y = " + str(robotPos[1]) + ")")
+
+                # Get the robot orientation after the movement sequence
+                oret, robotOrient = vrep.simxGetObjectOrientation(clientID, robotHandle, -1, vrep.simx_opmode_buffer)
+                print("2w1a orientation: (x = " + str(robotOrient[0]) +\
+                      ", y = " + str(robotOrient[1]) +\
+                      ", z = " + str(robotOrient[2]) + ")")
+
+            # End the simulation, wait to be sure V-REP had the time to stop it entirely
+            # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxStopSimulation
+            vrep.simxStopSimulation(clientID, opmode)
+            time.sleep(1)
+            print("----- Simulation ended -----")
+
+    # Close the connection to V-REP remote server
+    # http://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxFinish
+    vrep.simxFinish(clientID)
+else:
+    print ('Failed connecting to remote API server')
+print ('End')
+</pre>
 <p></p><h2>Fossil SCM</h2>
 <p>有了 Github 帳號, 為何還需要 <a href="https://fossil-scm.org">Fossil SCM</a>? 尤其當 <a href="https://gitlab.com/gitlab-org/gitlab">Gitlab 開放原始碼</a>可以在自己的伺服器中安裝 Gitlab like server. 還是需要進一步學會利用 <a href="https://fossil-scm.org">Fossil SCM</a> 進行設計內容的分散式版次管理嗎? 從 <a href="https://mde.tw">KMOLab</a> 的角度來看, 答案是肯定的. 主要原因是: <a href="https://fossil-scm.org">Fossil SCM</a> 可以直接讓使用者即時擷取各版次的 cmsimde 靜態網頁, 而 Github Pages 與 Gitlab Pages 則尚無此一功能, 光憑這一點, 學會運用 <a href="https://fossil-scm.org">Fossil SCM</a> 管理機械協同設計產品流程所衍生的各種資料, 有其必要性.</p>
 <p>有關 <a href="https://fossil-scm.org">Fossil SCM</a> 的使用, 請參考:</p>
