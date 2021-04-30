@@ -870,14 +870,15 @@ with open("stage3_2a.txt") as fh:
 for i in range(len(data)):
     group = data[i].rstrip("\n").split("\t")
     print(group)
-# the following will use group data to generate needed html</pre><h3>task2</h3>
+# the following will use group data to generate needed html</pre>
+<h4>以下為各分組倉儲, 分組網站與學員倉儲及學員網站連結:</h4><h3>task2</h3>
 <p>請各組員分別將個人在 stage1 與 stage2 所完成的 coppeliasim 場景, 採 Python remote API 進行操控, 並將過程拍成影片後, 放在個人與分組網站上.</p>
 <p>stage3 專案中的 CoppeliaSim 請一律使用 <a href="http://a.kmol.info:88/CoppeliaSimEdu_4.2.0.7z">4.2.0 版</a>.</p>
 <p>範例: <a href="http://mde.tw/cad2020/content/CoppeliaSim.html">http://mde.tw/cad2020/content/CoppeliaSim.html</a></p>
 <h4>W10 範例:</h4>
 <p style="padding-left: 30px;">各班上課時所分配到的內部 IP, 192.168.192.1+組別+排序別</p>
 <p style="padding-left: 30px;">意即, 第五組排序別第一即為該組組長, 其 IP 為 192.168.192.151</p>
-<p style="padding-left: 30px;">以 <a href="http://mde.tw/cad2020/downloads/coppeliasim/vrep_remoteapi_ex.7z">http://mde.tw/cad2020/downloads/coppeliasim/vrep_remoteapi_ex.7z</a> 為例, 每一個 Python3 remote api 程式執行需要 <a href="https://raw.githubusercontent.com/CoppeliaRobotics/remoteApiBindings/master/python/python/sim.py">sim.py</a>, <a href="https://raw.githubusercontent.com/CoppeliaRobotics/remoteApiBindings/master/python/python/simConst.py">simConst.py</a> 與 remoteApi.dll 等三個檔案, 若針對 2w1a.ttt 場景, 以下列 Python 程式對位於 192.168.192.1 伺服器上的 CoppeliaSim 場景進行操控:</p>
+<p style="padding-left: 30px;">以 <a href="http://mde.tw/cad2020/downloads/coppeliasim/vrep_remoteapi_ex.7z">http://mde.tw/cad2020/downloads/coppeliasim/vrep_remoteapi_ex.7z</a> 為例, 每一個 Python3 remote api 程式執行需要 <a href="https://raw.githubusercontent.com/CoppeliaRobotics/remoteApiBindings/master/python/python/sim.py">sim.py</a>, <a href="https://raw.githubusercontent.com/CoppeliaRobotics/remoteApiBindings/master/python/python/simConst.py">simConst.py</a> 與 <a href="https://github.com/CoppeliaRobotics/remoteApiBindings/tree/master/lib/lib/Windows">remoteApi.dll</a> 等三個檔案, 若針對 2w1a.ttt 場景, 以下列 Python 程式對位於 192.168.192.1 伺服器上的 CoppeliaSim 場景進行操控:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import sim as vrep
 import math
 import random
@@ -992,7 +993,21 @@ print ('End')
 <li>待遠端各協同操控學員準備就緒後, 完成操控流程後將所錄製的影片嵌入個人與分組網站中.</li>
 </ol>
 <h4>直播範例錄影:</h4>
-<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/ZGIydfD0HiQ" title="YouTube video player" width="560"></iframe></p><h2>Fossil SCM</h2>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/ZGIydfD0HiQ" title="YouTube video player" width="560"></iframe></p>
+<h4>參考資料:</h4>
+<p style="padding-left: 30px;">RoboComp is a cutting-edge open-source robotics framework providing tools to easily create, modify and manage robot software components.</p>
+<p style="padding-left: 60px;"><a href="https://github.com/mdecourse/robocomp">https://github.com/mdecourse/robocomp</a> </p>
+<p style="padding-left: 60px;">Code to connect RocoComp to V-REP</p>
+<p style="padding-left: 90px;"><a href="https://github.com/mdecourse/V-REP-component">https://github.com/mdecourse/V-REP-component</a> </p><h3>task3</h3>
+<h4>W11-W17</h4>
+<p style="padding-left: 30px;">每週各組按照組員順序, 於每堂課程時段, 輪流由 2-3 名學員啟動 OBS + Youtube 直播 (每週每位學員均需輪流負責直播工作項目內容), 並在開播前將直播 URL 公布於課程 gitter, 以展示該時段該組針對 stage3 分組專題工作項目的協同過程. (即每週各組於上課時段均會有四段協同設計影片分別嵌入各負責直播錄影組員的網頁與分組網頁).</p>
+<p style="padding-left: 30px;">各直播錄影時段, 各直播組員 (2-3 名) 應先規劃進行中工作項目的網際簡報資料, 並依照簡報內容逐一介紹所要展示或討論的協同設計項目.</p>
+<p style="padding-left: 30px;">當其他組別在執行 stage3 分組專題內容碰到問題時, 應按照順序採取下列步驟解決問題:</p>
+<ol>
+<li>利用協同直播錄影時段, 輔以網際簡報資料, 明確說明所遭遇之問題情境.</li>
+<li>上述影片上傳並嵌入個人網站與分組網站後, 根據問題描述影片內容, 尋求其他組在其分段直播時段說明如何解題.</li>
+</ol>
+<p style="padding-left: 30px;">各組組員於進行 stage3 分組專題期間, 均應協同負責從<span style="background-color: #ccffcc;">零組件設計繪圖</span>, <span style="background-color: #ccffcc;">零件轉檔</span>, 零組件轉入 <span style="background-color: #ccffcc;">CoppeliaSim 進行設定</span>, <span style="background-color: #ccffcc;">Lua 監控</span>, <span style="background-color: #ccffcc;">Python 監控</span>, <span style="background-color: #ccffcc;">直播錄影</span>, ssh 維護<span style="background-color: #ccffcc;">個人網際簡報</span>, ssh 維護<span style="background-color: #ccffcc;">個人網站</span>, 並協同參與維護<span style="background-color: #ccffcc;">分組網站</span>等工作項目, 若過程中遭遇問題, 則根據上述步驟進行解題.</p><h2>Fossil SCM</h2>
 <p>有了 Github 帳號, 為何還需要 <a href="https://fossil-scm.org">Fossil SCM</a>? 尤其當 <a href="https://gitlab.com/gitlab-org/gitlab">Gitlab 開放原始碼</a>可以在自己的伺服器中安裝 Gitlab like server. 還是需要進一步學會利用 <a href="https://fossil-scm.org">Fossil SCM</a> 進行設計內容的分散式版次管理嗎? 從 <a href="https://mde.tw">KMOLab</a> 的角度來看, 答案是肯定的. 主要原因是: <a href="https://fossil-scm.org">Fossil SCM</a> 可以直接讓使用者即時擷取各版次的 cmsimde 靜態網頁, 而 Github Pages 與 Gitlab Pages 則尚無此一功能, 光憑這一點, 學會運用 <a href="https://fossil-scm.org">Fossil SCM</a> 管理機械協同設計產品流程所衍生的各種資料, 有其必要性.</p>
 <p>有關 <a href="https://fossil-scm.org">Fossil SCM</a> 的使用, 請參考:</p>
 <p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html">https://mdecourse.blogspot.com/2021/02/fossil-scm-on-ubuntu.html</a></p>
