@@ -871,6 +871,59 @@ for i in range(len(data)):
     group = data[i].rstrip("\n").split("\t")
     print(group)
 # the following will use group data to generate needed html</pre>
+<p>以下為每組亂數抽選 2 名組員的程式碼:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># open file, default is read mode, since txt content no chinese char
+# no encoding = "UTF-8" is needed
+import random
+
+# number of group menber to draw
+num = 2
+
+# check if data is "" or not
+def notVacant(data):
+    if data == "":
+        return False
+    else:
+        return True
+        
+with open("stage3_2b.txt") as fh:
+    # readlines will read into the whole line and put into list format
+    # has \n at the end of each line
+    data = fh.readlines()
+#print(len(data))
+# big group list
+bgroup = []
+# count from the second group member
+sgroup = []
+for i in range(len(data)):
+    group = data[i].rstrip("\n").split("\t")
+    #print(group)
+    # use mem to count the total number of each group
+    mem = 0
+    # final group data
+    fgroup = []
+    # count from the second group member, eliminate the first element
+    sgroup = group[1:]
+    # get only the odd index number
+    igroup = [i for i in range(len(sgroup)) if i % 2 == 1]
+    for j in igroup:
+        # index starts from 0 which is j-1 when j=1
+        if notVacant(sgroup[j-1]) == True:
+            mem += 1
+            fgroup.append(sgroup[j-1])
+    print("group " + str(i+1) + ":" + str(mem))
+    # shuffle the fgroup list
+    random.shuffle(fgroup)
+    # draw num of member from final group list: fgroup
+    for k in range(num):
+        try:
+            print(fgroup[k])
+        except:
+            # num is greater than total number of this group
+            print("no such member")
+    # seperator
+    print("-"*20)
+# the following will use group data to generate needed html</pre>
 <h4>以下為各分組倉儲, 分組網站與學員倉儲及學員網站連結:</h4><h3>task2</h3>
 <p>請各組員分別將個人在 stage1 與 stage2 所完成的 coppeliasim 場景, 採 Python remote API 進行操控, 並將過程拍成影片後, 放在個人與分組網站上.</p>
 <p>stage3 專案中的 CoppeliaSim 請一律使用 <a href="http://a.kmol.info:88/CoppeliaSimEdu_4.2.0.7z">4.2.0 版</a>.</p>
@@ -1008,6 +1061,9 @@ print ('End')
 <li>上述影片上傳並嵌入個人網站與分組網站後, 根據問題描述影片內容, 尋求其他組在其分段直播時段說明如何解題.</li>
 </ol>
 <p style="padding-left: 30px;">各組組員於進行 stage3 分組專題期間, 均應協同負責從<span style="background-color: #ccffcc;">零組件設計繪圖</span>, <span style="background-color: #ccffcc;">零件轉檔</span>, 零組件轉入 <span style="background-color: #ccffcc;">CoppeliaSim 進行設定</span>, <span style="background-color: #ccffcc;">Lua 監控</span>, <span style="background-color: #ccffcc;">Python 監控</span>, <span style="background-color: #ccffcc;">直播錄影</span>, ssh 維護<span style="background-color: #ccffcc;">個人網際簡報</span>, ssh 維護<span style="background-color: #ccffcc;">個人網站</span>, 並協同參與維護<span style="background-color: #ccffcc;">分組網站</span>等工作項目, 若過程中遭遇問題, 則根據上述步驟進行解題.</p>
+<p style="padding-left: 30px;">直播前: 準備網際投影片</p>
+<p style="padding-left: 30px;">開啟直播: 將直播投影片(即直播主題) 與直播連結登錄在 <a href="https://gitter.im/mdecourse/cd2021">https://gitter.im/mdecourse/cd2021</a></p>
+<p style="padding-left: 30px;">直播結束後: 將影片嵌入個人與分組網頁後, 連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/24">https://github.com/mdecourse/cd2021/discussions/24</a></p>
 <h4>人形 Robot 模擬套件比較:</h4>
 <p style="padding-left: 30px;"><a href="/downloads/A Comparison of Humanoid Robot Simulators A Quantitative Approach.pdf">A Comparison of Humanoid Robot Simulators A Quantitative Approach.pdf</a></p>
 <p style="padding-left: 30px;">For robotic systems to be implemented in real-world scenarios, in several situations, it is preferred to develop and test them under controlled environments in order to reduce the risk of errors and unexpected behavior.  In this regard, a more accessible and efficient alternative is to implement  the environment using robotic simulation tools.</p>
