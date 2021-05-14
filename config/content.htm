@@ -821,14 +821,6 @@ cv2.destroyAllWindows()</pre>
 studList = "stage3_2a.txt"
 courTitle = "cd2021"
 
-# check if data is "" or not
-def notVacant(data):
-    if data == "":
-        return False
-    else:
-        return True
-
-# given group and generate needed html
 # group title initial
 grpTitle = studList[:6] + "-" + studList[8] + "g"
 
@@ -848,12 +840,6 @@ def grpWeb(s, g, ord):
 def grpRepo(s, g, ord):
     pSite = "&lt;a href=\"https://github.com/" + g + "/" + grpTitle + str(ord) + "\"&gt;grp repo&lt;/a&gt;"
     print(pSite)
-    
-def genHtml(group, grpTitle):
-    # total number of members in each group
-    total = int(len(group[1:])/2)
-    for i in range(total):
-        print(grpTitle, group[i])
 
 # open file, default is read mode, since txt content no chinese char
 # no encoding = "UTF-8" is needed
@@ -861,20 +847,20 @@ with open(studList) as fh:
     # readlines will read into the whole line and put into list format
     # has \n at the end of each line
     data = fh.readlines()
-#print(len(data))
+
 grpCount = 0
 for i in range(len(data)):
+    # grpCount is the group order
     grpCount = grpCount + 1
     group = data[i].rstrip("\n").split("\t")
-    # drop the first element and vacant element
     # use filter to remove vacant string element
     # use [1:] to remove first element
     group = list(filter(None, group))[1:]
-    # 01, 23, 45, 67
     print(grpTitle + str(grpCount) + "&lt;br /&gt;")
     for j in range(0, len(group), 2):
-        #print(j)
+        # s is the student number
         s = group[j]
+        # g is the github account
         g = group[j+1]
         perWeb(s, g)
         print("|")
@@ -883,8 +869,7 @@ for i in range(len(data)):
         grpWeb(s, g, grpCount)
         print("|")
         grpRepo(s, g, grpCount)
-        print("&lt;br /&gt;")
-</pre>
+        print("&lt;br /&gt;")</pre>
 <h4>練習範例:</h4>
 <p style="padding-left: 30px;">修改上述單機執行程式, 改為 <a href="https://brython.info/">https://brython.info/</a> based, 直接讀取倉儲中的各班分組名單, 並直接將超文件嵌入網頁中.</p>
 <p></p><h2>W10</h2>
