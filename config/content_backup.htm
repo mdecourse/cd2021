@@ -937,6 +937,8 @@ for i in range(len(data)):
 <p><a href="https://drive.google.com/file/d/1OSV3aYWeUo3fmIyYx-EasEGRPAzTQ71N/view?usp=sharing">下載 Range3 可攜程式</a> (開源 FEM 有限元素分析軟體)</p>
 <p>已知 RoboDK 可以透過外部 Python API 程式執行官方 <a href="https://github.com/mdecourse/wcm2021/blob/main/downloads/robodk/pick_and_place/Example%2002-1%20-%20Pick%20and%20place%20with%20Python.rdk?raw=true">Pick and Place 範例</a>:</p>
 <p>完整的 <a href="https://drive.google.com/file/d/1XoB3F5cPK8R4Y8AIWL5pKR5TQjPW8TRv/view?usp=sharing">Pick and Place 檔案下載</a></p>
+<p>使用者開啟 Pick and Place 專案檔案後, Python 以 pip install robodk 後, 可以開啟下列控制程式, 逐一由機械手臂將球從 Table1 取放至 Table2, 圓球排列方式採 <a href="https://en.wikipedia.org/wiki/Square_pyramid">Square Pyramid</a>. 使用者可精確送出各球座標位置, 導引機械手臂取放圓球. 操作過程如下:</p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/xAIphqg0aw8" title="YouTube video player" width="560"></iframe></p>
 <p>控制程式如下:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># KMOLab Portable RoboDK pick and place
 from robolink import *    # API to communicate with robodk
