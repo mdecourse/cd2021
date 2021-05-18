@@ -2,7 +2,7 @@
         <head>
         <title>CD2021</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -134,15 +134,16 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">分組題目 << <a href='分組題目.html'>Previous</a> <a href='Stage2.html'>Next</a> >> Stage2<br /><h1>Wink3</h1>
-<p>在電腦輔助設計室可以下載 <a href="http://a.kmol.info:88/wink3.7z,">http://a.kmol.info:88/wink3.7z</a></p>
-<p><a href="https://www.debugmode.com/wink/">Wink 官方網站</a></p>
-<p><a href="./../downloads/Wink User Guide.pdf">Wink user guide.pdf</a></p>
-<p>Wink3 tutorial 1:</p>
-<p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial1.htm" width="810"></iframe></p>
-<p>Wink 3 tutorial 2:</p>
-<p><iframe height="625" src="https://mde.tw/cd2021/downloads/wink3_samples/tutorial2.htm" width="810"></iframe></p>
-<br />分組題目 << <a href='分組題目.html'>Previous</a> <a href='Stage2.html'>Next</a> >> Stage2</div>
+    <div id="tipue_search_content">W13-W14 << <a href='W13-W14.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving<br /><h1>FANUC M710iC</h1>
+<p style="text-align: center;"><img caption="false" height="413" src="./../images/Fanuc_m710ic_50_robot.jpg" width="300"/></p>
+<p style="text-align: center;">Robot graphics from <a href="https://www.fanuc.eu">https://www.fanuc.eu</a></p>
+<p><a href="https://www.fanuc.eu/it/en/robots/robot-filter-page/m-710-series/m-710ic-50">https://www.fanuc.eu/it/en/robots/robot-filter-page/m-710-series/m-710ic-50</a></p>
+<p>以下希望自行建立一個 fanuc_m710ic_50.ttt 用於 Pick and Place 模擬. 相關設計檔案位於: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/FANUC_M710iC_50">https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/FANUC_M710iC_50</a></p>
+<p>利用 CoppeliaSim 4.1.0 導入 Robot STL 檔案後, Z 軸朝上且整體向上移動 0.57 m 後, Robot 底座位於場景平台, 且底座座標位於絕對原點. 將此初步的機械手臂檔案存為 ttt 後, 再存為 .simscene.xml 後, 接下來需要檢視是否能夠透過 xml 中的 joint 定義, 配合 .simscene.xml 檔案格式, 以程式方法加入各旋轉軸.</p>
+<p>假如上述流程可以從 Robot 各軸位置定義 xml 檔案產生 .simscene.xml, 隨後將可利用相同流程導入所有已知規格的工業級機械手臂.</p>
+<p>將上述 .simscene.xml 檔案置於 CoppeliaSim 4.1.0 之視窗畫面如下:</p>
+<p><img caption="false" height="317" src="./../images/Fanuc_m710ic_50_coppeliasim_xml.png" width="530"/></p>
+<p></p><br />W13-W14 << <a href='W13-W14.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->
       <div class="container">
