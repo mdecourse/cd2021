@@ -1353,6 +1353,15 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p>以下希望自行建立一個 fanuc_m710ic_50.ttt 用於 Pick and Place 模擬. 相關設計檔案位於: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/FANUC_M710iC_50">https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/FANUC_M710iC_50</a></p>
 <p>利用 CoppeliaSim 4.1.0 導入 Robot STL 檔案後, Z 軸朝上且整體向上移動 0.57 m 後, Robot 底座位於場景平台, 且底座座標位於絕對原點. 將此初步的機械手臂檔案存為 ttt 後, 再存為 .simscene.xml 後, 接下來需要檢視是否能夠透過 xml 中的 joint 定義, 配合 .simscene.xml 檔案格式, 以程式方法加入各旋轉軸.</p>
 <p>假如上述流程可以從 Robot 各軸位置定義 xml 檔案產生 .simscene.xml, 隨後將可利用相同流程導入所有已知規格的工業級機械手臂.</p>
+<p>將上述 .simscene.xml 檔案置於 CoppeliaSim 4.1.0 之視窗畫面如下:</p>
+<p><img caption="false" height="317" src="/images/Fanuc_m710ic_50_coppeliasim_xml.png" width="530"/></p>
+<h4>Pick and Place 參考:</h4>
+<p><a href="https://github.com/mdecourse/vrep-ur10-pick-and-place">https://github.com/mdecourse/vrep-ur10-pick-and-place</a></p>
+<p><a href="https://github.com/mdecourse/Smart-Robotic-Arm-Pick-and-Place-using-matlab-and-V-Rep">https://github.com/mdecourse/Smart-Robotic-Arm-Pick-and-Place-using-matlab-and-V-Rep</a></p>
+<p><a href="https://github.com/mdecourse/UR10PickAndPlace">https://github.com/mdecourse/UR10PickAndPlace</a></p>
+<p><a href="https://github.com/mdecourse/Pick-and-Place-on-Baxter-using-ROS-and-V-REP">https://github.com/mdecourse/Pick-and-Place-on-Baxter-using-ROS-and-V-REP</a> </p>
+<p><a href="https://github.com/CoppeliaRobotics/scenes/blob/master/youBotAndHanoiTower.ttt">https://github.com/CoppeliaRobotics/scenes/blob/master/youBotAndHanoiTower.ttt</a></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/CVoV08T0Aqo" title="YouTube video player" width="560"></iframe></p>
 <p></p><h2>Problem Solving</h2>
 <p>在 <a href="http://mde.tw/cd2021/content/W5.html">W5</a> 的教學內容中, 已經說明要熟悉利用一個套件來解決問題的重點, 必須從其說明手冊的研讀開始, 以 CoppeliaSim 為例, 就必須仔細研讀其 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a>, 並且經常造訪其官方網站.</p>
 <p>由於 CoppeliaSim 於 2021.04.06 已經<a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">改版為 4.2.0</a> (CoppeliaSim 4.2.0 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 而且引用的 Lua 版次已經從 5.1 升級為 5.3, 因此目前散布在網路上的許多 V-rep 或 CoppeliaSim 既有模型, 若採用 Lua 5.3 版不相容的 Script 進行控制, 將無法在 CoppeliaSim 4.2.0 版次中執行. 其中牽涉的語法包括與 <a href="http://www.lua.org/manual/5.2/manual.html#8">Lua 5.2 不相容部分</a>及 <a href="http://www.lua.org/manual/5.3/manual.html#8">Lua 5.3 不相容部分</a>.</p>
