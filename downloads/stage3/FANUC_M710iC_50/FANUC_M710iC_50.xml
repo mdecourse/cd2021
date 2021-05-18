@@ -1,0 +1,24 @@
+<robot_definition>
+<robot_dk name=FANUC_M710iC_50>
+<axis id="Base" maxvalue="0" minvalue="0" alpha="0" a="0" theta="0" d="0"/>
+<axis id="Joint1" limsup="180.000" liminf="-180.000" alpha="0.000" a="0.000" theta="0.000" d="570.000"/>
+<axis id="Joint2" limsup="110.000" liminf="-110.000" alpha="-90.000" a="150.000" theta="-90.000" d="0.000"/>
+<axis id="Joint3" limsup="245.000" liminf="-65.000" alpha="0.000" a="870.000" theta="0.000" d="0.000"/>
+<axis id="Joint4" limsup="360.000" liminf="-360.000" alpha="-90.000" a="170.000" theta="0.000" d="1016.000"/>
+<axis id="Joint5" limsup="125.000" liminf="-125.000" alpha="90.000" a="0.000" theta="0.000" d="0.000"/>
+<axis id="Joint6" limsup="360.000" liminf="-360.000" alpha="-90.000" a="0.000" theta="0.000" d="175.000"/>
+</robot_dk>
+<robot_geometry>
+<geometry geo="FANUC_M710iC_50-0" name="Base"/>
+<geometry geo="FANUC_M710iC_50-1" name="Joint1"/>
+<geometry geo="FANUC_M710iC_50-2" name="Joint2"/>
+<geometry geo="FANUC_M710iC_50-3" name="Joint3"/>
+<geometry geo="FANUC_M710iC_50-4" name="Joint4"/>
+<geometry geo="FANUC_M710iC_50-5" name="Joint5"/>
+<geometry geo="FANUC_M710iC_50-6" name="Joint6"/>
+</robot_geometry>
+<CAD_base x="0.000" y="0.000" z="-570.000" rx="0.000" ry="0.000" rz="0.000"/>
+<CAD_scale FACTOR="1.000000000"/>
+<CAD_offsets cad_theta1="0.000" cad_theta2="0.000" cad_theta3="0.000" cad_theta4="0.000" cad_theta5="0.000" cad_theta6="0.000"/>
+<Angle_Type id="2"/>
+</robot_definition>
