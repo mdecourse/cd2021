@@ -1367,12 +1367,25 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/Zt21o1qsOB4" title="YouTube video player" width="560"></iframe></p>
 <p><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=2477">How to pick up object?</a></p>
 <p><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=3175">Suction pad</a></p>
-<p></p><h2>Problem Solving</h2>
+<p></p><h3>CopSim</h3>
+<h4>CoppeliaSim 相關函式:</h4>
+<p>使用 <a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-python.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-python.htm</a> 較為靈活, but how?</p>
+<p style="padding-left: 30px;">programming/remoteApiBindings/b0Based/python/b0RemoteApi.py</p>
+<p style="padding-left: 30px;">programming/remoteApiBindings/b0Based/python/b0.py</p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiClientSide.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiClientSide.htm</a></p>
+<p style="padding-left: 30px;">下載可攜 4.1.0 Windows 64 位元教育版對應的 <a href="https://drive.google.com/file/d/1RE-P5RlLelxLVYB82TU6Hlsc4t5XpXJG/view?usp=sharing">blue_zero_410.7z</a></p>
+<p style="padding-left: 60px;">參考資料: <a href="/downloads/Connecting V-REP with Python Script through BlueZero Remote API.pdf">Connecting V-REP with Python Script through BlueZero Remote API.pdf</a> (<a href="https://imbilaljaved.wordpress.com/2019/10/06/connecting-v-rep-with-python-script-through-remote-api/">來源</a>)</p>
+<p>sim.getObjectMatrix(ikTip,-1)</p>
+<p style="padding-left: 30px;"><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=7033">remote API can not use getObjectMatrix directly</a></p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiExtension.htm">https://www.coppeliarobotics.com/helpFiles/en/remoteApiExtension.htm</a></p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxCallScriptFunction">https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm#simxCallScriptFunction</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm">https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/kinematicsPlugin.htm">https://www.coppeliarobotics.com/helpFiles/en/kinematicsPlugin.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm">https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm</a></p><h2>Problem Solving</h2>
 <p>在 <a href="http://mde.tw/cd2021/content/W5.html">W5</a> 的教學內容中, 已經說明要熟悉利用一個套件來解決問題的重點, 必須從其說明手冊的研讀開始, 以 CoppeliaSim 為例, 就必須仔細研讀其 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a>, 並且經常造訪其官方網站.</p>
 <p>由於 CoppeliaSim 於 2021.04.06 已經<a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">改版為 4.2.0</a> (CoppeliaSim 4.2.0 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 而且引用的 Lua 版次已經從 5.1 升級為 5.3, 因此目前散布在網路上的許多 V-rep 或 CoppeliaSim 既有模型, 若採用 Lua 5.3 版不相容的 Script 進行控制, 將無法在 CoppeliaSim 4.2.0 版次中執行. 其中牽涉的語法包括與 <a href="http://www.lua.org/manual/5.2/manual.html#8">Lua 5.2 不相容部分</a>及 <a href="http://www.lua.org/manual/5.3/manual.html#8">Lua 5.3 不相容部分</a>.</p>
 <p>目前 <a href="https://mde.tw">KMOLab</a> 正在嘗試改寫 <a href="https://github.com/mdecourse/cmsimde/">CMSiMDE</a>, 讓動態網頁與靜態網頁的轉換可以雙向並行, 意即, 目前若能將僅支援從動態網頁的 config/content.htm 轉為 content 目錄中的靜態網頁功能, 加上能夠從既有的 content 靜態網頁, 轉換為 config/content.htm 的格式, 使用者就可以先將 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的說明檔案超文件轉為 content 目錄中靜態網頁的格式, 然後透過 CMSiMDE 轉進動態網頁的 config/content.htm 中, 如此, 使用者就可以啟用動態網站對 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的內容進行編輯, 註記與改寫.</p>
-<p>此類開發中的 CoppeliaSim 的說明文檔可參見: <a href="https://github.com/mdecourse/copsim">https://github.com/mdecourse/copsim</a> (網站: <a href="https://mde.tw/copsim">https://mde.tw/copsim</a>)</p>
-<h3>task1</h3>
+<p>此類開發中的 CoppeliaSim 的說明文檔可參見: <a href="https://github.com/mdecourse/copsim">https://github.com/mdecourse/copsim</a> (網站: <a href="https://mde.tw/copsim">https://mde.tw/copsim</a>)</p><h3>task1</h3>
 <p>讀取 stage3_2a.txt, 建立 Stage3 的分組倉儲, 分組網頁, 以及各組員倉儲及網頁連結.</p>
 <p>已知 <a href="/downloads/stage3/stage3_2a.txt">stage3_2a.txt</a> 與 <a href="/downloads/stage3/stage3_2b.txt">stage3_2b.txt</a> 內容, 以及初步資料讀取程式:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># open file, default is read mode, since txt content no chinese char
