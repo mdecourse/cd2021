@@ -1348,7 +1348,10 @@ while idTake &gt;= 0:
 robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p>假如使用 CoppeliaSim Python remote API, 能夠透過 <a href="https://github.com/Troxid/vrep-api-python">https://github.com/Troxid/vrep-api-python</a> 簡化流程嗎?</p>
 <h4>其他參考資料:</h4>
+<p style="padding-left: 30px;"><a href="http://mde.tw/2017springcd/blog/vrep-introduction.html">http://mde.tw/2017springcd/blog/vrep-introduction.html</a> (舊版 V-rep 簡介)</p>
+<p style="padding-left: 30px;"><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=737&amp;start=10">https://forum.coppeliarobotics.com/viewtopic.php?t=737&amp;start=10</a> (image sensor 取影像)</p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ECE470">https://github.com/mdecourse/ECE470</a> </p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1r4AjSRwI6SPBovXmeboBdNR87O0-Lufx/view?usp=sharing">ECE470_vrep_pick_and_place.7z</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/ur5_vrep_python">https://github.com/mdecourse/ur5_vrep_python</a></p>
 <p style="padding-left: 30px;"><a href="https://gitlab.engr.illinois.edu/rmaksi2/ECE470">https://gitlab.engr.illinois.edu/rmaksi2/ECE470</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/rlrobot">https://github.com/mdecourse/rlrobot</a></p>
@@ -1363,6 +1366,7 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p><img caption="false" height="317" src="/images/Fanuc_m710ic_50_coppeliasim_xml.png" width="530"/></p>
 <h4>Pick and Place 參考:</h4>
 <p><a href="/downloads/stage3/FANUC_M710iC_50/ur5WithRg2Grasping.ttt">ur5WithRg2Grasping.ttt</a></p>
+<p><a href="https://github.com/mkhuthir/RoboND-Kinematics-Project">https://github.com/mkhuthir/RoboND-Kinematics-Project</a> </p>
 <p><a href="https://github.com/mdecourse/vrep-ur10-pick-and-place">https://github.com/mdecourse/vrep-ur10-pick-and-place</a></p>
 <p><a href="https://github.com/mdecourse/Smart-Robotic-Arm-Pick-and-Place-using-matlab-and-V-Rep">https://github.com/mdecourse/Smart-Robotic-Arm-Pick-and-Place-using-matlab-and-V-Rep</a></p>
 <p><a href="https://github.com/mdecourse/UR10PickAndPlace">https://github.com/mdecourse/UR10PickAndPlace</a></p>
@@ -1374,13 +1378,37 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=2477">How to pick up object?</a></p>
 <p><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=3175">Suction pad</a></p>
 <p></p><h3>CopSim</h3>
+<p>CoppeliaSim 啟動時因為根目錄中的 remoteApiConnections.txt 內容為:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">// This file defines all the continuous remote API server services (started at remote API plugin initialization, i.e. CoppeliaSim start-up)
+//
+// Each remote API server service requires following 3 entries:
+//
+// portIndex@_port = xxxx               // where xxxx is the desired port number (below 19997 are preferred for server services starting at CoppeliaSim start-up)
+// portIndex@_debug = xxxx              // where xxxx is true or false
+// portIndex@_syncSimTrigger = xxxx     // where xxxx is true or false. When true, then the service will be pre-enabled for synchronous operation.
+//
+// In above strings, @ can be any number starting with 1. If more than one server service is required, then numbers need to be consecutive and starting with 1
+
+// Let's start a continuous remote API server service on port 19997:
+portIndex1_port             = 19997
+portIndex1_debug            = false
+portIndex1_syncSimTrigger   = true
+</pre>
+<p>因此 remote API 的連線埠號為 19997, 假如希望加開多個埠號則可以自行增加 19998 與 19999:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">portIndex2_port             = 19998
+portIndex2_debug            = false
+portIndex2_syncSimTrigger   = true
+
+portIndex3_port             = 19999
+portIndex3_debug            = false
+portIndex3_syncSimTrigger   = true</pre>
 <h4>CoppeliaSim 相關函式:</h4>
 <p>使用 <a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-python.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-python.htm</a> 較為靈活, but how?</p>
 <p style="padding-left: 30px;">programming/remoteApiBindings/b0Based/python/b0RemoteApi.py</p>
 <p style="padding-left: 30px;">programming/remoteApiBindings/b0Based/python/b0.py</p>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiOverview.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiOverview.htm</a></p>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiClientSide.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiClientSide.htm</a></p>
-<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiExtension.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiExtension.htm</a> </p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiExtension.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiExtension.htm</a></p>
 <p style="padding-left: 30px;">下載可攜 4.1.0 Windows 64 位元教育版對應的 <a href="https://drive.google.com/file/d/1NYUQFraelb8MYeyOvc9kri03FfoUU5Pd/view?usp=sharing">blue_zero_410.7z</a></p>
 <h4 style="padding-left: 60px;">bluezero Python remote API 執行需要下列系統所安裝的 dll:</h4>
 <h4 style="padding-left: 90px;">b0.dll</h4>
