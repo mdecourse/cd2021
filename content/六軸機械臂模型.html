@@ -2,7 +2,7 @@
         <head>
         <title>CD2021</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -134,17 +134,36 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Blogs << <a href='Blogs.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD<br /><h1>LaTeX or Word</h1>
-<p>Why LaTeX?</p>
-<p><a href="https://en.wikibooks.org/wiki/LaTeX/Collaborative_Writing_of_LaTeX_Documents">https://en.wikibooks.org/wiki/LaTeX/Collaborative_Writing_of_LaTeX_Documents</a></p>
-<p><a href="https://www.natureindex.com/news-blog/three-ways-to-collaborate-on-writing">https://www.natureindex.com/news-blog/three-ways-to-collaborate-on-writing</a></p>
-<p><a href="https://www.authorea.com/">https://www.authorea.com/</a></p>
-<p><a href="https://github.com/PHPirates/travis-ci-latex-pdf">https://github.com/PHPirates/travis-ci-latex-pdf</a></p>
-<p><a href="https://medium.com/@baymac/continuous-integration-of-latex-documents-using-travis-ci-a1916c89e978">https://medium.com/@baymac/continuous-integration-of-latex-documents-using-travis-ci-a1916c89e978</a></p>
-<p><a href="https://dfm.io/posts/travis-latex/">https://dfm.io/posts/travis-latex/</a></p>
-<p></p>
-<p></p>
-<br />Blogs << <a href='Blogs.html'>Previous</a> <a href='CAD.html'>Next</a> >> CAD</div>
+    <div id="tipue_search_content">W13 << <a href='W13.html'>Previous</a> <a href='建立場景模型.html'>Next</a> >> 建立場景模型<br /><h1>六軸機械臂模型</h1>
+<p>有關六軸機械臂 CoppeliaSim ttm 模型建立, 可以分為從網路上或官方程式庫中取用已經建立好的 ttt 或 ttm 模型.</p>
+<p>或者自行利用參數式電腦輔助設計套件建立.</p>
+<h4>1. 取用現成的零組件</h4>
+<p>從 <a href="https://www.parallemic.org/RoKiSim.html">https://www.parallemic.org/RoKiSim.html</a> 可以取得六軸機械臂的 stl 與 xml 尺寸定義.</p>
+<h4>FANUC M710iC</h4>
+<p style="text-align: center;"><img caption="false" height="413" src="./../images/Fanuc_m710ic_50_robot.jpg" width="300"/></p>
+<p style="text-align: center;">Robot graphics from <a href="https://www.fanuc.eu">https://www.fanuc.eu</a></p>
+<p><a href="https://www.fanuc.eu/it/en/robots/robot-filter-page/m-710-series/m-710ic-50">https://www.fanuc.eu/it/en/robots/robot-filter-page/m-710-series/m-710ic-50</a></p>
+<p>以下希望自行建立一個 fanuc_m710ic_50.ttt 用於 Pick and Place 模擬. 相關設計檔案位於: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/FANUC_M710iC_50">https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/FANUC_M710iC_50</a></p>
+<p>利用 CoppeliaSim 4.1.0 導入 Robot STL 檔案後, Z 軸朝上且整體向上移動 0.57 m 後, Robot 底座位於場景平台, 且底座座標位於絕對原點. 將此初步的機械手臂檔案存為 ttt 後, 再存為 .simscene.xml 後, 接下來需要檢視是否能夠透過 xml 中的 joint 定義, 配合 .simscene.xml 檔案格式, 以程式方法加入各旋轉軸.</p>
+<p>假如上述流程可以從 Robot 各軸位置定義 xml 檔案產生 .simscene.xml, 隨後將可利用相同流程導入所有已知規格的工業級機械手臂.</p>
+<p>將上述 .simscene.xml 檔案置於 CoppeliaSim 4.1.0 之視窗畫面如下:</p>
+<p><img caption="false" height="317" src="./../images/Fanuc_m710ic_50_coppeliasim_xml.png" width="530"/></p>
+<h4>Pick and Place 參考:</h4>
+<p><a href="./../downloads/stage3/FANUC_M710iC_50/ur5WithRg2Grasping.ttt">ur5WithRg2Grasping.ttt</a></p>
+<p><a href="https://github.com/mkhuthir/RoboND-Kinematics-Project">https://github.com/mkhuthir/RoboND-Kinematics-Project</a></p>
+<p><a href="https://github.com/mdecourse/vrep-ur10-pick-and-place">https://github.com/mdecourse/vrep-ur10-pick-and-place</a></p>
+<p><a href="https://github.com/mdecourse/Smart-Robotic-Arm-Pick-and-Place-using-matlab-and-V-Rep">https://github.com/mdecourse/Smart-Robotic-Arm-Pick-and-Place-using-matlab-and-V-Rep</a></p>
+<p><a href="https://github.com/mdecourse/UR10PickAndPlace">https://github.com/mdecourse/UR10PickAndPlace</a></p>
+<p><a href="https://github.com/mdecourse/Pick-and-Place-on-Baxter-using-ROS-and-V-REP">https://github.com/mdecourse/Pick-and-Place-on-Baxter-using-ROS-and-V-REP</a></p>
+<p><a href="https://github.com/mdecourse/V-REP-Inverse-Kinematics">https://github.com/mdecourse/V-REP-Inverse-Kinematics</a></p>
+<p><a href="https://github.com/CoppeliaRobotics/scenes/blob/master/youBotAndHanoiTower.ttt">https://github.com/CoppeliaRobotics/scenes/blob/master/youBotAndHanoiTower.ttt</a></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/CVoV08T0Aqo" title="YouTube video player" width="560"></iframe></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/Zt21o1qsOB4" title="YouTube video player" width="560"></iframe></p>
+<p><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=2477">How to pick up object?</a></p>
+<p><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=3175">Suction pad</a></p>
+<h4>2. 自行繪圖建立</h4>
+<p>完全以手動繪製所有場景所需零組件</p>
+<p>以套件 API 協助建立場景所需零組件</p><br />W13 << <a href='W13.html'>Previous</a> <a href='建立場景模型.html'>Next</a> >> 建立場景模型</div>
         
     <!-- footer -->
       <div class="container">
