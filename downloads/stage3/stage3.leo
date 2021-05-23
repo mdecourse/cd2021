@@ -10,6 +10,7 @@
 <v t="leo.20210507135925.2"><vh>@data qt-gui-plugin-style-sheet</vh></v>
 <v t="leo.20210507135925.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
+<v t="leo.20210523160810.1"><vh>W13 40823214</vh></v>
 <v t="leo.20210507135913.1"><vh>recursive importer</vh></v>
 </vnodes>
 <tnodes>
@@ -20,7 +21,7 @@ c.recursiveImport(
     dir_ = r'./',
     kind = '@clean', # The new best practice.
     safe_at_file = False,
-    theTypes = ['.xml'] 
+    theTypes = ['.lua'] 
 )</t>
 <t tx="leo.20210507135925.1"></t>
 <t tx="leo.20210507135925.2">QTreeWidget {
@@ -98,5 +99,6 @@ QLineEdit#editorLabel {
 }</t>
 <t tx="leo.20210507135925.3">horizontal: body pane to the left
 vertical: body pane on the botton</t>
+<t tx="leo.20210523160810.1"></t>
 </tnodes>
 </leo_file>
