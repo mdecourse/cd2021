@@ -1,5 +1,5 @@
 function sysCall_init() 
-    modelBase5=sim.getObjectHandle(sim.handle_self)
+    modelBase5=sim.getObjectAssociatedWithScript(sim.handle_self)
     robotBase5=modelBase5
     while true do
         robotBase5=sim.getObjectParent(robotBase5)
@@ -20,7 +20,7 @@ function sysCall_init()
     l2a=sim.getObjectHandle('suctionPadLoopClosureDummy2#3')
     ba=sim.getObjectHandle('suctionPad')
     suctionPadLink=sim.getObjectHandle('suctionPadLink#3')
-    local gripperBase=sim.getObjectHandle(sim.handle_self)
+    local gripperBase=sim.getObjectAssociatedWithScript(sim.handle_self)
 
     infiniteStrength=sim.getScriptSimulationParameter(sim.handle_self,'infiniteStrength')
     maxPullForce=sim.getScriptSimulationParameter(sim.handle_self,'maxPullForce')
