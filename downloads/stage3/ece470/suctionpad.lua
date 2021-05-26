@@ -1,7 +1,9 @@
 function sysCall_init() 
     s=sim.getObjectHandle('suctionPadSensor')
+    
     l=sim.getObjectHandle('suctionPadLoopClosureDummy1')
     l2=sim.getObjectHandle('suctionPadLoopClosureDummy2')
+    
     b=sim.getObjectHandle('suctionPad')
     suctionPadLink=sim.getObjectHandle('suctionPadLink')
 
@@ -9,9 +11,15 @@ function sysCall_init()
     maxPullForce=sim.getScriptSimulationParameter(sim.handle_self,'maxPullForce')
     maxShearForce=sim.getScriptSimulationParameter(sim.handle_self,'maxShearForce')
     maxPeelTorque=sim.getScriptSimulationParameter(sim.handle_self,'maxPeelTorque')
-
+    -- set l to -1 to unlink the dummy-dummy link pair
+    --[[
+    https://www.coppeliarobotics.com/helpFiles/en/dummies.htm
+     they are also used in pairs to specify loop closures or tip-target relationships for dynamics or kinematics calculations
+    ]]--
     sim.setLinkDummy(l,-1)
+    -- https://www.coppeliarobotics.com/helpFiles/en/regularApi/simSetObjectParent.htm
     sim.setObjectParent(l,b,true)
+    -- https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetObjectMatrix.htm
     m=sim.getObjectMatrix(l2,-1)
     sim.setObjectMatrix(l,-1,m)
 end
@@ -61,6 +69,10 @@ function sysCall_sensing()
             -- Here we have an object attached
             if (infiniteStrength==false) then
                 -- We might have to conditionally beak it apart!
+                -- https://www.coppeliarobotics.com/helpFiles/en/forceSensors.htm
+                --[[
+                A force sensor is only operational during simulation if it is dynamically enabled. 
+                ]]--
                 result,force,torque=sim.readForceSensor(suctionPadLink) -- Here we read the median value out of 5 values (check the force sensor prop. dialog)
                 if (result>0) then
                     breakIt=false

@@ -10,6 +10,7 @@
 <v t="leo.20210526093155.2"><vh>@data qt-gui-plugin-style-sheet</vh></v>
 <v t="leo.20210526093155.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
+<v t="leo.20210526142340.1"><vh>Scripts</vh></v>
 <v t="leo.20210526101725.1"><vh>Customization Scripts</vh></v>
 <v t="leo.20210526102644.1"><vh>Child Scripts</vh></v>
 <v t="leo.20210526095443.1"><vh>@clean ur3.lua</vh>
@@ -76,7 +77,7 @@
     /*font-family: DejaVu Sans Mono;*/
     font-family:YaHei Mono;
     /* 標題字型大小設定 */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: normal; /* normal,bold,100,..,900 */
     font-style: normal; /* normal, italic,oblique */
  }
@@ -89,7 +90,7 @@ QTreeWidget QLineEdit {
     /*font-family: DejaVu Sans Mono;*/    
     font-family:YaHei Mono;
     /* 沒有特別對應字型大小 */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: normal; /* normal,bold,100,..,900 */
     font-style: normal; /* normal, italic,oblique */
 }
@@ -102,7 +103,7 @@ QTextEdit {
     /* font-family: Courier New; */
     font-family:YaHei Mono;
     /* log font 大小 */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: normal; /* normal,bold,100,..,900 */
     font-style: normal; /* normal, italic,oblique */
 }
@@ -116,7 +117,7 @@ QTextEdit#richTextEdit {
     /* font-family: Courier New; */
     font-family:YaHei Mono;
     /* 內文字型大小 */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: normal; /* normal,bold,100,..,900 */
     font-style: normal; /* normal,italic,oblique */
 }
@@ -124,7 +125,7 @@ QTextEdit#richTextEdit {
 QLabel {
     font-family:YaHei Mono;'CherryPy', 'pytz', 'mako', 'beautifulsoup4', 'pymysql', 'peewee'
     /* 下方的 Minibuffer 標題字型大小 */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: normal; /* normal,bold,100,..,900 */
     font-style: normal; /* normal,italic,oblique */
 }
@@ -134,7 +135,7 @@ QLineEdit#editorLabel {
     background-color: #ffffec;
     font-family:YaHei Mono;
     /* 沒有直接對應字型大小 */
-    font-size: 20px;
+    font-size: 30px;
     font-weight: normal; /* normal,bold,100,..,900 */
     font-style: normal; /* normal,italic,oblique */
     border: 2px;
@@ -143,10 +144,12 @@ QLineEdit#editorLabel {
 <t tx="leo.20210526093155.3">horizontal: body pane to the left
 vertical: body pane on the botton</t>
 <t tx="leo.20210526093514.1">function sysCall_init()
+    
     h=sim.getObjectAssociatedWithScript(sim.handle_self)
     ui=simGetUIHandle('Tree')
     local randomCols=(sim.boolAnd32(simGetUIButtonProperty(ui,6),sim.buttonproperty_isdown)~=0)
     setColors(randomCols)
+
     local p=simGetUIProperty(ui)
     p=sim.boolOr32(p,sim_ui_property_visible)
     simSetUIProperty(ui,p-sim_ui_property_visible)    
@@ -164,6 +167,8 @@ colorCorrectionFunction=function(_aShapeHandle_)
   return '@backCompatibility1:'.._aShapeHandle_ 
 end 
 ------------------------------------------------------------------------------ 
+ 
+ 
 setColors=function(randomCols)
     local green={0.23,0.32,0.23}
     local brown={0.49,0.41,0.29}
@@ -178,6 +183,8 @@ setColors=function(randomCols)
     sim.setShapeColor(colorCorrectionFunction(h),'TREE_GREEN',0,green)
     sim.setShapeColor(colorCorrectionFunction(h),'TREE_BROWN',0,brown)
 end
+
+
 function sysCall_nonSimulation()
     local selectedObjects=sim.getObjectSelection()
     if selectedObjects and (#selectedObjects==1) and (selectedObjects[1]==h) then
@@ -217,6 +224,7 @@ function sysCall_nonSimulation()
         simSetUIProperty(ui,p-sim_ui_property_visible)
     end
 end
+
 </t>
 <t tx="leo.20210526093514.3">function sysCall_beforeSimulation()
     local p=simGetUIProperty(ui)
@@ -251,11 +259,13 @@ end
 end
 </t>
 <t tx="leo.20210526093835.3">function sysCall_init()
+    
     h=sim.getObjectAssociatedWithScript(sim.handle_self)
     windowElement=sim.getObjectHandle('building_windowElement')
     windows=sim.getObjectHandle('building_windows')
     body=sim.getObjectHandle('building_body')
     ui=simGetUIHandle('building')
+
     local p=simGetUIProperty(ui)
     p=sim.boolOr32(p,sim_ui_property_visible)
     simSetUIProperty(ui,p-sim_ui_property_visible)    
@@ -273,6 +283,8 @@ colorCorrectionFunction=function(_aShapeHandle_)
     return '@backCompatibility1:'.._aShapeHandle_ 
 end 
 ------------------------------------------------------------------------------ 
+ 
+ 
 _hueToRgb=function(m1,m2,h)
     if h&lt;0 then 
         h=h+1
@@ -291,12 +303,14 @@ _hueToRgb=function(m1,m2,h)
     end
     return(m1)
 end
+
 hslToRgb=function(hsl)
     local h=hsl[1]
     local s=hsl[2]
     local l=hsl[3]
     local m1,m2
     local rgb={0,0,0}
+
     if s==0 then
         rgb[1]=l
         rgb[2]=l
@@ -314,6 +328,8 @@ hslToRgb=function(hsl)
     end
     return(rgb)
 end
+
+
 function sysCall_nonSimulation()
     local selectedObjects=sim.getObjectSelection()
     if selectedObjects and (#selectedObjects==1) and (selectedObjects[1]==h) then
@@ -329,6 +345,7 @@ function sysCall_nonSimulation()
             local sx=2.9*xCnt
             local sy=2.9*yCnt
             local sz=2.6*zCnt
+
             dat=sim.readCustomDataBlock(h,'buildingSizes')
             if (dat) then
                 dat=sim.unpackInt32Table(dat)
@@ -405,6 +422,7 @@ function sysCall_nonSimulation()
             sim.setShapeColor(colorCorrectionFunction(body),nil,0,rgb)
             adjustColor=false
         end
+
         if (buttonID==2) then
             simRemoveUI(ui)
             sim.removeScript(sim.handle_self)
@@ -415,6 +433,7 @@ function sysCall_nonSimulation()
         simSetUIProperty(ui,p-sim_ui_property_visible)
     end
 end
+
 </t>
 <t tx="leo.20210526093835.5">function sysCall_beforeSimulation()
     local p=simGetUIProperty(ui)
@@ -511,8 +530,12 @@ end
 end
 </t>
 <t tx="leo.20210526095341.2">-- Check the end of the script for some explanations!
+
+
 function sysCall_cleanup() 
+ 
 end 
+
 </t>
 <t tx="leo.20210526095341.3">function sysCall_sensing() 
     res,dist,pt=sim.handleProximitySensor(sensor)
@@ -523,11 +546,14 @@ end
         pt2=pt
     end
     pt2=sim.multiplyVector(m,pt2)
+    
     sim.addDrawingObjectItem(lineContainer,nil)
     sim.addDrawingObjectItem(pointContainer,nil)
+    
     if (sim.getScriptSimulationParameter(sim.handle_self,'showLaserRay')) then
         sim.addDrawingObjectItem(lineContainer,{pt1[1],pt1[2],pt1[3],pt2[1],pt2[2],pt2[3]})
     end
+    
     if (res&gt;0) then
         if (sim.getScriptSimulationParameter(sim.handle_self,'showLaserPoint')) then
             sim.addDrawingObjectItem(pointContainer,pt2)
@@ -540,6 +566,7 @@ end
         sim.tubeWrite(communicationTube,sim.packFloatTable({-1}))
         sim.setFloatSignal('CarDistanceData',99)
     end
+    
     -- To read data from this laser range finder in another script, use following code:
     --
     -- communicationTube=sim.tubeOpen(0,'laserPointerData'..sim.getNameSuffix(nil),1) -- put this in the initialization phase
@@ -575,8 +602,10 @@ end
 </t>
 <t tx="leo.20210526095454.1">function sysCall_threadmain()
     jointHandles={-1,-1,-1,-1,-1,-1}
+    
     gripperHandle= sim.getObjectHandle('suctionPad')
     scriptHandle = sim.getScriptAssociatedWithObject(gripperHandle)
+    
     for i=1,6,1 do
         jointHandles[i]=sim.getObjectHandle('UR3_joint'..i)
     end
@@ -586,15 +615,16 @@ end
     jerk=80
     currentVel={0,0,0,0,0,0,0}
     currentAccel={0,0,0,0,0,0,0}
-    maxVel={vel*math.pi/180,vel*math.pi/180,vel*math.pi/180,vel*math.pi/180,vel*math.pi/180,vel*math.pi/180}
-    maxAccel={accel*math.pi/180,accel*math.pi/180,accel*math.pi/180,accel*math.pi/180,accel*math.pi/180,accel*math.pi/180}
-    maxJerk={jerk*math.pi/180,jerk*math.pi/180,jerk*math.pi/180,jerk*math.pi/180,jerk*math.pi/180,jerk*math.pi/180}
+    deg = math.pi/180
+    maxVel={vel*deg,vel*deg,vel*deg,vel*deg,vel*deg,vel*deg}
+    maxAccel={accel*deg,accel*deg,accel*deg,accel*deg,accel*deg,accel*deg}
+    maxJerk={jerk*deg,jerk*deg,jerk*deg,jerk*deg,jerk*deg,jerk*deg}
     targetVel={0,0,0,0,0,0}
-    targetPos1={0,60*math.pi/180,30*math.pi/180,0,-90*math.pi/180,0}
+    targetPos1={0,60*deg,30*deg,0,-90*deg,0}
     targetPos2={0,0,0,0,0,0}
-    targetPos3={-90*math.pi/180,60*math.pi/180,30*math.pi/180,0,-90*math.pi/180,0}
-    targetPos4={0,92*math.pi/180,0,0,-90*math.pi/180,0}
-    targetPos5={180*math.pi/180,90*math.pi/180,0,0,-90*math.pi/180,0*math.pi/180}
+    targetPos3={-90*deg,60*deg,30*deg,0,-90*deg,0}
+    targetPos4={0,92*deg,0,0,-90*deg,0}
+    targetPos5={180*deg,90*deg,0,0,-90*deg,0*deg}
     dist = 99
     while dist &gt; 0.5 do
         dist = sim.getFloatSignal("CarDistanceData")
@@ -602,8 +632,11 @@ end
     sim.rmlMoveToJointPositions(jointHandles,-1,currentVel,currentAccel,maxVel,maxAccel,maxJerk,targetPos1,targetVel)
     sim.rmlMoveToJointPositions(jointHandles,-1,currentVel,currentAccel,maxVel,maxAccel,maxJerk,targetPos2,targetVel)
     sim.rmlMoveToJointPositions(jointHandles,-1,currentVel,currentAccel,maxVel,maxAccel,maxJerk,targetPos3,targetVel)
+    
     sim.setScriptSimulationParameter(scriptHandle, 'active', 'false')
+    
     sim.rmlMoveToJointPositions(jointHandles,-1,currentVel,currentAccel,maxVel,maxAccel,maxJerk,targetPos2,targetVel)
+    
     sim.setScriptSimulationParameter(scriptHandle, 'active', 'true')
     --sim.rmlMoveToJointPositions(jointHandles,-1,currentVel,currentAccel,maxVel,maxAccel,maxJerk,targetPos1,targetVel)
     sim.rmlMoveToJointPositions(jointHandles,-1,currentVel,currentAccel,maxVel,maxAccel,maxJerk,targetPos4,targetVel)
@@ -619,19 +652,30 @@ end
 </t>
 <t tx="leo.20210526100025.1">function sysCall_init() 
     s=sim.getObjectHandle('suctionPadSensor')
+    
     l=sim.getObjectHandle('suctionPadLoopClosureDummy1')
     l2=sim.getObjectHandle('suctionPadLoopClosureDummy2')
+    
     b=sim.getObjectHandle('suctionPad')
     suctionPadLink=sim.getObjectHandle('suctionPadLink')
+
     infiniteStrength=sim.getScriptSimulationParameter(sim.handle_self,'infiniteStrength')
     maxPullForce=sim.getScriptSimulationParameter(sim.handle_self,'maxPullForce')
     maxShearForce=sim.getScriptSimulationParameter(sim.handle_self,'maxShearForce')
     maxPeelTorque=sim.getScriptSimulationParameter(sim.handle_self,'maxPeelTorque')
+    -- set l to -1 to unlink the dummy-dummy link pair
+    --[[
+    https://www.coppeliarobotics.com/helpFiles/en/dummies.htm
+     they are also used in pairs to specify loop closures or tip-target relationships for dynamics or kinematics calculations
+    ]]--
     sim.setLinkDummy(l,-1)
+    -- https://www.coppeliarobotics.com/helpFiles/en/regularApi/simSetObjectParent.htm
     sim.setObjectParent(l,b,true)
+    -- https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetObjectMatrix.htm
     m=sim.getObjectMatrix(l2,-1)
     sim.setObjectMatrix(l,-1,m)
 end
+
 </t>
 <t tx="leo.20210526100025.2">function sysCall_cleanup() 
     sim.setLinkDummy(l,-1)
@@ -639,6 +683,7 @@ end
     m=sim.getObjectMatrix(l2,-1)
     sim.setObjectMatrix(l,-1,m)
 end 
+
 </t>
 <t tx="leo.20210526100025.3">function sysCall_sensing() 
     parent=sim.getObjectParent(l)
@@ -678,6 +723,10 @@ end
             -- Here we have an object attached
             if (infiniteStrength==false) then
                 -- We might have to conditionally beak it apart!
+                -- https://www.coppeliarobotics.com/helpFiles/en/forceSensors.htm
+                --[[
+                A force sensor is only operational during simulation if it is dynamically enabled. 
+                ]]--
                 result,force,torque=sim.readForceSensor(suctionPadLink) -- Here we read the median value out of 5 values (check the force sensor prop. dialog)
                 if (result&gt;0) then
                     breakIt=false
@@ -742,6 +791,8 @@ colorCorrectionFunction=function(_aShapeHandle_)
   return '@backCompatibility1:'.._aShapeHandle_ 
 end 
 ------------------------------------------------------------------------------ 
+ 
+ 
 setColor=function(objectTable,colorName,color)
     for i=1,#objectTable,1 do
         if (sim.getObjectType(objectTable[i])==sim.object_shape_type) then
@@ -749,6 +800,8 @@ setColor=function(objectTable,colorName,color)
         end
     end
 end
+
+
 function sysCall_cleanup() 
     -- Restore to initial colors:
     if (randomColors) then
@@ -775,10 +828,12 @@ end
 -- scenes to be automatically also using newer features, without explicitely coding
 -- them. If you modify the main script, it will be marked as "customized", and you
 -- won't benefit of that automatic forward compatibility mechanism. 
+
 @others
 -- By default threaded child scripts switch back to the main thread after 2 ms. The main
 -- thread switches back to a threaded child script at one of above's "sim.resumeThreads"
 -- location
+
 -- You can define additional system calls here:
 --[[
 function sysCall_beforeCopy(inData)
@@ -815,6 +870,7 @@ end
     sim.openModule(sim.handle_all)
     sim.handleGraph(sim.handle_all_except_explicit,0)
 end
+
 </t>
 <t tx="leo.20210526101204.2">function sysCall_actuation()
     sim.resumeThreads(sim.scriptthreadresume_default)
@@ -833,6 +889,7 @@ end
     sim.handleDynamics(sim.getSimulationTimeStep())
     sim.handleMill(sim.handle_all_except_explicit)
 end
+
 </t>
 <t tx="leo.20210526101204.3">function sysCall_sensing()
     -- put your sensing code here
@@ -851,6 +908,7 @@ end
     sim.resumeThreads(sim.scriptthreadresume_allnotyetresumed)
     sim.handleGraph(sim.handle_all_except_explicit,sim.getSimulationTime()+sim.getSimulationTimeStep())
 end
+
 </t>
 <t tx="leo.20210526101204.4">function sysCall_cleanup()
     sim.resetMilling(sim.handle_all)
@@ -861,6 +919,7 @@ end
     sim.resetVisionSensor(sim.handle_all_except_explicit)
     sim.closeModule(sim.handle_all)
 end
+
 </t>
 <t tx="leo.20210526101204.5">function sysCall_suspend()
     sim.handleChildScripts(sim.syscb_suspend)
@@ -868,12 +927,14 @@ end
     sim.handleAddOnScripts(sim.syscb_suspend)
     sim.handleSandboxScript(sim.syscb_suspend)
 end
+
 </t>
 <t tx="leo.20210526101204.6">function sysCall_suspended()
     sim.handleCustomizationScripts(sim.syscb_suspended)
     sim.handleAddOnScripts(sim.syscb_suspended)
     sim.handleSandboxScript(sim.syscb_suspended)
 end
+
 </t>
 <t tx="leo.20210526101204.7">function sysCall_resume()
     sim.handleChildScripts(sim.syscb_resume)
@@ -881,18 +942,22 @@ end
     sim.handleAddOnScripts(sim.syscb_resume)
     sim.handleSandboxScript(sim.syscb_resume)
 end
+
 </t>
 <t tx="leo.20210526101316.1">@others
 @language lua
 @tabwidth -4
 </t>
 <t tx="leo.20210526101329.1">function sysCall_init()
+    
     h=sim.getObjectAssociatedWithScript(sim.handle_self)
     ui=simGetUIHandle('ConcretBlock')
+
     local p=simGetUIProperty(ui)
     p=sim.boolOr32(p,sim_ui_property_visible)
     simSetUIProperty(ui,p-sim_ui_property_visible)    
 end
+
 </t>
 <t tx="leo.20210526101329.2">function sysCall_nonSimulation()
     local selectedObjects=sim.getObjectSelection()
@@ -907,23 +972,29 @@ end
             ys=simGetUISlider(ui,8)/1000
             zs=simGetUISlider(ui,9)/1000
             ds=simGetUISlider(ui,10)/1000
+
             dxs=5*0.1^((1-xs)*2)
             dys=5*0.1^((1-ys)*2)
             dzs=5*0.1^((1-zs)*2)
             dds=10000*0.1^((1-ds)*2)
+
             sizeVals=sim.getObjectSizeValues(h)
             sizeVals[1]=sizeVals[1]*0.5
             sizeVals[2]=sizeVals[2]*0.5
             sizeVals[3]=sizeVals[3]*0.5
+                
             sim.scaleObject(h,dxs/sizeVals[1],dys/sizeVals[2],dzs/sizeVals[3])
+
             p=sim.getObjectPosition(h,-1)
             sim.setObjectPosition(h,-1,{p[1],p[2],p[3]+sizeVals[3]*(dzs/sizeVals[3]-1)*0.5})
+
             sizeVals=sim.getObjectSizeValues(h)
             sizeVals[1]=sizeVals[1]*0.5
             sizeVals[2]=sizeVals[2]*0.5
             sizeVals[3]=sizeVals[3]*0.5
             mass=sizeVals[1]*sizeVals[2]*sizeVals[3]*dds
             sim.setObjectFloatParameter(h,sim.shapefloatparam_mass,mass)
+
             if (isStatic) then
                 sim.setObjectInt32Parameter(h,sim.shapeintparam_static,1)
             else
@@ -940,6 +1011,7 @@ end
         simSetUIProperty(ui,p-sim_ui_property_visible)
     end
 end
+
 </t>
 <t tx="leo.20210526101329.3">function sysCall_beforeSimulation()
     local p=simGetUIProperty(ui)
@@ -969,7 +1041,6 @@ A customization script can run threaded or non-threaded, and should be segmented
 
 </t>
 <t tx="leo.20210526102644.1">https://www.coppeliarobotics.com/helpFiles/en/childScripts.htm
-
 
 Child scripts
 
@@ -1004,5 +1075,6 @@ the restoration function: sysCall_cleanup. This part will be executed one time j
 
 
 </t>
+<t tx="leo.20210526142340.1">https://www.coppeliarobotics.com/helpFiles/en/scripts.htm</t>
 </tnodes>
 </leo_file>
