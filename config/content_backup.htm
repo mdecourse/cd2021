@@ -1396,9 +1396,27 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p>2. 利用 XML 檔案格式產生</p>
 <p></p>
 <p>3. 利用 Lua script 及 Python remote API 協助產生</p><h3>控制方法</h3>
+<p><a href="http://www.reflexxes.ws">http://www.reflexxes.ws</a> (成立於 2010)</p>
+<p><a href="https://ieeexplore.ieee.org/document/5980578">Opening the door to new sensor-based robot applications—The Reflexxes Motion Libraries</a> (2011)</p>
+<p><a href="/downloads/stage3/2016_Reactive Planning on a Collaborative Robot for Industrial Applications.pdf">2016_Reactive Planning on a Collaborative Robot for Industrial Applications.pdf</a></p>
+<p><a href="/downloads/stage3/2016_Iterative Path-Accurate Trajectory Generation for Fast Sensor-Based Motionof Robot Arms.pdf">2016_Iterative Path-Accurate Trajectory Generation for Fast Sensor-Based Motionof Robot Arms.pdf</a></p>
+<p><a href="/downloads/stage3/2018_in_pursuit_of_safety.pdf">2018_in_pursuit_of_safety.pdf</a></p>
+<p><a href="/downloads/stage3/2021_Learning  Robot  Trajectories  subject  to  Kinematic  Joint  Constraints.pdf">2021_Learning Robot Trajectories subject to Kinematic Joint Constraints.pdf</a></p>
+<p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/6Ke5Gyz6O6c" title="YouTube video player" width="560"></iframe></p>
+<p><a href="http://www.reflexxes.ws/products/reflexxes-motion-libraries.html">Reflexx motion libraries</a> (<a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simRMLPos.htm">CoppeliaSim 提供的相關函式庫</a>) 源自 <a href="https://www.rob.cs.tu-bs.de/">https://www.rob.cs.tu-bs.de/</a>, 是學生數約 2 萬人, 德國成立最早的 <a href="https://en.wikipedia.org/wiki/Technical_University_of_Braunschweig">Braunschweig 工業大學</a>.</p>
 <h4>1. Lua script</h4>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/scripts.htm">https://www.coppeliarobotics.com/helpFiles/en/scripts.htm</a> </p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/simulationScripts.htm">https://www.coppeliarobotics.com/helpFiles/en/simulationScripts.htm</a></p>
+<p style="padding-left: 60px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/mainScript.htm">https://www.coppeliarobotics.com/helpFiles/en/mainScript.htm</a></p>
+<p style="padding-left: 60px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/childScripts.htm">https://www.coppeliarobotics.com/helpFiles/en/childScripts.htm</a></p>
+<p style="padding-left: 90px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/threadedAndNonThreadedCode.htm">https://www.coppeliarobotics.com/helpFiles/en/threadedAndNonThreadedCode.htm</a></p>
+<p style="padding-left: 90px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/callbackFunctions.htm">https://www.coppeliarobotics.com/helpFiles/en/callbackFunctions.htm</a></p>
+<p style="padding-left: 90px;"><a href="https://en.wikipedia.org/wiki/Coroutine">https://en.wikipedia.org/wiki/Coroutine</a></p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/customizationScripts.htm">https://www.coppeliarobotics.com/helpFiles/en/customizationScripts.htm</a></p>
 <h4>2. Python remote API</h4>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctions.htm#simxCallScriptFunction">https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctions.htm#simxCallScriptFunction</a></p>
 <h4>3. BlueZero Python remote API</h4>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-cpp.htm#simxCallScriptFunction">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-cpp.htm#simxCallScriptFunction</a></p>
 <h4>CoppeliaSim 相關函式:</h4>
 <p>使用 <a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-python.htm">https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApi-python.htm</a> 較為靈活, but how?</p>
 <p style="padding-left: 30px;">programming/remoteApiBindings/b0Based/python/b0RemoteApi.py</p>
@@ -1439,7 +1457,7 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <h4>參考資料:</h4>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/Simulated-Multi-Robot-Arm-Object-Passing-System">https://github.com/mdecourse/Simulated-Multi-Robot-Arm-Object-Passing-System</a></p>
 <p style="padding-left: 30px;"><a href="https://www.zhihu.com/question/23309094/answer/775009148">https://www.zhihu.com/question/23309094/answer/775009148</a></p>
-<p style="padding-left: 30px;"><a href="https://github.com/mdecourse/vrep-ur10-pick-and-place">https://github.com/mdecourse/vrep-ur10-pick-and-place</a> </p><h3>CopSim</h3>
+<p style="padding-left: 30px;"><a href="https://github.com/mdecourse/vrep-ur10-pick-and-place">https://github.com/mdecourse/vrep-ur10-pick-and-place</a></p><h3>CopSim</h3>
 <p>CoppeliaSim 啟動時因為根目錄中的 remoteApiConnections.txt 內容為:</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">// This file defines all the continuous remote API server services (started at remote API plugin initialization, i.e. CoppeliaSim start-up)
 //
@@ -1467,7 +1485,8 @@ portIndex3_syncSimTrigger   = true</pre>
 <p>當 CoppeliaSim 開啟多個 ports 時, 可以從不同遠端電腦接收 remote API 指令, 達成網路協同監控的目的.</p>
 <h4>參考資料:</h4>
 <p style="padding-left: 30px;"><a href="http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction">http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction</a></p>
-<p style="padding-left: 30px;"><a href="https://liacs.leidenuniv.nl/~bakkerem2/robotics/">https://liacs.leidenuniv.nl/~bakkerem2/robotics/</a> </p>
+<p style="padding-left: 30px;"><a href="https://liacs.leidenuniv.nl/~bakkerem2/robotics/">https://liacs.leidenuniv.nl/~bakkerem2/robotics/</a></p>
+<p style="padding-left: 30px;"><a href="https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html">https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html</a> </p>
 <p></p><h2>Problem Solving</h2>
 <p>在 <a href="http://mde.tw/cd2021/content/W5.html">W5</a> 的教學內容中, 已經說明要熟悉利用一個套件來解決問題的重點, 必須從其說明手冊的研讀開始, 以 CoppeliaSim 為例, 就必須仔細研讀其 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a>, 並且經常造訪其官方網站.</p>
 <p>由於 CoppeliaSim 於 2021.04.06 已經<a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">改版為 4.2.0</a> (CoppeliaSim 4.2.0 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 而且引用的 Lua 版次已經從 5.1 升級為 5.3, 因此目前散布在網路上的許多 V-rep 或 CoppeliaSim 既有模型, 若採用 Lua 5.3 版不相容的 Script 進行控制, 將無法在 CoppeliaSim 4.2.0 版次中執行. 其中牽涉的語法包括與 <a href="http://www.lua.org/manual/5.2/manual.html#8">Lua 5.2 不相容部分</a>及 <a href="http://www.lua.org/manual/5.3/manual.html#8">Lua 5.3 不相容部分</a>.</p>

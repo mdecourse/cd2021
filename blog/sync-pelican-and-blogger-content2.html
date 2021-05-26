@@ -59,7 +59,7 @@
 <meta property="og:url" content="./sync-pelican-and-blogger-content2.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2021-02-10 11:20:00+08:00"/>
-<meta property="article:modified_time" content=""/>
+<meta property="article:modified_time" content="2021-04-30 21:02:58.638848+08:00"/>
 <meta property="article:author" content="./author/yen.html">
 <meta property="article:section" content="Weblog"/>
 <meta property="article:tag" content="202102"/>
@@ -74,7 +74,7 @@
   "name": "Pelican 與 Blogger 內容同步2",
   "headline": "Pelican 與 Blogger 內容同步2",
   "datePublished": "2021-02-10 11:20:00+08:00",
-  "dateModified": "",
+  "dateModified": "2021-04-30 21:02:58.638848+08:00",
   "author": {
     "@type": "Person",
     "name": "yen",
@@ -204,6 +204,7 @@ init_mathjax();
             | <time datetime="週三 10 二月 2021">週三 10 二月 2021</time>
         </span>
         <!-- TODO : Modified check -->
+            <span class="post-meta"> | Updated on 週五 30 四月 2021</span>
             <div class="post-cover cover" style="background-image: url('./theme/images/post-bg.jpg')">
       </div>
     </header>
@@ -247,6 +248,7 @@ import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+
 
 SCOPES = ['https://www.googleapis.com/auth/blogger', ]
 
