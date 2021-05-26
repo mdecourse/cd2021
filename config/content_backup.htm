@@ -1402,11 +1402,12 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p><a href="/downloads/stage3/2016_Iterative Path-Accurate Trajectory Generation for Fast Sensor-Based Motionof Robot Arms.pdf">2016_Iterative Path-Accurate Trajectory Generation for Fast Sensor-Based Motionof Robot Arms.pdf</a></p>
 <p><a href="/downloads/stage3/2018_in_pursuit_of_safety.pdf">2018_in_pursuit_of_safety.pdf</a></p>
 <p><a href="/downloads/stage3/2021_Learning  Robot  Trajectories  subject  to  Kinematic  Joint  Constraints.pdf">2021_Learning Robot Trajectories subject to Kinematic Joint Constraints.pdf</a></p>
+<p><a href="/downloads/stage3/2021_A Digital Twin Creation Method for an Opensource Low-cost Changeable Learning Factory.pdf">2021_A Digital Twin Creation Method for an Opensource Low-cost Changeable Learning Factory.pdf</a></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/6Ke5Gyz6O6c" title="YouTube video player" width="560"></iframe></p>
 <p><a href="http://www.reflexxes.ws/products/reflexxes-motion-libraries.html">Reflexx motion libraries</a> (<a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simRMLPos.htm">CoppeliaSim 提供的相關函式庫</a>) 源自 <a href="https://www.rob.cs.tu-bs.de/">https://www.rob.cs.tu-bs.de/</a>, 是學生數約 2 萬人, 德國成立最早的 <a href="https://en.wikipedia.org/wiki/Technical_University_of_Braunschweig">Braunschweig 工業大學</a>.</p>
 <h4>1. Lua script</h4>
 <p><a href="https://www.coppeliarobotics.com/helpFiles/en/scripts.htm">https://www.coppeliarobotics.com/helpFiles/en/scripts.htm</a></p>
-<p><a href="https://www.coppeliarobotics.com/helpFiles/en/scriptExecution.htm">https://www.coppeliarobotics.com/helpFiles/en/scriptExecution.htm</a> </p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/scriptExecution.htm">https://www.coppeliarobotics.com/helpFiles/en/scriptExecution.htm</a></p>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/simulationScripts.htm">https://www.coppeliarobotics.com/helpFiles/en/simulationScripts.htm</a></p>
 <p style="padding-left: 60px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/mainScript.htm">https://www.coppeliarobotics.com/helpFiles/en/mainScript.htm</a></p>
 <p style="padding-left: 60px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/childScripts.htm">https://www.coppeliarobotics.com/helpFiles/en/childScripts.htm</a></p>
@@ -1489,8 +1490,16 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 30px;"><a href="https://liacs.leidenuniv.nl/~bakkerem2/robotics/">https://liacs.leidenuniv.nl/~bakkerem2/robotics/</a></p>
 <p style="padding-left: 30px;"><a href="https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html">https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html</a> </p>
 <p></p><h2>W14</h2>
-<p>協同產品設計實習課程, W14 週的取分項目為: MTB_robot.zip (參考資料)</p>
-<h2>Problem Solving</h2>
+<p>協同產品設計實習課程, W14 週的取分項目檔案位於: <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/MTB_robot">MTB Robot 取放 Block 控制</a>.</p>
+<h4>背景說明:</h4>
+<p style="padding-left: 30px;">所謂的 MTB Robot 是 <a href="https://www.coppeliarobotics.com/helpFiles/en/robotLanguageIntegrationTutorial.htm">https://www.coppeliarobotics.com/helpFiles/en/robotLanguageIntegrationTutorial.htm</a> 中用來展示其 plugin 功能, 可以自行設計機械手臂操控語法, 並編寫客製化解譯 plugin 來解讀為 CoppeliaSim 操控流程.</p>
+<h4>取分項目:</h4>
+<ol>
+<li>請簡化上列四軸機械手臂取放方塊零件的 Lua 程式, 去除客製化控制 plugin 語法部分, 且刪除其舊有的 GUI 程式控制介面, 改用 CoppeliaSim 制式的 Lua Script 編寫與原先取放方塊零件相同的操控流程.</li>
+<li>請採用 CoppeliaSim <a href="https://www.coppeliarobotics.com/helpFiles/en/customUIPlugin.htm">Qt based GUI 介面</a>, 改寫原 <a href="https://github.com/CoppeliaRobotics/models/blob/master/robots/non-mobile/MTB%20robot.ttm">MTB robot.ttm</a> 模型中的 legacy GUI 介面視窗.</li>
+</ol>
+<p style="padding-left: 30px;"></p>
+<p></p><h2>Problem Solving</h2>
 <p>在 <a href="http://mde.tw/cd2021/content/W5.html">W5</a> 的教學內容中, 已經說明要熟悉利用一個套件來解決問題的重點, 必須從其說明手冊的研讀開始, 以 CoppeliaSim 為例, 就必須仔細研讀其 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a>, 並且經常造訪其官方網站.</p>
 <p>由於 CoppeliaSim 於 2021.04.06 已經<a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">改版為 4.2.0</a> (CoppeliaSim 4.2.0 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 而且引用的 Lua 版次已經從 5.1 升級為 5.3, 因此目前散布在網路上的許多 V-rep 或 CoppeliaSim 既有模型, 若採用 Lua 5.3 版不相容的 Script 進行控制, 將無法在 CoppeliaSim 4.2.0 版次中執行. 其中牽涉的語法包括與 <a href="http://www.lua.org/manual/5.2/manual.html#8">Lua 5.2 不相容部分</a>及 <a href="http://www.lua.org/manual/5.3/manual.html#8">Lua 5.3 不相容部分</a>.</p>
 <p>目前 <a href="https://mde.tw">KMOLab</a> 正在嘗試改寫 <a href="https://github.com/mdecourse/cmsimde/">CMSiMDE</a>, 讓動態網頁與靜態網頁的轉換可以雙向並行, 意即, 目前若能將僅支援從動態網頁的 config/content.htm 轉為 content 目錄中的靜態網頁功能, 加上能夠從既有的 content 靜態網頁, 轉換為 config/content.htm 的格式, 使用者就可以先將 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的說明檔案超文件轉為 content 目錄中靜態網頁的格式, 然後透過 CMSiMDE 轉進動態網頁的 config/content.htm 中, 如此, 使用者就可以啟用動態網站對 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的內容進行編輯, 註記與改寫.</p>
