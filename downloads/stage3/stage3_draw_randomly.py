@@ -3,7 +3,7 @@
 import random
 
 # number of group menber to draw
-num = 4
+num = 2
 
 # check if data is "" or not
 def notVacant(data):
