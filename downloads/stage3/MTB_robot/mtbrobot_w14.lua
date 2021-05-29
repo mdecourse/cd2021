@@ -6,34 +6,44 @@ function sysCall_init()
     mtb3=sim.getObjectHandle('MTB_link3Respondable')
     suctionPad=sim.getObjectHandle('suctionPad')
     rotation1 = 0
+    distance3 = 0
     deg = math.pi/180
 end
 function sysCall_actuation() 
-    --degree = 2.math.pi/180
-    --sim.setJointTargetPosition(axis1, 30*degree)
-    --sim.setObjectPosition(mtb3, -1, {0.2, 0.3, 0.2})
-    
-    --sim.setJointPosition(axis1, -math.pi*0.5)
-    
+
     message, auxiliaryData=sim.getSimulatorMessage()
         while message ~= -1 do
             key=auxiliaryData[1]
             sim.addStatusbarMessage('key:'..key)
             if (message==sim.message_keypress) then
                 if (auxiliaryData[1]==112) then --p
+                    -- if key p pressed activate the suction mode
 sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','true')
-                end -- if
+                end -- if p
                 if (auxiliaryData[1]==113) then --q
+                    -- if key q pressed deactivate the suction mode
 sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','false')
-                end -- if
+                end -- if q
                 if (auxiliaryData[1]==114) then --r
+                    -- if key r pressed axis1 angle adds 5 degrees
                      rotation1 = rotation1 + 5*deg
                      sim.setJointPosition(axis1, rotation1)
-                end -- if
-                if (auxiliaryData[1]==108) then --r
+                end -- if r
+                if (auxiliaryData[1]==108) then --l
+                    -- if key l pressed axis1 angle substract 5 degrees
                      rotation1 = rotation1 - 5*deg
                      sim.setJointPosition(axis1, rotation1)
-                end -- if
+                end -- if l
+                if (auxiliaryData[1]==100) then --d
+                    -- if key d pressed axis3 will down 0.01 m
+                     distance3 = distance3 + 0.01
+                     sim.setJointPosition(axis3, distance3)
+                end -- if d
+                if (auxiliaryData[1]==117) then --u
+                    -- if key u pressed axis3 will up 0.01 m
+                     distance3 = distance3 - 0.01
+                     sim.setJointPosition(axis3, distance3)
+                end -- if u
            end  -- if
     message, auxiliaryData=sim.getSimulatorMessage()
         end -- while

@@ -13,7 +13,6 @@
 <v t="leo.20210526155936.1"><vh>About W14 task</vh>
 <v t="leo.20210529151306.1"><vh>mtbrobot_w14</vh></v>
 </v>
-<v t="leo.20210529164809.1"><vh>reference</vh></v>
 <v t="leo.20210529215420.1"><vh>force sensor</vh></v>
 <v t="leo.20210529155453.1"><vh>recursive importer</vh></v>
 <v t="leo.20210529155606.1"><vh>imported files</vh>
@@ -115,7 +114,7 @@ vertical: body pane on the botton</t>
 目前 MTB_robot 是一項四軸機械手臂, 採用特殊的指令語言令 robot 移動, 並利用 suction pad 執行 pick and place
 
 請各組設法去除原有的特殊控制語法, 編寫一組通用的 lua 程式完成上述 MTB_robot 取放 block 的操作流程.</t>
-<t tx="leo.20210529151306.1">直接以 lua 驅動 robot</t>
+<t tx="leo.20210529151306.1">將原先透過 plugin 特殊控制語法的場景, 改為直接以 lua 驅動 robot</t>
 <t tx="leo.20210529155453.1">'''Recursively import all python files in a directory and clean the result.'''
 # ctrl + b to execute
 
@@ -127,31 +126,40 @@ c.recursiveImport(
 )</t>
 <t tx="leo.20210529155606.1"></t>
 <t tx="leo.20210529155606.10">function sysCall_actuation() 
-    --degree = 2.math.pi/180
-    --sim.setJointTargetPosition(axis1, 30*degree)
-    --sim.setObjectPosition(mtb3, -1, {0.2, 0.3, 0.2})
-    
-    --sim.setJointPosition(axis1, -math.pi*0.5)
-    
+
     message, auxiliaryData=sim.getSimulatorMessage()
         while message ~= -1 do
             key=auxiliaryData[1]
             sim.addStatusbarMessage('key:'..key)
             if (message==sim.message_keypress) then
                 if (auxiliaryData[1]==112) then --p
+                    -- if key p pressed activate the suction mode
 sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','true')
-                end -- if
+                end -- if p
                 if (auxiliaryData[1]==113) then --q
+                    -- if key q pressed deactivate the suction mode
 sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','false')
-                end -- if
+                end -- if q
                 if (auxiliaryData[1]==114) then --r
+                    -- if key r pressed axis1 angle adds 5 degrees
                      rotation1 = rotation1 + 5*deg
                      sim.setJointPosition(axis1, rotation1)
-                end -- if
-                if (auxiliaryData[1]==108) then --r
+                end -- if r
+                if (auxiliaryData[1]==108) then --l
+                    -- if key l pressed axis1 angle substract 5 degrees
                      rotation1 = rotation1 - 5*deg
                      sim.setJointPosition(axis1, rotation1)
-                end -- if
+                end -- if l
+                if (auxiliaryData[1]==100) then --d
+                    -- if key d pressed axis3 will down 0.01 m
+                     distance3 = distance3 + 0.01
+                     sim.setJointPosition(axis3, distance3)
+                end -- if d
+                if (auxiliaryData[1]==117) then --u
+                    -- if key u pressed axis3 will up 0.01 m
+                     distance3 = distance3 - 0.01
+                     sim.setJointPosition(axis3, distance3)
+                end -- if u
            end  -- if
     message, auxiliaryData=sim.getSimulatorMessage()
         end -- while
@@ -345,121 +353,9 @@ end
     mtb3=sim.getObjectHandle('MTB_link3Respondable')
     suctionPad=sim.getObjectHandle('suctionPad')
     rotation1 = 0
+    distance3 = 0
     deg = math.pi/180
 end
-</t>
-<t tx="leo.20210529164809.1">@language lua
-function sysCall_init()
-         
-    jointHandles={{-1,-1,-1},{-1,-1,-1},{-1,-1,-1}}
-    firstPartTorqueSensorHandles={-1,-1,-1}
-    for i=0,2,1 do
-        if (i~=1) then
-            jointHandles[i+1][1]=sim.getObjectHandle('BarrettHand_jointA_'..i)
-        end
-        jointHandles[i+1][2]=sim.getObjectHandle('BarrettHand_jointB_'..i)
-        jointHandles[i+1][3]=sim.getObjectHandle('BarrettHand_jointC_'..i)
-        firstPartTorqueSensorHandles[i+1]=sim.getObjectHandle('BarrettHand_fingerSensor'..i)
-    end
-    communicationTube=sim.tubeOpen(0,'BarrettGripperState'..sim.getNameSuffix(nil),1)
-    
-    closing=false
-    fingerAngle=0
-    closing=flase
-    firstPartLocked={false,false,false}
-    needFullOpening={0,0,0}
-    firstPartTorqueOvershootCount={0,0,0}
-    firstPartTorqueOvershootCountRequired=1
-    firstPartMaxTorque=0.9
-    closingVel=60*math.pi/180
-    openingVel=-120*math.pi/180
-    closingOpeningTorque=1
-    for i=1,3,1 do
-        sim.setObjectInt32Parameter(jointHandles[i][2],sim.jointintparam_motor_enabled,1)
-        sim.setObjectInt32Parameter(jointHandles[i][2],sim.jointintparam_ctrl_enabled,0)
-        sim.setObjectInt32Parameter(jointHandles[i][3],sim.jointintparam_motor_enabled,1)
-        sim.setObjectInt32Parameter(jointHandles[i][3],sim.jointintparam_ctrl_enabled,1)
-        sim.setJointTargetVelocity(jointHandles[i][2],-closingVel)
-        sim.setJointTargetVelocity(jointHandles[i][3],-closingVel/3)
-        sim.setJointForce(jointHandles[i][2],closingOpeningTorque)
-        sim.setJointForce(jointHandles[i][3],closingOpeningTorque)
-    end
-    
-end
-
-function sysCall_cleanup() 
- 
-end 
-
-function sysCall_actuation() 
-    
-    data=sim.tubeRead(communicationTube)
-    if (data) then
-        closing=sim.unpackInt32Table(data,0,1)[1]~=0
-        fingerAngle=sim.unpackFloatTable(data,1,1)[1]
-    end
-    
-    sim.setJointTargetPosition(jointHandles[1][1],-math.pi*0.5+fingerAngle)
-    sim.setJointTargetPosition(jointHandles[3][1],-math.pi*0.5+fingerAngle)
-    
-    for i=1,3,1 do
-        if (closing)and(needFullOpening[1]~=2)and(needFullOpening[2]~=2)and(needFullOpening[3]~=2) then
-            if (firstPartLocked[i]) then
-                sim.setJointTargetVelocity(jointHandles[i][3],closingVel/3)
-            else
-                r,f,t=sim.readForceSensor(firstPartTorqueSensorHandles[i])
-                if (r&gt;0)and(math.abs(t[3])&gt;firstPartMaxTorque) then
-                    firstPartTorqueOvershootCount[i]=firstPartTorqueOvershootCount[i]+1
-                else
-                    firstPartTorqueOvershootCount[i]=0
-                end
-                if (firstPartTorqueOvershootCount[i]&gt;=firstPartTorqueOvershootCountRequired) then
-                    needFullOpening[i]=1
-                    firstPartLocked[i]=true
-                    -- First joint is now locked and holding the position:
-                    sim.setObjectInt32Parameter(jointHandles[i][2],sim.jointintparam_ctrl_enabled,1)
-                    sim.setJointForce(jointHandles[i][2],closingOpeningTorque*100)
-                    sim.setJointTargetPosition(jointHandles[i][2],sim.getJointPosition(jointHandles[i][2]))
-                    -- second joint is now not in position control anymore:
-                    sim.setObjectInt32Parameter(jointHandles[i][3],sim.jointintparam_ctrl_enabled,0)
-                    sim.setJointTargetVelocity(jointHandles[i][3],closingVel/3)
-                else
-                    sim.setJointTargetVelocity(jointHandles[i][2],closingVel)
-                    sim.setJointTargetPosition(jointHandles[i][3],(45*math.pi/180)+sim.getJointPosition(jointHandles[i][2])/3)
-                end
-            end
-        else
-            if (needFullOpening[i]==1) then
-                needFullOpening[i]=2
-            end
-            sim.setJointTargetVelocity(jointHandles[i][3],openingVel/3)
-            if (firstPartLocked[i]) then
-                jv=sim.getJointPosition(jointHandles[i][3])
-                if (jv&lt;45.5*math.pi/180) then
-                    firstPartLocked[i]=false -- we unlock the first part
-                    sim.setObjectInt32Parameter(jointHandles[i][2],sim.jointintparam_ctrl_enabled,0)
-                    sim.setJointForce(jointHandles[i][2],closingOpeningTorque)
-                    sim.setJointTargetVelocity(jointHandles[i][2],openingVel)
-                end
-            else
-                if (needFullOpening[i]~=0) then
-                    jv3=sim.getJointPosition(jointHandles[i][3])
-                    jv2=sim.getJointPosition(jointHandles[i][2])
-                    if (jv3&lt;45.5*math.pi/180)and(jv2&lt;2*math.pi/180) then
-                        needFullOpening[i]=0
-                        -- second joint is now again in position control:
-                        sim.setObjectInt32Parameter(jointHandles[i][3],sim.jointintparam_ctrl_enabled,1)
-                        sim.setJointTargetPosition(jointHandles[i][3],(45*math.pi/180)+sim.getJointPosition(jointHandles[i][2])/3)
-                    end
-                else
-                    sim.setJointTargetVelocity(jointHandles[i][2],openingVel)
-                    sim.setJointTargetPosition(jointHandles[i][3],(45*math.pi/180)+sim.getJointPosition(jointHandles[i][2])/3)
-                end
-            end
-        end
-    end
-end 
-
 </t>
 <t tx="leo.20210529215420.1">Force sensors are initially rigid links between two shapes that are able to measure transmitted forces and torques. The rigidity of force sensors is conditional, in the sense that force sensors can be broken if a certain condition arises (e.g. if a force or torque threshold is overshot). Following figure illustrates an application using a force sensor:
 
