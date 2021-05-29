@@ -405,6 +405,7 @@ end
     sim.setObjectMatrix(l,-1,m)
     associatedRobotHandle=sim.getObjectHandle('MTB_Robot')
 end
+
 </t>
 <t tx="leo.20210526154304.2">function sysCall_cleanup() 
     sim.setLinkDummy(l,-1)
@@ -412,10 +413,13 @@ end
     m=sim.getObjectMatrix(l2,-1)
     sim.setObjectMatrix(l,-1,m)
 end 
+
 </t>
 <t tx="leo.20210526154304.3">function sysCall_actuation() 
     -- Set the active/inactive state (directly controlled by the robot program):
+
     active=false
+
     -- here, read the active flag from the robot server (i.e. to activate the suction cup):
     local serverHandlePacked=sim.readCustomDataBlock(associatedRobotHandle,'@tmpMTBSERVERHANDLE')
     if serverHandlePacked then
@@ -423,6 +427,7 @@ end
         robotOutput=simMTB.getOutput(serverHandle)
         active=(sim.boolAnd32(robotOutput[1],1)==1)
     end
+    
     parent=sim.getObjectParent(l)
     if (active==false) then
         if (parent~=b) then
