@@ -1377,7 +1377,8 @@ robot.MoveJ([0,0,0,0,10,-200])</pre>
 <p>將上述 .simscene.xml 檔案置於 CoppeliaSim 4.1.0 之視窗畫面如下:</p>
 <p><img caption="false" height="317" src="/images/Fanuc_m710ic_50_coppeliasim_xml.png" width="530"/></p>
 <h4>Pick and Place 參考:</h4>
-<p><a href="https://sajidnisar.github.io/posts/python_kinematics_dh">https://sajidnisar.github.io/posts/python_kinematics_dh</a> </p>
+<p><a href="https://petercorke.github.io/robotics-toolbox-python/intro.html">https://petercorke.github.io/robotics-toolbox-python/intro.html</a> </p>
+<p><a href="https://sajidnisar.github.io/posts/python_kinematics_dh">https://sajidnisar.github.io/posts/python_kinematics_dh</a></p>
 <p><a href="https://automaticaddison.com/coding-denavit-hartenberg-tables-using-python/">https://automaticaddison.com/coding-denavit-hartenberg-tables-using-python/</a></p>
 <p><a href="https://github.com/MultipedRobotics/dh">https://github.com/MultipedRobotics/dh</a></p>
 <p><a href="https://github.com/Zekhire/oop_robot_simulation">https://github.com/Zekhire/oop_robot_simulation</a></p>
@@ -1495,7 +1496,14 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 30px;"><a href="http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction">http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction</a></p>
 <p style="padding-left: 30px;"><a href="https://liacs.leidenuniv.nl/~bakkerem2/robotics/">https://liacs.leidenuniv.nl/~bakkerem2/robotics/</a></p>
 <p style="padding-left: 30px;"><a href="https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html">https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html</a> </p>
-<p></p><h2>W14</h2>
+<p></p><h2>W14-W15</h2>
+<h4>CoppeliaSim 控制程式學習流程:</h4>
+<ol>
+<li>Lua embedded scripts - 根據<a href="https://www.lua.org/pil/1.html">官方簡介</a>與 <a href="https://www.tutorialspoint.com/lua/index.htm">Tutorial</a>, 在<a href="http://mde.tw/lab/downloads/lua/index.html">網際解譯器</a>中執行, 並參考 <a href="http://mde.tw/cad2020/content/CoppeliaSim.html">CAD2020 CoppeliaSim</a> 頁面中的範例, 了解如何利用 non-threaded and threaded Lua 操控模擬場景中的機電系統.</li>
+<li>Legacy Python remote API - 根據<a href="https://www.coppeliarobotics.com/helpFiles/en/legacyRemoteApiOverview.htm">簡介</a>, <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiClientSide.htm">客戶端需求說明</a>與 <a href="http://fid.cl/courses/ai-robotics/vrep-tut/pythonBubbleRob.pdf">Tutorial</a>, 並參考 <a href="http://mde.tw/cad2020/content/CoppeliaSim.html">CAD2020 CoppeliaSim</a> 頁面中的範例, 查詢 <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm">Python remote API 函式</a>, 了解如何利用 Python 操控模擬場景中的機電系統.</li>
+<li>B0-based remote API - 根據<a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiOverview.htm">簡介</a>了解如何利用 Python 操控模擬場景中的機電系統.</li>
+<li>在 Python remote API 中導入 Flask, 並啟動 server 的多埠號架構, 將場景中的 image sensor 影像串流至各操控端瀏覽器, 以便執行組員間的場景協同控制系統設計.</li>
+</ol>
 <p><a href="https://drive.google.com/file/d/1W6sncSvH7vQgOckxQx7ucrbkQwmEFRvJ/view?usp=sharing">W14 線上課程教學影片</a></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/PwGY8PxQOXY" title="YouTube video player" width="560"></iframe></p>
 <p><a href="https://www.youtube.com/watch?v=PwGY8PxQOXY&amp;list=PLjzuoBhdtaXOoqkJUqhYQletLLnJP8vjZ">其他 CoppeliaSim 線上教學課程</a>.</p>

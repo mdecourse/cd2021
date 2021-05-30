@@ -1496,7 +1496,21 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 30px;"><a href="http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction">http://hades.mech.northwestern.edu/index.php/CoppeliaSim_Introduction</a></p>
 <p style="padding-left: 30px;"><a href="https://liacs.leidenuniv.nl/~bakkerem2/robotics/">https://liacs.leidenuniv.nl/~bakkerem2/robotics/</a></p>
 <p style="padding-left: 30px;"><a href="https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html">https://staff.fnwi.uva.nl/a.visser/education/BehaviorBasedRobotics/Labbook2021.html</a> </p>
-<p></p><h2>W14</h2>
+<p></p><h2>W14-W15</h2>
+<h4>CoppeliaSim 控制程式學習流程:</h4>
+<ol>
+<li>Lua embedded scripts - 根據<a href="https://www.lua.org/pil/1.html">官方簡介</a>與 <a href="https://www.tutorialspoint.com/lua/index.htm">Tutorial</a>, 在<a href="http://mde.tw/lab/downloads/lua/index.html">網際解譯器</a>中執行, 並參考 <a href="http://mde.tw/cad2020/content/CoppeliaSim.html">CAD2020 CoppeliaSim</a> 頁面中的範例, 了解如何利用 non-threaded and threaded Lua 操控模擬場景中的機電系統.</li>
+<li>Legacy Python remote API - 根據<a href="https://www.coppeliarobotics.com/helpFiles/en/legacyRemoteApiOverview.htm">簡介</a>, <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiClientSide.htm">客戶端需求說明</a>與 <a href="http://fid.cl/courses/ai-robotics/vrep-tut/pythonBubbleRob.pdf">Tutorial</a>, 並參考 <a href="http://mde.tw/cad2020/content/CoppeliaSim.html">CAD2020 CoppeliaSim</a> 頁面中的範例, 查詢 <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctionsPython.htm">Python remote API 函式</a>, 了解如何利用 Python 操控模擬場景中的機電系統.</li>
+<li>B0-based remote API - 根據<a href="https://www.coppeliarobotics.com/helpFiles/en/b0RemoteApiOverview.htm">簡介</a>了解如何利用 Python 操控模擬場景中的機電系統.</li>
+<li>在 Python remote API 中導入 Flask, 並啟動 server 的多埠號架構, 將場景中的 image sensor 影像串流至各操控端瀏覽器, 以便執行組員間的場景協同控制系統設計.</li>
+</ol>
+<h4>機械手臂取放物件專案學習流程:</h4>
+<ol>
+<li>自行利用 SolidWorks, Inventor, NX, Onshape 或 Solvespace 繪製機械手臂零組件後, 分別以 ASCII STL 或 Binary STL 手動轉入 Coppeliasim 建立機械手臂 .ttm 模型備用.</li>
+<li>根據 CoppeliaSim 4.1.0 版 (4.2.0 無法開啟 .simplescene.xml 檔案) 中的 <a href="https://www.coppeliarobotics.com/helpFiles/en/xmlFormat.htm">XML simplescene 格式</a>, 利用 Python 程式建立所需的機械手臂 .ttm 模型備用.</li>
+<li>根據 RoKiSim 中的六軸機械手臂定義, 以 Python 程式, 將既有的 Industrial Robots STL 轉為 CoppeliaSim simplexml 模型格式備用.</li>
+<li>將上述完成的機械手臂模型導入場景後, 機械手臂末端利用 force sensor 接上 components/grippers/suction pad.ttm tool 後, 先完成 MTB Robot 取放 Block 範例的改寫, 再完成 <a href="https://www.fanuc.eu/it/en/robots/robot-filter-page/m-710-series/m-710ic-50">FANUC m-710ic-50</a> 機械手臂的<a href="https://www.youtube.com/watch?v=3EqzMzszMV0">圓球取放範例</a>.</li>
+</ol>
 <p><a href="https://drive.google.com/file/d/1W6sncSvH7vQgOckxQx7ucrbkQwmEFRvJ/view?usp=sharing">W14 線上課程教學影片</a></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/PwGY8PxQOXY" title="YouTube video player" width="560"></iframe></p>
 <p><a href="https://www.youtube.com/watch?v=PwGY8PxQOXY&amp;list=PLjzuoBhdtaXOoqkJUqhYQletLLnJP8vjZ">其他 CoppeliaSim 線上教學課程</a>.</p>
