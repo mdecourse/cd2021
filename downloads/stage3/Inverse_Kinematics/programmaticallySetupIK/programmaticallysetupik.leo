@@ -10,8 +10,12 @@
 <v t="leo.20210526153741.2"><vh>@data qt-gui-plugin-style-sheet</vh></v>
 <v t="leo.20210526153741.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
+<v t="leo.20210602200835.1"><vh>sim.handle_self</vh></v>
+<v t="leo.20210602201605.1"><vh>sim.getObjectMatrix</vh></v>
+<v t="leo.20210602204142.1"><vh>simIK</vh></v>
 <v t="leo.20210529155453.1"><vh>recursive importer</vh></v>
 <v t="leo.20210602170939.1"><vh>imported files</vh>
+<v t="leo.20210602202348.1"><vh>Inverse Kinematics</vh></v>
 <v t="leo.20210602170939.2"><vh>@path ./</vh>
 <v t="leo.20210602170939.3"><vh>@clean beam.lua</vh>
 <v t="leo.20210602170939.4"><vh>sysCall_init (beam.lua)</vh></v>
@@ -122,7 +126,8 @@ c.recursiveImport(
 @language lua
 @tabwidth -4
 </t>
-<t tx="leo.20210602170939.11">function sysCall_init()
+<t tx="leo.20210602170939.11">-- use program to setup IK group
+function sysCall_init()
     -- Take a few handles from the blue robot:
     simBase=sim.getObjectHandle('RobotB')
     simTip=sim.getObjectHandle('RobotB_tip')
@@ -131,6 +136,7 @@ c.recursiveImport(
     for i=1,6,1 do
         simJoints[i]=sim.getObjectHandle('RobotB_joint'..i)
     end
+
     -- Now build a kinematic chain and 2 IK groups (undamped and damped) inside of the IK plugin environment,
     -- based on the kinematics of the blue robot:
     ikJoints={}
@@ -146,6 +152,7 @@ c.recursiveImport(
         simIK.setJointPosition(ikEnv,ikJoints[i],sim.getJointPosition(simJoints[i])) -- set the same joint position as its CoppeliaSim counterpart joint
         simIK.setObjectMatrix(ikEnv,ikJoints[i],-1,sim.getObjectMatrix(simJoints[i],-1)) -- set the same object pose as its CoppeliaSim counterpart joint
         simIK.setObjectParent(ikEnv,ikJoints[i],parent,true) -- set its corresponding parent
+        -- 依據 robot link hierarchy 設定各 joint 從屬關係
         parent=ikJoints[i]
     end
     ikTip=simIK.createDummy(ikEnv) -- create the tip dummy in the IK environment
@@ -166,9 +173,11 @@ c.recursiveImport(
     simIK.setIkElementBase(ikEnv,ikGroup_damped,ikElementHandle,ikBase) -- specify the base of that IK element
     simIK.setIkElementConstraints(ikEnv,ikGroup_damped,ikElementHandle,simIK.constraint_pose) -- specify the constraints of that IK element
 end
+
 </t>
 <t tx="leo.20210602170939.12">function sysCall_actuation()
     simIK.setObjectMatrix(ikEnv,ikTarget,-1,sim.getObjectMatrix(simTarget,-1)) -- reflect the pose of the target dummy to its counterpart in the IK environment
+
     if simIK.handleIkGroup(ikEnv,ikGroup_undamped)==simIK.result_fail then -- try to solve with the undamped method
         -- the position/orientation could not be reached.
        simIK.handleIkGroup(ikEnv,ikGroup_damped) -- try to solve with the damped method
@@ -181,10 +190,12 @@ end
             ikFailedReportHandle=nil
         end
     end
+    
     for i=1,#simJoints,1 do
         sim.setJointPosition(simJoints[i],simIK.getJointPosition(ikEnv,ikJoints[i])) -- apply the joint values computed in the IK environment to their CoppeliaSim joint counterparts
     end
 end 
+
 </t>
 <t tx="leo.20210602170939.13">function sysCall_cleanup() 
     simIK.eraseEnvironment(ikEnv) -- erase the IK environment
@@ -197,9 +208,11 @@ end
 @tabwidth -4
 </t>
 <t tx="leo.20210602170939.4">function sysCall_init()
+    -- sim.handle_self is the handle of the object associated with the script currently executing
     h=sim.getObjectHandle(sim.handle_self)
     initM=sim.getObjectMatrix(h,-1)
 end
+
 </t>
 <t tx="leo.20210602170939.5">function sysCall_actuation()
     local t=sim.getSimulationTime()
@@ -215,13 +228,17 @@ end
 @language lua
 @tabwidth -4
 </t>
-<t tx="leo.20210602170939.7">function sysCall_init() 
+<t tx="leo.20210602170939.7">-- IK setup by using GUI method
+function sysCall_init() 
     ik_undamped=sim.getIkGroupHandle('RobotA_undamped')
     ik_damped=sim.getIkGroupHandle('RobotA_damped')
 end
+
 </t>
 <t tx="leo.20210602170939.8">function sysCall_cleanup() 
+ 
 end 
+
 </t>
 <t tx="leo.20210602170939.9">function sysCall_actuation() 
     if sim.handleIkGroup(ik_undamped)==sim.ikresult_fail then
@@ -238,5 +255,27 @@ end
     end
 end 
 </t>
+<t tx="leo.20210602200835.1">sim.handle_self, in order to retrieve the handle of the object associated with the script currently executing.</t>
+<t tx="leo.20210602201605.1">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetObjectMatrix.htm
+Retrieves the transformation matrix of an object. 
+
+initM=sim.getObjectMatrix(h,-1) get absolute transformation matrix of h
+</t>
+<t tx="leo.20210602202348.1">https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm
+
+https://www.coppeliarobotics.com/helpFiles/en/solvingIkAndFk.htm
+
+https://www.coppeliarobotics.com/helpFiles/en/coppeliaKinematicsRoutines-api.htm
+
+https://www.coppeliarobotics.com/helpFiles/en/remoteApiFunctions.htm#simxCallScriptFunction</t>
+<t tx="leo.20210602204142.1">https://www.coppeliarobotics.com/helpFiles/en/simIK.htm
+
+simIK.constraint_position=simIK.constraint_x|simIK.constraint_y|simIK.constraint_z, 
+
+simIK.constraint_orientation=simIK.constraint_alpha_beta|simIK.constraint_gamma, 
+
+and 
+
+simIK.constraint_pose=simIK.constraint_position|simIK.constraint_orientation</t>
 </tnodes>
 </leo_file>

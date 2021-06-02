@@ -1,4 +1,5 @@
 function sysCall_init()
+    -- sim.handle_self is the handle of the object associated with the script currently executing
     h=sim.getObjectHandle(sim.handle_self)
     initM=sim.getObjectMatrix(h,-1)
 end

@@ -1,3 +1,4 @@
+-- IK setup by using GUI method
 function sysCall_init() 
     ik_undamped=sim.getIkGroupHandle('RobotA_undamped')
     ik_damped=sim.getIkGroupHandle('RobotA_damped')

@@ -1,3 +1,4 @@
+-- use program to setup IK group
 function sysCall_init()
     -- Take a few handles from the blue robot:
     simBase=sim.getObjectHandle('RobotB')
@@ -23,6 +24,7 @@ function sysCall_init()
         simIK.setJointPosition(ikEnv,ikJoints[i],sim.getJointPosition(simJoints[i])) -- set the same joint position as its CoppeliaSim counterpart joint
         simIK.setObjectMatrix(ikEnv,ikJoints[i],-1,sim.getObjectMatrix(simJoints[i],-1)) -- set the same object pose as its CoppeliaSim counterpart joint
         simIK.setObjectParent(ikEnv,ikJoints[i],parent,true) -- set its corresponding parent
+        -- 依據 robot link hierarchy 設定各 joint 從屬關係
         parent=ikJoints[i]
     end
     ikTip=simIK.createDummy(ikEnv) -- create the tip dummy in the IK environment
