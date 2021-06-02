@@ -22,6 +22,8 @@
 <v t="leo.20210529155606.10"><vh>sysCall_actuation (mtbrobot_w14.lua)</vh></v>
 <v t="leo.20210529155606.11"><vh>sysCall_sensing (mtbrobot_w14.lua)</vh></v>
 <v t="leo.20210529155606.12"><vh>sysCall_cleanup (mtbrobot_w14.lua)</vh></v>
+<v t="leo.20210602134238.1"><vh>table_to_string</vh></v>
+<v t="leo.20210602140159.1"><vh>round</vh></v>
 <v t="leo.20210529155606.13"><vh>insertBox (mtbrobot_w14.lua)</vh></v>
 </v>
 <v t="leo.20210529155606.18"><vh>@clean suctionpad_w14.lua</vh>
@@ -130,36 +132,40 @@ c.recursiveImport(
     message, auxiliaryData=sim.getSimulatorMessage()
         while message ~= -1 do
             key=auxiliaryData[1]
-            sim.addStatusbarMessage('key:'..key)
+            sim.addStatusbarMessage('使用者按下 key:'..key)
             if (message==sim.message_keypress) then
-                if (auxiliaryData[1]==112) then --p
+                if (auxiliaryData[1]==112) then --p activate the suction pad
                     -- if key p pressed activate the suction mode
 sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','true')
                 end -- if p
-                if (auxiliaryData[1]==113) then --q
+                if (auxiliaryData[1]==113) then --q deactivate the suction pad
                     -- if key q pressed deactivate the suction mode
 sim.setScriptSimulationParameter(sim.getScriptAssociatedWithObject(suctionPad),'active','false')
                 end -- if q
-                if (auxiliaryData[1]==114) then --r
+                if (auxiliaryData[1]==114) then --r right turn in degree
                     -- if key r pressed axis1 angle adds 5 degrees
                      rotation1 = rotation1 + 5*deg
                      sim.setJointPosition(axis1, rotation1)
                 end -- if r
-                if (auxiliaryData[1]==108) then --l
+                if (auxiliaryData[1]==108) then --l left turn in degree
                     -- if key l pressed axis1 angle substract 5 degrees
                      rotation1 = rotation1 - 5*deg
                      sim.setJointPosition(axis1, rotation1)
                 end -- if l
-                if (auxiliaryData[1]==100) then --d
+                if (auxiliaryData[1]==100) then --d suction pad down
                     -- if key d pressed axis3 will down 0.01 m
                      distance3 = distance3 + 0.01
                      sim.setJointPosition(axis3, distance3)
                 end -- if d
-                if (auxiliaryData[1]==117) then --u
+                if (auxiliaryData[1]==117) then --u suction pad up
                     -- if key u pressed axis3 will up 0.01 m
                      distance3 = distance3 - 0.01
                      sim.setJointPosition(axis3, distance3)
                 end -- if u
+                if (auxiliaryData[1]==99) then --c coordinate of block
+                    blockPosition = sim.getObjectPosition(block, BaseFrame)
+                    sim.addStatusbarMessage("方塊目前座標為:"..table_to_string(blockPosition))
+                end --if c
            end  -- if
     message, auxiliaryData=sim.getSimulatorMessage()
         end -- while
@@ -352,6 +358,9 @@ end
     axis4=sim.getObjectHandle('MTB_axis4')
     mtb3=sim.getObjectHandle('MTB_link3Respondable')
     suctionPad=sim.getObjectHandle('suctionPad')
+    MTB_Robot=sim.getObjectHandle("MTB_Robot")
+    BaseFrame=sim.getObjectHandle("BaseFrame")
+    block =sim.getObjectHandle("block")
     rotation1 = 0
     distance3 = 0
     deg = math.pi/180
@@ -362,5 +371,40 @@ end
 A force sensor is only operational during simulation if it is dynamically enabled. It means the child of the force sensor need to be dynamically enabled.
 
 In CoppeliaSim, only a limited number of objects will be dynamically simulated. Those are shapes, joints and force sensors, but it will depend on the scene structure and object properties, whether a given object will be dynamically simulated. </t>
+<t tx="leo.20210602134238.1">-- Convert a lua table into a lua syntactically correct string
+function table_to_string(tbl)
+    local result = "{"
+    for k, v in pairs(tbl) do
+        -- Check the key type (ignore any numerical keys - assume its an array)
+        if type(k) == "string" then
+            result = result.."[\""..k.."\"]".."="
+        end
+
+        -- Check the value type
+        if type(v) == "table" then
+            result = result..table_to_string(v)
+        elseif type(v) == "boolean" then
+            result = result..tostring(v)
+        else
+            v = round(v, 4)
+            result = result.."\""..v.."\""
+        end
+        result = result..","
+    end
+    -- Remove leading commas from the result
+    if result ~= "" then
+        result = result:sub(1, result:len()-1)
+    end
+    return result.."}"
+end</t>
+<t tx="leo.20210602140159.1">function round(x, n)
+    n = math.pow(10, n or 0)
+    x = x * n
+    if x &gt;= 0 then x = math.floor(x + 0.5) else x = math.ceil(x - 0.5) end
+    return x / n
+end
+
+
+</t>
 </tnodes>
 </leo_file>
