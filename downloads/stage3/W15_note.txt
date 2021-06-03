@@ -1,0 +1,15 @@
+https://fossil.kmol.info:3443
+
+acp "提交訊息"
+
+git remote add fossil https://fossil.kmol.info:3443/帳號/倉儲名稱.git
+
+git push fossil
+
+gogs web
+
+http://localhost:3000
+
+sudo /etc/init.d/stunnel4 start
+sudo /etc/init.d/stunnel4 stop
+sudo /etc/init.d/stunnel4 restart
