@@ -1521,12 +1521,13 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 60px;"><a href="https://github.com/gogs/gogs/issues/5184">https://github.com/gogs/gogs/issues/5184</a></p>
 <p style="padding-left: 60px;"><a href="https://codewords.recurse.com/issues/three/unpacking-git-packfiles">https://codewords.recurse.com/issues/three/unpacking-git-packfiles</a></p>
 <p style="padding-left: 60px;">Gitea:</p>
-<p style="padding-left: 90px;"><a href="https://github.com/go-gitea/gitea/issues/302">https://github.com/go-gitea/gitea/issues/302</a> </p>
+<p style="padding-left: 90px;"><a href="https://github.com/go-gitea/gitea/issues/302">https://github.com/go-gitea/gitea/issues/302</a></p>
 <p style="padding-left: 90px;"><a href="https://gist.github.com/bricewge/ca40d415f5f3a45de9c04e779ac68e03">Caddyfile </a></p>
-<p style="padding-left: 90px;"><a href="https://github.com/caddyserver/caddy">https://github.com/caddyserver/caddy</a> </p>
+<p style="padding-left: 90px;"><a href="https://github.com/caddyserver/caddy">https://github.com/caddyserver/caddy</a></p>
 <p style="padding-left: 30px;">Fossil SCM mirror of Git repository:</p>
-<p style="padding-left: 60px;"><a href="https://www.fossil-scm.org/home/doc/trunk/www/mirrortogithub.md">https://www.fossil-scm.org/home/doc/trunk/www/mirrortogithub.md</a> </p>
+<p style="padding-left: 60px;"><a href="https://www.fossil-scm.org/home/doc/trunk/www/mirrortogithub.md">https://www.fossil-scm.org/home/doc/trunk/www/mirrortogithub.md</a></p>
 <p style="padding-left: 60px;"><a href="https://fossil-scm.org/forum/info/0f1d7e653831cca30cbbf33734293705fc5c83f77bcd4e414c633275e66ba7ac">Git mirroring</a></p>
+<p style="padding-left: 60px;"><a href="https://fossil-scm.org/home/doc/trunk/www/inout.wiki">Import Git repo to Fossil SCM repo</a></p>
 <p><a href="https://drive.google.com/file/d/18BfY3PVEpcMZhu6HcjB1eTW19K_M5Qt2/view?usp=sharing">W15 第二段線上課程教學影片</a> (從 Lua 基本程式學習到 Kinematic 轉動主軸角度, 以及利用變數名稱控制吸盤作動, 其中的 <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/MTB_robot">https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/MTB_robot</a> 分為 W14 與 W15 等兩個版本, 分別以鍵盤按鍵控制手臂轉動, 吸盤作動及列出 block 絕對座標)</p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/PwGY8PxQOXY" title="YouTube video player" width="560"></iframe></p>
 <p><a href="https://www.youtube.com/watch?v=PwGY8PxQOXY&amp;list=PLjzuoBhdtaXOoqkJUqhYQletLLnJP8vjZ">其他 CoppeliaSim 線上教學課程</a>.</p>
@@ -1561,7 +1562,24 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 30px;"><a href="https://github.com/dsingh80/Full-Body-Inverse-Kinematics">https://github.com/dsingh80/Full-Body-Inverse-Kinematics</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/sudipchakraborty/An-Inverse-Kinematics-Demonstration-using-C-and-CoppeliaSim">https://github.com/sudipchakraborty/An-Inverse-Kinematics-Demonstration-using-C-and-CoppeliaSim</a></p>
 <p style="padding-left: 30px;"><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=3967&amp;start=20">https://forum.coppeliarobotics.com/viewtopic.php?t=3967&amp;start=20</a></p>
-<p style="padding-left: 30px;"><a href="https://www.robwork.dk/manual/inverse_kinematics/">https://www.robwork.dk/manual/inverse_kinematics/</a></p><h2>Problem Solving</h2>
+<p style="padding-left: 30px;"><a href="https://www.robwork.dk/manual/inverse_kinematics/">https://www.robwork.dk/manual/inverse_kinematics/</a></p><h2>W16</h2>
+<h4>CoppeliaSim Kinematics:</h4>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm">https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm</a></p>
+<p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/basicsOnIkGroupsAndIkElements.htm">https://www.coppeliarobotics.com/helpFiles/en/basicsOnIkGroupsAndIkElements.htm</a></p>
+<p>In CoppeliaSim, an IK task requires specifying at least following elements:</p>
+<ol>
+<li>a kinematic chain described with a tip dummy and a base object.</li>
+<li>a target dummy that the tip dummy will be constrained to follow.</li>
+</ol>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/kinematics.htm">https://www.coppeliarobotics.com/helpFiles/en/kinematics.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/kinematicsPlugin.htm">https://www.coppeliarobotics.com/helpFiles/en/kinematicsPlugin.htm</a></p>
+<p><a href="https://www.coppeliarobotics.com/helpFiles/en/coppeliaKinematicsRoutines.htm">https://www.coppeliarobotics.com/helpFiles/en/coppeliaKinematicsRoutines.htm</a></p>
+<p><a href="https://github.com/CoppeliaRobotics/simExtIK">https://github.com/CoppeliaRobotics/simExtIK</a></p>
+<p>Custom IK:</p>
+<p style="padding-left: 30px;"><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=3967&amp;start=20">https://forum.coppeliarobotics.com/viewtopic.php?t=3967&amp;start=20</a></p>
+<p style="padding-left: 30px;"><a href="https://www.researchgate.net/publication/351561339_An_Inverse_Kinematics_Demonstration_of_a_Custom_Robot_using_C_and_CoppeliaSim">https://www.researchgate.net/publication/351561339_An_Inverse_Kinematics_Demonstration_of_a_Custom_Robot_using_C_and_CoppeliaSim</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/vyomthakkar/ece470finalproject">https://github.com/vyomthakkar/ece470finalproject</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/griffincolvin/ECE470">https://github.com/griffincolvin/ECE470</a> </p><h2>Problem Solving</h2>
 <p>在 <a href="http://mde.tw/cd2021/content/W5.html">W5</a> 的教學內容中, 已經說明要熟悉利用一個套件來解決問題的重點, 必須從其說明手冊的研讀開始, 以 CoppeliaSim 為例, 就必須仔細研讀其 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a>, 並且經常造訪其官方網站.</p>
 <p>由於 CoppeliaSim 於 2021.04.06 已經<a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">改版為 4.2.0</a> (CoppeliaSim 4.2.0 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 而且引用的 Lua 版次已經從 5.1 升級為 5.3, 因此目前散布在網路上的許多 V-rep 或 CoppeliaSim 既有模型, 若採用 Lua 5.3 版不相容的 Script 進行控制, 將無法在 CoppeliaSim 4.2.0 版次中執行. 其中牽涉的語法包括與 <a href="http://www.lua.org/manual/5.2/manual.html#8">Lua 5.2 不相容部分</a>及 <a href="http://www.lua.org/manual/5.3/manual.html#8">Lua 5.3 不相容部分</a>.</p>
 <p>目前 <a href="https://mde.tw">KMOLab</a> 正在嘗試改寫 <a href="https://github.com/mdecourse/cmsimde/">CMSiMDE</a>, 讓動態網頁與靜態網頁的轉換可以雙向並行, 意即, 目前若能將僅支援從動態網頁的 config/content.htm 轉為 content 目錄中的靜態網頁功能, 加上能夠從既有的 content 靜態網頁, 轉換為 config/content.htm 的格式, 使用者就可以先將 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的說明檔案超文件轉為 content 目錄中靜態網頁的格式, 然後透過 CMSiMDE 轉進動態網頁的 config/content.htm 中, 如此, 使用者就可以啟用動態網站對 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的內容進行編輯, 註記與改寫.</p>
