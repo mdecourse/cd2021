@@ -2,7 +2,7 @@
         <head>
         <title>CD2021</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -134,64 +134,30 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Stage1 << <a href='Stage1.html'>Previous</a> <a href='cmsimde.html'>Next</a> >> cmsimde<br /><h1>W2</h1>
-<p>利用下列程式查驗尚未納分組人員:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True
-'''
-2021 spring:
-0741 1a
-0764 2a
-0776 2b
-2384 5j
-'''
-# for read data from url
-import urllib.request
-# for execution through proxy
-import os
-# for converting 2d list into 1d
-from itertools import chain 
- 
-proxy = 'http://[2001:288:6004:17::69]:3128'
- 
-os.environ['http_proxy'] = proxy 
-os.environ['HTTP_PROXY'] = proxy
-os.environ['https_proxy'] = proxy
-os.environ['HTTPS_PROXY'] = proxy
+    <div id="tipue_search_content">W16 << <a href='W16.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving<br /><h1>account flagged</h1>
+<h4>Github account flagged 的解決方法:</h4>
+<ol>
+<li>寫信詢問為何會被封鎖, 並<a href="https://www.google.com/search?q=github+account+flagged+solution">尋求解除封鎖</a>.</li>
+<li>自行建立 <a href="https://gogs.io/">gogs</a> 與 <a href="https://www.fossil-scm.org">Fossil SCM</a> 伺服器, 利用 gogs 展開原先在 Github 倉儲中的歷程資料, 利用 Fossil SCM 伺服原先在 Github Pages 上的靜態網頁.</li>
+</ol>
+<p>gogs 主機可以透過 <a href="https://letsencrypt.org/">https://letsencrypt.org/</a> 取得公開認證的數位簽章, 若使用自行簽署的數位簽章, 則用戶必須在執行 git 指令之前將 http.sslVerify 設為 false: git config --global http.sslVerify false</p>
+<p>建立 gogs 與 Fossil SCM 伺服器:</p>
+<p>以下為利用 <a href="https://www.stunnel.org/">Stunnel</a> 建立 TLS/SSL tunneling service for gogs 與 Fossil SCM servers 所需的設定檔案:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
+accept = server_domain_name:443
+cert = /etc/stunnel/localhost.crt
+key = /etc/stunnel/localhost.key
+exec = /usr/bin/fossil
+execargs = /usr/bin/fossil http /home/user_account/repository/ --https --nojail --notfound cd2021
 
-# read data from url
-with urllib.request.urlopen('https://nfulist.herokuapp.com/?semester=1092&amp;courseno=0764&amp;column=True') as response:
-   html = response.read().decode('utf-8')
-
-# split data with "&lt;/br&gt;" into list, up to here we get the student list of the cd2021 2a
-Udata = html.split("&lt;/br&gt;")
-#print("total:" + str(len(Udata)))
-
-# set group as vacent list
-group = []
-# open w2_a_list.txt which copied from http://c.kmol.info:8000/o616appencye at 2021/03/04 15:00
-with open("w2_a_list.txt") as file: 
-    content = file.readlines()
-for i in range(len(content)):
-    data = content[i].rstrip("\n").split("\t")
-    group.append(data)
-#print(group)
-
-# converting 2d list into 1d 
-# using chain.from_iterables 
-flatten_group= list(chain.from_iterable(group)) 
-for stud in Udata:
-    if stud not in flatten_group:
-        print(stud)
-
-
-</pre>
-<p>2a 初步查驗結果:</p>
-<p><img alt="" height="542" src="./../images/w2_grouping_check_2a.png" width="600"/></p>
-<p>2b 初步查驗結果:</p>
-<p><img alt="" height="542" src="./../images/w2_grouping_check_2b.png" width="600"/></p>
-<p><a href="./../downloads/grouping/w2_a_list.txt">2a stage1 分組名單</a></p>
-<p><a href="./../downloads/grouping/w2_b_list.txt">2b stage1 分組名單</a></p>
-<br />Stage1 << <a href='Stage1.html'>Previous</a> <a href='cmsimde.html'>Next</a> >> cmsimde</div>
+[https]
+accept = server_domain_name:3443
+connect = server_domain_name:3000
+cert = /etc/stunnel/localhost.crt
+key = /etc/stunnel/localhost.key</pre>
+<p>其中第一段, 將 port 443 設為 Fossil SCM 的網際連線埠號, 而 localhost.crt 與 localhost.key 則取自 /etc/letsencrypt/live/server_domain_name/fullchain.pem 與 /etc/letsencrypt/live/server_domain_name/privkey.pem.</p>
+<p>至於 Fossil SCM 的用戶倉儲目錄設為 /home/user_account/repository, 採用 https 啟動, 且以 drop root privilege but do not enter the chroot jail 的模式啟動, 並且內定倉儲設為 cd2021.fossil.</p>
+<p>而第二段則將 gogs 的對外 https 連線埠號設為 3443, 而 http 連線埠號則為 3000, 啟動時也是採用上述 Letsencrypt 所取得的公開認證數位簽章檔案.</p><br />W16 << <a href='W16.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->
       <div class="container">
