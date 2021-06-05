@@ -252,7 +252,8 @@ WantedBy=multi-user.target</pre>
 <p>由於 gogs 與 Fossil SCM 都是依賴 Stunnel 啟動, 開關或重啟服務:</p>
 <p style="padding-left: 30px;">sudo /etc/init.d/stunnel4 start</p>
 <p style="padding-left: 30px;">sudo /etc/init.d/stunnel4 stop</p>
-<p style="padding-left: 30px;">sudo /etc/initld/stunnel4 restart</p><br />W16 << <a href='W16.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
+<p style="padding-left: 30px;">sudo /etc/initld/stunnel4 restart</p>
+<p>接下來為了利用 Fossil SCM template 倉儲, 從網際表單讓使用者自行登錄建立能夠展開 Github 倉儲 Pages 靜態網頁的系統, 必須參考 <a href="http://mde.tw/wcm2021/content/Fossil%20scm.html">http://mde.tw/wcm2021/content/Fossil%20scm.html</a> 與 Google oauth2 介面, 讓使用者登入系統後填表建立對應的 Fossil SCM 倉儲, 之後再 fossil clone 至近端與登錄至 gogs 倉儲的檔案整合, 最後再 fossil commit, 即可將整合後的倉儲內容推向 Fossil SCM server, 並在 <a href="https://www.fossil-scm.org/home/doc/trunk/www/embeddeddoc.wiki">Fossil Documentation</a> 的機制下, 伺服整合至 Fossil SCM 之後的各版本的靜態網頁內容.</p><br />W16 << <a href='W16.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->
       <div class="container">
