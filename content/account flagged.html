@@ -157,7 +157,102 @@ cert = /etc/stunnel/localhost.crt
 key = /etc/stunnel/localhost.key</pre>
 <p>其中第一段, 將 port 443 設為 Fossil SCM 的網際連線埠號, 而 localhost.crt 與 localhost.key 則取自 /etc/letsencrypt/live/server_domain_name/fullchain.pem 與 /etc/letsencrypt/live/server_domain_name/privkey.pem.</p>
 <p>至於 Fossil SCM 的用戶倉儲目錄設為 /home/user_account/repository, 採用 https 啟動, 且以 drop root privilege but do not enter the chroot jail 的模式啟動, 並且內定倉儲設為 cd2021.fossil.</p>
-<p>而第二段則將 gogs 的對外 https 連線埠號設為 3443, 而 http 連線埠號則為 3000, 啟動時也是採用上述 Letsencrypt 所取得的公開認證數位簽章檔案.</p><br />W16 << <a href='W16.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
+<p>而第二段則將 gogs 的對外 https 連線埠號設為 3443, 而 http 連線埠號則為 3000, 啟動時也是採用上述 Letsencrypt 所取得的公開認證數位簽章檔案.</p>
+<p>由於 gogs 具備使用者 register 功能, 因此 Github 帳號被 flagged 的使用者可以自行至 gogs 網站註冊帳號後, 即可將原先 Github 倉儲同步至 gogs 同名倉儲. 但是若要讓每一位 Github 帳號被 flagged 的使用者都建立一個 Fossil SCM 倉儲則可以利用 Flask 編寫一個網際程式, 讓使用者以 @gm 登入系統後, 直接取用學號建立對應的 Fossil SCM 倉儲, 並設法完成能夠展開 CMSiMDE 靜態網頁的環境設定.</p>
+<p>為了建立此一網際服務, 必須依照 <a href="http://mde.tw/wcm2021/content/W11.html">http://mde.tw/wcm2021/content/W11.html</a> 的步驟, 以 uwsgi 與 nginx 提供一台應用程式執行伺服器.</p>
+<h4>Python 應用程式伺服器設定:</h4>
+<p>以 pip3 安裝 flask 與 flask_cors</p>
+<p style="padding-left: 30px;">sudo pip3 install flask flask_cors</p>
+<h4>接下來安裝 uwsgi 所需程式庫與模組:</h4>
+<p style="padding-left: 30px;">sudo apt install uwsgi uwsgi-plugin-python3</p>
+<p style="padding-left: 30px;">sudo pip3 install uwsgi</p>
+<h4>Nginx 設定:</h4>
+<p>設定目的在利用 port 9443 建立 https 連線伺服器, 並且從 8080 埠號執行的 uwsgi Flask 程式取得網際資料.</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"># for creating web-based flask application server
+server {
+    listen 9443 ssl;
+    listen [::]:9443 ssl;
+    
+    location / {
+        include uwsgi_params;
+        uwsgi_pass  127.0.0.1:8080;
+    }
+    
+    ssl_certificate /etc/stunnel/localhost.crt;
+    ssl_certificate_key /etc/stunnel/localhost.key;
+    ssl_session_timeout 5m;
+    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+    ssl_prefer_server_ciphers on;
+    try_files $uri $uri/ =404;
+}</pre>
+<h4>uwsgi 設定:</h4>
+<p>位於 uswsig_ini 目錄中的 uwsgi.ini 則宣告所要執行的 uwsgi 程式位置.</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[uwsgi]
+socket = :8080
+uid = user_account
+gid = user_account
+plugins-dir = /usr/lib/uwsgi/plugins/
+plugin = python3
+master = true
+process = 4
+threads = 2
+chdir = /home/user_account/github/fossilapp
+wsgi-file = /home/user_account/github/fossilapp/wsgi.py
+</pre>
+<h4>最簡單的網際 Flask 程式:</h4>
+<p>fossilapp.py</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def simplest():
+    return "&lt;h1&gt;The Simplest Flask Web-based Program!&lt;/h1&gt;"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+</pre>
+<p>wsgi.py</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">import fossilapp
+
+# 若 True 則以 uwsgi 模式執行
+uwsgi = True
+
+application = fossilapp.app
+
+if __name__ == "__main__":
+    if uwsgi:
+        application = fossilapp.app
+    else:
+        fossilapp.app.run()
+</pre>
+<p>最後為了要讓 uwsgi 程式以服務執行, 必須設定 /etc/systemd/system/wsgi.service 檔案.</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[Unit]
+Description=uWSGI to serve fossilapp
+After=network.target
+   
+[Service]
+User=user_account
+Group=user_account
+WorkingDirectory=/home/user_account/uwsgi_ini
+ExecStart=/usr/bin/uwsgi --emperor /home/user_account/uwsgi_ini
+   
+[Install]
+WantedBy=multi-user.target</pre>
+<p>設定完成後, enable wsgi 服務, uwsgi 程式會隨開機程序啟動執行:</p>
+<p style="padding-left: 30px;">sudo systemctl enable wsgi</p>
+<p>啟動, 關閉及重啟 wsgi 服務:</p>
+<p style="padding-left: 30px;">sudo systemctl start wsgi</p>
+<p style="padding-left: 30px;">sudo systemctl stop wsgi</p>
+<p style="padding-left: 30px;">sudo systemctl restart wsgi</p>
+<p>而 uwsgi 的 https 則是由 Nginx 提供, 啟動, 關閉或重啟服務:</p>
+<p style="padding-left: 30px;">sudo /etc/init.d/nginx start</p>
+<p style="padding-left: 30px;">sudo /etc/init.d/nginx stop</p>
+<p style="padding-left: 30px;">sudo /etc/init.d/nginx restart</p>
+<p>由於 gogs 與 Fossil SCM 都是依賴 Stunnel 啟動, 開關或重啟服務:</p>
+<p style="padding-left: 30px;">sudo /etc/init.d/stunnel4 start</p>
+<p style="padding-left: 30px;">sudo /etc/init.d/stunnel4 stop</p>
+<p style="padding-left: 30px;">sudo /etc/initld/stunnel4 restart</p><br />W16 << <a href='W16.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->
       <div class="container">
