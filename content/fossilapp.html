@@ -222,7 +222,23 @@ git push -u origin main</pre>
 </ol>
 <p>利用 <a href="https://fossil-scm.org/home/help?cmd=user">fossil user new</a> 指令修改上述步驟所複製的 fossil 倉儲對應使用者的管理密碼.</p>
 <p>利用 <a href="https://fossil-scm.org/home/help?cmd=user">fossil user capabilities</a> 指令修改 fossil 倉儲對應使用者帳號的管理權限 (讓使用者升級為管理者).</p>
-<p>利用 <a href="https://fossil-scm.org/home/help?cmd=user">fossil user capabilities</a> 指令修改 fossil 倉儲 template 對應帳號的管理權限 (刪除 cd 帳號管理權限).</p><br />account flagged << <a href='account flagged.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
+<p>利用 <a href="https://fossil-scm.org/home/help?cmd=user">fossil user capabilities</a> 指令修改 fossil 倉儲 template 對應帳號的管理權限 (刪除 cd 帳號管理權限).</p>
+<h4>防止 Shell Command Injection:</h4>
+<p>由於目前的網際程式透過表單取使用者的帳號與密碼, 並利用此資料直接執行 shell commands, 因此為了防範使用者利用輸入字串執行 shell commands, 因此帳號只允許輸入數字 (即學員學號), 而密碼則排除可用於 shell commands 的特殊字元, 初步的輸入字串判定程序為:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">    # To avoid shell command injection, accept only numbers for Account
+    if account.isdigit():
+        pass
+    else:
+        return "Accept only numbers for Account!"
+    
+    # To avoid shell command injection, no special characters allowed for Password
+    for i in range(len(password)):
+        if password[i] in ["&amp;", "|", ";", "$","&gt;", "&lt;", "`", "\\","!"]:
+            return "No special characters allowed for Password!"</pre>
+<p>接下來為了更進一步管制使用本 fossilapp 網際程式的族群, 只限縮於 KMOLab 本學期選課的學員, 且只限於目前 Github 帳號被 flagged 的學員, 因此必須置入 Google Oauth2 的登入管控機制, 除了只允許擁有 @gm 電子郵箱的用戶登入外, 並且限制只有帳號被進用的學員登入.</p>
+<p>另外一個處理方法則是透過網際表單, 讓 Github 帳號被禁用的學員至 fossilapp 登記時, 由系統產生一串編碼的連結, 以 email 寄出, 而使用者點擊回網際系統時再直接取使用者的學號, 並由使用者選擇要管理 Fossil SCM 的密碼後, 再完成對應 Fossil SCM 倉儲的建立.</p>
+<p>在此先選擇採 Google Oauth2 的方式建立登入管理系統.</p>
+<p></p><br />account flagged << <a href='account flagged.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->
       <div class="container">
