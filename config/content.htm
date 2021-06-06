@@ -1709,7 +1709,71 @@ WantedBy=multi-user.target</pre>
 <p style="padding-left: 30px;">sudo /etc/init.d/stunnel4 start</p>
 <p style="padding-left: 30px;">sudo /etc/init.d/stunnel4 stop</p>
 <p style="padding-left: 30px;">sudo /etc/initld/stunnel4 restart</p>
-<p>接下來為了利用 Fossil SCM template 倉儲, 從網際表單讓使用者自行登錄建立能夠展開 Github 倉儲 Pages 靜態網頁的系統, 必須參考 <a href="http://mde.tw/wcm2021/content/Fossil%20scm.html">http://mde.tw/wcm2021/content/Fossil%20scm.html</a> 與 Google oauth2 介面, 讓使用者登入系統後填表建立對應的 Fossil SCM 倉儲, 之後再 fossil clone 至近端與登錄至 gogs 倉儲的檔案整合, 最後再 fossil commit, 即可將整合後的倉儲內容推向 Fossil SCM server, 並在 <a href="https://www.fossil-scm.org/home/doc/trunk/www/embeddeddoc.wiki">Fossil Documentation</a> 的機制下, 伺服整合至 Fossil SCM 之後的各版本的靜態網頁內容.</p><h2>Problem Solving</h2>
+<p>接下來為了利用 Fossil SCM template 倉儲, 從網際表單讓使用者自行登錄建立能夠展開 Github 倉儲 Pages 靜態網頁的系統, 必須參考 <a href="http://mde.tw/wcm2021/content/Fossil%20scm.html">http://mde.tw/wcm2021/content/Fossil%20scm.html</a> 與 Google oauth2 介面, 讓使用者登入系統後填表建立對應的 Fossil SCM 倉儲, 之後再 fossil clone 至近端與登錄至 gogs 倉儲的檔案整合, 最後再 fossil commit, 即可將整合後的倉儲內容推向 Fossil SCM server, 並在 <a href="https://www.fossil-scm.org/home/doc/trunk/www/embeddeddoc.wiki">Fossil Documentation</a> 的機制下, 伺服整合至 Fossil SCM 之後的各版本的靜態網頁內容.</p><h3>fossilapp</h3>
+<p>fossilapp 是希望能夠用於 Fossil SCM 用戶註冊帳號時, 提供網際表單讓使用者自行設定帳號密碼並完成能夠展開 Github 倉儲靜態網頁的設定.</p>
+<p>為了在遠端電腦上以 SSH 連線到 Fossil SCM 主機進行 fossilapp 網際程式的開發, 因此啟動 Xming, 並設定 putty.exe session, 以 X11 forwarding (X display location 設為 localhost:0.0) 將 X-windows 傳送到 Windows, 首先以 sudo pip3 install leo 安裝 Leo Editor.</p>
+<p>Leo Editor 安裝後, 就可以透過 leo&amp; 在 background 開啟至近端, 接下來就可以進行 fossilapp 的開發.</p>
+<p>第一版的 fossilapp 先將表單與處理表單變數的函式架構先建起來:</p>
+<p>fossilapp.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, request
+
+# for generating secret_key
+import os
+
+app = Flask(__name__)
+
+# 使用 session 必須要設定 secret_key
+# In order to use sessions you have to set a secret key
+# set the secret key.  keep this really secret:
+secret_key = os.urandom(24).hex()
+app.secret_key = secret_key
+
+@app.route("/")
+def hello():
+    return "&lt;h1 style='color:blue'&gt;Hello There!&lt;/h1&gt;"
+
+@app.route('/form')
+def form():
+    """Create form routine"""
+    
+    return "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Create Fossil SCM Repository&lt;/h1&gt;&lt;form method='post' action='genAccount'&gt; \
+     Account:&lt;input type='text' name='account'&gt;&lt;br \&gt; \
+     Password:&lt;input type='password' name='password'&gt;&lt;br \&gt; \
+    &lt;input type='submit' value='genAccount'&gt;&lt;/form&gt; \
+    &lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"
+    
+@app.route('/genAccount', methods=['POST'])
+def genAccount():
+
+    """Generate Fossil SCM account
+    """
+    # get user input account and password
+    account = request.form["account"]
+    password = request.form["password"]
+    return "account:" + account+"&lt;br /&gt;" \
+    + "password:" + password
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+</pre>
+<p>wsgi.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import fossilapp
+
+uwsgi = True
+
+application = fossilapp.app
+
+if __name__ == "__main__":
+    
+    if uwsgi:
+        application = fossilapp.app
+    else:
+        fossilapp.app.run()
+</pre>
+<p>第一版的 fossilapp 網際程式僅在 /form 執行時列出帳號與密碼表單, 送出後由伺服器確定已經取到此兩個輸入變數.</p>
+<p>而每次遠端 fossilapp 程式修改後, uwsgi 對應的 Flask wsgi 服務就必須重新啟動, 以便納入程式碼的改變 (若在近端以 fossilapp.app.run() 執行, 程式碼修改存檔後, 則 Flask 會自動重新啟動, 無需手動重啟).</p>
+<p>重新啟動 /etc/systemd/system/wsgi.service 服務, 執行:</p>
+<p style="padding-left: 30px;">sudo systemctl restart wsgi</p>
+<p></p><h2>Problem Solving</h2>
 <p>在 <a href="http://mde.tw/cd2021/content/W5.html">W5</a> 的教學內容中, 已經說明要熟悉利用一個套件來解決問題的重點, 必須從其說明手冊的研讀開始, 以 CoppeliaSim 為例, 就必須仔細研讀其 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a>, 並且經常造訪其官方網站.</p>
 <p>由於 CoppeliaSim 於 2021.04.06 已經<a href="https://www.coppeliarobotics.com/helpFiles/en/versionInfo.htm#coppeliaSim4.2.0">改版為 4.2.0</a> (CoppeliaSim 4.2.0 <a href="https://drive.google.com/file/d/1AURSAmn1ABcP4Iz3cSb8I0iaP3HaRTOj/view?usp=sharing">可攜版下載</a> 142MB), 而且引用的 Lua 版次已經從 5.1 升級為 5.3, 因此目前散布在網路上的許多 V-rep 或 CoppeliaSim 既有模型, 若採用 Lua 5.3 版不相容的 Script 進行控制, 將無法在 CoppeliaSim 4.2.0 版次中執行. 其中牽涉的語法包括與 <a href="http://www.lua.org/manual/5.2/manual.html#8">Lua 5.2 不相容部分</a>及 <a href="http://www.lua.org/manual/5.3/manual.html#8">Lua 5.3 不相容部分</a>.</p>
 <p>目前 <a href="https://mde.tw">KMOLab</a> 正在嘗試改寫 <a href="https://github.com/mdecourse/cmsimde/">CMSiMDE</a>, 讓動態網頁與靜態網頁的轉換可以雙向並行, 意即, 目前若能將僅支援從動態網頁的 config/content.htm 轉為 content 目錄中的靜態網頁功能, 加上能夠從既有的 content 靜態網頁, 轉換為 config/content.htm 的格式, 使用者就可以先將 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的說明檔案超文件轉為 content 目錄中靜態網頁的格式, 然後透過 CMSiMDE 轉進動態網頁的 config/content.htm 中, 如此, 使用者就可以啟用動態網站對 <a href="https://www.coppeliarobotics.com/helpFiles/">https://www.coppeliarobotics.com/helpFiles/</a> 的內容進行編輯, 註記與改寫.</p>

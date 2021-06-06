@@ -134,78 +134,71 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">task2 << <a href='task2.html'>Previous</a> <a href='Fossil SCM.html'>Next</a> >> Fossil SCM<br /><h1>task3</h1>
-<h4>W11-W17</h4>
-<p style="padding-left: 30px;">每週各組按照組員順序, 於每堂課程時段, 輪流由 2-3 名學員啟動 OBS + Youtube 直播 (每週每位學員均需輪流負責直播工作項目內容), 並在開播前將直播 URL 公布於課程 gitter, 以展示該時段該組針對 stage3 分組專題工作項目的協同過程. (即每週各組於上課時段均會有四段協同設計影片分別嵌入各負責直播錄影組員的網頁與分組網頁).</p>
-<p style="padding-left: 30px;">各直播錄影時段, 各直播組員 (2-3 名) 應先規劃進行中工作項目的網際簡報資料, 並依照簡報內容逐一介紹所要展示或討論的協同設計項目.</p>
-<p style="padding-left: 30px;">當其他組別在執行 stage3 分組專題內容碰到問題時, 應按照順序採取下列步驟解決問題:</p>
-<ol>
-<li>利用協同直播錄影時段, 輔以網際簡報資料, 明確說明所遭遇之問題情境.</li>
-<li>上述影片上傳並嵌入個人網站與分組網站後, 根據問題描述影片內容, 尋求其他組在其分段直播時段說明如何解題.</li>
-</ol>
-<p style="padding-left: 30px;">各組組員於進行 stage3 分組專題期間, 均應協同負責從<span style="background-color: #ccffcc;">零組件設計繪圖</span>, <span style="background-color: #ccffcc;">零件轉檔</span>, 零組件轉入 <span style="background-color: #ccffcc;">CoppeliaSim 進行設定</span>, <span style="background-color: #ccffcc;">Lua 監控</span>, <span style="background-color: #ccffcc;">Python 監控</span>, <span style="background-color: #ccffcc;">直播錄影</span>, ssh 維護<span style="background-color: #ccffcc;">個人網際簡報</span>, ssh 維護<span style="background-color: #ccffcc;">個人網站</span>, 並協同參與維護<span style="background-color: #ccffcc;">分組網站</span>等工作項目, 若過程中遭遇問題, 則根據上述步驟進行解題.</p>
-<p style="padding-left: 30px;">直播前: 準備網際投影片</p>
-<p style="padding-left: 30px;">開啟直播: 將直播投影片(即直播主題) 與直播連結登錄在 <a href="https://gitter.im/mdecourse/cd2021">https://gitter.im/mdecourse/cd2021</a></p>
-<p style="padding-left: 30px;">直播結束後: 將影片嵌入個人與分組網頁後, 連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/24">https://github.com/mdecourse/cd2021/discussions/24</a></p>
-<h4 style="padding-left: 30px;">抽選各分組直播學員的程式:</h4>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># open file, default is read mode, since txt content no chinese char
-# no encoding = "UTF-8" is needed
-import random
+    <div id="tipue_search_content">account flagged << <a href='account flagged.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving<br /><h1>fossilapp</h1>
+<p>fossilapp 是希望能夠用於 Fossil SCM 用戶註冊帳號時, 提供網際表單讓使用者自行設定帳號密碼並完成能夠展開 Github 倉儲靜態網頁的設定.</p>
+<p>為了在遠端電腦上以 SSH 連線到 Fossil SCM 主機進行 fossilapp 網際程式的開發, 因此啟動 Xming, 並設定 putty.exe session, 以 X11 forwarding (X display location 設為 localhost:0.0) 將 X-windows 傳送到 Windows, 首先以 sudo pip3 install leo 安裝 Leo Editor.</p>
+<p>Leo Editor 安裝後, 就可以透過 leo&amp; 在 background 開啟至近端, 接下來就可以進行 fossilapp 的開發.</p>
+<p>第一版的 fossilapp 先將表單與處理表單變數的函式架構先建起來:</p>
+<p>fossilapp.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, request
 
-# number of group menber to draw
-num = 2
+# for generating secret_key
+import os
 
-# check if data is "" or not
-def notVacant(data):
-    if data == "":
-        return False
+app = Flask(__name__)
+
+# 使用 session 必須要設定 secret_key
+# In order to use sessions you have to set a secret key
+# set the secret key.  keep this really secret:
+secret_key = os.urandom(24).hex()
+app.secret_key = secret_key
+
+@app.route("/")
+def hello():
+    return "&lt;h1 style='color:blue'&gt;Hello There!&lt;/h1&gt;"
+
+@app.route('/form')
+def form():
+    """Create form routine"""
+    
+    return "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Create Fossil SCM Repository&lt;/h1&gt;&lt;form method='post' action='genAccount'&gt; \
+     Account:&lt;input type='text' name='account'&gt;&lt;br \&gt; \
+     Password:&lt;input type='password' name='password'&gt;&lt;br \&gt; \
+    &lt;input type='submit' value='genAccount'&gt;&lt;/form&gt; \
+    &lt;/section&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"
+    
+@app.route('/genAccount', methods=['POST'])
+def genAccount():
+
+    """Generate Fossil SCM account
+    """
+    # get user input account and password
+    account = request.form["account"]
+    password = request.form["password"]
+    return "account:" + account+"&lt;br /&gt;" \
+    + "password:" + password
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
+</pre>
+<p>wsgi.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import fossilapp
+
+uwsgi = True
+
+application = fossilapp.app
+
+if __name__ == "__main__":
+    
+    if uwsgi:
+        application = fossilapp.app
     else:
-        return True
-        
-with open("stage3_2b.txt") as fh:
-    # readlines will read into the whole line and put into list format
-    # has \n at the end of each line
-    data = fh.readlines()
-#print(len(data))
-# big group list
-bgroup = []
-# count from the second group member
-sgroup = []
-for i in range(len(data)):
-    group = data[i].rstrip("\n").split("\t")
-    #print(group)
-    # use mem to count the total number of each group
-    mem = 0
-    # final group data
-    fgroup = []
-    # count from the second group member, eliminate the first element
-    sgroup = group[1:]
-    # get only the odd index number
-    igroup = [i for i in range(len(sgroup)) if i % 2 == 1]
-    for j in igroup:
-        # index starts from 0 which is j-1 when j=1
-        if notVacant(sgroup[j-1]) == True:
-            mem += 1
-            fgroup.append(sgroup[j-1])
-    print("group " + str(i+1) + ":" + str(mem))
-    # shuffle the fgroup list
-    random.shuffle(fgroup)
-    # draw num of member from final group list: fgroup
-    for k in range(num):
-        try:
-            print(fgroup[k])
-        except:
-            # num is greater than total number of this group
-            print("no such member")
-    # seperator
-    print("-"*20)
-# the following will use group data to generate needed html</pre>
-<h4>人形 Robot 模擬套件比較:</h4>
-<p style="padding-left: 30px;"><a href="./../downloads/A Comparison of Humanoid Robot Simulators A Quantitative Approach.pdf">A Comparison of Humanoid Robot Simulators A Quantitative Approach.pdf</a></p>
-<p style="padding-left: 30px;">For robotic systems to be implemented in real-world scenarios, in several situations, it is preferred to develop and test them under controlled environments in order to reduce the risk of errors and unexpected behavior.  In this regard, a more accessible and efficient alternative is to implement  the environment using robotic simulation tools.</p>
-<p style="padding-left: 30px;">In general terms, our results show that Webots is the simulator with the lowest use ofresources, followed by V-REP, which has advantages over Gazebo, mainly because of the CPU use.</p>
-<p style="padding-left: 30px;">Robot simulators allow evaluating the feasibility and efficiency of algorithms varying in type and complexity, in a more controlled environment with no disturbances avoiding the occurrence of accidents.</p>
-<br />task2 << <a href='task2.html'>Previous</a> <a href='Fossil SCM.html'>Next</a> >> Fossil SCM</div>
+        fossilapp.app.run()
+</pre>
+<p>第一版的 fossilapp 網際程式僅在 /form 執行時列出帳號與密碼表單, 送出後由伺服器確定已經取到此兩個輸入變數.</p>
+<p>而每次遠端 fossilapp 程式修改後, uwsgi 對應的 Flask wsgi 服務就必須重新啟動, 以便納入程式碼的改變 (若在近端以 fossilapp.app.run() 執行, 程式碼修改存檔後, 則 Flask 會自動重新啟動, 無需手動重啟).</p>
+<p>重新啟動 /etc/systemd/system/wsgi.service 服務, 執行:</p>
+<p style="padding-left: 30px;">sudo systemctl restart wsgi</p>
+<p></p><br />account flagged << <a href='account flagged.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->
       <div class="container">
