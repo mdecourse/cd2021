@@ -198,6 +198,17 @@ if __name__ == "__main__":
 <p>而每次遠端 fossilapp 程式修改後, uwsgi 對應的 Flask wsgi 服務就必須重新啟動, 以便納入程式碼的改變 (若在近端以 fossilapp.app.run() 執行, 程式碼修改存檔後, 則 Flask 會自動重新啟動, 無需手動重啟).</p>
 <p>重新啟動 /etc/systemd/system/wsgi.service 服務, 執行:</p>
 <p style="padding-left: 30px;">sudo systemctl restart wsgi</p>
+<p>上述流程所建立的 Flask 網際程式原始碼已經利用 git init 將程式目錄設為 Git 倉儲, 並且透過下列指令, 以 main 分支送到 <a href="https://github.com/mdecourse/fossilapp">https://github.com/mdecourse/fossilapp</a>.</p>
+<p>新增 <a href="https://raw.githubusercontent.com/mdecourse/fossilapp/main/.gitignore">.gitignore</a>, <a href="https://raw.githubusercontent.com/mdecourse/fossilapp/main/README.md">README.md</a> 與 <a href="https://raw.githubusercontent.com/mdecourse/fossilapp/main/LICENSE">LICENSE</a>.</p>
+<p>並且執行:</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">git add .
+git commit -m "initial add"
+git branch -M main
+git remote add origin https://github.com/mdecourse/fossilapp.git
+git push -u origin main</pre>
+<p>git add . 表示要將所有新增的內容進行 tracking, 即拍一個現存所有內容的快照. 接著的 git commit 提交則以 "initial add" 提交字串進行註記, 說明這是將 fossil app 程式碼提交到 Git 倉儲的第一個新增版本.</p>
+<p>git branch -M 中的 -M 是 --move --force 指令選項的縮寫, 因此 git branch -M main 的指令是要求將目前倉儲的內容強制轉為名稱為 main 的分支.</p>
+<p>至於 git push -u origin main, 指令中的 -u 是 --set-upstream 的縮寫, 在 git push 後加上 -u origin main 表示目前的 push 與隨後的推送, 在不指定 url 名稱與分支的情況下, 其 tracking 的 url 內定為 origin, 而分支則內定為 main.</p>
 <p></p><br />account flagged << <a href='account flagged.html'>Previous</a> <a href='Problem Solving.html'>Next</a> >> Problem Solving</div>
         
     <!-- footer -->

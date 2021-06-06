@@ -1769,6 +1769,7 @@ if __name__ == "__main__":
     else:
         fossilapp.app.run()
 </pre>
+<p>第一版的 fossilapp 網際程式僅在 /form 執行時列出帳號與密碼表單, 送出後由伺服器確定已經取到此兩個輸入變數.</p>
 <p>而每次遠端 fossilapp 程式修改後, uwsgi 對應的 Flask wsgi 服務就必須重新啟動, 以便納入程式碼的改變 (若在近端以 fossilapp.app.run() 執行, 程式碼修改存檔後, 則 Flask 會自動重新啟動, 無需手動重啟).</p>
 <p>重新啟動 /etc/systemd/system/wsgi.service 服務, 執行:</p>
 <p style="padding-left: 30px;">sudo systemctl restart wsgi</p>
