@@ -2094,7 +2094,29 @@ for i in range(len(data)):
 <p style="padding-left: 30px;"><a href="https://mdecourse.blogspot.com/2021/02/fossil-scm-github.html">Fossil SCM 與 Github 整合</a></p>
 <p style="padding-left: 30px;"><a href="http://mde.tw/2017springcd/blog/intro-fossil-scm.html">http://mde.tw/2017springcd/blog/intro-fossil-scm.html</a></p>
 <p></p>
-<h1>Project</h1>
+<h3>Fossil SCM 研究</h3>
+<p><a href="https://fossil-scm.org">https://fossil-scm.org</a> 是一套冷門的系統, 感覺好像沒有太多單位或團體使用, 只是就分散式版次管理系統的角度來看, 其實是一套小而美且功能齊全的 SCM 系統, 接下來希望透過 <a href="https://fossil.kmol.info">https://fossil.kmol.info</a> 系統, 對 Fossil SCM 進行初步研究.</p>
+<p>起始一個 Fossil SCM 倉儲之前需要先從 <a href="https://fossil-scm.org/home/uv/download.html">https://fossil-scm.org/home/uv/download.html</a> 下載相應的檔案, 與 <a href="https://git-scm.com/download/win">Portablegit</a> 相比, Fossil SCM 工具無論在 Windows, Linux 或 Mac 操作系統, 都只有一個檔案, 且大小只有約 9MB.</p>
+<p>而起始 Fossil SCM 倉儲的指令與 Git 相同:</p>
+<p>fossil init</p>
+<p>只不過 Fossil SCM 在倉儲 clone 之後的檔案為一個壓縮檔案, 通常以 .fossil 作為副檔名, 其實這是一個 SQLite 資料庫檔案. 當使用者 clone Fossil SCM 倉儲至近端之後, 必須透過 fossil open 將最新的版本內容展開, 一般會建議, 擺放 .fossil 檔案的目錄中, 建立 working director 目錄, 建議命名為 wd, 然後在 wd 目錄之中, 再根據各倉儲檔案的名稱建立位於 wd 目錄下的子目錄, 而各 .fossil 倉儲的內容則在各自的 "wd\倉儲名稱" 目錄下展開.</p>
+<p>假如要將遠端的倉儲 clone 至遠端, 若採 https 協定, 其命令列語法為:</p>
+<p>fossil clone <a href="https://user_name@fossil.kmol.info/repository">https://user_name@fossil.kmol.info/repository</a> repository.fossil</p>
+<p>表示要將位於 fossil.kmol.info 主機上的 repository 倉儲, 以 https 協定 clone 至近端且存為 repository.fossil</p>
+<p>以一位於近端檔案架構的 repository.fossil 本身會帶有管理者的密碼設定, 而此一管理者帳號下對應的 local password 與 remote passwors 分屬於兩個不同的 repository.fossil, 當使用者要將近端改版資料推向遠端時, 依據的是遠端的管理者 passwors, 而近端的管理者密碼則在近端倉儲以 fossil web 進行網際啟動時之用. 換言之, 各個 Fossil SCM 倉儲壓縮檔案內所儲存的管理者帳號密碼, 主針對下游啟動服務時採用.</p>
+<p> 至於在工作目錄下倉儲資料檔案中的改版資料, 一旦新增提交推送後, 不僅會將版本更新資料註記在近端對應的 .fossil 檔案中, 也會推向遠端對應的 .fossil 倉儲檔案.</p>
+<p>Fossil SCM project documentation: <a href="https://www.fossil-scm.org/home/doc/trunk/www/embeddeddoc.wiki">https://www.fossil-scm.org/home/doc/trunk/www/embeddeddoc.wiki</a></p>
+<h4>Fossil SCM unversioned content:</h4>
+<p style="padding-left: 30px;">在 Fossil SCM 倉儲中, 所謂的 unversioned content 指在改版紀錄中沒有保留改版資料的檔案, 倉儲中的 unversioned 內容只保留最新的版本, 且可以透過網際 /uvlist 列出無改版歷程的檔案列表, 並能透過網際 /uv/檔案名稱 進行下載.</p>
+<p style="padding-left: 30px;">Fossil SCM 中的帳號必須具備 y capabilities 的權限才能 fossil uv sync -v 對倉儲中先前所加入的無版本檔案送到倉儲資料中.</p>
+<p style="padding-left: 30px;">Fossil SCM 中的帳號最高管理者必須具備 s capabilities (setup 權限).</p>
+<p style="padding-left: 30px;">Fossil SCM 倉儲改版時若刪除檔案, 則可以透過 fossil addremove 納入改版內容.</p>
+<p style="padding-left: 30px;">將 uversioned_file_name 納入或移除倉儲中成為無版本管理內容:</p>
+<p style="padding-left: 60px;">fossil uv add unversioned_file_name</p>
+<p style="padding-left: 60px;">fossil uv delete unversioned_file_name</p>
+<p style="padding-left: 60px;">fossil uv sync -v</p>
+<p style="padding-left: 30px;"><a href="https://fossil-scm.org/home/doc/trunk/www/unvers.wiki">https://fossil-scm.org/home/doc/trunk/www/unvers.wiki</a></p>
+<p style="padding-left: 30px;"><a href="https://fossil-scm.org/home/help?cmd=unversioned">https://fossil-scm.org/home/help?cmd=unversioned</a></p><h1>Project</h1>
 <p>以 <a href="https://github.com/mdecourse/airhockey">https://github.com/mdecourse/airhockey</a> 為例,</p>
 <p style="padding-left: 30px;">專題網站: <a href="https://github.com/mdecourse/airhockey">https://github.com/mdecourse/airhockey</a></p>
 <p style="padding-left: 30px;"><a href="https://mde.tw/airhockey/2020_report_Application_Of_Image_Recognition_In_Cyber_Physical_Mechatronic_System_Design.pdf">專題報告 pdf 檔案</a></p>
@@ -2201,8 +2223,7 @@ for i in range(len(data)):
 <p style="padding-left: 30px;">W10-W17</p>
 <p style="padding-left: 60px;">八人共同快速 (八週) 開發一組產品設計與實作模擬 (分組自評與互評, 說明遭遇問題與解決方法)</p>
 <p style="padding-left: 30px;">W18 上課之前必須將各組報告 html, pdf 與 Youtube 影片連結繳交至 <a href="https://github.com/mdecourse/cd2021/discussions/14">2021 協同產品設計實習 期末 (W18) 分組專題報告與影片繳交處 </a></p>
-<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4>
-<h2>Programming</h2>
+<h4 style="padding-left: 30px;">W18: 期末檢討報告與評分</h4><h2>Programming</h2>
 <p>KMOLab 建議使用者利用 Leo Editor 與 Pycharm 作為開發程式用的 IDE.</p>
 <p style="padding-left: 30px;">Leo Editor 作為資料管理套件, 可用於整理分散各處的程式開發相關資料.</p>
 <p style="padding-left: 30px;">Pycharm 則是典型的程式開發 IDE.</p>
