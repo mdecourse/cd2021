@@ -1576,6 +1576,10 @@ portIndex3_syncSimTrigger   = true</pre>
 <h4>CoppeliaSim Kinematics:</h4>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm">https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm</a></p>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/basicsOnIkGroupsAndIkElements.htm">https://www.coppeliarobotics.com/helpFiles/en/basicsOnIkGroupsAndIkElements.htm</a></p>
+<h4 style="padding-left: 30px;">Examples:</h4>
+<p style="padding-left: 60px;"><a href="https://github.com/mdecourse/ece470finalproject">https://github.com/mdecourse/ece470finalproject</a></p>
+<p style="padding-left: 60px;"><a href="https://github.com/mdecourse/PythonRobotics/blob/master/docs/modules/Planar_Two_Link_IK.rst">https://github.com/mdecourse/PythonRobotics/blob/master/docs/modules/Planar_Two_Link_IK.rst</a></p>
+<p style="padding-left: 60px;"><a href="/downloads/2013_Formal Kinematic Analysis of the Two-LinkPlanar Manipulator.pdf">2013_Formal Kinematic Analysis of the Two-LinkPlanar Manipulator.pdf</a></p>
 <p>In CoppeliaSim, an IK task requires specifying at least following elements:</p>
 <ol>
 <li>a kinematic chain described with a tip dummy and a base object.</li>
@@ -1590,7 +1594,7 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 30px;"><a href="https://www.researchgate.net/publication/351561339_An_Inverse_Kinematics_Demonstration_of_a_Custom_Robot_using_C_and_CoppeliaSim">https://www.researchgate.net/publication/351561339_An_Inverse_Kinematics_Demonstration_of_a_Custom_Robot_using_C_and_CoppeliaSim</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/vyomthakkar/ece470finalproject">https://github.com/vyomthakkar/ece470finalproject</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/griffincolvin/ECE470">https://github.com/griffincolvin/ECE470</a></p>
-<p style="padding-left: 30px;"><a href="https://github.com/lohitakshgupta/ece470_object-sorting">https://github.com/lohitakshgupta/ece470_object-sorting</a> </p><h3>account flagged</h3>
+<p style="padding-left: 30px;"><a href="https://github.com/lohitakshgupta/ece470_object-sorting">https://github.com/lohitakshgupta/ece470_object-sorting</a></p><h3>account flagged</h3>
 <h4>Github account flagged 的解決方法:</h4>
 <ol>
 <li>寫信詢問為何會被封鎖, 並<a href="https://www.google.com/search?q=github+account+flagged+solution">尋求解除封鎖</a>.</li>
@@ -2110,8 +2114,10 @@ for i in range(len(data)):
 <p style="padding-left: 30px;">在 Fossil SCM 倉儲中, 所謂的 unversioned content 指在改版紀錄中沒有保留改版資料的檔案, 倉儲中的 unversioned 內容只保留最新的版本, 且可以透過網際 /uvlist 列出無改版歷程的檔案列表, 並能透過網際 /uv/檔案名稱 進行下載.</p>
 <p style="padding-left: 30px;">Fossil SCM 中的帳號必須具備 y capabilities 的權限才能 fossil uv sync -v 對倉儲中先前所加入的無版本檔案送到倉儲資料中.</p>
 <p style="padding-left: 30px;">Fossil SCM 中的帳號最高管理者必須具備 s capabilities (setup 權限).</p>
-<p style="padding-left: 30px;">將 uversioned_file_name 納入倉儲中成為無版本管理內容:</p>
+<p style="padding-left: 30px;">Fossil SCM 倉儲改版時若刪除檔案, 則可以透過 fossil addremove 納入改版內容.</p>
+<p style="padding-left: 30px;">將 uversioned_file_name 納入或移除倉儲中成為無版本管理內容:</p>
 <p style="padding-left: 60px;">fossil uv add unversioned_file_name</p>
+<p style="padding-left: 60px;">fossil uv delete unversioned_file_name</p>
 <p style="padding-left: 60px;">fossil uv sync -v</p>
 <p style="padding-left: 30px;"><a href="https://fossil-scm.org/home/doc/trunk/www/unvers.wiki">https://fossil-scm.org/home/doc/trunk/www/unvers.wiki</a></p>
 <p style="padding-left: 30px;"><a href="https://fossil-scm.org/home/help?cmd=unversioned">https://fossil-scm.org/home/help?cmd=unversioned</a></p><h1>Project</h1>

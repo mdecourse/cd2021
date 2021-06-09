@@ -135,9 +135,26 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">W14-W15 << <a href='W14-W15.html'>Previous</a> <a href='account flagged.html'>Next</a> >> account flagged<br /><h1>W16</h1>
+<p>本週的評分項目是要將 <a href="https://github.com/mdecourse/cd2021/tree/main/downloads/stage3/MTB_robot">MTB_robot</a> 的取放方塊流程規劃, 拆解為下列分項:</p>
+<p>各分項的繳交內容包含: 相關零件檔案連結, 嵌入頁面之操作過程影片, 與操作心得放入個人網頁中, 標題為 W16 之頁面後, 將連結回報至 <a href="https://github.com/mdecourse/cd2021/discussions/36">W16 評分回報區</a>, 填寫回報時請同時自評個人完成百分比.</p>
+<h4>MTB_robot 的取放方塊流程規劃 (Process Planning):</h4>
+<h4 style="padding-left: 30px;">1. Onshape 零組件繪製 (20%)</h4>
+<p style="padding-left: 60px;">零組件必須在 <a href="https://www.onshape.com">Onshape</a> 繪圖, 並提供可公開分享之零組件連結於頁面及回報區中.</p>
+<h4 style="padding-left: 30px;">2. 建立 CoppeliaSim 4.1.0 MTB robot 場景 (20%)</h4>
+<p style="padding-left: 60px;">請以自行繪製之零件輸入 CoppeliaSim 後, 組合為 MTB robot 模型, 並利用 Leo Editor 以 require 導入 Lua 程式運作, 分別控制各軸轉動示範, 所完成的所有檔案請存入 W16_exam 後壓縮為 W16_exam.7z 後送至個人 @gm 帳號下的 Google Drive 後將連結設為任何人皆可下載, 並將連結與操作嵌入影片放在 W16 頁面與回報區中 .</p>
+<h4 style="padding-left: 30px;">3. 手臂末端加入 components-gripper-suction pad 吸盤 (20%)</h4>
+<p style="padding-left: 60px;">請接續上述 MTB robot, 在其末端接上 force sensor 後接上標準 suction pad 後, 分別導入 W15 週線上課程之鍵盤控制程式後, 拍攝影片示範 W15 線上課程中之操作與示範過程.</p>
+<h4 style="padding-left: 30px;">4. 逆向運動學函式 (20%)</h4>
+<p style="padding-left: 60px;">請根據 W15 線上課程內容之 Inverse Kinematics 方程式 (<a href="https://www.youtube.com/watch?v=IKOGwoJ2HLk&amp;t=35s">影片1</a> 或<a href="https://www.youtube.com/watch?v=eIZuz1XCd0w&amp;t=183s">影片2</a>), 以程式指定方塊取放之兩個位置 - (0.2, 0.7, 0.05) 與 (-0.3, -0.55, 0.05), 以前述 Leo Editor Lua 程式編寫方法, 分別採鍵盤控制與程式迴圈方式執行 W15 兩個指定位置之方塊取放.</p>
+<h4 style="padding-left: 30px;">5. Python remote API 逆向運動學函式 (20%)</h4>
+<p style="padding-left: 60px;">請利用 Python remote API 程式重現以迴圈方式執行 W15 兩個指定位置之方塊取放.</p>
 <h4>CoppeliaSim Kinematics:</h4>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm">https://www.coppeliarobotics.com/helpFiles/en/inverseKinematicsTutorial.htm</a></p>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/basicsOnIkGroupsAndIkElements.htm">https://www.coppeliarobotics.com/helpFiles/en/basicsOnIkGroupsAndIkElements.htm</a></p>
+<h4 style="padding-left: 30px;">Examples:</h4>
+<p style="padding-left: 60px;"><a href="https://github.com/mdecourse/ece470finalproject">https://github.com/mdecourse/ece470finalproject</a></p>
+<p style="padding-left: 60px;"><a href="https://github.com/mdecourse/PythonRobotics/blob/master/docs/modules/Planar_Two_Link_IK.rst">https://github.com/mdecourse/PythonRobotics/blob/master/docs/modules/Planar_Two_Link_IK.rst</a></p>
+<p style="padding-left: 60px;"><a href="./../downloads/2013_Formal Kinematic Analysis of the Two-LinkPlanar Manipulator.pdf">2013_Formal Kinematic Analysis of the Two-LinkPlanar Manipulator.pdf</a></p>
 <p>In CoppeliaSim, an IK task requires specifying at least following elements:</p>
 <ol>
 <li>a kinematic chain described with a tip dummy and a base object.</li>
@@ -152,7 +169,7 @@ img.add_border {
 <p style="padding-left: 30px;"><a href="https://www.researchgate.net/publication/351561339_An_Inverse_Kinematics_Demonstration_of_a_Custom_Robot_using_C_and_CoppeliaSim">https://www.researchgate.net/publication/351561339_An_Inverse_Kinematics_Demonstration_of_a_Custom_Robot_using_C_and_CoppeliaSim</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/vyomthakkar/ece470finalproject">https://github.com/vyomthakkar/ece470finalproject</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/griffincolvin/ECE470">https://github.com/griffincolvin/ECE470</a></p>
-<p style="padding-left: 30px;"><a href="https://github.com/lohitakshgupta/ece470_object-sorting">https://github.com/lohitakshgupta/ece470_object-sorting</a> </p><br />W14-W15 << <a href='W14-W15.html'>Previous</a> <a href='account flagged.html'>Next</a> >> account flagged</div>
+<p style="padding-left: 30px;"><a href="https://github.com/lohitakshgupta/ece470_object-sorting">https://github.com/lohitakshgupta/ece470_object-sorting</a></p><br />W14-W15 << <a href='W14-W15.html'>Previous</a> <a href='account flagged.html'>Next</a> >> account flagged</div>
         
     <!-- footer -->
       <div class="container">
