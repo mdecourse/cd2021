@@ -1,0 +1,28 @@
+https://fossil.kmol.info/u/cda
+
+c:\tmp\W16\fossil>
+
+fossil clone https://yen@fossil.kmol.info/u/cda cda.fossil
+
+mkdir wd
+
+cd wd
+
+mkdir cda
+
+c:\tmp\W16\fossil\wd\cda>
+
+cd cda
+
+fossil open ./../../cda.fossil
+
+fossil add .
+
+fossil addremove
+
+fossil commit -m "initial add"
+
+fossil scm unversioned
+
+https://fossil.kmol.info/u/cda/doc/trunk/index.html
+
