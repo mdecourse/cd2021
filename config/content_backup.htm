@@ -1564,6 +1564,70 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 30px;"><a href="https://designrobotics.net/2020/07/20/robot-calibration/">https://designrobotics.net/2020/07/20/robot-calibration/</a></p>
 <p style="padding-left: 30px;">2007 年的舊資料: <a href="http://www.me.nchu.edu.tw/lab/CIM/www/courses/Flexible%20Manufacturing%20Systems.htm">http://www.me.nchu.edu.tw/lab/CIM/www/courses/Flexible%20Manufacturing%20Systems.htm</a></p>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/IKOGwoJ2HLk" title="YouTube video player" width="560"></iframe></p>
+<p>根據上述影片中的推導過程, 取得 q2(x, y, a1, a2) 與 q1(x, y, a1, a2, q2) 的方程式, 寫為 Lua 程式如下:</p>
+<pre class="brush:lua;auto-links:false;toolbar:false" contenteditable="false">-- The decimal point of number x is rounded to the nth place
+function round(x, n)
+    n = math.pow(10, n or 0)
+    x = x * n
+    if x &gt;= 0 then x = math.floor(x + 0.5) else x = math.ceil(x - 0.5) end
+    return x / n
+end
+
+-- radian to degree
+deg = 180/math.pi
+-- link 1 length
+a1 = 10
+-- link 2 length
+a2 = 10
+-- derivated based upon https://www.youtube.com/watch?v=IKOGwoJ2HLk&amp;t=311s
+function ik(x, y)
+    -- (x, y) need to be located inside the circle with radius a1+a2
+    if (x^2 + y^2) &lt;= (a1+ a2)^2 then
+        q2 = -math.acos((x^2+y^2-a1^2-a2^2)/(2*a1*a2))
+        q1 = math.atan2(y, x) + math.atan2((a2*math.sin(q2)), (a1+a2*math.cos(q2)))
+        return {round(q1*deg, 4), round(q2*deg, 4)}
+    else
+        print("Over range!")
+        -- end the script execution
+        os.exit()
+    end
+end
+
+theta = ik(15, 1)
+
+print(theta[1], theta[2])
+  
+</pre>
+<p>假如以 Python 編寫則程式如下:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># for acos, atan2 and sin
+import math
+import sys
+
+# radian to degree
+deg = 180/math.pi
+# link 1 length
+a1 = 10
+# link 2 length
+a2 = 10
+# derivated based up https://www.youtube.com/watch?v=IKOGwoJ2HLk&amp;t=311s
+
+def ik(x, y):
+    # (x, y)  need to be located inside the circle with radius a1+a2
+    if (x**2 + y**2) &lt;= (a1+ a2)**2:
+        q2 = -math.acos((x**2+y**2-a1**2-a2**2)/(2*a1*a2))
+        q1 = math.atan2(y, x) + math.atan2((a2*math.sin(q2)), (a1+a2*math.cos(q2)))
+        # The decimal point of number is rounded to the 4th place
+        return [round(q1*deg, 4), round(q2*deg, 4)]
+    else:
+        print("Over range!")
+        # end the script execution
+        sys.exit()
+
+theta = ik(15, 1)
+
+print(theta[0], theta[1])
+  
+</pre>
 <p><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/eIZuz1XCd0w" title="YouTube video player" width="560"></iframe></p>
 <h4>參考資料:</h4>
 <p style="padding-left: 30px;"><a href="https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetObjectPosition.htm">https://www.coppeliarobotics.com/helpFiles/en/regularApi/simGetObjectPosition.htm</a></p>
@@ -1572,7 +1636,11 @@ portIndex3_syncSimTrigger   = true</pre>
 <p style="padding-left: 30px;"><a href="https://github.com/dsingh80/Full-Body-Inverse-Kinematics">https://github.com/dsingh80/Full-Body-Inverse-Kinematics</a></p>
 <p style="padding-left: 30px;"><a href="https://github.com/sudipchakraborty/An-Inverse-Kinematics-Demonstration-using-C-and-CoppeliaSim">https://github.com/sudipchakraborty/An-Inverse-Kinematics-Demonstration-using-C-and-CoppeliaSim</a></p>
 <p style="padding-left: 30px;"><a href="https://forum.coppeliarobotics.com/viewtopic.php?t=3967&amp;start=20">https://forum.coppeliarobotics.com/viewtopic.php?t=3967&amp;start=20</a></p>
-<p style="padding-left: 30px;"><a href="https://www.robwork.dk/manual/inverse_kinematics/">https://www.robwork.dk/manual/inverse_kinematics/</a></p><h2>W16</h2>
+<p style="padding-left: 30px;"><a href="https://www.robwork.dk/manual/inverse_kinematics/">https://www.robwork.dk/manual/inverse_kinematics/</a></p><h2>W16-final</h2>
+<p>W18 期末考週之前, 請兩班各組員拍攝一段 3 - 5 分鐘, 帶有字幕說明的個人期末報告影片, 說明一下個人與分組在本學期所完成內容之導覽. 影片必須包含個人倉儲提交推送次數與頻率畫面說明, 以及各階段實習操作的影片內容介紹, 完成後請 upload 到 Youbube, 標題必須為"國立虎尾科技大學 - 機械設計工程系 - 協同產品設計實習 - 期末報告 - 學號”.</p>
+<p>2019 Spring 期末 a 全班協同倉儲: <a href="https://github.com/scrum-1/cd2019a">https://github.com/scrum-1/cd2019a</a></p>
+<p>2019 Spring 期末 b 全班協同倉儲: <a href="https://github.com/scrum-1/cd2019b">https://github.com/scrum-1/cd2019b</a></p>
+<hr/>
 <p><a href="https://drive.google.com/file/d/1yyqDhiHTWyeSmMWOrU1SLCOWuWdmDLIP/view?usp=sharing">2a W16 教學影片1</a></p>
 <p><a href="https://drive.google.com/file/d/14Dae7TAskQo-L_gto0HCwQcz5DVD1A7k/view?usp=sharing">2a W16 教學影片2</a></p>
 <p><a href="https://drive.google.com/file/d/1UMLm8ZShP_M6YHFCp6QSetCwsQ7H_-yL/view?usp=sharing">2a W16 教學影片3</a></p>
