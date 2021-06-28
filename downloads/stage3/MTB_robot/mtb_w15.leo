@@ -129,7 +129,7 @@ c.recursiveImport(
 <t tx="leo.20210529155606.1"></t>
 <t tx="leo.20210529155606.10">function sysCall_actuation() 
     -- 吸盤往下降時, 直接貼在方塊頂部的校正值, 單位 m
-    -- 向下較正值為 4.2 mm
+    -- 向下校正值為 4.2 mm
     calibration = 0.0042
     message, auxiliaryData=sim.getSimulatorMessage()
         while message ~= -1 do
